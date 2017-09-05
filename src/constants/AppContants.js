@@ -1,0 +1,1 @@
+export const SIGNUP_MSISDN_EXIST = 'signup_msisdn_exists';

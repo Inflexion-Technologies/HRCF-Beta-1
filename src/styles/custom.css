@@ -1,0 +1,142 @@
+.login{
+    margin: auto;
+}
+
+.login .typo-style{
+    color: #FEFEFE;
+    text-decoration: none;
+}
+
+.login .title-typo-style{
+    color: #FEFEFE;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.login .ad{
+    background: #FFFFFF;
+    height: 800px;
+}
+
+.login .ad .icon{
+    width: 100px;
+    padding: 10px;
+}
+
+.login .ad .thumb{
+    padding-top: 50px;
+    margin: auto;
+}
+
+.login .control{
+    background: #0d47a1;
+    height: 800px;
+}
+
+.login-icon{
+    width: 55%;
+}
+
+.error{
+    color: #e65100;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.vamus{
+    visibility: hidden;
+}
+
+.signup{
+    margin: auto;
+}
+
+.signup .typo-style{
+    color: #FEFEFE;
+    text-decoration: none;
+}
+
+.signup .title-typo-style{
+    color: #FEFEFE;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.signup .ad{
+    background: #FFFFFF;
+    height: 800px;
+}
+
+.signup .ad .icon{
+    width: 100px;
+    padding: 10px;
+}
+
+.signup .ad .thumb{
+    padding-top: 50px;
+    margin: auto;
+}
+
+.signup .control{
+    background: #0d47a1;
+    height: 800px;
+}
+
+.signup .anchor-text{
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.target{
+    text-align: center;
+}
+
+.target .svg{
+    width: 500px;
+}
+
+.login-svg{
+    width: 100px;
+}
+
+.review{
+    margin: auto;
+}
+
+.review .typo-style{
+    color: #FEFEFE;
+    text-decoration: none;
+}
+
+.review .ad{
+    background: #FFFFFF;
+    height: 800px;
+}
+
+.review .ad .icon{
+    width: 100px;
+    padding: 10px;
+}
+
+.review .ad .thumb{
+    padding-top: 50px;
+    margin: auto;
+}
+
+.review .control{
+    background: #0d47a1;
+    height: 800px;
+}
+
+.review .message{
+    color: #FEFEFE;
+    margin-bottom: 30px;
+}
