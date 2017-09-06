@@ -93,6 +93,20 @@ export function branchModel(config){
 	return bankBranch;
 }
 
+export function trackModel(config){
+	const track = config.define('trackers', {
+    count: {
+      type: Sequelize.INTEGER
+    },
+    status: {
+      type: Sequelize.STRING(1),
+      defaultValue : 'A'
+	  }
+	}, {underscored: true});
+
+	return track;
+}
+
 export function approveModel(config){
 	const approvers = config.define('approvers', {
       firstname: {
@@ -148,6 +162,10 @@ export function usersModel(config){
           this.setDataValue('lastname', _.capitalize(val).trim());
         }
       },
+      payment_number: {
+        type: Sequelize.STRING,
+        unique : true
+      },
       email: {
         type: Sequelize.STRING,
         unique : true,
@@ -169,16 +187,30 @@ export function usersModel(config){
       type: {
         type: Sequelize.ENUM,
         values : ['C','I']
-	    },
+      },
+      kin:{
+        type: Sequelize.STRING,
+        set(val) {
+          this.setDataValue('kin', _.capitalize(val).trim());
+        }
+      },
+      kin_msisdn: {
+        type: Sequelize.STRING,
+        validate : {
+            isNumeric : true
+        }, set(val) {
+          this.setDataValue('kin_msisdn', (val).trim());
+        }
+      },
       password: {
         type: Sequelize.STRING,
         set(val) {
           this.setDataValue('password', utils.getHash(val.trim()));
         }
 	    },
-	    validate: {
+	    is_complete: {
         type: Sequelize.BOOLEAN,
-        defaultValue : true
+        defaultValue : false
 	    },
 	    status: {
         type: Sequelize.STRING(1),

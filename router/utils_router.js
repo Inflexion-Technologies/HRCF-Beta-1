@@ -7,10 +7,6 @@ constructor(UsersModel){
     this.UsersModel = UsersModel;
 }
 
-getUserDetails(res, user){
-    res.status(200).json(user);
-}
-
 routes(){
     const app = this;
     const utilsRouter = express.Router();
@@ -23,24 +19,17 @@ routes(){
             if(utils.isValidEmail(req.query.username.trim())){
                 app.UsersModel.findOne({where : {email : req.query.username, password : utils.getHash(req.query.password)}}).then(user => {
                     if(user){
-                        this.getUserDetails(res, user); 
-                        
-                        //Set sessions
-                        req.session.user = user;  
-                    }else{
                         res.status(200).json(user);
+                    }else{
+                        res.status(400).json('something wrong happened');
                     }
-                    this.getUserDetails(res, user);                                                  
                 });
             }else if(utils.isValidMSISDN(req.query.username.trim())){
                 app.UsersModel.findOne({where : {msisdn : req.query.username, password : utils.getHash(req.query.password)}}).then(user => {
                     if(user){
-                        this.getUserDetails(res, user); 
-
-                        //Set sessions
-                        req.session.user = user;                                                              
-                    }else{
                         res.status(200).json(user);
+                    }else{
+                        res.status(400).send('something wrong happened');
                     }
                 });
             }

@@ -30,7 +30,7 @@ class LoginStore extends EventEmitter{
         console.log('DATA ::: '+JSON.stringify(data));
 
         cookie.save('firstname', data.firstname);
-        cookie.save('user_id', data.user_id);
+        cookie.save('id', data.user_id);
         cookie.save('type', data.type);
         cookie.save('msisdn', data.msisdn);
 

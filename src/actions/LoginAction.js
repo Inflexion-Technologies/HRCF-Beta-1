@@ -16,7 +16,7 @@ export function registerSession(){
 export function login(username, password){
     axios.get('/api/v1/utils/login/', {params :{username, password}})
     .then((res)=>{
-        if(res.data !== null && res.data.user_id){
+        if(res.data !== null && res.data.id){
             dispatcher.dispatch({
                 type : "LOGIN_SUCCESS",
                 user: res.data

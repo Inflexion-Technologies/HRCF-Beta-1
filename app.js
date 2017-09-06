@@ -102,6 +102,7 @@ export default class App {
         const transactionModel = models.transactionModel(dbConfig);
         const withdrawalModel = models.withdrawalModel(dbConfig);
         const usersModel = models.usersModel(dbConfig);
+        const trackModel = models.trackModel(dbConfig);
         
 
         //Setting relationships
@@ -122,9 +123,11 @@ export default class App {
         usersModel.belongsToMany(approveModel, {through: 'user_approves'});
         usersModel.belongsToMany(branchModel, {through: 'user_branches'});
 
-        dbConfig.sync({force:true});
+        dbConfig.sync({force:true}).then(()=>{
+            trackModel.bulkCreate([{count: 1},{count: 1}]);
+        });
 
-        const users = new UserRoutes(usersModel);
+        const users = new UserRoutes(usersModel, trackModel);
         const approvers = new ApproveRoutes(approveModel);
 
         const branches = new BranchesRoutes(branchModel);

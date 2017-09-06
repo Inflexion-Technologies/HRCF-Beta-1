@@ -1,0 +1,6002 @@
+[
+    {
+      "name": "GN Bank",
+      "code": "GNBK",
+      "branch": "Tamale",
+      "branch_code": "0000"
+    },
+    {
+      "name": "GN Bank",
+      "code": "GNBK",
+      "branch": "Community 6",
+      "branch_code": "0000"
+    },
+    {
+      "name": "BEST POINT SAVINGS AND LOANS",
+      "code": "79895",
+      "branch": "MAKOLA BRANCH",
+      "branch_code": "78"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "ENCHI BRANCH",
+      "branch_code": "280404"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "TAMALE BRANCH",
+      "branch_code": "280801"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "KUMASI ASAFO BRANCH",
+      "branch_code": "280601"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "CASTLE ROAD BRANCH",
+      "branch_code": "280108"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "OSU WATSON BRANCH",
+      "branch_code": "280105"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "ACHIMOTA BRANCH",
+      "branch_code": "280118"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "KANESHIE BRANCH",
+      "branch_code": "280107"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "MADINA BRANCH",
+      "branch_code": "280109"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "NIA BRANCH",
+      "branch_code": "280111"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "SEFWI BRANCH",
+      "branch_code": "280403"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "TEMA MAIN BRANCH",
+      "branch_code": "280102"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "TAKORADI BRANCH",
+      "branch_code": "280402"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "LASHIBI BRANCH",
+      "branch_code": "280104"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "AMAKOM BRANCH",
+      "branch_code": "280604"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "TECHIMAN BRANCH",
+      "branch_code": "280701"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "TIA BRANCH",
+      "branch_code": "280121"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "OKAISHIE BRANCH",
+      "branch_code": "280115"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "ABEKA LAPAZ BRANCH",
+      "branch_code": "280114"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "KANTAMANTO BRANCH",
+      "branch_code": "280106"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "EAST CANTONMENTS BRANCH",
+      "branch_code": "280101"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "SUAME BRANCH",
+      "branch_code": "280603"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "RING ROAD CENTRAL BRANCH",
+      "branch_code": "280112"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "IPS BRANCH",
+      "branch_code": "280117"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "HEAD OFFICE",
+      "branch_code": "280100"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "KANESHIE POST OFFICE BRANCH",
+      "branch_code": "280113"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "OSU  OXFORD BRANCH",
+      "branch_code": "280103"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "SOUTH INDUSTRIAL BRANCH",
+      "branch_code": "280110"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "ADUM BRANCH",
+      "branch_code": "280602"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "ASHAIMAN BRANCH",
+      "branch_code": "280116"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "AIRPORT BRANCH",
+      "branch_code": "280122"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "TARKWA BRANCH",
+      "branch_code": "280401"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "NIMA BRANCH",
+      "branch_code": "280120"
+    },
+    {
+      "name": "ACCESS BANK CHG",
+      "code": "280100",
+      "branch": "TEMA COMMUNITY 1 BRANCH",
+      "branch_code": "280119"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "NAVRONGO",
+      "branch_code": "80993"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "TECHIMAN",
+      "branch_code": "80776"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "AGONA SWEDRU",
+      "branch_code": "80115"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "INTERNATIONAL BANKING",
+      "branch_code": "80107"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "NEW EDUBIASE",
+      "branch_code": "80663"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "HEAD OFFICE",
+      "branch_code": "80100"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "WA",
+      "branch_code": "80995"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "NKORANSAH",
+      "branch_code": "80775"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "CEDI HOUSE",
+      "branch_code": "80106"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "BONSO NKWANTA",
+      "branch_code": "80686"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "DORMAA AHENKRO",
+      "branch_code": "80772"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "NKWANTA",
+      "branch_code": "80554"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "KUMASI ASOKWA",
+      "branch_code": "80666"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "SOGAKOPE",
+      "branch_code": "80557"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "AMAKOM",
+      "branch_code": "80668"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "BEREKUM",
+      "branch_code": "80774"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "KANESSHIE",
+      "branch_code": "80105"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "NUNGUA",
+      "branch_code": "80110"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "HO",
+      "branch_code": "80552"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "ADABRAKA",
+      "branch_code": "80102"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "KASOA",
+      "branch_code": "80127"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "ACHIMOTA",
+      "branch_code": "80117"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "MADINA",
+      "branch_code": "80113"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "GULF HOUSE",
+      "branch_code": "80108"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "OBUASI",
+      "branch_code": "80664"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "TAMALE ABOABO",
+      "branch_code": "80882"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "BKWAI",
+      "branch_code": "80662"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "DENU",
+      "branch_code": "80555"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "TAKORADI",
+      "branch_code": "80441"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "CAPE COAST",
+      "branch_code": "80331"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "KPANDO",
+      "branch_code": "80553"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "KUMASI ADUM",
+      "branch_code": "80661"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "TEMA",
+      "branch_code": "80103"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "JUAPONG",
+      "branch_code": "80556"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "ENCHI",
+      "branch_code": "80444"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "SEFWI WIAWSO",
+      "branch_code": "80684"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "KOFORIDUA",
+      "branch_code": "80221"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "SUHUM",
+      "branch_code": "80222"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "MANKESSIM",
+      "branch_code": "80334"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "KUMASI PREMPEH 11 STREET",
+      "branch_code": "80667"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "ASSIN FOSO",
+      "branch_code": "80332"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "DANQUAH CIRCLE",
+      "branch_code": "80125"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "ACCRA NEW TOWN",
+      "branch_code": "80120"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "YENDI",
+      "branch_code": "80883"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "AGONA NKWANTA",
+      "branch_code": "80446"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "ADB HOUSE BRANCH",
+      "branch_code": "80116"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "SUNYANI",
+      "branch_code": "80771"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "TESHIE",
+      "branch_code": "80104"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "NKAWKAW",
+      "branch_code": "80223"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "DANSOMAN",
+      "branch_code": "80109"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "SEFWI ESSAM",
+      "branch_code": "80687"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "TAMALE",
+      "branch_code": "80881"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "ASHIAMAN",
+      "branch_code": "80124"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "MAKOLA",
+      "branch_code": "80119"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "UCC",
+      "branch_code": "80333"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "KORKORDZOR",
+      "branch_code": "80111"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "KUMASI CENTRAL  MARKET",
+      "branch_code": "80665"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "KWAPONG",
+      "branch_code": "80778"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "RING ROAD CENTRAL",
+      "branch_code": "80101"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "KENYASE",
+      "branch_code": "80779"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "OSU",
+      "branch_code": "80112"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "SPINTEX ROAD",
+      "branch_code": "80118"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "GOASO",
+      "branch_code": "80777"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "ATEBUBU",
+      "branch_code": "80685"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "HOHOE",
+      "branch_code": "81151"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "ABEKALAPAZ",
+      "branch_code": "80114"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "BAWKU",
+      "branch_code": "80992"
+    },
+    {
+      "name": "AGRIC. DEVELOPMENT BANK",
+      "code": "80100",
+      "branch": "BOLGATANGA",
+      "branch_code": "80991"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "OSINO",
+      "branch_code": "70208"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ESSUEHYIA",
+      "branch_code": "70307"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "AMUANA PRASO",
+      "branch_code": "70211"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "SENYA BREKU",
+      "branch_code": "70122"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "HO CENTRE",
+      "branch_code": "70501"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "AWUMASA",
+      "branch_code": "70116"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ASSIN AKROPONG",
+      "branch_code": "70308"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "WASSA AKROPONG",
+      "branch_code": "70403"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "GUAMAN",
+      "branch_code": "71102"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "WAMFIE",
+      "branch_code": "70703"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KAASE",
+      "branch_code": "70715"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "SANDEMA",
+      "branch_code": "70906"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "MAMFE",
+      "branch_code": "70107"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "WA",
+      "branch_code": "71005"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KOFORIDUA",
+      "branch_code": "70218"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ASUOM",
+      "branch_code": "70212"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "CEDI HOUSECED HOUSE",
+      "branch_code": "70126"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "SAMPA",
+      "branch_code": "70718"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KUMAWU",
+      "branch_code": "70608"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ESIAMA",
+      "branch_code": "70402"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KWAHU PRASO",
+      "branch_code": "70206"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "GAMBAGA",
+      "branch_code": "70905"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KUMASI",
+      "branch_code": "70633"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ASOKRE",
+      "branch_code": "70604"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KWAHU PEPEASE",
+      "branch_code": "70203"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ELMINA",
+      "branch_code": "70303"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "NSOATRE",
+      "branch_code": "70711"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "JAMASI",
+      "branch_code": "70618"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ANKWAWSO",
+      "branch_code": "70626"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "AMASAMAN",
+      "branch_code": "70117"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "AYAMFURI",
+      "branch_code": "70613"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "JUANSA",
+      "branch_code": "70605"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "JUABEN",
+      "branch_code": "70621"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "",
+      "branch_code": "70722"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "WA CENTRE",
+      "branch_code": "71001"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "WIOSO",
+      "branch_code": "70610"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ODUMASE",
+      "branch_code": "70104"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ACCRA",
+      "branch_code": "70102"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "AKROFUOM",
+      "branch_code": "70609"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "NYINAHIM",
+      "branch_code": "70619"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ANLOGA",
+      "branch_code": "70123"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "BAREKESE",
+      "branch_code": "70623"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "TOASE",
+      "branch_code": "70624"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "BADU",
+      "branch_code": "70710"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KASSEH",
+      "branch_code": "70110"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KINTAMPO",
+      "branch_code": "70702"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "AKUMA",
+      "branch_code": "70707"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KASEI",
+      "branch_code": "70628"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KUMASI",
+      "branch_code": "70631"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "BRAKWA",
+      "branch_code": "70111"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "TORYA RURAL BANK LTD",
+      "branch_code": "70627"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "TEASE",
+      "branch_code": "70209"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "SEIKWA",
+      "branch_code": "70714"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "DABALE",
+      "branch_code": "70120"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "TUMA",
+      "branch_code": "71004"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ACHIASE",
+      "branch_code": "70204"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ZIBILLA",
+      "branch_code": "70907"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "AKATSI",
+      "branch_code": "70503"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "SEKYEDUMASI",
+      "branch_code": "70603"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "CAPE COASTCAPE COAST",
+      "branch_code": "70301"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ACCRA",
+      "branch_code": "70127"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "PAGA",
+      "branch_code": "70902"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "LA",
+      "branch_code": "70125"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "WASSA AKROPONG",
+      "branch_code": "70410"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "WORAWORA",
+      "branch_code": "71103"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KUMASIKUMASI",
+      "branch_code": "70601"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ASSIN MANSO",
+      "branch_code": "70305"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ACERENSUA",
+      "branch_code": "70706"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "BIRIWA",
+      "branch_code": "70310"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KUMASI",
+      "branch_code": "70632"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "HO",
+      "branch_code": "70506"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "MANSO",
+      "branch_code": "70408"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "SUNYANI",
+      "branch_code": "70720"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "BOMAA",
+      "branch_code": "70709"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "AFOSU",
+      "branch_code": "70202"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "JACOBU",
+      "branch_code": "70615"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KUMBUNGU",
+      "branch_code": "70802"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "AYIREBI",
+      "branch_code": "70213"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "FOMENA",
+      "branch_code": "70607"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KOFORIDUA",
+      "branch_code": "70201"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "TAMALE CENTRE",
+      "branch_code": "70801"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "OFRAMASE",
+      "branch_code": "70216"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "APAM",
+      "branch_code": "70105"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "BUSUNYA",
+      "branch_code": "70708"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "BOLGATANGA",
+      "branch_code": "70908"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "SOUTH RIDGE ACCRA",
+      "branch_code": "70101"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "WIAMOASE",
+      "branch_code": "70612"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ADIDOME",
+      "branch_code": "70502"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KOMENDA",
+      "branch_code": "70306"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "WALEWALE",
+      "branch_code": "70904"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KWAMANG",
+      "branch_code": "70606"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "AKIM SWEDRU",
+      "branch_code": "70210"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ACCRA",
+      "branch_code": "70128"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "SAVELEGU",
+      "branch_code": "70803"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "NYAKROM",
+      "branch_code": "70103"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KASOA",
+      "branch_code": "70124"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KUNTANASE",
+      "branch_code": "70611"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "AFRANSI",
+      "branch_code": "70113"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ABESIM",
+      "branch_code": "70719"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KWANYAKU",
+      "branch_code": "70114"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "PRANG",
+      "branch_code": "70622"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "SEFWI",
+      "branch_code": "70614"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "TWIFO AGONA",
+      "branch_code": "70309"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "TAMALE",
+      "branch_code": "70805"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "NEW TAFO",
+      "branch_code": "70217"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "FANTI NYANKUMASE",
+      "branch_code": "70304"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "PAKYI NO. 2",
+      "branch_code": "70616"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "AWUTU BAWJIASE",
+      "branch_code": "70119"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "SHAMA",
+      "branch_code": "70406"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "AWIEBO",
+      "branch_code": "70404"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KPEVE",
+      "branch_code": "70505"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "TIKOBO NO. 1",
+      "branch_code": "70405"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "SUNYANI CENTRE",
+      "branch_code": "70701"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "DODOWA",
+      "branch_code": "70109"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "SUNYANI",
+      "branch_code": "70721"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "GOMOA",
+      "branch_code": "70115"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "FOASE",
+      "branch_code": "70602"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KOFIASE",
+      "branch_code": "70625"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "HOHOE",
+      "branch_code": "71105"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "BOLGA CENTRE",
+      "branch_code": "70901"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ZIOPE",
+      "branch_code": "70504"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "DROBO",
+      "branch_code": "70717"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ANTOAKROM",
+      "branch_code": "70620"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ENYAN DENKYIRA",
+      "branch_code": "70302"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "NANKESE",
+      "branch_code": "70214"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "JIRAPA",
+      "branch_code": "71003"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KWABENG",
+      "branch_code": "70207"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "AGONA NKWANTA",
+      "branch_code": "70409"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ABOKOBI",
+      "branch_code": "70118"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "",
+      "branch_code": "70129"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ANUM",
+      "branch_code": "70106"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "",
+      "branch_code": "70806"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "TAKORADI CENTRE",
+      "branch_code": "70401"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "KUKUOM",
+      "branch_code": "70716"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "DERMA",
+      "branch_code": "70712"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "SUMA AHENKRO",
+      "branch_code": "70704"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "HOHOE",
+      "branch_code": "71104"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "GOMOA",
+      "branch_code": "70112"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "BOGOSO",
+      "branch_code": "70407"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ANOMA RURAL BANK LTD",
+      "branch_code": "70215"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "NSUTA",
+      "branch_code": "70629"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "ASESEWA",
+      "branch_code": "70205"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "TAMALE",
+      "branch_code": "70804"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "GARU",
+      "branch_code": "70903"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "HOHOE CENTRE",
+      "branch_code": "71101"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "MEPE",
+      "branch_code": "70121"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "NANDOM",
+      "branch_code": "71002"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "PRAMPRAM",
+      "branch_code": "70108"
+    },
+    {
+      "name": "ARB APEX & RURAL BANKS",
+      "code": "70100",
+      "branch": "SEFWI",
+      "branch_code": "70630"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "Tema Main",
+      "branch_code": "1233"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "GUMANI",
+      "branch_code": "30871"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "BCM",
+      "branch_code": "30116"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "AGOGO",
+      "branch_code": "30658"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "HO",
+      "branch_code": "30539"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "MATAHEKO",
+      "branch_code": "30193"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "KOTOBABI",
+      "branch_code": "30196"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "MANKESSIM",
+      "branch_code": "30367"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "AHODWO",
+      "branch_code": "30683"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "KONONGO",
+      "branch_code": "30677"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "NEW SUAME MAGAZINE",
+      "branch_code": "30653"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "OLD SUAME MAGAZINE",
+      "branch_code": "30657"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "PREMPEH II STREET",
+      "branch_code": "30627"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "ACHIMOTA",
+      "branch_code": "30111"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "ACCRA MALL",
+      "branch_code": "30105"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "TECHIMAN",
+      "branch_code": "30718"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "ACCRA NEWTOWN",
+      "branch_code": "30169"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "OBUASI",
+      "branch_code": "30638"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "HOHOE",
+      "branch_code": "30540"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "LEGON MAIN",
+      "branch_code": "30125"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "SME CENTRE",
+      "branch_code": "30161"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "A AND C MALL",
+      "branch_code": "30104"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "ABOSSEY OKAI",
+      "branch_code": "30195"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "SPINTEX PRESTIGE",
+      "branch_code": "30145"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "SPINTEX MAIN",
+      "branch_code": "30121"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "KEJETIA",
+      "branch_code": "30628"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "AIRPORT CITY",
+      "branch_code": "30136"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "CAPE COAST",
+      "branch_code": "30337"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "KROFOM",
+      "branch_code": "30680"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "DIRECT SALES",
+      "branch_code": "30149"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "HEAD OFFICE",
+      "branch_code": "30164"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "TARKWA",
+      "branch_code": "30434"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "KNUTSFORD AVENUE",
+      "branch_code": "30122"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "MAKOLA SQUARE",
+      "branch_code": "30135"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "GNPC",
+      "branch_code": "30108"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "TESHIE NUNGUA",
+      "branch_code": "30168"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "MAAMOBI",
+      "branch_code": "30191"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "HIGH STREET",
+      "branch_code": "30431"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "TEMA OIL REFINERY",
+      "branch_code": "30189"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "KASOA",
+      "branch_code": "30101"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "NORTH KANESHIE",
+      "branch_code": "30190"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "ADUM",
+      "branch_code": "30666"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "GOASO",
+      "branch_code": "30759"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "MADINA",
+      "branch_code": "30163"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "ELUBO",
+      "branch_code": "30498"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "ASAFO",
+      "branch_code": "30623"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "ASHAIMAN",
+      "branch_code": "30184"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "ODA",
+      "branch_code": "30246"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "DOME",
+      "branch_code": "30170"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "HIGH STREET",
+      "branch_code": "30148"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "LEGON",
+      "branch_code": "30110"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "TARKWA MINES",
+      "branch_code": "30451"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "DANSOMAN",
+      "branch_code": "30107"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "HAATSO",
+      "branch_code": "30185"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "PALM WINE JUNCTION",
+      "branch_code": "30197"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "ADENTA",
+      "branch_code": "30194"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "INDEPENDENCE AVENUE",
+      "branch_code": "30175"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "BANTAMA",
+      "branch_code": "30674"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "BOLGATANGA",
+      "branch_code": "30919"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "RING ROAD CENTRAL",
+      "branch_code": "30114"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "ATEBUBU",
+      "branch_code": "30778"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "WEIJA",
+      "branch_code": "30179"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "ASANKRAGUA",
+      "branch_code": "30452"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "OSU",
+      "branch_code": "30112"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "SEFWI",
+      "branch_code": "30676"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "DARKUMAN",
+      "branch_code": "30173"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "NIMA",
+      "branch_code": "30109"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "AFLAO",
+      "branch_code": "30572"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "SOMANYA",
+      "branch_code": "30186"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "BEREKUM",
+      "branch_code": "30723"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "KOFORIDUA",
+      "branch_code": "30242"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "UNDP",
+      "branch_code": "30155"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "TANOSO",
+      "branch_code": "30681"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "TEMA FISHING HARBOUR",
+      "branch_code": "30130"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "WA",
+      "branch_code": "31088"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "TEMA MAIN",
+      "branch_code": "30160"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "OFFSHORE BANKING",
+      "branch_code": "30192"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "NSAWAM",
+      "branch_code": "30247"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "CIRCLE",
+      "branch_code": "30141"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "AGBOBLOSHIE",
+      "branch_code": "30162"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "MOTORWAY EXT",
+      "branch_code": "30117"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "NKAWKAW",
+      "branch_code": "30243"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "ACCRA CORPORATE SERVICE CENTR",
+      "branch_code": "30144"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "TEPA",
+      "branch_code": "30771"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "WINNEBA",
+      "branch_code": "30165"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "KANESHIE",
+      "branch_code": "30187"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "TWIFO PRASO",
+      "branch_code": "30399"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "LIBERATION ROAD",
+      "branch_code": "30432"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "SUNYANI",
+      "branch_code": "30750"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "AVENUE CENTRAL",
+      "branch_code": "30154"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "BAWKU",
+      "branch_code": "30926"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "TAKORADI KOKOMPE",
+      "branch_code": "30456"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "ABEKA LAPAZ",
+      "branch_code": "30106"
+    },
+    {
+      "name": "BARCLAYS BANK",
+      "code": "30100",
+      "branch": "TAMALE",
+      "branch_code": "30833"
+    },
+    {
+      "name": "BANK OF BARODA (GH) LTD.",
+      "code": "260100",
+      "branch": "HEAD OFFICE",
+      "branch_code": "260101"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "MICHEL CAMP",
+      "branch_code": "210106"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "NEWTOWN",
+      "branch_code": "210105"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "KUMASI",
+      "branch_code": "210602"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "KUMASI AMAKOM",
+      "branch_code": "210601"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "MAAMOBI",
+      "branch_code": "210103"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "OSU",
+      "branch_code": "210113"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "TAKORADI",
+      "branch_code": "210401"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "TAMALE",
+      "branch_code": "210801"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "ACCRA CENTRAL",
+      "branch_code": "210104"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "HEAD OFFICE",
+      "branch_code": "210100"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "MULTICREDIT SAVINGS AND LOANS CO.",
+      "branch_code": "210699"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "EAST LEGON",
+      "branch_code": "210111"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "TEMA",
+      "branch_code": "210116"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "SPINTEX ROAD",
+      "branch_code": "210114"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "MADINA",
+      "branch_code": "210118"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "KWASHIEMAN",
+      "branch_code": "210112"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "DANSOMAN",
+      "branch_code": "210117"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "FARRAR",
+      "branch_code": "210101"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "ABOSSEY OKAI",
+      "branch_code": "210119"
+    },
+    {
+      "name": "BANK OF AFRICA -GHANA LTD",
+      "code": "210100",
+      "branch": "RIDGE",
+      "branch_code": "210102"
+    },
+    {
+      "name": "BANK OF GHANA",
+      "code": "10100",
+      "branch": "SEFWI BOAKO",
+      "branch_code": "10402"
+    },
+    {
+      "name": "BANK OF GHANA",
+      "code": "10100",
+      "branch": "TAKORADI",
+      "branch_code": "10401"
+    },
+    {
+      "name": "BANK OF GHANA",
+      "code": "10100",
+      "branch": "AGONA SWEDRU",
+      "branch_code": "10303"
+    },
+    {
+      "name": "BANK OF GHANA",
+      "code": "10100",
+      "branch": "SUNYANI",
+      "branch_code": "10701"
+    },
+    {
+      "name": "BANK OF GHANA",
+      "code": "10100",
+      "branch": "HOHOE",
+      "branch_code": "11101"
+    },
+    {
+      "name": "BANK OF GHANA",
+      "code": "10100",
+      "branch": "",
+      "branch_code": "10101"
+    },
+    {
+      "name": "BANK OF GHANA",
+      "code": "10100",
+      "branch": "KUMASI",
+      "branch_code": "10601"
+    },
+    {
+      "name": "BANK OF GHANA",
+      "code": "10100",
+      "branch": "TAMALE",
+      "branch_code": "10801"
+    },
+    {
+      "name": "BSIC GHANA LTD.",
+      "code": "270100",
+      "branch": "SPINTEX",
+      "branch_code": "270103"
+    },
+    {
+      "name": "BSIC GHANA LTD.",
+      "code": "270100",
+      "branch": "MADINA",
+      "branch_code": "270106"
+    },
+    {
+      "name": "BSIC GHANA LTD.",
+      "code": "270100",
+      "branch": "KUMASI",
+      "branch_code": "270601"
+    },
+    {
+      "name": "BSIC GHANA LTD.",
+      "code": "270100",
+      "branch": "ACCRA CENTRAL",
+      "branch_code": "270102"
+    },
+    {
+      "name": "BSIC GHANA LTD.",
+      "code": "270100",
+      "branch": "DARKUMAN",
+      "branch_code": "270108"
+    },
+    {
+      "name": "BSIC GHANA LTD.",
+      "code": "270100",
+      "branch": "TAKORADI",
+      "branch_code": "270401"
+    },
+    {
+      "name": "BSIC GHANA LTD.",
+      "code": "270100",
+      "branch": "NIMA",
+      "branch_code": "270104"
+    },
+    {
+      "name": "BSIC GHANA LTD.",
+      "code": "270100",
+      "branch": "ADABRAKA",
+      "branch_code": "270101"
+    },
+    {
+      "name": "BSIC GHANA LTD.",
+      "code": "270100",
+      "branch": "NORTH INDUSTRIAL AREA",
+      "branch_code": "270105"
+    },
+    {
+      "name": "BSIC GHANA LTD.",
+      "code": "270100",
+      "branch": "HEAD OFFICE",
+      "branch_code": "270100"
+    },
+    {
+      "name": "BSIC GHANA LTD.",
+      "code": "270100",
+      "branch": "TEMA",
+      "branch_code": "270107"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "ASAFO",
+      "branch_code": "140605"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "CIRCLE BRANCH",
+      "branch_code": "140108"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "SPINTEX ROAD",
+      "branch_code": "140104"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "GRAPHIC ROAD",
+      "branch_code": "140105"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "TEMA",
+      "branch_code": "140102"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "HEAD OFFICE",
+      "branch_code": "140100"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "WEIJA BRANCH",
+      "branch_code": "140107"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "OPPORTUNITY SAVINGS & LOANS",
+      "branch_code": "140199"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "SUAME",
+      "branch_code": "140602"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "KEJETIA",
+      "branch_code": "140603"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "TARKWA",
+      "branch_code": "140402"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "NHYIEASO",
+      "branch_code": "140601"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "LEGON",
+      "branch_code": "140109"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "KNUST",
+      "branch_code": "140604"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "DERBY AVENUE",
+      "branch_code": "140103"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "INDEPENDENCE AVENUE",
+      "branch_code": "140101"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "TEMA HARBOUR",
+      "branch_code": "140106"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "TAKORADI HARBOUR",
+      "branch_code": "140403"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "RING ROAD CENTRAL",
+      "branch_code": "140110"
+    },
+    {
+      "name": "CAL BANK LTD",
+      "code": "140100",
+      "branch": "TAKORADI",
+      "branch_code": "140401"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "SPINTEX",
+      "branch_code": "130117"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "WOMEN'S WORLD BANKING",
+      "branch_code": "130157"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "BURMA CAMP",
+      "branch_code": "130130"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "KASOA BRANCH",
+      "branch_code": "130135"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "DARKUMAN",
+      "branch_code": "130114"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "TAFO",
+      "branch_code": "130606"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "TARKWA",
+      "branch_code": "130402"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "KENYASI AGENCY",
+      "branch_code": "130701"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "TRUST TOWERS BRANCH",
+      "branch_code": "130132"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "HOSPITAL ROAD BRANCH",
+      "branch_code": "130134"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "MADINA CENTRAL BRANCH",
+      "branch_code": "130137"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "ADUM",
+      "branch_code": "130604"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "ELUBU",
+      "branch_code": "130404"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "JUBILEE HOUSE",
+      "branch_code": "130602"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "TEMA LONG ROOM",
+      "branch_code": "130108"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "SOUTH INDUSTRIAL AREA(SIA)",
+      "branch_code": "130116"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "TAKORADI MARKET CIRCLE",
+      "branch_code": "130403"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "COMMUNITY1 BRANCH",
+      "branch_code": "130138"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "OSU",
+      "branch_code": "130106"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "DOME ST. JOHNS",
+      "branch_code": "130126"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "RING ROAD CENTRAL",
+      "branch_code": "130103"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "OKOFO BRANCH",
+      "branch_code": "130153"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "BANTAMA",
+      "branch_code": "130610"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "SAFE BOND",
+      "branch_code": "130128"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "SSNIT HOUSE BRANCH",
+      "branch_code": "130614"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "SILVER STAR",
+      "branch_code": "130105"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "TAKORADI",
+      "branch_code": "130401"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "PROCREDIT SAVINGS & LOANS",
+      "branch_code": "130156"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "SAKUMONO BRANCH",
+      "branch_code": "130139"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "KUMASI HARPER ROAD",
+      "branch_code": "130601"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "DANSOMAN",
+      "branch_code": "130112"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "ASH TOWN",
+      "branch_code": "130607"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "ACCION",
+      "branch_code": "130145"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "KISSEIMAN BRANCH",
+      "branch_code": "130142"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "STADIUM",
+      "branch_code": "130611"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "BUI",
+      "branch_code": "130703"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "BANTAMA GNTC BRANCH",
+      "branch_code": "130613"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "KEJETIA",
+      "branch_code": "130608"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "ACHIMOTA MILE 7",
+      "branch_code": "130121"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "KANTAMANTO BRANCH",
+      "branch_code": "130136"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "FIRST NATIONAL SAVINGS & LOANS",
+      "branch_code": "130155"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "TEMA COMMUNITY 6",
+      "branch_code": "130113"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "UNION SAVINGS & LOANS",
+      "branch_code": "130158"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "ACCRA SHOPPING MALL",
+      "branch_code": "130118"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "NIMA",
+      "branch_code": "130110"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "HEAD OFFICE",
+      "branch_code": "130101"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "HIGH STREET BRANCH",
+      "branch_code": "130140"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "MADINA",
+      "branch_code": "130122"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "SUAME BRANCH",
+      "branch_code": "130615"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "LEGON",
+      "branch_code": "130115"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "TEMA SHOPPING MALL",
+      "branch_code": "130119"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "EAST AIRPORT BRANCH",
+      "branch_code": "130147"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "TUDU",
+      "branch_code": "130104"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "TESANO BRANCH",
+      "branch_code": "130133"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "KWASHIEMAN BRANCH",
+      "branch_code": "130141"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "WESTLANDS",
+      "branch_code": "130124"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "MCCARTHY HILL",
+      "branch_code": "130109"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "HAATSOO",
+      "branch_code": "130123"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "NEW ABIREM",
+      "branch_code": "130201"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "OPPORTUNITY INT. SAVINGS AND LOAN",
+      "branch_code": "130146"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "LABONE",
+      "branch_code": "130129"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "ABREPO JUNCTION",
+      "branch_code": "130605"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "MOTOR WAY ROUNDABOUT",
+      "branch_code": "130125"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "TEMA",
+      "branch_code": "130102"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "REINSURANCE HOUSE BRANCH",
+      "branch_code": "130131"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "TAMALE",
+      "branch_code": "130801"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "EVANDY HOSTEL BRANCH",
+      "branch_code": "130151"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "AFLAO",
+      "branch_code": "130501"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "KNUST",
+      "branch_code": "130603"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "SUNYANI",
+      "branch_code": "130702"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "ADEHYEMAN SAVINGS & LOAN",
+      "branch_code": "130154"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "ASHTOWN EAST BRANCH",
+      "branch_code": "130616"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "PENTAGON LEGON BRANCH",
+      "branch_code": "130152"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "KWABENYA BRANCH",
+      "branch_code": "130148"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "BEIGE CAPITAL",
+      "branch_code": "130160"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "FIRST ALLIED SAVINGS & LOANS",
+      "branch_code": "130159"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "A AND C",
+      "branch_code": "130107"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "TANOSO",
+      "branch_code": "130612"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "KOTOBABI",
+      "branch_code": "130127"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "ASHAIMAN",
+      "branch_code": "130150"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "OKPONGLO BRANCH",
+      "branch_code": "130149"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "ABREPO MAIN",
+      "branch_code": "130609"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "WEIJA",
+      "branch_code": "130120"
+    },
+    {
+      "name": "ECOBANK (GH) LTD",
+      "code": "130100",
+      "branch": "ABEKA LAPAZ",
+      "branch_code": "130111"
+    },
+    {
+      "name": "ENERGY BANK CHG",
+      "code": "290100",
+      "branch": "",
+      "branch_code": "290101"
+    },
+    {
+      "name": "FIRST ATLANTIC MERCHANT",
+      "code": "170100",
+      "branch": "KANTAMANTO AGENCY",
+      "branch_code": "170102"
+    },
+    {
+      "name": "FIRST ATLANTIC MERCHANT",
+      "code": "170100",
+      "branch": "SUAME",
+      "branch_code": "170602"
+    },
+    {
+      "name": "FIRST ATLANTIC MERCHANT",
+      "code": "170100",
+      "branch": "NORTH RIDGE",
+      "branch_code": "170105"
+    },
+    {
+      "name": "FIRST ATLANTIC MERCHANT",
+      "code": "170100",
+      "branch": "ACCRA",
+      "branch_code": "170101"
+    },
+    {
+      "name": "FIRST ATLANTIC MERCHANT",
+      "code": "170100",
+      "branch": "TEMA",
+      "branch_code": "170103"
+    },
+    {
+      "name": "FIRST ATLANTIC MERCHANT",
+      "code": "170100",
+      "branch": "MAKOLA",
+      "branch_code": "170104"
+    },
+    {
+      "name": "FIRST ATLANTIC MERCHANT",
+      "code": "170100",
+      "branch": "KUMASI",
+      "branch_code": "170601"
+    },
+    {
+      "name": "FIRST CAPITAL PLUS BANK",
+      "code": "0000",
+      "branch": "SPINTEX",
+      "branch_code": "20111"
+    },
+    {
+      "name": "FIRST CAPITAL PLUS BANK",
+      "code": "0000",
+      "branch": "TESANO BRANCH",
+      "branch_code": ""
+    },
+    {
+      "name": "FIRST CAPITAL PLUS BANK",
+      "code": "0000",
+      "branch": "ACCRA CENTRAL BRANCH",
+      "branch_code": ""
+    },
+    {
+      "name": "FIRST CAPITAL PLUS BANK",
+      "code": "0000",
+      "branch": "DANSOMAN BRANCH",
+      "branch_code": ""
+    },
+    {
+      "name": "FIRST CAPITAL PLUS BANK",
+      "code": "0000",
+      "branch": "NEWTOWN BRANCH",
+      "branch_code": ""
+    },
+    {
+      "name": "FIRST CAPITAL PLUS BANK",
+      "code": "0000",
+      "branch": "OSU BRANCH",
+      "branch_code": ""
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "SUNYANI POSTBANK",
+      "branch_code": "240701"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "SPINTEX ROAD",
+      "branch_code": "240102"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "RIDGE TOWERS",
+      "branch_code": "240101"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "OSU",
+      "branch_code": "240104"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "ACCRA CENTRAL POSTBANK",
+      "branch_code": "240117"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "A AND C MALL",
+      "branch_code": "240112"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "ATONSU",
+      "branch_code": "240604"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "DZORWULU",
+      "branch_code": "240122"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "KUMASI",
+      "branch_code": "240603"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "RING ROAD",
+      "branch_code": "240114"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "HO",
+      "branch_code": "240501"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "ADENTA",
+      "branch_code": "240118"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "TEMA SAFE BOND",
+      "branch_code": "240106"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "BOLGATANGA POSTBANK",
+      "branch_code": "240901"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "TAKORADI POSTBANK",
+      "branch_code": "240403"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "KANTAMANTO",
+      "branch_code": "240107"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "TEMA",
+      "branch_code": "240109"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "ACTION CHAPEL",
+      "branch_code": "240111"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "HIGH STREET",
+      "branch_code": "240103"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "KUMASI",
+      "branch_code": "240602"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "MAMPROBI POSTBANK",
+      "branch_code": "240123"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "STADIUM POST",
+      "branch_code": "240601"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "KUMASI ADUM POSTBANK",
+      "branch_code": "240606"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "ASSIN FOSU",
+      "branch_code": "240301"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "TAMALE",
+      "branch_code": "240801"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "OKAISHIE",
+      "branch_code": "240110"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "HAATSO",
+      "branch_code": "240115"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "KWAME NKRUMAH AVENUE",
+      "branch_code": "240124"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "AHODWO",
+      "branch_code": "240605"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "ABOSSEY OKAI",
+      "branch_code": "240105"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "TRADE FAIR LA",
+      "branch_code": "240120"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "HOHOE",
+      "branch_code": "240191"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "TAKORADI MARKET CIRCLE",
+      "branch_code": "240401"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "DANSOMAN",
+      "branch_code": "240113"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "TUDU",
+      "branch_code": "240108"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "TARKWA",
+      "branch_code": "240402"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "TESANO",
+      "branch_code": "240121"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "HEAD OFFICE",
+      "branch_code": "240100"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "TEMA COMMUNITY 2",
+      "branch_code": "240116"
+    },
+    {
+      "name": "FIDELITY BANK GHANA LTD",
+      "code": "240100",
+      "branch": "IPS",
+      "branch_code": "240119"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "DOME (KWABENYA)",
+      "branch_code": "40144"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "SUHUM",
+      "branch_code": "40208"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ASHAIMAN",
+      "branch_code": "40121"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "NKAWIE",
+      "branch_code": "40623"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KEJETIA",
+      "branch_code": "40604"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "SAMPA",
+      "branch_code": "40723"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "MANKESSIM",
+      "branch_code": "40307"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TAKORADI HARBOUR",
+      "branch_code": "40402"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "EJISU",
+      "branch_code": "40612"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "NKWANTA",
+      "branch_code": "41106"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "NSAWAM",
+      "branch_code": "40134"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KOFORIDUA",
+      "branch_code": "40201"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "LIBERTY HOUSE",
+      "branch_code": "40117"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "MPRAESO",
+      "branch_code": "40210"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "BEKWAI",
+      "branch_code": "40609"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "AXIM",
+      "branch_code": "40408"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "DAMBAI",
+      "branch_code": "41108"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TAKORADI MARKET CIRCLE",
+      "branch_code": "40403"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "MAMPONGASHANTI",
+      "branch_code": "40607"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ELUBO",
+      "branch_code": "40415"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "HO MARKET",
+      "branch_code": "40526"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TEMA FISHING HARBOUR",
+      "branch_code": "40110"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "RING ROAD WEST",
+      "branch_code": "40111"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TECHIMAN MARKET",
+      "branch_code": "40724"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "SOGAKOPE",
+      "branch_code": "40142"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "PEKI",
+      "branch_code": "41105"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ANYINAM",
+      "branch_code": "40207"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "CLEARING",
+      "branch_code": "40125"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "HO POLYTECHNIC",
+      "branch_code": "40530"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TAMALE MARKET",
+      "branch_code": "40805"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KETEKRACHI",
+      "branch_code": "41107"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ASSIN FOSU",
+      "branch_code": "40303"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TEPA",
+      "branch_code": "40615"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "DZODZE",
+      "branch_code": "40503"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "BREMAN ASIKUMA",
+      "branch_code": "40304"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "BOGOSO",
+      "branch_code": "40414"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "YENDI",
+      "branch_code": "40802"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "BOLGATANGA",
+      "branch_code": "40901"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "31ST DECEMBER MARKET",
+      "branch_code": "40124"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "AFLAO",
+      "branch_code": "40502"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "YEJI",
+      "branch_code": "40606"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TANTRA HILL",
+      "branch_code": "40130"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "AGOGO",
+      "branch_code": "40622"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TEMA INDUSTRIAL AREA",
+      "branch_code": "40109"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TARKWA",
+      "branch_code": "40405"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KADJEBI",
+      "branch_code": "41103"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ELMINA",
+      "branch_code": "40315"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KADE",
+      "branch_code": "40203"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "NEW EDUBIASE",
+      "branch_code": "40618"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TECH JUNCTION,KUMASI",
+      "branch_code": "40628"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "MADINA",
+      "branch_code": "40123"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ABELENKPE",
+      "branch_code": "40145"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "HALFASSINI",
+      "branch_code": "40409"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "UNIVERSITY OF CAPE COAST",
+      "branch_code": "40302"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "NEW TAFO",
+      "branch_code": "40204"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "DUNKWA",
+      "branch_code": "40624"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "LEGON",
+      "branch_code": "40103"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KNUST KUMASI",
+      "branch_code": "40603"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "BECHEM",
+      "branch_code": "40702"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "EFFIDUASEASHANTI",
+      "branch_code": "40610"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "HO",
+      "branch_code": "40501"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "NUNGUA",
+      "branch_code": "40160"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "AKROPONGAKWAPIM",
+      "branch_code": "40132"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "NIMA BRANCH",
+      "branch_code": "40159"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "SUNYANI",
+      "branch_code": "40701"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "AKUSE",
+      "branch_code": "40136"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "JUASO",
+      "branch_code": "40617"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "NKORANZA",
+      "branch_code": "40713"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KORLEBU",
+      "branch_code": "40113"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "DAMONGO",
+      "branch_code": "40803"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "SPINTEX ROAD",
+      "branch_code": "40150"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "SAFE BOND (JUBILEE) TEMA",
+      "branch_code": "40146"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ENCHI",
+      "branch_code": "40407"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ACCRA NEW TOWN",
+      "branch_code": "40118"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "WINNEBA",
+      "branch_code": "40138"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TETTEH QUARSHIE CIRCLE",
+      "branch_code": "40126"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ABOR",
+      "branch_code": "40504"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KIBI",
+      "branch_code": "40209"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TAMALE HOSPITAL ROAD",
+      "branch_code": "40809"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "NAVRONGO",
+      "branch_code": "40902"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "BANTAMA",
+      "branch_code": "40627"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "JAPEKROM",
+      "branch_code": "40710"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "AHINSANKUMASI",
+      "branch_code": "40619"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "SEKONDI",
+      "branch_code": "40404"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "JUBILEE HOUSE",
+      "branch_code": "40621"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ADA FOAH",
+      "branch_code": "40140"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "AKOSOMBO",
+      "branch_code": "40135"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "OSU",
+      "branch_code": "40114"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KASOA",
+      "branch_code": "40143"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ACCRA NORTH CIRCLE",
+      "branch_code": "40151"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "BIMBILA",
+      "branch_code": "40806"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "AGONAASHANTI",
+      "branch_code": "40620"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "BAWKU",
+      "branch_code": "40903"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KASOA MAIN",
+      "branch_code": "40147"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "SEFWI WIAWSO",
+      "branch_code": "40608"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "REPUBLIC HOUSE",
+      "branch_code": "40106"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KUMASI MAIN",
+      "branch_code": "40601"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ASAFO MARKET",
+      "branch_code": "40602"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "MAMPONGAKWAPIM",
+      "branch_code": "40133"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "DONKORKROM",
+      "branch_code": "40211"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "GOASO",
+      "branch_code": "40707"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ASAMANKESE",
+      "branch_code": "40206"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KWAME NKRUMAH CIRCLE",
+      "branch_code": "40127"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ADENTA MARKET",
+      "branch_code": "40149"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "PRESTEA",
+      "branch_code": "40410"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "JASIKAN",
+      "branch_code": "41102"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KANESHIE INDUSTRIAL AREA",
+      "branch_code": "40120"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "HEAD OFFICE",
+      "branch_code": "40199"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TECHIMAN",
+      "branch_code": "40715"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "INTERNATIONAL TRADE FINANCE",
+      "branch_code": "40128"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "LAWRA",
+      "branch_code": "41003"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KINTAMPO",
+      "branch_code": "40712"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "EJURA",
+      "branch_code": "40614"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ABURI",
+      "branch_code": "40137"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TEMA MARKET",
+      "branch_code": "40108"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "BEREKUM",
+      "branch_code": "40703"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "SALTPOND",
+      "branch_code": "40306"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TAMALE MAIN",
+      "branch_code": "40801"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "SOMANYA",
+      "branch_code": "40131"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KPANDO",
+      "branch_code": "41104"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "HOHOE",
+      "branch_code": "41101"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "MIM",
+      "branch_code": "40709"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TWIFO PRASO",
+      "branch_code": "40308"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KETA",
+      "branch_code": "40141"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KISSEIMAN",
+      "branch_code": "40148"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "BOUNDARY ROAD",
+      "branch_code": "40116"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "WA",
+      "branch_code": "41001"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "BOGOSO",
+      "branch_code": "40412"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "AKATSI",
+      "branch_code": "40517"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "HWIDIEM",
+      "branch_code": "40706"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TUMU",
+      "branch_code": "41002"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "WALEWALE",
+      "branch_code": "40906"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "DUAYAWNKWANTA",
+      "branch_code": "40705"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "OBUASI",
+      "branch_code": "40611"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "NKAWKAW",
+      "branch_code": "40205"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "SANKORE",
+      "branch_code": "40717"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KANESHIE MARKET",
+      "branch_code": "40112"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "BOLE",
+      "branch_code": "41004"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "MINISTRIES",
+      "branch_code": "40105"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "AKIM ODA",
+      "branch_code": "40202"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "CAPE COAST MAIN",
+      "branch_code": "40301"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TAKORADI MAIN",
+      "branch_code": "40401"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "DANSOMAN",
+      "branch_code": "40158"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "NEW OFFINSO",
+      "branch_code": "40613"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "DORMAA AHENKRO",
+      "branch_code": "40704"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TEMA MAIN",
+      "branch_code": "40107"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "GLOBAL TRANSFER SERVICES",
+      "branch_code": "40129"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "AGONA SWEDRU",
+      "branch_code": "40139"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "TRADE FAIR SITE",
+      "branch_code": "40119"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "SUNYANI MARKET",
+      "branch_code": "40725"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "HARPER ROAD",
+      "branch_code": "40625"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "HIGH STREET",
+      "branch_code": "40101"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "AKUMADAN",
+      "branch_code": "40616"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "SAMREBOI",
+      "branch_code": "40406"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "WENCHI",
+      "branch_code": "40711"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "KONONGO",
+      "branch_code": "40605"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "DADIESO",
+      "branch_code": "40413"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "SALAGA",
+      "branch_code": "40804"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "BURMA CAMP",
+      "branch_code": "40102"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "ABURA DUNKWA",
+      "branch_code": "40305"
+    },
+    {
+      "name": "GHANA COMMERCIAL BANK",
+      "code": "40100",
+      "branch": "DERBY AVENUE",
+      "branch_code": "40115"
+    },
+    {
+      "name": "GHIPSS DR CHG",
+      "code": "999999",
+      "branch": "",
+      "branch_code": ""
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "COMMUNITY 6",
+      "branch_code": "230113"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "TECHIMAN",
+      "branch_code": "230701"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "OSU",
+      "branch_code": "230104"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "KUMASI",
+      "branch_code": "230601"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "TAMALE",
+      "branch_code": "230801"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "TARKWA",
+      "branch_code": "230402"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "SPINTEX ROAD",
+      "branch_code": "230105"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "OPERA SQUARE",
+      "branch_code": "230114"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "TEMA",
+      "branch_code": "230103"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "GRAPHIC ROAD",
+      "branch_code": "230107"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "LAPAZ",
+      "branch_code": "230115"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "TUDU",
+      "branch_code": "230109"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "LABONE",
+      "branch_code": "230106"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "HEAD OFFICE",
+      "branch_code": "230101"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "MADINA",
+      "branch_code": "230110"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "ACHIMOTA",
+      "branch_code": "230111"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "AFLAO",
+      "branch_code": "230501"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "TAKORADI",
+      "branch_code": "230401"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "NIA",
+      "branch_code": "230112"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "AIRPORT",
+      "branch_code": "230102"
+    },
+    {
+      "name": "GUARANTY TRUST (GH) LTD.",
+      "code": "230100",
+      "branch": "ASHIAMAN",
+      "branch_code": "230108"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "ASHIAMAN",
+      "branch_code": "110118"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "WINNEBA",
+      "branch_code": "110304"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "KUMASI MAGAZINE",
+      "branch_code": "110604"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "PRIVATE BANKING",
+      "branch_code": "110117"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "KOFORIDUA",
+      "branch_code": "110215"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "TAMALE",
+      "branch_code": "110814"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "TUDU",
+      "branch_code": "110109"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "AGBOGBLOSHIE",
+      "branch_code": "110112"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "ACCRA CENTRAL",
+      "branch_code": "110103"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "TECHIMAN",
+      "branch_code": "110710"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "BAATSONA",
+      "branch_code": "110116"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "POST OFFICE SQUARE",
+      "branch_code": "110119"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "ADUM",
+      "branch_code": "110603"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "ASAMANKESE",
+      "branch_code": "110216"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "ABOSEY OKAI",
+      "branch_code": "110108"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "EBANKESE",
+      "branch_code": "110101"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "KNUST",
+      "branch_code": "110613"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "LEGON",
+      "branch_code": "110107"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "KUMASI",
+      "branch_code": "110601"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "TAKORADI",
+      "branch_code": "110401"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "TEMA",
+      "branch_code": "110105"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "SWEDRU",
+      "branch_code": "110302"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "RIDGE",
+      "branch_code": "110104"
+    },
+    {
+      "name": "HFC BANK (GH) LTD",
+      "code": "110100",
+      "branch": "CAPE COAST",
+      "branch_code": "110303"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "ACHIMOTA",
+      "branch_code": "200109"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "TAKORADI",
+      "branch_code": "200401"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "SWEDRU",
+      "branch_code": "200108"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "KASOA",
+      "branch_code": "200102"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "ADUM",
+      "branch_code": "200601"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "MAKOLA",
+      "branch_code": "200101"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "KORLE",
+      "branch_code": "200111"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "SWANMILL",
+      "branch_code": "200110"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "SPINTEX ROAD",
+      "branch_code": "200107"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "TECHIMAN",
+      "branch_code": "200701"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "RING ROAD CENTRAL",
+      "branch_code": "200105"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "SUAME",
+      "branch_code": "200602"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "DOME",
+      "branch_code": "200112"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "TEMA",
+      "branch_code": "200103"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "SANTA MARIA",
+      "branch_code": "200113"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "KANESHIE",
+      "branch_code": "200104"
+    },
+    {
+      "name": "INTERNATIONAL COMMERIAL",
+      "code": "200100",
+      "branch": "DANSOMAN",
+      "branch_code": "200106"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "NORTH INDUSTIAL AREA",
+      "branch_code": "250113"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "ACHIMOTA",
+      "branch_code": "250121"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "OSU",
+      "branch_code": "250101"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "TECHIMAN",
+      "branch_code": "250719"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "MADINA",
+      "branch_code": "250106"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "KANESHIE POST OFF",
+      "branch_code": "250115"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "KANESHIE",
+      "branch_code": "250104"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "TEMA INDUST. AREA",
+      "branch_code": "250125"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "CASTLE ROAD",
+      "branch_code": "250105"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "ASHAIMAN",
+      "branch_code": "250118"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "TAMALE",
+      "branch_code": "250808"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "SUAME",
+      "branch_code": "250610"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "TEMA",
+      "branch_code": "250103"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "KANTAMANTO",
+      "branch_code": "250102"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "IPS",
+      "branch_code": "250120"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "TARKWA",
+      "branch_code": "250411"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "AMAKOM",
+      "branch_code": "250624"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "AGBOGBLOSHIE",
+      "branch_code": "250107"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "ADUM",
+      "branch_code": "250609"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "HEAD OFFICE",
+      "branch_code": "250100"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "SEFWI WIAWSO",
+      "branch_code": "250426"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "TEMA COMMUNITY 1",
+      "branch_code": "250122"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "TAKORADI",
+      "branch_code": "250412"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "NIMA",
+      "branch_code": "250123"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "RING ROAD CENTRAL",
+      "branch_code": "250114"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "OKAISHIE",
+      "branch_code": "250117"
+    },
+    {
+      "name": "INTERCONTINENTAL BANK",
+      "code": "250100",
+      "branch": "ABAKA LAPAZ",
+      "branch_code": "250116"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "ASAFO",
+      "branch_code": "100603"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "ACCRA",
+      "branch_code": "100101"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "KOFORIDUA",
+      "branch_code": "100204"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "BIBIANI",
+      "branch_code": "100602"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "BANTAMA",
+      "branch_code": "100604"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "FIRST NATATIONAL S&L",
+      "branch_code": "100199"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "TEMA EAST",
+      "branch_code": "100108"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "RIDGE",
+      "branch_code": "100103"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "KANESHIE",
+      "branch_code": "100105"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "TECHIMAN",
+      "branch_code": "100701"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "OSU",
+      "branch_code": "100112"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "KUMASI",
+      "branch_code": "100601"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "ADABRAKA",
+      "branch_code": "100104"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "ABEKA BRANCH",
+      "branch_code": "100106"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "ABOSEY OKAI",
+      "branch_code": "100110"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "ACHIMOTA",
+      "branch_code": "100109"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "TARKWA",
+      "branch_code": "100402"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "SOUTH INDUSTRIAL AREA",
+      "branch_code": "100111"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "TEMA",
+      "branch_code": "100102"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "NORTH INDUSTRIAL",
+      "branch_code": "100107"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "ADUM",
+      "branch_code": "100605"
+    },
+    {
+      "name": "MERCHANT BANK (GH) LTD",
+      "code": "100100",
+      "branch": "TAKORADI",
+      "branch_code": "100401"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "AKIM ODA",
+      "branch_code": "50218"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "TECHIMAN",
+      "branch_code": "50715"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "NORTH INDUSTRIAL AREA",
+      "branch_code": "50128"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "TAMALE",
+      "branch_code": "50808"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "WINNEBA ROAD",
+      "branch_code": "50124"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "FOREIGN",
+      "branch_code": "50112"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "TEMA MAIN",
+      "branch_code": "50109"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "OBUASI",
+      "branch_code": "50621"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "BOLGATANGA",
+      "branch_code": "50902"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "TEMA HABOUR AREA(AFKO)",
+      "branch_code": "50113"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "ADENTA",
+      "branch_code": "50122"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "KUMASI",
+      "branch_code": "50605"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "CLEARING UNIT",
+      "branch_code": "50120"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "HO",
+      "branch_code": "50503"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "KOFORIDUA",
+      "branch_code": "50204"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "KUMASI CENTRAL",
+      "branch_code": "50619"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "DANSOMAN",
+      "branch_code": "50132"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "TEMA COMMUNITY 9",
+      "branch_code": "50129"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "WENCHI",
+      "branch_code": "50725"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "LOTTERIES",
+      "branch_code": "50116"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "OSU",
+      "branch_code": "50111"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "ABEKA",
+      "branch_code": "50117"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "SUNYANI",
+      "branch_code": "50706"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "NTOROSO",
+      "branch_code": "50730"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "KINTAMPO",
+      "branch_code": "50726"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "WA",
+      "branch_code": "51014"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "TAKORADI",
+      "branch_code": "50407"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "DUNKWA ON",
+      "branch_code": "50327"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "SPINTEX",
+      "branch_code": "50123"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "CAPE COAST",
+      "branch_code": "50310"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "ACCRA MAIN",
+      "branch_code": "50101"
+    },
+    {
+      "name": "NATIONAL INVESTMENT BANK",
+      "code": "50100",
+      "branch": "HEAD OFFICE",
+      "branch_code": "50131"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "KWAME NKRUMAH CIRCLE",
+      "branch_code": "180119"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "ATONSU",
+      "branch_code": "180605"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "MAKOLA",
+      "branch_code": "180107"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "TAMALE",
+      "branch_code": "180801"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "TEMA FISHING HABOUR",
+      "branch_code": "180104"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "SPINTEX ROAD",
+      "branch_code": "180110"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "SUAME MAAKRO",
+      "branch_code": "180606"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "CAPECOAST BRANCH",
+      "branch_code": "180301"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "ABOABO",
+      "branch_code": "180604"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "MADINA",
+      "branch_code": "180105"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "TAKORADI HARBOUR",
+      "branch_code": "180401"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "ABEKA",
+      "branch_code": "180116"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "TAKORADI MARKET CIRCLE",
+      "branch_code": "180402"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "ACCRA",
+      "branch_code": "180101"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "TEMA COMMUNITY 1",
+      "branch_code": "180111"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "GICEL",
+      "branch_code": "180103"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "RING ROAD CENTRAL",
+      "branch_code": "180109"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "NORTH INDUSTRIAL AREA",
+      "branch_code": "180117"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "UNIV. OF CAPE COAST BRANCH",
+      "branch_code": "180302"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "AFFUL NKWANTA",
+      "branch_code": "180603"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "ADENTA",
+      "branch_code": "180118"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "ODORKOR",
+      "branch_code": "180115"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "ZONGO JUNCTION",
+      "branch_code": "180114"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "KUMASI",
+      "branch_code": "180601"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "MATAHEKO",
+      "branch_code": "180120"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "TESANO",
+      "branch_code": "180113"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "ABOSSEY OKAI",
+      "branch_code": "180102"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "ADUM",
+      "branch_code": "180602"
+    },
+    {
+      "name": "PRUDENTIAL BANK LTD.",
+      "code": "180100",
+      "branch": "WEIJA",
+      "branch_code": "180112"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "OBUASI",
+      "branch_code": "20617"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "LEGON",
+      "branch_code": "20108"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "TAKORADI HARBOUR",
+      "branch_code": "20422"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "KORLE DUDOR",
+      "branch_code": "20103"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "TEMA",
+      "branch_code": "20106"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "ACHIMOTA",
+      "branch_code": "20127"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "KEJETIA",
+      "branch_code": "20613"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "DANSOMAN",
+      "branch_code": "20121"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "TARKWA",
+      "branch_code": "20424"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "OSU",
+      "branch_code": "20112"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "ABEKA",
+      "branch_code": "20126"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "TAMALE",
+      "branch_code": "20823"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "TUDU",
+      "branch_code": "20107"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "HARPER ROAD",
+      "branch_code": "20615"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "OPEIBEA HOUSE",
+      "branch_code": "20105"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "HIGH STREET",
+      "branch_code": "20101"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "SPINTEX",
+      "branch_code": "20118"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "MADINA",
+      "branch_code": "20128"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "LIBERIA ROAD",
+      "branch_code": "20104"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "TECHIMAN",
+      "branch_code": "20720"
+    },
+    {
+      "name": "STANDARD CHARTERED BANK",
+      "code": "20100",
+      "branch": "RING ROAD CENTRAL",
+      "branch_code": "20114"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "Sunyani",
+      "branch_code": "0000"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "ADUM",
+      "branch_code": "90601"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "TEMA FISHING HARBOUR",
+      "branch_code": "90110"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "BOLGATANGA",
+      "branch_code": "90901"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "RING ROAD CENTRAL",
+      "branch_code": "90107"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "TAKORADI",
+      "branch_code": "90401"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "AKIM ODA",
+      "branch_code": "90202"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "SEFWI BEKWAI",
+      "branch_code": "90402"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "ACCRA NEW TOWN",
+      "branch_code": "90104"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "MADINA",
+      "branch_code": "90118"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "HEAD OFFICE",
+      "branch_code": "90115"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "NORTH INDUSTRIAL AREA",
+      "branch_code": "90102"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "KANESHIE",
+      "branch_code": "90109"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "JUABESO",
+      "branch_code": "90408"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "KUMASI CENTRAL",
+      "branch_code": "90602"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "HO",
+      "branch_code": "90501"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "TEMA COMMUNITY TWO",
+      "branch_code": "90106"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "AKONTOMBRA",
+      "branch_code": "90407"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "SPINTEX ROAD",
+      "branch_code": "90117"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "PREMIER TOWERS",
+      "branch_code": "90114"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "KOFORIDUA",
+      "branch_code": "90201"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "TEPA",
+      "branch_code": "90604"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "DUNKWA",
+      "branch_code": "90302"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "BIBIANI",
+      "branch_code": "90603"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "SUNYANI",
+      "branch_code": "90701"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "WA",
+      "branch_code": "91001"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "ADABOKROM",
+      "branch_code": "90410"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "ASANKRAGUA",
+      "branch_code": "90406"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "ACCRA MAIN",
+      "branch_code": "90101"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "ASAFO",
+      "branch_code": "90605"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "KEJETIA",
+      "branch_code": "90607"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "TUDU",
+      "branch_code": "90103"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "SEFWI WIAWSO",
+      "branch_code": "90403"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "BEREKUM",
+      "branch_code": "90741"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "TAMALE",
+      "branch_code": "90801"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "CAPE COAST",
+      "branch_code": "90301"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "FAANOFA",
+      "branch_code": "90105"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "ESSAM",
+      "branch_code": "90405"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "OKAISHIE",
+      "branch_code": "90108"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "TARKWA",
+      "branch_code": "90404"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "ASEMPANEYE",
+      "branch_code": "90409"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "SUAME",
+      "branch_code": "90606"
+    },
+    {
+      "name": "SG  SSB  LTD",
+      "code": "90100",
+      "branch": "KOTOBABI",
+      "branch_code": "90111"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "EAST LEGON",
+      "branch_code": ""
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "HO",
+      "branch_code": "190501"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "NORTH INDUSTIAL AREA",
+      "branch_code": "190105"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "KASOA",
+      "branch_code": "190112"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "BOLGATANGA",
+      "branch_code": "190901"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "HARPER",
+      "branch_code": "190601"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "GRAPHIC ROAD",
+      "branch_code": "190107"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "ROMAN RIDGE",
+      "branch_code": "190111"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "ACCRA MAIN",
+      "branch_code": "190101"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "MAKOLA",
+      "branch_code": "190108"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "TEMA INDUSTRIAL AREA",
+      "branch_code": "190106"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "SUNYANI",
+      "branch_code": "190701"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "ACHIMOTA",
+      "branch_code": "190110"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "ACCRA MALL",
+      "branch_code": "190104"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "TEMA FISHING HABOUR",
+      "branch_code": "190113"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "TAKORADI",
+      "branch_code": "190401"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "SPINTEX ROAD",
+      "branch_code": "190103"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "WA",
+      "branch_code": "191001"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "AIRPORT CITY",
+      "branch_code": "190102"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "RIND ROAD",
+      "branch_code": "190109"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "TARKWA",
+      "branch_code": "190402"
+    },
+    {
+      "name": "STANBIC BANK GHANA LTD",
+      "code": "190100",
+      "branch": "TAMALE",
+      "branch_code": "190801"
+    },
+    {
+      "name": "The Royal Bank CHG",
+      "code": "300100",
+      "branch": "NORTH INDUSTRIAL AREA",
+      "branch_code": "300109"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "EVANDY BRANCH",
+      "branch_code": "150131"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "KWABENYA  BRANCH",
+      "branch_code": "150118"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "WOMEN'S WORLD BANKING",
+      "branch_code": "150124"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "MADINA",
+      "branch_code": "150107"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "OKPONGLO BRANCH",
+      "branch_code": "150119"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "ASHTOWN",
+      "branch_code": "150603"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "ASHIAMAN BRANCH",
+      "branch_code": "150130"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "KANTAMANTO",
+      "branch_code": "150106"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "SPINTEX BRANCH",
+      "branch_code": "150117"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "KISSEIMAN",
+      "branch_code": "150116"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "UNION SAVING & LOANS",
+      "branch_code": "150128"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "TRUST TOWERS BRANCH",
+      "branch_code": "150102"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "TEMA MAIN",
+      "branch_code": "150104"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "ADEHERNAN SAVINGS&LOANS",
+      "branch_code": "150120"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "ACCRA MAIN BRANCH",
+      "branch_code": "150101"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "SAKUMONO",
+      "branch_code": "150111"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "BANTAMA BRANCH",
+      "branch_code": "150604"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "KWASHIEMAN",
+      "branch_code": "150115"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "FIRST NATIONAL SAVINGS&LOANS",
+      "branch_code": "150121"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "TEMA COMMUNITY I",
+      "branch_code": "150108"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "KUMASI MAIN BRANCH",
+      "branch_code": "150601"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "POST OFFICE",
+      "branch_code": "150114"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "KASOA",
+      "branch_code": "150105"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "OKOFO HOUSE",
+      "branch_code": "150112"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "TESANO BRANCH",
+      "branch_code": "150103"
+    },
+    {
+      "name": "THE TRUST BANK",
+      "code": "150100",
+      "branch": "SUAME MAGAZINE",
+      "branch_code": "150602"
+    },
+    {
+      "name": "UNITED BANK FOR AFRICA",
+      "code": "60100",
+      "branch": "TAKORADI",
+      "branch_code": "60402"
+    },
+    {
+      "name": "UNITED BANK FOR AFRICA",
+      "code": "60100",
+      "branch": "DZORWULU 1 MOTORWAY",
+      "branch_code": "60108"
+    },
+    {
+      "name": "UNITED BANK FOR AFRICA",
+      "code": "60100",
+      "branch": "",
+      "branch_code": "60127"
+    },
+    {
+      "name": "UNITED BANK FOR AFRICA",
+      "code": "60100",
+      "branch": "EAST LEGON 1",
+      "branch_code": "60111"
+    },
+    {
+      "name": "UNITED BANK FOR AFRICA",
+      "code": "60100",
+      "branch": "KUMASI",
+      "branch_code": "60601"
+    },
+    {
+      "name": "UNITED BANK FOR AFRICA",
+      "code": "60100",
+      "branch": "HEAD OFFICE",
+      "branch_code": "60101"
+    },
+    {
+      "name": "UNITED BANK FOR AFRICA",
+      "code": "60100",
+      "branch": "SPINTEX ROAD",
+      "branch_code": "60114"
+    },
+    {
+      "name": "UNITED BANK FOR AFRICA",
+      "code": "60100",
+      "branch": "MADINA",
+      "branch_code": "60110"
+    }
+  ]

@@ -54,7 +54,7 @@ export function validateEmail(user){
 }
 
 export function signupUser(user){
-    axios.post('/api/v1/officers/', user)
+    axios.post('/api/v1/users/', user)
     .then(res => {
         if(res.data.id){
             dispatcher.dispatch({type : "SIGNUP_COMPLETE", data : res.data});
