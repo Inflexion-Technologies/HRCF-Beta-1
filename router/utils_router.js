@@ -3,36 +3,12 @@ import request from 'request';
 
 export default class UtilsRoutes{ 
 
-constructor(UsersModel, ManagersModel, OfficersModel){
+constructor(UsersModel){
     this.UsersModel = UsersModel;
-    this.ManagersModel = ManagersModel;
-    this.OfficersModel = OfficersModel;
 }
 
 getUserDetails(res, user){
-    let route = '';
-
-    if(user.type === 'M'){
-        this.ManagersModel.findOne({where :{user_id : user.id}}).then((manager)=>{
-            if(manager){
-                let detail = {firstname : manager.firstname, type : user.type, user_id : user.id, msisdn : user.msisdn};   
-                res.status(200).json(detail);             
-            }else{
-                res.status(200).send('no details found');                            
-            }
-        })
-    }else if(user.type === 'O'){
-        this.OfficersModel.findOne({where :{user_id : user.id}}).then((officer)=>{
-            if(officer){
-                let detail = {firstname : officer.firstname, type : user.type, user_id : user.id, msisdn : user.msisdn};   
-                res.status(200).json(detail);                             
-            }else{
-                res.status(200).send('no details found');                            
-            }
-        })
-    }else{
-        res.status(404).send('user type unknown');
-    }
+    res.status(200).json(user);
 }
 
 routes(){

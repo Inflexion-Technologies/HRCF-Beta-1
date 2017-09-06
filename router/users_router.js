@@ -12,23 +12,23 @@ export default class UserRoutes{
 
         usersRouter.route('/')
             .get((req, res)=>{  
-                app.UsersModel.findAll().then(users => {
-                    res.status(200).json('success');
+                app.UsersModel.findAll({where : {status : 'A'}}).then(users => {
+                    res.status(200).json(users);
                 });
             });   
 
         usersRouter.route('/:id')
             .get((req, res)=>{
-                // User.findById(req.params.id).then(user => {
-                //     res.status(200).json(user);
-                // })
+                User.findOne({where : {id : req.params.id, status : 'A'}}).then(user => {
+                    res.status(200).json(user);
+                })
             }); 
 
         usersRouter.route('/email/:email')
             .get((req, res)=>{
-               // User.findOne({ where : {email : req.params.email}}).then(user => {
-               //  res.status(200).json(user);
-               // })
+               User.findOne({ where : {email : req.params.email, status : 'A'}}).then(user => {
+                res.status(200).json(user);
+               })
             }); 
 
         usersRouter.route('/')
@@ -43,8 +43,6 @@ export default class UserRoutes{
                         res.status(200).json(user);
                     });
               }
-
-
             }); 
 
         usersRouter.route('/:id')

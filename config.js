@@ -5,7 +5,7 @@ const config = {
     PORT:process.env.SERVER_PORT || 8001, 
 }
 
-const sequelize = new Sequelize(process.env.DB_NAME || 'dedup', process.env.DB_USER || 'root', process.env.DB_PASSWORD || '', {
+const sequelize = new Sequelize(process.env.DB_NAME || 'HRCF', process.env.DB_USER || 'root', process.env.DB_PASSWORD || '', {
     host: process.env.DB_HOST || 'localhost',
     //dialect: 'postgres',
     dialect: process.env.DB_DIALECT || 'mysql',

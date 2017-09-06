@@ -1,13 +1,15 @@
 {
-  "main.css": "static/css/main.a2462560.css",
-  "main.css.map": "static/css/main.a2462560.css.map",
-  "main.js": "static/js/main.b66cc996.js",
-  "main.js.map": "static/js/main.b66cc996.js.map",
-  "static/media/fingerprint.svg": "static/media/fingerprint.adba373a.svg",
+  "main.css": "static/css/main.b145ab0f.css",
+  "main.css.map": "static/css/main.b145ab0f.css.map",
+  "main.js": "static/js/main.395b1827.js",
+  "main.js.map": "static/js/main.395b1827.js.map",
   "static/media/glyphicons-halflings-regular.eot": "static/media/glyphicons-halflings-regular.f4769f9b.eot",
   "static/media/glyphicons-halflings-regular.svg": "static/media/glyphicons-halflings-regular.89889688.svg",
   "static/media/glyphicons-halflings-regular.ttf": "static/media/glyphicons-halflings-regular.e18bbf61.ttf",
   "static/media/glyphicons-halflings-regular.woff": "static/media/glyphicons-halflings-regular.fa277232.woff",
   "static/media/glyphicons-halflings-regular.woff2": "static/media/glyphicons-halflings-regular.448c34a5.woff2",
+  "static/media/icam_logo.png": "static/media/icam_logo.a6e01bea.png",
+  "static/media/icam_logo_.png": "static/media/icam_logo_.4a0a4e0d.png",
+  "static/media/ssbb.svg": "static/media/ssbb.8f6860a4.svg",
   "static/media/thumb.svg": "static/media/thumb.cb192409.svg"
 }

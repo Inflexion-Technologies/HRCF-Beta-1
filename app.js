@@ -7,12 +7,12 @@ import expressValidator from 'express-validator';
 
 import UserRoutes from './router/users_router';
 import ApproveRoutes from './router/approves_router';
-import BankRoutes from './router/banks_router';
-import BranchRoutes from './router/branches_router';
-import CompanyRoutes from './router/companys_router';
-import CreditRoutes from './router/credits_router';
-import TransactionRoutes from './router/transactions_router';
-import WithdrawalRoutes from './router/withdrawals_router';
+import BanksRoutes from './router/banks_router';
+import BranchesRoutes from './router/branches_router';
+import CompanysRoutes from './router/companys_router';
+import CreditsRoutes from './router/credits_router';
+import TransactionsRoutes from './router/transactions_router';
+import WithdrawalsRoutes from './router/withdrawals_router';
 
 import UtilsRoutes from './router/utils_router';
 import SessionsRouters from './router/session_router';
@@ -119,26 +119,35 @@ export default class App {
         withdrawalModel.belongsTo(usersModel);
         withdrawalModel.belongsTo(bankModel);
 
-        usersModel.belongsTo(companyModel);
+        usersModel.belongsToMany(approveModel, {through: 'user_approves'});
+        usersModel.belongsToMany(branchModel, {through: 'user_branches'});
 
-        usersModel.hasMany(bankModel);
+        dbConfig.sync({force:true});
 
-        dbConfig.sync();
+        const users = new UserRoutes(usersModel);
+        const approvers = new ApproveRoutes(approveModel);
 
-        // const users = new UserRoutes(usersModel);
-        // const managers = new ManagersRoutes(managersModel, usersModel);
-        // const officers = new OfficerRoutes(officersModel, managersModel, usersModel);
-        // const utils = new UtilsRoutes(usersModel, managersModel, officersModel);
-        // const sessions = new SessionsRouters(usersModel);
+        const branches = new BranchesRoutes(branchModel);
+        const companys = new CompanysRoutes(companyModel, usersModel);
+        const credits = new CreditsRoutes(creditModel, bankModel, usersModel);
+        const transactions = new TransactionsRoutes(transactionModel, usersModel);
+        const withdrawals = new WithdrawalsRoutes(withdrawalModel, usersModel);
+        const banks = new BanksRoutes(bankModel);
+        
+        const utils = new UtilsRoutes(usersModel);
 
         //Set Middleware to check for sessions
         //app.use('/api/v1/*', this.validate); 
 
-        // app.use('/api/v1/users', users.routes());
-        // app.use('/api/v1/banks', users.routes());        
-        // app.use('/api/v1/utils', utils.routes());
-        // app.use('/api/sessions', sessions.routes());
-        
+        app.use('/api/v1/users', users.routes());
+        app.use('/api/v1/approvers', approvers.routes());  
+        app.use('/api/v1/branches', branches.routes());  
+        app.use('/api/v1/companys', companys.routes());  
+        app.use('/api/v1/credits', credits.routes());  
+        app.use('/api/v1/transactions', transactions.routes());  
+        app.use('/api/v1/withdrawals', withdrawals.routes());  
+        app.use('/api/v1/banks', banks.routes());  
+        app.use('/api/v1/utils', utils.routes());
     }
 
     finalize(app){

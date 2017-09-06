@@ -50,7 +50,7 @@ export default class CreditsRoutes{
                 
             });
 
-        return withdrawalsRouter;
+        return creditsRouter;
     }
 
 };
