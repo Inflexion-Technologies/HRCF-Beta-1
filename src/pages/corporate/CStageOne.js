@@ -9,8 +9,8 @@ import icam_icon2 from '../../icons/icam_logo_.png';
 import thumb_icon from '../../icons/thumb.svg';
 import {Link} from 'react-router-dom';
 
-import SignupStore from '../../stores/SignupStore';
-//import * as SignupAction from '../../actions/SignupAction';
+import CorporateSignupStore from '../../stores/CorporateSignupStore';
+import * as CorporateSignupAction from '../../actions/CorporateSignupAction';
 //import _ from 'lodash';
 
 //import * as utils from '../../utils/utils';
@@ -24,31 +24,40 @@ class CStageOne extends Component {
         
         this.getUser = this.getUser.bind(this);
 
+        this.cNameExists = this.cNameExists.bind(this);
+        this.cNameNotExists = this.cNameNotExists.bind(this);
+
         this.cNameErrorText = 'Please Enter Corporate Name';
         this.locationErrorText = 'Please Enter Location';
 
-        this.cName = '';
-        this.lName = '';
-        this.user = SignupStore.getUser();
+        this.user = CorporateSignupStore.getUser();
         this.nextButtonText = 'Next';
 
         this.state = {    
-           
+           cError : false,
+           cname : '',
+           lname : ''
         }
     }
 
     componentWillMount(){
-                
+        CorporateSignupStore.on('corporate_signup_corporate_exist', this.cNameExists);
+        CorporateSignupStore.on('corporate_signup_corporate_not_exist', this.cNameNotExists);
         this.clearCookies();
     }
 
     componentWillUnMount(){
-        
+        CorporateSignupStore.removeListener('corporate_signup_email_exist', this.emailExists);
+        CorporateSignupStore.removeListener('corporate_signup_email_not_exist', this.emailNotExists);
+    }
+
+    redirect(){
+        this.props.history.push('/corporate_2');        
     }
 
     getUser(){
         this.setState({
-            user : SignupStore.getUser()
+            user : CorporateSignupStore.getUser()
         });
     }
 
@@ -56,20 +65,42 @@ class CStageOne extends Component {
         this.cNameErrorText = 'Corporate Name Already Exist';
         
         this.setState({
-            cNameError : true
+            cError : true
         })
 
         this.disableButton(false, 'Next');
     }
 
     cNameNotExists(){
-        this.cNameErrorText = '';
-              
+        //this.cNameErrorText = '';
+
+        this.setState({
+            cError : false
+        })
+
+        this.disableButton(false, 'Next');
+
+        //Save User
+        CorporateSignupStore.initUser(this.user);
+
+        this.redirect();   
     }
 
     handleBrowserConfig(){
-        cookie.save('cname', this.cName);
-        cookie.save('clocation', this.lName);
+        cookie.save('cname', this.state.cname);
+        cookie.save('lname', this.state.lname);
+    }
+
+    onCompanyChanged(evt){
+        this.setState({
+            cname : evt.target.value
+        })
+    }
+
+    onLocationChanged(evt){
+        this.setState({
+            lname : evt.target.value
+        })
     }
 
     onNextClicked(){
@@ -79,10 +110,10 @@ class CStageOne extends Component {
 
             this.grabDetails();
             this.handleBrowserConfig();
-            //SignupAction.isCorporateExist(this.user);
+            CorporateSignupAction.isCorporateExist(this.user);
 
             //For Testing purposes
-            this.props.history.push('/corporate_2');
+            // this.props.history.push('/corporate_2');
            
         }
     }
@@ -95,8 +126,8 @@ class CStageOne extends Component {
     }
 
     grabDetails(){
-        this.user.cname = this.cName.trim();
-        this.user.lname = this.lName.trim();
+        this.user.cname = this.state.cname.trim();
+        this.user.lname = this.state.lname.trim();
     }
 
     doValidate(){
@@ -136,11 +167,11 @@ class CStageOne extends Component {
 
                             <div className="sign-in-form">
                                 <div className="form-group">
-                                    <input type="text" className="form-control" placeholder="Corporate Name" value={this.cName} />
+                                    <input type="text" className="form-control" placeholder="Corporate Name" value={this.state.cname} onChange={this.onCompanyChanged.bind(this)}/>
                                     <span className={this.cError ? 'error' : 'vamus'}>{this.cNameErrorText}</span>
                                 </div>
                                 <div className="form-group">
-                                    <input type="text" className="form-control" placeholder="Location" value={this.lName} />
+                                    <input type="text" className="form-control" placeholder="Location" value={this.state.lname} onChange={this.onLocationChanged.bind(this)}/>
                                     <span className={this.lError ? 'error' : 'vamus'}>{this.locationErrorText}</span>
                                 </div>
                             

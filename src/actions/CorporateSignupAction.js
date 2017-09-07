@@ -19,7 +19,7 @@ export function validateMsisdn(user){
         }
 
         dispatcher.dispatch({
-            type : "VALIDATE_MSISDN",
+            type : "CORPORATE_VALIDATE_MSISDN",
             msisdn : user.msisdn,
             isMsisdnExist,
             isMsisdnError
@@ -45,7 +45,7 @@ export function validateEmail(user){
         }
 
         dispatcher.dispatch({
-            type : "VALIDATE_EMAIL",
+            type : "CORPORATE_VALIDATE_EMAIL",
             msisdn : user.email,
             isEmailExist,
             isEmailError
@@ -53,22 +53,19 @@ export function validateEmail(user){
     });  
 }
 
-export function signupUser(user){
-    axios.post('/api/v1/users/', user)
-    .then(res => {
-        if(res.data.id){
-            dispatcher.dispatch({type : "SIGNUP_COMPLETE", data : res.data});
-        }
-    });
-}
-
-export function signupCorporate(user){
-    axios.post('/api/v1/users/', user)
-    .then(res => {
-        if(res.data.id){
-            dispatcher.dispatch({type : "SIGNUP_COMPLETE", data : res.data});
-        }
-    });
+export function corporateSignupUser(user){
+    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    
+    if(user){
+        console.log('fname : '+user.firstname+', lname : '+user.lastname+', email : '+user.email+', type : '+user.type);
+        axios.post('/api/v1/users/', user).then(res => {
+            if(res.data.id){
+                dispatcher.dispatch({type : "CORPORATE_SIGNUP_COMPLETE", data : res.data});
+            }
+        });
+    }else{
+        console.log('user object is empty');
+    }
 }
 
 export function isCorporateExist(user){

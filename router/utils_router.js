@@ -3,8 +3,9 @@ import request from 'request';
 
 export default class UtilsRoutes{ 
 
-constructor(UsersModel){
+constructor(UsersModel, CompanyModel){
     this.UsersModel = UsersModel;
+    this.CompanyModel = CompanyModel;
 }
 
 routes(){
@@ -67,6 +68,22 @@ routes(){
                 res.status(200).json('Wrong MSISN format');
             }
         }); 
+
+    utilsRouter.route('/is_corporate_exist/:corporate')
+        .get((req, res)=>{  
+            if(req.params.corporate.trim()){
+                app.CompanyModel.findOne({where : {name : req.params.corporate}}).then(company => {
+                    if(company){
+                        res.status(200).json({is_exist : true});                    
+                    }else{
+                        res.status(200).json({is_exist : false});                                        
+                    }
+                });
+            }else{
+                res.status(200).json('Wrong corporate name');
+            }
+        }); 
+
 
         return utilsRouter;
     }

@@ -110,7 +110,7 @@ export default class App {
 
         branchModel.belongsTo(bankModel);
 
-        companyModel.belongsTo(usersModel);
+        usersModel.belongsTo(companyModel);
 
         creditModel.belongsTo(usersModel);
         creditModel.belongsTo(bankModel);
@@ -125,9 +125,10 @@ export default class App {
 
         dbConfig.sync({force:true}).then(()=>{
             trackModel.bulkCreate([{count: 1},{count: 1}]);
+            companyModel.bulkCreate([{name : 'Anonymous'}]);
         });
 
-        const users = new UserRoutes(usersModel, trackModel);
+        const users = new UserRoutes(usersModel, trackModel, companyModel);
         const approvers = new ApproveRoutes(approveModel);
 
         const branches = new BranchesRoutes(branchModel);
@@ -137,7 +138,7 @@ export default class App {
         const withdrawals = new WithdrawalsRoutes(withdrawalModel, usersModel);
         const banks = new BanksRoutes(bankModel);
         
-        const utils = new UtilsRoutes(usersModel);
+        const utils = new UtilsRoutes(usersModel, companyModel);
 
         //Set Middleware to check for sessions
         //app.use('/api/v1/*', this.validate); 

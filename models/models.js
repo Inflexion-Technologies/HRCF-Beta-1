@@ -8,8 +8,12 @@ export function companyModel(config){
       name: {
         type: Sequelize.STRING
       },
+      location: {
+        type: Sequelize.STRING
+      },
       status: {
-        type: Sequelize.STRING(1)
+        type: Sequelize.STRING(1),
+        defaultValue:'A'
       }
 	  }, {underscored: true});
 
@@ -23,7 +27,8 @@ export function transactionModel(config){
         values : ['W','C']
       },
       status: {
-        type: Sequelize.STRING(1)
+        type: Sequelize.STRING(1),
+        defaultValue: 'A'
       }
 	  }, {underscored: true});
 
@@ -36,7 +41,8 @@ export function withdrawalModel(config){
         type: Sequelize.DOUBLE
       },
       status: {
-        type: Sequelize.STRING(1)
+        type: Sequelize.STRING(1),
+        defaultValue: 'A'
       }
 	  }, {underscored: true});
 
@@ -49,7 +55,8 @@ export function creditModel(config){
         type: Sequelize.DOUBLE
       },
       status: {
-        type: Sequelize.STRING(1)
+        type: Sequelize.STRING(1),
+        defaultValue: 'A'
       }
 	  }, {underscored: true});
 

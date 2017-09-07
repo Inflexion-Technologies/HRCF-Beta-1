@@ -9,8 +9,8 @@ import icam_icon2 from '../../icons/icam_logo_.png';
 import thumb_icon from '../../icons/thumb.svg';
 import {Link} from 'react-router-dom';
 
-import SignupStore from '../../stores/SignupStore';
-import * as SignupAction from '../../actions/SignupAction';
+import CorporateSignupStore from '../../stores/CorporateSignupStore';
+import * as CorporateSignupAction from '../../actions/CorporateSignupAction';
 import _ from 'lodash';
 
 import * as utils from '../../utils/utils';
@@ -35,7 +35,7 @@ class CStageTwo extends Component {
         this.emailErrorText = 'Please Enter Email';        
         this.msisdnErrorText = 'Please Enter Phone Number';
         this.passwordErrorText = 'Please Enter Password';
-        this.user = SignupStore.getUser();
+        this.user = CorporateSignupStore.getUser();
 
         this.state = {    
             showProgress : false,
@@ -54,34 +54,34 @@ class CStageTwo extends Component {
     }
 
     componentWillMount(){
-        SignupStore.on('signup', this.getUser);
-        SignupStore.on('signup_complete', this.redirect);
-        SignupStore.on('signup_msisdn_error', this.msisdnError);
-        SignupStore.on('signup_msisdn_exists', this.msisdnExists);
-        SignupStore.on('signup_msisdn_not_exists', this.msisdnNotExists);
+        CorporateSignupStore.on('corporate_signup', this.getUser);
+        CorporateSignupStore.on('corporate_signup_complete', this.redirect);
+        CorporateSignupStore.on('corporate_signup_msisdn_error', this.msisdnError);
+        CorporateSignupStore.on('corporate_signup_msisdn_exists', this.msisdnExists);
+        CorporateSignupStore.on('corporate_signup_msisdn_not_exists', this.msisdnNotExists);
 
-        SignupStore.on('signup_email_error', this.emailError);
-        SignupStore.on('signup_email_exists', this.emailExists);
-        SignupStore.on('signup_email_not_exists', this.emailNotExists);
+        CorporateSignupStore.on('corporate_signup_email_error', this.emailError);
+        CorporateSignupStore.on('corporate_signup_email_exists', this.emailExists);
+        CorporateSignupStore.on('corporate_signup_email_not_exists', this.emailNotExists);
         
-        this.clearCookies();
+        //this.clearCookies();
     }
 
     componentWillUnMount(){
-        SignupStore.removeAllListener('signup', this.getUser);
-        SignupStore.removeListener('signup_complete', this.redirect);
-        SignupStore.removeListener('signup_msisdn_error', this.msisdnError);
-        SignupStore.removeListener('signup_msisdn_exists', this.msisdnExists);
-        SignupStore.removeListener('signup_msisdn_not_exists', this.msisdnNotExists);
+        CorporateSignupStore.removeListener('corporate_signup', this.getUser);
+        CorporateSignupStore.removeListener('corporate_signup_complete', this.redirect);
+        CorporateSignupStore.removeListener('corporate_signup_msisdn_error', this.msisdnError);
+        CorporateSignupStore.removeListener('corporate_signup_msisdn_exists', this.msisdnExists);
+        CorporateSignupStore.removeListener('corporate_signup_msisdn_not_exists', this.msisdnNotExists);
 
-        SignupStore.removeListener('signup_email_error', this.emailError);
-        SignupStore.removeListeneron('signup_email_exists', this.emailExists);
-        SignupStore.removeListener('signup_email_not_exists', this.emailNotExists);
+        CorporateSignupStore.removeListener('corporate_signup_email_error', this.emailError);
+        CorporateSignupStore.removeListener('corporate_signup_email_exists', this.emailExists);
+        CorporateSignupStore.removeListener('corporate_signup_email_not_exists', this.emailNotExists);
     }
 
     getUser(){
         this.setState({
-            user : SignupStore.getUser()
+            user : CorporateSignupStore.getUser()
         });
     }
 
@@ -135,7 +135,10 @@ class CStageTwo extends Component {
             mError : false
         })
         
-        SignupAction.signupUser(this.user);        
+        this.user.type = 'C';
+        
+        console.log('user ::: '+this.user.firstname);
+        CorporateSignupAction.corporateSignupUser(this.user);        
     }
 
     emailNotExists(){
@@ -144,7 +147,7 @@ class CStageTwo extends Component {
             eError : false
         })
 
-        SignupAction.validateMsisdn(this.user);
+        CorporateSignupAction.validateMsisdn(this.user);
     }
 
     handleBrowserConfig(){
@@ -193,8 +196,7 @@ class CStageTwo extends Component {
 
             this.grabDetails();
             this.handleBrowserConfig();
-            SignupAction.validateEmail(this.user);
-            //this.redirect();
+            CorporateSignupAction.validateEmail(this.user);
         }
     }
 
@@ -206,11 +208,17 @@ class CStageTwo extends Component {
     }
 
     grabDetails(){
+        const location = this.user.lname;
+        const company = this.user.cname;
+
+        this.user = {};
         this.user.firstname = this.state.firstname.trim();
         this.user.lastname = this.state.lastname.trim();
         this.user.email = this.state.email.trim();        
         this.user.msisdn = this.state.msisdn.trim();
         this.user.password = this.state.password.trim();
+        this.user.cname = company;
+        this.user.lname = location;
         this.user.type = 'C';
     }
 
@@ -299,13 +307,6 @@ class CStageTwo extends Component {
         }
 
         return true;
-    }
-
-    clearCookies(){
-        cookie.remove('fname');
-        cookie.remove('lname');
-        cookie.remove('msisdn');
-        cookie.remove('pswd');
     }
 
     render() {

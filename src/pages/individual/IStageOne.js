@@ -197,7 +197,6 @@ class IStageOne extends Component {
             this.grabDetails();
             this.handleBrowserConfig();
             SignupAction.validateEmail(this.user);
-            //this.redirect();
         }
     }
 
@@ -214,7 +213,7 @@ class IStageOne extends Component {
         this.user.email = this.state.email.trim();        
         this.user.msisdn = this.state.msisdn.trim();
         this.user.password = this.state.password.trim();
-        this.user.type = 'C';
+        this.user.type = 'I';
     }
 
     doValidate(){

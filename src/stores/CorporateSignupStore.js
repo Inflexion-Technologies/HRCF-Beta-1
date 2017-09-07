@@ -1,7 +1,7 @@
 import {EventEmitter} from 'events';
 import dispatcher from '../dispatcher';
 
-class SignupStore extends EventEmitter{
+class CorporateSignupStore extends EventEmitter{
     constructor(){
         super();
         this.user = {
@@ -9,32 +9,34 @@ class SignupStore extends EventEmitter{
             lastname : '',
             email : '',
             msisdn : '',
-            password : ''
+            password : '',
+            cname : '',
+            lname : ''
         }
     }
 
-    initUser (...user){
+    initUser (user){
         this.user = user;
         this.emit('signup');
     }
 
     doMsisdnValidate(action){
         if(action.isMsisdnError){
-            this.emit('signup_msisdn_error');
+            this.emit('corporate_signup_msisdn_error');
         }else if(action.isMsisdnExist){
-            this.emit('signup_msisdn_exists');
+            this.emit('corporate_signup_msisdn_exists');
         }else if(!action.isMsisdnExist){
-            this.emit('signup_msisdn_not_exists');
+            this.emit('corporate_signup_msisdn_not_exists');
         }
     }
 
     doEmailValidate(action){
         if(action.isEmailError){
-            this.emit('signup_email_error');
+            this.emit('corporate_signup_email_error');
         }else if(action.isEmailExist){
-            this.emit('signup_email_exists');
+            this.emit('corporate_signup_email_exists');
         }else if(!action.isEmailExist){
-            this.emit('signup_email_not_exists');
+            this.emit('corporate_signup_email_not_exists');
         }
     }
 
@@ -43,31 +45,31 @@ class SignupStore extends EventEmitter{
     }
 
     onSignupComplete(data){
-        this.emit('signup_complete');
+        this.emit('corporate_signup_complete');
     }
 
     onCorporateExist(action){
         if(action.data){
-            this.emit('signup_corporate_exist');
+            this.emit('corporate_signup_corporate_exist');
         }else{
-            this.emit('signup_corporate_not_exist');
+            this.emit('corporate_signup_corporate_not_exist');
         }
     }
 
     handleActions(action){
         switch(action.type){
-            case 'VALIDATE_MSISDN' : {
+            case 'CORPORATE_VALIDATE_MSISDN' : {
                 this.doMsisdnValidate(action);
                 break;
             } 
-            case 'VALIDATE_EMAIL' : {
+            case 'CORPORATE_VALIDATE_EMAIL' : {
                 this.doEmailValidate(action);
                 break;
             } 
-            case 'SIGNUP_USER' : {
+            case 'CORPORATE_SIGNUP_USER' : {
                 break;
             } 
-            case 'SIGNUP_COMPLETE' :{
+            case 'CORPORATE_SIGNUP_COMPLETE' :{
                 this.onSignupComplete(action.data);
                 break;
             }
@@ -81,7 +83,7 @@ class SignupStore extends EventEmitter{
 
 }
 
-const signupStore = new SignupStore();
-dispatcher.register(signupStore.handleActions.bind(signupStore));
+const corporateSignupStore = new CorporateSignupStore();
+dispatcher.register(corporateSignupStore.handleActions.bind(corporateSignupStore));
 
-export default signupStore;
+export default corporateSignupStore;

@@ -3,9 +3,10 @@ import dateformat from 'dateformat';
     
 export default class UserRoutes{ 
 
-    constructor(UsersModel, TracksModel){
+    constructor(UsersModel, TracksModel, CompanyModel){
         this.UsersModel = UsersModel;
         this.TracksModel = TracksModel;
+        this.CompanyModel = CompanyModel;
     }
 
     getGeneratedId(count, type){
@@ -44,7 +45,7 @@ export default class UserRoutes{
         return 'H'+type+year+id+month;
     }
 
-    updatePaymentNumber(user, res){
+    updateIndividualPaymentNumber(user, res){
         const app = this;
         
         if(user.type === 'I'){
@@ -57,7 +58,7 @@ export default class UserRoutes{
 
                     //Update user
                     if(track){
-                        app.UsersModel.update({payment_number : paymentId}, {where : {id : user.id}}).then(user=>{
+                        app.UsersModel.update({payment_number : paymentId, company_id : 1}, {where : {id : user.id}}).then(user=>{
                             if(user){
                                 app.UsersModel.findOne().then(user =>{
                                     res.status(200).json(user);                                    
@@ -73,25 +74,39 @@ export default class UserRoutes{
                     }
                 });
             })
-       }else if(user.type === 'C'){
+       }
+    }
+
+    updateCompanyPaymentNumber(user, res){
+        const app = this;
+        
+        if(user.type === 'C'){
             app.TracksModel.findById(2).then(track => {
                 let newCount = (track.count)+1;
                 let paymentId = app.getGeneratedId(newCount, '00');
 
                 //Update count
                 app.TracksModel.update({count : newCount}, {where : {id : 2}}).then(track=>{
-
-                    //Update user
+      
                     if(track){
-                        app.UsersModel.update({payment_number : paymentId}, {where : {id : user.id}}).then(user=>{
-                            if(user){
-                                app.UsersModel.findOne().then(user =>{
-                                    res.status(200).json(user);                                    
-                                })
-                            }else{
-                                res.status(400).send('Could not update');
+
+                        //Save company
+                        app.CompanyModel.create({name : user.cname, location : user.lname}).then(company=>{
+                            if(company){
+
+                                //Update user
+                                app.UsersModel.update({payment_number : paymentId, company_id: company.id}, {where : {id : user.id}}).then(user=>{
+                                    if(user){
+                                        app.UsersModel.findOne().then(user =>{
+                                            res.status(200).json(user);                                    
+                                        })
+                                    }else{
+                                        res.status(400).send('Could not update');
+                                    }
+                                });
                             }
                         });
+
                     }else{
 
                         console.log('Something happened !');
@@ -129,22 +144,32 @@ export default class UserRoutes{
 
         usersRouter.route('/')
             .post((req, res)=>{
-                
+            
               if(Object.keys(req.body) != 0){
                     app.UsersModel.create(req.body).then((user)=>{
-                        if(user){
-                            app.updatePaymentNumber(user, res);
+                        if(user && req.body.type === 'C'){
+                            user.lname = req.body.lname;
+                            user.cname = req.body.cname;
+
+                            app.updateCompanyPaymentNumber(user, res);
+                        }else if(user && req.body.type === 'I'){
+                            app.updateIndividualPaymentNumber(user, res);
                         }
                     });
               }else if(Object.keys(req.params) != 0){
                     app.UsersModel.create(req.params).then((user)=>{
-                        if(user){
+                        if(user && req.params.type === 'C'){
+                            user.lname = req.params.lname;
+                            user.cname = req.params.cname;
+
                             app.updatePaymentNumber(user, res);
                         }
                     }).catch((error)=>{
                         if(error)
                             res.status(400).send('Could not save data');
                     });
+              }else{
+                  console.log('Passed NONE !!!');
               }
             }); 
 
