@@ -24,7 +24,8 @@ class App extends Component {
         <Route path="/corporate_2" component={CStageTwo} />
         <Route path="/individual" component={IStageOne} />
         <Route path="/success" component={ThankYou} />
-        <Route path="/app" component={Main} />
+        {/* <Route path="/app" component={Main} /> */}
+        <Route path="/app" render={(props) => (<Main {...props} page='dashboard' /> )}/>
       </div>
     </Router>
     );

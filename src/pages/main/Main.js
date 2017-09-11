@@ -1,64 +1,63 @@
 import React, { Component } from 'react';
+import SideNav from './SideNav';
+import Header from './Header';
+import Dashboard from '../contents/Dashboard'
+
+import {Route, Switch } from 'react-router-dom';
+
 
 import '../../bower_components/bootstrap/dist/css/bootstrap.css';
-import '../../styles/main.css';
+import '../../styles/font-awesome/css/font-awesome.css';
 import '../../styles/custom.css';
 
-import Header from './Header';
-import SideBar from './SideBar';
-
-//import MainStore from '../../stores/MainStore';
-//import * as MainAction from '../../actions/MainAction';
 //import _ from 'lodash';
 
 class Main extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            fullScreen : false
+        }
+
+        this.hideSideNav = this.hideSideNav.bind(this);
+    }
+
+  componentWillMount(){
+      this.setState({
+          fullScreen : false
+      })
+  }
+
+  hideSideNav(){
+      this.setState({
+          fullScreen : true
+      })
+  }
+
   render() {
     return (
-      <div id="ui" className="ui">
-            <Header />
-            <SideBar />
-         
-            <div id="content" className="ui-content ui-content-aside-overlay">
-                <div className="ui-content-body">
-
-                    <div className="ui-container">
-
-                        <div className="row">
-                            <div className="col-md-8">
-                                
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-md-4">
-                                <div className="panel">
-                                    <header className="panel-heading panel-border">
-                                        Upload History
-                                        <span className="tools pull-right">
-                                            {/* <a className="refresh-box fa fa-repeat"></a>
-                                            <a className="collapse-box fa fa-chevron-down"></a>
-                                            <a className="close-box fa fa-times"></a> */}
-                                        </span>
-                                    </header>
-                                    <div className="panel-body">
-                                        <div className="row">
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div id="footer" className="ui-footer">
-                2017 &copy; Powered by Insyt.
-            </div>
-      </div> 
+       <div className="container main">
+           <Header></Header>
+           <div className="row">  
+               <div className={this.state.fullScreen ? 'hidden-xs' : 'hidden-xs col-md-2'}>                
+                 <SideNav onClose={this.hideSideNav}></SideNav>
+               </div>
+               <div className={this.state.fullScreen ? "col-xs-12 col-md-12 content" : "col-xs-12 col-md-10 content"}>
+                   
+                   {/* Content */}
+                   <Switch>
+                    <Route exact path='/app/dashboard' component={Dashboard}/>
+                </Switch>
+                   
+                 
+               </div>
+           </div>
+       </div>
     );
   }
 }
+
+
 
 export default Main;

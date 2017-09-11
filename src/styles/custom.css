@@ -140,3 +140,279 @@
     color: #FEFEFE;
     margin-bottom: 30px;
 }
+
+/* main stylesheet */
+.main{
+    display: table;
+    border-spacing: 0;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    transition: margin-left .5s;
+
+    transition: margin-left .5s;
+    padding-top: 70px;
+    /* margin-left: 250px; */
+}
+
+.main .dash-widget-contribution{
+    background: #7CB5EC;
+    border: 1px solid #7CB5EC;
+    height: 95px;
+    text-align: right;
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+.main .dash-widget-contribution .amount{
+    font-size: 30px;
+    font-weight: 600;
+    color: #eeeeee;
+}
+
+.main .dash-widget-contribution .label{
+    font-size: 11px;
+    font-weight: 600;
+    color: #333333;
+    text-transform: uppercase;
+}
+
+.main .dash-widget-balance{
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    height: 95px;
+    text-align: right;
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+.main .dash-widget-balance .amount{
+    font-size: 30px;
+    font-weight: 600;
+    color: #01579b;
+}
+
+.main .dash-widget-balance .label{
+    font-size: 11px;
+    font-weight: 600;
+    color: #01579b;
+    text-transform: uppercase;
+}
+
+.main .dash-widget-interest{
+    background: #1aae88;
+    border: 1px solid #1aae88;
+    height: 95px;
+    text-align: right;
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+.main .dash-widget-interest .amount{
+    font-size: 30px;
+    font-weight: 600;
+    color: #eeeeee;
+}
+
+.main .dash-widget-interest .label{
+    font-size: 11px;
+    font-weight: 600;
+    color: #333333;
+    text-transform: uppercase;
+}
+
+.main .header{
+    position: fixed;
+    top: 0;
+    padding: 10px;
+    background: #FFFFFF;
+    width: 100%;
+    left: 0;
+    height: 65px;
+    z-index: 2;
+    opacity: 1;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+    color: #788288;
+}
+
+.main .header .header-logo-icon{
+    float: left;
+    width: 120px;
+    height: 100%;
+}
+
+.main .header .header-switch-icon{
+    float: left;
+    height: 100%;
+    padding: 10px 70px 10px 10px;
+    font-size: large;
+    display: none;
+    cursor: pointer;
+}
+
+.main .header .header-avatar-icon{
+    float: right;
+    height: 100%;
+    font-size: xx-large;
+    padding: 6px;
+}
+
+.main .header .header-user{
+    float: right;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.main .content{
+    background: #eaeaea;
+    padding: 5px;
+    margin-top: -5px;
+}
+
+.sidebar{
+    display: block;
+    width: 250px;
+    transition: 0.5s;
+}
+
+.close {
+    width : 0px;
+    display: none;
+}
+
+.breaker{
+    height: 5px;
+}
+
+.sidebar .sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 100%; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 0; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #ffffff; /* White*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidebar .sidenav a {
+    width: 100%;
+    padding: 8px 8px 8px 20px;
+    text-decoration: none;
+    font-size: 13px;
+    color: #aaaaaa;
+    display: block;
+    transition: 0.3s;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.sidebar .sidenav a:hover{
+    background: #F59231;    
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.sidebar .sidenav i:hover{
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Position and style the close button (top right corner) */
+.sidebar .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.sidebar .sidenav .user-profile{
+    float : left;
+    width : 100%;
+    height: 100px;
+    background: #01579b;
+    margin-bottom: 10px;
+}
+
+.sidebar .sidenav .user-profile .avatar{
+    float: left;
+    width: 30%;
+    height: 100%;
+    padding-top: 50px;
+}
+
+.sidebar .sidenav .user-profile .avatar>i{
+    float: left;
+    font-size: xx-large;
+    color: #F59231;
+    padding: 10px;
+}
+
+.sidebar .sidenav .user-profile .details{
+    float: left;
+    color: #fefefe;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 10px;
+}
+
+.sidebar .sidenav .close-div{
+    width: 100%;
+    padding: 10px;
+    background: #01579b;
+}
+
+.sidebar .sidenav .close-div .close-icon{
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.sidebar ul{
+    list-style-type: none;
+    float : left;
+    width: 100%;
+    padding-left: 0;
+}
+
+.sidebar ul>li{
+    float:left;
+    width: 100%;
+}
+
+.sidebar ul>li>*{
+    float:left;
+}
+
+.sidebar ul>li>a>i{
+    padding: 10px 12px 8px 10px;
+    color: #F59231;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidebar .sidenav {padding-top: 15px;}
+    .sidebar .sidenav ul {font-size: 18px;}
+}
+
+.clearfix{
+    clear : both;
+    height: 0;
+}
+
+.show{
+    display: block !important;
+}
