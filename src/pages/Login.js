@@ -77,7 +77,7 @@ class Login extends Component {
 
     onLoginSuccess(){
         this.disableLoginButton(false, 'Login'); 
-        this.redirect('/app');
+        this.redirect('/app/dashboard');
     }
 
     onLoginFailed(){

@@ -162,7 +162,9 @@ export default class UserRoutes{
                             user.lname = req.params.lname;
                             user.cname = req.params.cname;
 
-                            app.updatePaymentNumber(user, res);
+                            app.updateCompanyPaymentNumber(user, res);
+                        }else if(user && req.body.type === 'I'){
+                            app.updateIndividualPaymentNumber(user, res);
                         }
                     }).catch((error)=>{
                         if(error)

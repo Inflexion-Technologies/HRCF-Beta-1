@@ -1,0 +1,157 @@
+[
+    {
+       "id":1,
+       "name":"GN Bank",
+       "code":"GNBK"
+    },
+    {
+       "id":2,
+       "name":"BEST POINT SAVINGS AND LOANS",
+       "code":"79895"
+    },
+    {
+       "id":3,
+       "name":"ACCESS BANK CHG",
+       "code":"280100"
+    },
+    {
+       "id":4,
+       "name":"AGRIC. DEVELOPMENT BANK",
+       "code":"80100"
+    },
+    {
+       "id":5,
+       "name":"ARB APEX & RURAL BANKS",
+       "code":"70100"
+    },
+    {
+       "id":6,
+       "name":"BARCLAYS BANK",
+       "code":"30100"
+    },
+    {
+       "id":7,
+       "name":"BANK OF BARODA (GH) LTD.",
+       "code":"260100"
+    },
+    {
+       "id":8,
+       "name":"BANK OF AFRICA -GHANA LTD",
+       "code":"210100"
+    },
+    {
+       "id":9,
+       "name":"BANK OF GHANA",
+       "code":"10100"
+    },
+    {
+       "id":10,
+       "name":"BSIC GHANA LTD.",
+       "code":"270100"
+    },
+    {
+       "id":11,
+       "name":"CAL BANK LTD",
+       "code":"140100"
+    },
+    {
+       "id":12,
+       "name":"ECOBANK (GH) LTD",
+       "code":"130100"
+    },
+    {
+       "id":13,
+       "name":"ENERGY BANK CHG",
+       "code":"290100"
+    },
+    {
+       "id":14,
+       "name":"FIRST ATLANTIC MERCHANT",
+       "code":"170100"
+    },
+    {
+       "id":15,
+       "name":"FIRST CAPITAL PLUS BANK",
+       "code":"0000"
+    },
+    {
+       "id":16,
+       "name":"FIDELITY BANK GHANA LTD",
+       "code":"240100"
+    },
+    {
+       "id":17,
+       "name":"GHANA COMMERCIAL BANK",
+       "code":"40100"
+    },
+    {
+       "id":18,
+       "name":"GHIPSS DR CHG",
+       "code":"999999"
+    },
+    {
+       "id":19,
+       "name":"GUARANTY TRUST (GH) LTD.",
+       "code":"230100"
+    },
+    {
+       "id":20,
+       "name":"HFC BANK (GH) LTD",
+       "code":"110100"
+    },
+    {
+       "id":21,
+       "name":"INTERNATIONAL COMMERIAL",
+       "code":"200100"
+    },
+    {
+       "id":22,
+       "name":"INTERCONTINENTAL BANK",
+       "code":"250100"
+    },
+    {
+       "id":23,
+       "name":"MERCHANT BANK (GH) LTD",
+       "code":"100100"
+    },
+    {
+       "id":24,
+       "name":"NATIONAL INVESTMENT BANK",
+       "code":"50100"
+    },
+    {
+       "id":25,
+       "name":"PRUDENTIAL BANK LTD.",
+       "code":"180100"
+    },
+    {
+       "id":26,
+       "name":"STANDARD CHARTERED BANK",
+       "code":"20100"
+    },
+    {
+       "id":27,
+       "name":"SG  SSB  LTD",
+       "code":"90100"
+    },
+    {
+       "id":28,
+       "name":"STANBIC BANK GHANA LTD",
+       "code":"190100"
+    },
+    {
+       "id":29,
+       "name":"The Royal Bank CHG",
+       "code":"300100"
+    },
+    {
+       "id":30,
+       "name":"THE TRUST BANK",
+       "code":"150100"
+    },
+    {
+       "id":31,
+       "name":"UNITED BANK FOR AFRICA",
+       "code":"60100"
+    }
+ ]

@@ -34,7 +34,7 @@ class ThankYou extends Component {
     }
 
     redirectToApp(){
-        this.redirect('/app');
+        this.redirect('/app/dashboard');
     }
 
     redirect(link){

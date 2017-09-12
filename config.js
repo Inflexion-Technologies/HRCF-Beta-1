@@ -1,8 +1,9 @@
 var Sequelize = require('sequelize');
 
 const config = {
-    IP : process.env.SERVER_IP || 'localhost',
-    PORT:process.env.SERVER_PORT || 8001, 
+    IP : process.env.SERVER_IP || 'http://localhost',
+    PORT:process.env.SERVER_PORT || 8001,
+    secret : 'thequickfoxjumpedofthelazydog'
 }
 
 const sequelize = new Sequelize(process.env.DB_NAME || 'HRCF', process.env.DB_USER || 'root', process.env.DB_PASSWORD || '', {
