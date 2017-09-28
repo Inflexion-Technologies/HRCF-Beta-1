@@ -12,7 +12,6 @@ class ThankYouStore extends EventEmitter{
         this.user.firstname = cookie.load('fname');
         this.user.lastname = cookie.load('lname');
         this.user.msisdn = cookie.load('msisdn');
-        this.user.password = cookie.load('pswd');
 
         this.emit('final');
     }
@@ -22,7 +21,6 @@ class ThankYouStore extends EventEmitter{
         this.user.firstname = cookie.load('fname');
         this.user.lastname = cookie.load('lname');
         this.user.msisdn = cookie.load('msisdn');
-        this.user.password = cookie.load('pswd'); 
 
         return this.user;
     }

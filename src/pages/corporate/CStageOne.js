@@ -171,7 +171,7 @@ class CStageOne extends Component {
                                     <span className={this.cError ? 'error' : 'vamus'}>{this.cNameErrorText}</span>
                                 </div>
                                 <div className="form-group">
-                                    <input type="text" className="form-control" placeholder="Location" value={this.state.lname} onChange={this.onLocationChanged.bind(this)}/>
+                                    <input type="text" className="form-control" placeholder="Address" value={this.state.lname} onChange={this.onLocationChanged.bind(this)}/>
                                     <span className={this.lError ? 'error' : 'vamus'}>{this.locationErrorText}</span>
                                 </div>
                             

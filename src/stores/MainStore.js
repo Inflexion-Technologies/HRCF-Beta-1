@@ -1,5 +1,6 @@
 import {EventEmitter} from 'events';
 import dispatcher from '../dispatcher';
+import cookie from 'react-cookies';
 
 class MainStore extends EventEmitter{
     constructor(){
@@ -15,6 +16,15 @@ class MainStore extends EventEmitter{
     }
 
     getUser(){
+        this.user = {};
+        this.user.id = cookie.load('id');
+        this.user.firstname = cookie.load('firstname');
+        this.user.lastname = cookie.load('lastname');
+        this.user.msisdn = cookie.load('msisdn');
+        this.user.email = cookie.load('email');
+        this.user.payment_id = cookie.load('payment_id');
+        this.user.type = cookie.load('type');
+
         return this.user;
     }
 

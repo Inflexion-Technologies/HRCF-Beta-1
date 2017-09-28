@@ -16,10 +16,11 @@ export function registerSession(){
 export function login(username, password){
     axios.get('/api/utils/login/', {params :{username, password}})
     .then((res)=>{
-        if(res.data !== null && res.data.id){
+        if(res.data !== null){
             dispatcher.dispatch({
                 type : "LOGIN_SUCCESS",
-                user: res.data
+                user: res.data.user,
+                token: res.data.token
             });
         }else{
             dispatcher.dispatch({

@@ -11,6 +11,8 @@ import IStageOne from '../pages/individual/IStageOne';
 import ThankYou from '../pages/ThankYou';
 import Main from '../pages/main/Main';
 import ClientType from '../pages/ClientType'
+import Upload from '../pages/upload/Upload'
+
 
 class App extends Component {
   render() {
@@ -26,6 +28,7 @@ class App extends Component {
         <Route path="/success" component={ThankYou} />
         {/* <Route path="/app" component={Main} /> */}
         <Route path="/app" render={(props) => (<Main {...props} page='dashboard' /> )}/>
+        <Route path="/upload" component={Upload} />
       </div>
     </Router>
     );

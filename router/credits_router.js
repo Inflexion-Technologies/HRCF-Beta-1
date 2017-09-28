@@ -34,21 +34,21 @@ export default class CreditsRoutes{
                })
             }); 
 
-        creditsRouter.route('/')
-            .post((req, res)=>{
-                if(req.body){
-                    app.CreditModel.create(req.body).then((credit)=>{
-                        res.status(200).json(credit);                                
-                    })
-                }else{
-                    res.status(200).send('Data not saved!');
-                }
-            }); 
+        // creditsRouter.route('/')
+        //     .post((req, res)=>{
+        //         if(req.body){
+        //             app.CreditModel.create(req.body).then((credit)=>{
+        //                 res.status(200).json(credit);                                
+        //             })
+        //         }else{
+        //             res.status(200).send('Data not saved!');
+        //         }
+        //     }); 
 
-        creditsRouter.route('/:id')
-            .delete((req, res)=>{
+        // creditsRouter.route('/:id')
+        //     .delete((req, res)=>{
                 
-            });
+        //     });
 
         return creditsRouter;
     }

@@ -14,6 +14,7 @@ import CreditsRoutes from './router/credits_router';
 import TransactionsRoutes from './router/transactions_router';
 import WithdrawalsRoutes from './router/withdrawals_router';
 import AuthRoutes from './router/auth_router';
+import BankStatementRoutes from './router/bank_statements_router';
 
 import UtilsRoutes from './router/utils_router';
 import SessionsRouters from './router/session_router';
@@ -35,10 +36,10 @@ export default class App {
     }
 
     initExpress(app){
-        app.use(bodyParser.json({limit: '50mb'}));
-        app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+        app.use(bodyParser.json({limit: '50mb', parameterLimit: 1000000}));
+        app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit: 1000000}));
         app.use(cookieParser());
-        app.use(expressValidator([]));
+        //app.use(expressValidator([]));
         app.use(session({resave:true, saveUninitialized: true, 
                         secret: 'thequickbrownfoxjumpedoverthelazydogs',
                         cookieName: 'session',
@@ -51,6 +52,7 @@ export default class App {
         app.use((req, res, next)=>{
           res.header("Access-Control-Allow-Origin", "*");
           res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+          res.header("Access-Control-Allow-Headers", "*");
           res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
           next();
         });
@@ -124,7 +126,10 @@ export default class App {
         const withdrawalModel = models.withdrawalModel(dbConfig);
         const usersModel = models.usersModel(dbConfig);
         const trackModel = models.trackModel(dbConfig);
-        
+
+        const icBankModel = models.ICBankModel(dbConfig);
+        const bankStatementModel = models.bankStatementModel(dbConfig);
+        const idTypesModel = models.idModel(dbConfig);
 
         //Setting relationships
         approveModel.belongsTo(companyModel);
@@ -141,19 +146,33 @@ export default class App {
         withdrawalModel.belongsTo(usersModel);
         withdrawalModel.belongsTo(bankModel);
 
-        usersModel.belongsToMany(approveModel, {through: 'user_approves'});
-        usersModel.belongsToMany(branchModel, {through: 'user_branches'});
+        // usersModel.belongsToMany(approveModel, {through: 'user_approves'});
+        // usersModel.belongsToMany(branchModel, {through: 'user_branches'});
 
-        //Loading Banks and Branches
-        const banksData = require('./banks.json');
-        const branchesData = require('./bank_branches.json');
+        usersModel.hasMany(approveModel);
+        usersModel.hasMany(branchModel);
+        
+        approveModel.belongsTo(usersModel);
+        // branchModel.belongsTo(usersModel);
+
+        //bankStatementModel.belongsTo(icBankModel);
+
+        //Loading Banks and Branches and IC Banks
+
+        const banksData = require('./resources/banks.json');
+        const branchesData = require('./resources/bank_branches.json');
+        const icBanksData = require('./resources/ic_banks.json');
+        const idTypesData = require('./resources/id_types.json');
 
         dbConfig.sync({force:true}).then(()=>{
             trackModel.bulkCreate([{count: 1},{count: 1}]);
             companyModel.bulkCreate([{name : 'Anonymous'}]);
             bankModel.bulkCreate(banksData);
             branchModel.bulkCreate(branchesData);
+            icBankModel.bulkCreate(icBanksData);
+            idTypesModel.bulkCreate(idTypesData);         
         });
+        
 
         const users = new UserRoutes(usersModel, trackModel, companyModel);
         const approvers = new ApproveRoutes(approveModel);
@@ -165,8 +184,9 @@ export default class App {
         const withdrawals = new WithdrawalsRoutes(withdrawalModel, usersModel);
         const banks = new BanksRoutes(bankModel);
         
-        const utils = new UtilsRoutes(usersModel, trackModel, companyModel);
+        const utils = new UtilsRoutes(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel);
         const auth = new AuthRoutes(usersModel);
+        const bankstatement = new BankStatementRoutes(bankStatementModel, icBankModel, usersModel);
 
         //Set Middleware to check for sessions
         app.use('/api/v1/*', this.validate); 
@@ -179,6 +199,8 @@ export default class App {
         app.use('/api/v1/transactions', transactions.routes());  
         app.use('/api/v1/withdrawals', withdrawals.routes());  
         app.use('/api/v1/banks', banks.routes());  
+        app.use('/api/v1/ic/statements', bankstatement.routes());
+
         app.use('/api/utils', utils.routes());
         app.use('/api/auth', auth.routes());
     }

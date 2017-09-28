@@ -58,9 +58,9 @@ export default class UserRoutes{
 
                     //Update user
                     if(track){
-                        app.UsersModel.update({payment_number : paymentId, company_id : 1}, {where : {id : user.id}}).then(user=>{
-                            if(user){
-                                app.UsersModel.findOne().then(user =>{
+                        app.UsersModel.update({payment_number : paymentId, company_id : 1}, {where : {id : user.id}}).then(vuser=>{
+                            if(vuser){
+                                app.UsersModel.findOne({where : {id : user.id}, include : [app.CompanyModel]}).then(user =>{
                                     res.status(200).json(user);                                    
                                 })
                             }else{
@@ -95,9 +95,9 @@ export default class UserRoutes{
                             if(company){
 
                                 //Update user
-                                app.UsersModel.update({payment_number : paymentId, company_id: company.id}, {where : {id : user.id}}).then(user=>{
-                                    if(user){
-                                        app.UsersModel.findOne().then(user =>{
+                                app.UsersModel.update({payment_number : paymentId, company_id: company.id}, {where : {id : user.id}}).then(vuser=>{
+                                    if(vuser){
+                                        app.UsersModel.findOne({where : {id : user.id}, include : [app.CompanyModel]}).then(user =>{
                                             res.status(200).json(user);                                    
                                         })
                                     }else{
@@ -123,21 +123,29 @@ export default class UserRoutes{
 
         usersRouter.route('/')
             .get((req, res)=>{  
-                app.UsersModel.findAll({where : {status : 'A'}}).then(users => {
+                app.UsersModel.findAll({where : {status : 'A'}, include : [app.CompanyModel], attributes : ['id','firstname','lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'status']}).then(users => {
+                    users.map((user)=>{
+                        delete user.password;
+                    });
+
                     res.status(200).json(users);
                 });
             });   
 
         usersRouter.route('/:id')
             .get((req, res)=>{
-                User.findOne({where : {id : req.params.id, status : 'A'}}).then(user => {
+                app.UsersModel.findOne({where : {id : req.params.id, status : 'A'}, include : [app.CompanyModel], attributes : ['id','firstname','lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'status']}).then(user => {
+                    delete user.password;
+
                     res.status(200).json(user);
                 })
             }); 
 
         usersRouter.route('/email/:email')
             .get((req, res)=>{
-               User.findOne({ where : {email : req.params.email, status : 'A'}}).then(user => {
+               app.UsersModel.findOne({ where : {email : req.params.email, status : 'A'}, include : [app.CompanyModel], attributes : ['id','firstname','lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'status']}).then(user => {
+                delete user.password;
+                
                 res.status(200).json(user);
                })
             }); 
@@ -175,10 +183,10 @@ export default class UserRoutes{
               }
             }); 
 
-        usersRouter.route('/:id')
-            .delete((req, res)=>{
+        // usersRouter.route('/:id')
+        //     .delete((req, res)=>{
                 
-            });
+        //     });
 
         return usersRouter;
     }

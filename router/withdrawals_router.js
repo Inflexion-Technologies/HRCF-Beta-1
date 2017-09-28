@@ -33,21 +33,21 @@ export default class WithdrawalsRoutes{
                })
             }); 
 
-        withdrawalsRouter.route('/')
-            .post((req, res)=>{
-                if(req.body){
-                    app.WithdrawalModel.create(req.body).then((withdrawal)=>{
-                        res.status(200).json(withdrawal);                                
-                    })
-                }else{
-                    res.status(200).send('Data not saved!');
-                }
-            }); 
+        // withdrawalsRouter.route('/')
+        //     .post((req, res)=>{
+        //         if(req.body){
+        //             app.WithdrawalModel.create(req.body).then((withdrawal)=>{
+        //                 res.status(200).json(withdrawal);                                
+        //             })
+        //         }else{
+        //             res.status(200).send('Data not saved!');
+        //         }
+        //     }); 
 
-        withdrawalsRouter.route('/:id')
-            .delete((req, res)=>{
+        // withdrawalsRouter.route('/:id')
+        //     .delete((req, res)=>{
                 
-            });
+        //     });
 
         return withdrawalsRouter;
     }

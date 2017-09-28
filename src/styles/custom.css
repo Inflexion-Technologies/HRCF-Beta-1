@@ -416,3 +416,154 @@
 .show{
     display: block !important;
 }
+
+.hide{
+    display: none !important;
+}
+
+.browse-style{
+    width : 310px;
+}
+
+.upload-style{
+    width : 310px;
+}
+
+.overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7); /* Black background with opacity */
+    z-index: 3; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+}
+
+.over .text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
+
+.overlay .overlay-container{
+    height: 380px;
+    background: #0d47a1;
+    margin-top: 50px;
+}
+
+.overlay .overlay-container .dialog-header{
+    border-bottom: 1px solid;
+    color: #fefefe;    
+}
+
+.overlay .overlay-container .dialog-header .title{
+    float : left;
+    padding : 10px;
+    color: #fefefe;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.overlay .overlay-container .dialog-header .paginator{
+    float : right;
+    padding : 10px 15px;
+    color: #fefefe;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.overlay .overlay-container.icon{
+    width: 100px;
+    padding: 10px;
+}
+
+.overlay .overlay-container .illustrate{
+    height: 209px;
+    padding: 50px;
+}   
+
+.overlay .overlay-container .illustrate .icon{
+    width: 100px;
+}
+
+.overlay .overlay-container .input-container{
+    padding-top: 20px
+}  
+
+.overlay .overlay-container .input-container .wizard-style{
+    height: 274px;
+}  
+
+.overlay .overlay-container .input-container .update-btn{
+    color: #FEFEFE;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 500;
+} 
+
+.overlay .overlay-container .input-container .update-btn:hover{
+    text-decoration: none;
+} 
+
+.overlay .overlay-container .input-container .typo-style{
+    color: #FEFEFE;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.overlay .overlay-container .input-container .congrats{
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    color: #FEFEFE;
+    text-transform: uppercase;
+}
+
+.overlay .overlay-container .input-container .review{
+    color: #FEFEFE;
+}
+
+.overlay .overlay-container .input-container .review .review-label{
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.overlay .overlay-container .input-container .review .review-value{
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.overlay .overlay-container .input-container input{
+    /* background: transparent;
+    color: #FEFEFE; */
+}
+
+.overlay .overlay-container .input-container .wizard-style .dialog-title{
+    padding-bottom: 10px;
+    color: #FEFEFE;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+

@@ -33,21 +33,21 @@ export default class CompanysRoutes{
                })
             }); 
 
-        companysRouter.route('/')
-            .post((req, res)=>{
-                if(req.body){
-                    app.CompanyModel.create(req.body).then((company)=>{
-                        res.status(200).json(company);                                
-                    })
-                }else{
-                    res.status(200).send('Data not saved!');
-                }
-            }); 
+        // companysRouter.route('/')
+        //     .post((req, res)=>{
+        //         if(req.body){
+        //             app.CompanyModel.create(req.body).then((company)=>{
+        //                 res.status(200).json(company);                                
+        //             })
+        //         }else{
+        //             res.status(200).send('Data not saved!');
+        //         }
+        //     }); 
 
-        companysRouter.route('/:id')
-            .delete((req, res)=>{
+        // companysRouter.route('/:id')
+        //     .delete((req, res)=>{
                 
-            });
+        //     });
 
         return companysRouter;
     }

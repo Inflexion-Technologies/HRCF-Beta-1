@@ -1,0 +1,42 @@
+[
+    {
+       "name":"Ecobank",
+       "account_number":"0140004777408",
+       "status":"A"
+    },
+    {
+       "name":"Guaranty Trust Bank",
+       "account_number":"0140004777422",
+       "status":"A"    
+    },
+    {
+       "name":"Stanbic Bank",
+       "account_number":"0140004777433",
+       "status":"A"    
+    },
+    {
+       "name":"Cal Bank",
+       "account_number":"0140004777444",
+       "status":"A"    
+    },
+    {
+       "name":"Standard Chartered Bank",
+       "account_number":"0140004777455",
+       "status":"A"    
+    },
+    {
+       "name":"Barclays Bank",
+       "account_number":"0140004777466",
+       "status":"A"    
+    },
+    {
+       "name":"HFC Bank",
+       "account_number":"0140004777488",
+       "status":"A"    
+    },
+    {
+       "name":"Zenith Bank",
+       "account_number":"0140004777499",
+       "status":"A"    
+    }
+ ]

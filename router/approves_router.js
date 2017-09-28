@@ -45,10 +45,10 @@ export default class ApproveRoutes{
                 }
             }); 
 
-        approversRouter.route('/:id')
-            .delete((req, res)=>{
+        // approversRouter.route('/:id')
+        //     .delete((req, res)=>{
                 
-            });
+        //     });
 
         return approversRouter;
     }
