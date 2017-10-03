@@ -18,7 +18,7 @@ describe('Users#Check Fields', function(){
             uri: url+'utils/adduser',
             method: 'POST',
             json: true,
-            body : {firstname : 'Emmanuel', lastname : 'Selby', email : 'selby@hrcf.com', msisdn : '0244000000', password : 'pa55w0rd01', type : 'I', is_admin : 'Y'},
+            body : {firstname : 'Emmanuel', lastname : 'Selby', email : 'selby@hrcf.com', msisdn : '0244000000', password : 'pa55w0rd01', type : 'I'},
         }, function(error, response, body){
             user = body;
             done();

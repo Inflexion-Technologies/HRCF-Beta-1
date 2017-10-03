@@ -873,7 +873,6 @@ var App = function () {
             app.use(function (req, res, next) {
                 res.header("Access-Control-Allow-Origin", "*");
                 res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-                res.header("Access-Control-Allow-Headers", "*");
                 res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
                 next();
             });
@@ -983,14 +982,15 @@ var App = function () {
             var icBanksData = __webpack_require__(37);
             var idTypesData = __webpack_require__(38);
 
-            dbConfig.sync({ force: true }).then(function () {
-                trackModel.bulkCreate([{ count: 1 }, { count: 1 }]);
-                companyModel.bulkCreate([{ name: 'Anonymous' }]);
-                bankModel.bulkCreate(banksData);
-                branchModel.bulkCreate(branchesData);
-                icBankModel.bulkCreate(icBanksData);
-                idTypesModel.bulkCreate(idTypesData);
-            });
+            // dbConfig.sync({force:true}).then(()=>{
+            //     trackModel.bulkCreate([{count: 1},{count: 1}]);
+            //     companyModel.bulkCreate([{name : 'Anonymous'}]);
+            //     bankModel.bulkCreate(banksData);
+            //     branchModel.bulkCreate(branchesData);
+            //     icBankModel.bulkCreate(icBanksData);
+            //     idTypesModel.bulkCreate(idTypesData);         
+            // });
+
 
             var users = new _users_router2.default(usersModel, trackModel, companyModel);
             var approvers = new _approves_router2.default(approveModel);
@@ -2236,9 +2236,9 @@ var UtilsRoutes = function () {
 
                         //Update user
                         if (track) {
-                            app.UsersModel.update({ payment_number: paymentId, company_id: 1 }, { where: { id: user.id } }).then(function (user) {
-                                if (user) {
-                                    app.UsersModel.findOne().then(function (user) {
+                            app.UsersModel.update({ payment_number: paymentId, company_id: 1 }, { where: { id: user.id } }).then(function (tmpuser) {
+                                if (tmpuser) {
+                                    app.UsersModel.findOne({ where: { id: user.id }, attributes: ['id', 'firstname', 'lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'status'] }).then(function (user) {
                                         res.status(200).json(user);
                                     });
                                 } else {
@@ -2270,13 +2270,13 @@ var UtilsRoutes = function () {
                         if (track) {
 
                             //Save company
-                            app.CompanyModel.create({ name: user.cname, location: user.lname }).then(function (company) {
+                            app.CompanyModel.create({ name: user.cname.toLowerCase(), location: user.lname }).then(function (company) {
                                 if (company) {
 
                                     //Update user
-                                    app.UsersModel.update({ payment_number: paymentId, company_id: company.id }, { where: { id: user.id } }).then(function (user) {
-                                        if (user) {
-                                            app.UsersModel.findOne().then(function (user) {
+                                    app.UsersModel.update({ payment_number: paymentId, company_id: company.id }, { where: { id: user.id } }).then(function (tmpuser) {
+                                        if (tmpuser) {
+                                            app.UsersModel.findOne({ where: { id: user.id }, attributes: ['id', 'firstname', 'lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'status'] }).then(function (user) {
                                                 res.status(200).json(user);
                                             });
                                         } else {
@@ -2391,7 +2391,7 @@ var UtilsRoutes = function () {
             });
 
             utilsRouter.route('/is_corporate_exist/:corporate').get(function (req, res) {
-                if (req.params.corporate.trim()) {
+                if (req.params.corporate.toLowerCase().trim()) {
                     app.CompanyModel.findOne({ where: { name: req.params.corporate } }).then(function (company) {
                         if (company) {
                             res.status(200).json({ is_exist: true });
@@ -2428,12 +2428,12 @@ var UtilsRoutes = function () {
                             app.updateIndividualPaymentNumber(user, res);
                         }
                     });
-                } else if (Object.keys(req.params) != 0) {
-                    req.params.is_admin = 'N';
-                    app.UsersModel.create(req.params).then(function (user) {
-                        if (user && req.params.type === 'C') {
-                            user.lname = req.params.lname;
-                            user.cname = req.params.cname;
+                } else if (Object.keys(req.query) != 0) {
+                    req.query.is_admin = 'N';
+                    app.UsersModel.create(req.query).then(function (user) {
+                        if (user && req.query.type === 'C') {
+                            user.lname = req.query.lname;
+                            user.cname = req.query.cname;
 
                             app.updateCompanyPaymentNumber(user, res);
                         } else if (user && req.body.type === 'I') {
@@ -2444,6 +2444,7 @@ var UtilsRoutes = function () {
                     });
                 } else {
                     console.log('Passed NONE !!!');
+                    res.status(400).send('JSON format required');
                 }
             });
 

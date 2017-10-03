@@ -52,7 +52,6 @@ export default class App {
         app.use((req, res, next)=>{
           res.header("Access-Control-Allow-Origin", "*");
           res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-          res.header("Access-Control-Allow-Headers", "*");
           res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
           next();
         });
@@ -164,7 +163,8 @@ export default class App {
         const icBanksData = require('./resources/ic_banks.json');
         const idTypesData = require('./resources/id_types.json');
 
-        dbConfig.sync({force:true}).then(()=>{
+        dbConfig.sync().then(()=>{            
+        //dbConfig.sync({force:true}).then(()=>{
             trackModel.bulkCreate([{count: 1},{count: 1}]);
             companyModel.bulkCreate([{name : 'Anonymous'}]);
             bankModel.bulkCreate(banksData);

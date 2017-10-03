@@ -73,9 +73,9 @@ updateIndividualPaymentNumber(user, res){
 
                 //Update user
                 if(track){
-                    app.UsersModel.update({payment_number : paymentId, company_id : 1}, {where : {id : user.id}}).then(user=>{
-                        if(user){
-                            app.UsersModel.findOne().then(user =>{
+                    app.UsersModel.update({payment_number : paymentId, company_id : 1}, {where : {id : user.id}}).then(tmpuser=>{
+                        if(tmpuser){
+                            app.UsersModel.findOne({where : {id : user.id}, attributes : ['id','firstname','lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'status']}).then(user =>{
                                 res.status(200).json(user);                                    
                             })
                         }else{
@@ -106,13 +106,13 @@ updateCompanyPaymentNumber(user, res){
                 if(track){
 
                     //Save company
-                    app.CompanyModel.create({name : user.cname, location : user.lname}).then(company=>{
+                    app.CompanyModel.create({name : user.cname.toLowerCase(), location : user.lname}).then(company=>{
                         if(company){
 
                             //Update user
-                            app.UsersModel.update({payment_number : paymentId, company_id: company.id}, {where : {id : user.id}}).then(user=>{
-                                if(user){
-                                    app.UsersModel.findOne().then(user =>{
+                            app.UsersModel.update({payment_number : paymentId, company_id: company.id}, {where : {id : user.id}}).then(tmpuser=>{
+                                if(tmpuser){
+                                    app.UsersModel.findOne({where : {id : user.id}, attributes : ['id','firstname','lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'status']}).then(user =>{
                                         res.status(200).json(user);                                    
                                     })
                                 }else{
@@ -235,7 +235,7 @@ routes(){
 
     utilsRouter.route('/is_corporate_exist/:corporate')
         .get((req, res)=>{  
-            if(req.params.corporate.trim()){
+            if(req.params.corporate.toLowerCase().trim()){
                 app.CompanyModel.findOne({where : {name : req.params.corporate}}).then(company => {
                     if(company){
                         res.status(200).json({is_exist : true});                    
@@ -274,12 +274,12 @@ routes(){
                         app.updateIndividualPaymentNumber(user, res);
                     }
                 });
-          }else if(Object.keys(req.params) != 0){
-                req.params.is_admin = 'N';            
-                app.UsersModel.create(req.params).then((user)=>{
-                    if(user && req.params.type === 'C'){
-                        user.lname = req.params.lname;
-                        user.cname = req.params.cname;
+          }else if(Object.keys(req.query) != 0){
+                req.query.is_admin = 'N';            
+                app.UsersModel.create(req.query).then((user)=>{
+                    if(user && req.query.type === 'C'){
+                        user.lname = req.query.lname;
+                        user.cname = req.query.cname;
 
                         app.updateCompanyPaymentNumber(user, res);
                     }else if(user && req.body.type === 'I'){
@@ -291,6 +291,7 @@ routes(){
                 });
           }else{
               console.log('Passed NONE !!!');
+              res.status(400).send('JSON format required');
           }
     }); 
 
