@@ -9,7 +9,7 @@ const config = {
     ext : 'xlsx'
 }
 
-const sequelize = new Sequelize(process.env.DB_NAME || 'HRCF', process.env.DB_USER || 'root', process.env.DB_PASSWORD || '', {
+const sequelize = new Sequelize(process.env.DB_NAME || 'HRCF', process.env.DB_USER || 'hrcf', process.env.DB_PASSWORD || 'pa55w0rd', {
     host: process.env.DB_HOST || 'localhost',
     //dialect: 'postgres',
     dialect: process.env.DB_DIALECT || 'mysql',
