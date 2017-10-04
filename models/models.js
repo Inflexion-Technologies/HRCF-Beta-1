@@ -6,10 +6,10 @@ var utils = require('../services/utils');
 export function companyModel(config){
 	const company = config.define('companys', {
       name: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(255)
       },
       location: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(255)
       },
       status: {
         type: DataTypes.STRING(1),
@@ -23,7 +23,7 @@ export function companyModel(config){
 export function transactionModel(config){
 	const transactions = config.define('transactions', {
       type: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         values : ['W','C']
       },
       amount : {
@@ -34,7 +34,7 @@ export function transactionModel(config){
         type : DataTypes.INTEGER
       },
       narration : {
-        type : DataTypes.STRING
+        type : DataTypes.STRING(255)
       },
       status: {
         type: DataTypes.STRING(1),
@@ -51,7 +51,7 @@ export function withdrawalModel(config){
         type: DataTypes.DOUBLE
       },
       narration : {
-        type : DataTypes.STRING
+        type : DataTypes.STRING(255)
       },
       user_id : {
         type : DataTypes.INTEGER
@@ -81,7 +81,7 @@ export function creditModel(config){
         type : DataTypes.INTEGER
       },
       narration : {
-        type : DataTypes.STRING
+        type : DataTypes.STRING(255)
       },
       status: {
         type: DataTypes.STRING(1),
@@ -95,13 +95,13 @@ export function creditModel(config){
 export function bankModel(config){
 	const banks = config.define('banks', {
 	    name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         set(val) {
           this.setDataValue('name', _.capitalize(val).trim());
         }
       },
       code: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(255)
       },
 	    status: {
         type: DataTypes.STRING(1),
@@ -115,7 +115,7 @@ export function bankModel(config){
 export function idModel(config){
 	const ids = config.define('id_types', {
 	    name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         set(val) {
           this.setDataValue('name', _.capitalize(val).trim());
         }
@@ -132,7 +132,7 @@ export function idModel(config){
 export function bankStatementModel(config){
   const bankStatements = config.define('bank_statements', {
       ledger_account : {
-        type : DataTypes.STRING
+        type : DataTypes.STRING(255)
       },
       credit : {
         type : DataTypes.DOUBLE
@@ -141,19 +141,19 @@ export function bankStatementModel(config){
         type : DataTypes.DOUBLE
       },
       counterparty_code : {
-        type : DataTypes.STRING,
+        type : DataTypes.STRING(255),
       },
       account_number : {
-        type : DataTypes.STRING,
+        type : DataTypes.STRING(255),
       },
       description : {
-        type : DataTypes.STRING,
+        type : DataTypes.STRING(255),
       },
       sponsor_code : {
-        type : DataTypes.STRING,
+        type : DataTypes.STRING(255),
       },
       client_code : {
-        type : DataTypes.STRING,
+        type : DataTypes.STRING(255),
       },
 	    status: {
         type: DataTypes.STRING(1),
@@ -167,11 +167,11 @@ export function bankStatementModel(config){
 export function ICBankModel(config){
 	const icbanks = config.define('ic_banks', {
 	    name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         
       },
       account_number: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         set(val) {
           this.setDataValue('account_number',val.trim());
         }
@@ -188,10 +188,10 @@ export function ICBankModel(config){
 export function branchModel(config){
 	const bankBranch = config.define('bank_branches', {
 	    name: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(255)
       },
       code: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(255)
       },
 	    status: {
         type: DataTypes.STRING(1),
@@ -219,19 +219,19 @@ export function trackModel(config){
 export function approveModel(config){
 	const approvers = config.define('approvers', {
       firstname: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         set(val) {
           this.setDataValue('firstname', _.capitalize(val).trim());
         }
       },
       lastname: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         set(val) {
           this.setDataValue('lastname', _.capitalize(val).trim());
         }
       },
       email: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         unique : true,
         validate : {
             isEmail : true
@@ -240,7 +240,7 @@ export function approveModel(config){
         }
       },
       msisdn: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         unique : true,
         validate : {
             isNumeric : true
@@ -260,23 +260,23 @@ export function approveModel(config){
 export function usersModel(config){
 	const users = config.define('users', {
       firstname: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         set(val) {
           this.setDataValue('firstname', _.capitalize(val).trim());
         }
       },
       lastname: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         set(val) {
           this.setDataValue('lastname', _.capitalize(val).trim());
         }
       },
       payment_number: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         unique : true
       },
       email: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         unique : true,
         validate : {
             isEmail : true
@@ -285,7 +285,7 @@ export function usersModel(config){
         }
       },
       msisdn: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         unique : true,
         validate : {
             isNumeric : true
@@ -307,13 +307,13 @@ export function usersModel(config){
         defaultValue : ['N']
       },
       kin:{
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         set(val) {
           this.setDataValue('kin', _.capitalize(val).trim());
         }
       },
       kin_msisdn: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         validate : {
             isNumeric : true
         }, set(val) {
@@ -321,7 +321,7 @@ export function usersModel(config){
         }
       },
       password: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         set(val) {
           this.setDataValue('password', utils.getHash(val.trim()));
         }
