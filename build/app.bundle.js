@@ -93,7 +93,7 @@ var config = {
     ext: 'xlsx'
 };
 
-var sequelize = new Sequelize(process.env.DB_NAME || 'HRCF', process.env.DB_USER || 'root', process.env.DB_PASSWORD || '', {
+var sequelize = new Sequelize(process.env.DB_NAME || 'HRCF', process.env.DB_USER || 'hrcf', process.env.DB_PASSWORD || 'pa55w0rd', {
     host: process.env.DB_HOST || 'localhost',
     //dialect: 'postgres',
     dialect: process.env.DB_DIALECT || 'mysql',
@@ -404,10 +404,10 @@ var utils = __webpack_require__(3);
 function companyModel(config) {
   var company = config.define('companys', {
     name: {
-      type: _sequelize.DataTypes.STRING
+      type: _sequelize.DataTypes.STRING(255)
     },
     location: {
-      type: _sequelize.DataTypes.STRING
+      type: _sequelize.DataTypes.STRING(255)
     },
     status: {
       type: _sequelize.DataTypes.STRING(1),
@@ -421,7 +421,7 @@ function companyModel(config) {
 function transactionModel(config) {
   var transactions = config.define('transactions', {
     type: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       values: ['W', 'C']
     },
     amount: {
@@ -432,7 +432,7 @@ function transactionModel(config) {
       type: _sequelize.DataTypes.INTEGER
     },
     narration: {
-      type: _sequelize.DataTypes.STRING
+      type: _sequelize.DataTypes.STRING(255)
     },
     status: {
       type: _sequelize.DataTypes.STRING(1),
@@ -449,7 +449,7 @@ function withdrawalModel(config) {
       type: _sequelize.DataTypes.DOUBLE
     },
     narration: {
-      type: _sequelize.DataTypes.STRING
+      type: _sequelize.DataTypes.STRING(255)
     },
     user_id: {
       type: _sequelize.DataTypes.INTEGER
@@ -479,7 +479,7 @@ function creditModel(config) {
       type: _sequelize.DataTypes.INTEGER
     },
     narration: {
-      type: _sequelize.DataTypes.STRING
+      type: _sequelize.DataTypes.STRING(255)
     },
     status: {
       type: _sequelize.DataTypes.STRING(1),
@@ -493,13 +493,13 @@ function creditModel(config) {
 function bankModel(config) {
   var banks = config.define('banks', {
     name: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       set: function set(val) {
         this.setDataValue('name', _lodash2.default.capitalize(val).trim());
       }
     },
     code: {
-      type: _sequelize.DataTypes.STRING
+      type: _sequelize.DataTypes.STRING(255)
     },
     status: {
       type: _sequelize.DataTypes.STRING(1),
@@ -513,7 +513,7 @@ function bankModel(config) {
 function idModel(config) {
   var ids = config.define('id_types', {
     name: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       set: function set(val) {
         this.setDataValue('name', _lodash2.default.capitalize(val).trim());
       }
@@ -530,7 +530,7 @@ function idModel(config) {
 function bankStatementModel(config) {
   var bankStatements = config.define('bank_statements', {
     ledger_account: {
-      type: _sequelize.DataTypes.STRING
+      type: _sequelize.DataTypes.STRING(255)
     },
     credit: {
       type: _sequelize.DataTypes.DOUBLE
@@ -539,19 +539,19 @@ function bankStatementModel(config) {
       type: _sequelize.DataTypes.DOUBLE
     },
     counterparty_code: {
-      type: _sequelize.DataTypes.STRING
+      type: _sequelize.DataTypes.STRING(255)
     },
     account_number: {
-      type: _sequelize.DataTypes.STRING
+      type: _sequelize.DataTypes.STRING(255)
     },
     description: {
-      type: _sequelize.DataTypes.STRING
+      type: _sequelize.DataTypes.STRING(255)
     },
     sponsor_code: {
-      type: _sequelize.DataTypes.STRING
+      type: _sequelize.DataTypes.STRING(255)
     },
     client_code: {
-      type: _sequelize.DataTypes.STRING
+      type: _sequelize.DataTypes.STRING(255)
     },
     status: {
       type: _sequelize.DataTypes.STRING(1),
@@ -565,11 +565,11 @@ function bankStatementModel(config) {
 function ICBankModel(config) {
   var icbanks = config.define('ic_banks', {
     name: {
-      type: _sequelize.DataTypes.STRING
+      type: _sequelize.DataTypes.STRING(255)
 
     },
     account_number: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       set: function set(val) {
         this.setDataValue('account_number', val.trim());
       }
@@ -586,10 +586,10 @@ function ICBankModel(config) {
 function branchModel(config) {
   var bankBranch = config.define('bank_branches', {
     name: {
-      type: _sequelize.DataTypes.STRING
+      type: _sequelize.DataTypes.STRING(255)
     },
     code: {
-      type: _sequelize.DataTypes.STRING
+      type: _sequelize.DataTypes.STRING(255)
     },
     status: {
       type: _sequelize.DataTypes.STRING(1),
@@ -617,19 +617,19 @@ function trackModel(config) {
 function approveModel(config) {
   var approvers = config.define('approvers', {
     firstname: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       set: function set(val) {
         this.setDataValue('firstname', _lodash2.default.capitalize(val).trim());
       }
     },
     lastname: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       set: function set(val) {
         this.setDataValue('lastname', _lodash2.default.capitalize(val).trim());
       }
     },
     email: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       unique: true,
       validate: {
         isEmail: true
@@ -638,7 +638,7 @@ function approveModel(config) {
       }
     },
     msisdn: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       unique: true,
       validate: {
         isNumeric: true
@@ -658,23 +658,23 @@ function approveModel(config) {
 function usersModel(config) {
   var users = config.define('users', {
     firstname: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       set: function set(val) {
         this.setDataValue('firstname', _lodash2.default.capitalize(val).trim());
       }
     },
     lastname: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       set: function set(val) {
         this.setDataValue('lastname', _lodash2.default.capitalize(val).trim());
       }
     },
     payment_number: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       unique: true
     },
     email: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       unique: true,
       validate: {
         isEmail: true
@@ -683,7 +683,7 @@ function usersModel(config) {
       }
     },
     msisdn: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       unique: true,
       validate: {
         isNumeric: true
@@ -705,13 +705,13 @@ function usersModel(config) {
       defaultValue: ['N']
     },
     kin: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       set: function set(val) {
         this.setDataValue('kin', _lodash2.default.capitalize(val).trim());
       }
     },
     kin_msisdn: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       validate: {
         isNumeric: true
       }, set: function set(val) {
@@ -719,7 +719,7 @@ function usersModel(config) {
       }
     },
     password: {
-      type: _sequelize.DataTypes.STRING,
+      type: _sequelize.DataTypes.STRING(255),
       set: function set(val) {
         this.setDataValue('password', utils.getHash(val.trim()));
       }

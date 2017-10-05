@@ -25,7 +25,8 @@ class Overlay extends Component {
       msisdn : '',
       multi : false,
       value : '',
-      page : 1
+      page : 1,
+      count : 0
     }
     this.sn = true;
     this.onBankChange = this.onBankChange.bind(this);
@@ -35,6 +36,7 @@ class Overlay extends Component {
 
     this.nokError = 'Please Specify Next of Kin';
     this.msisdnError = 'Invalid Mobile Number';
+    this.assert = true;
   }
 
   componentWillMount(){
@@ -74,6 +76,15 @@ class Overlay extends Component {
       this.setState({
         page : this.state.page + 1
       });
+    }else{
+      if(this.state.page >= 5){
+
+        this.assert = false;
+        console.log('Assert is false');
+        this.setState({
+          count : this.state.count + 1
+        })
+      }
     }
     
   }
@@ -95,7 +106,8 @@ class Overlay extends Component {
     }
 
     return (
-      <div className={this.props.show ? "show overlay" : "overlay"}>
+
+      <div className={this.props.show && this.assert ? "show overlay" : "overlay"}>
         <div className="container">
           <div className="row">
             <div className="col-md-offset-3 col-md-6 overlay-container">
