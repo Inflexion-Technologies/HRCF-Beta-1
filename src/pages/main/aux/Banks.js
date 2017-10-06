@@ -26,6 +26,7 @@ class Banks extends Component {
     this.accountError = 'Invalid Account Number';
     this.loadBanks = this.loadBanks.bind(this);
     this.loadBranches = this.loadBranches.bind(this);
+    this.isAllValid = true;
   }
 
   componentWillMount(){
@@ -43,6 +44,10 @@ class Banks extends Component {
     this.setState({
         count : this.state.count + 1
     })
+  }
+
+  valid(){
+    return this.isAllValid;
   }
 
   loadBranches(){

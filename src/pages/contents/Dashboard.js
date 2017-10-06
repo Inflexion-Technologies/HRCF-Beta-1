@@ -124,21 +124,21 @@ class Dashboard extends Component {
     return (
             <div>
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-4 kill-padding-except-left">
                         <div className="dash-widget-contribution">
                             <div className="amount">34,000 GHS</div>
                             <div className="label">Total Balance</div>
                         </div>
                     </div>
 
-                    <div className="col-md-4">
+                    <div className="col-md-4 kill-padding">
                         <div className="dash-widget-balance">
                             <div className="amount">54,000 GHS</div>
                             <div className="label">Total Contributions</div>
                         </div>
                     </div>
 
-                    <div className="col-md-4">
+                    <div className="col-md-4 kill-padding-except-right">
                         <div className="dash-widget-interest">
                             <div className="amount">5,000 GHS</div>
                             <div className="label">Total Interest</div>
@@ -153,10 +153,10 @@ class Dashboard extends Component {
                 </div>
                 <div className="row breaker"></div>
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-6 kill-padding-except-left">
                         <ReactHighcharts config={this.bar_config}></ReactHighcharts>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-6 kill-padding-except-right">
                         <ReactHighcharts config={this.pie_config}></ReactHighcharts>
                     </div>
                 </div>

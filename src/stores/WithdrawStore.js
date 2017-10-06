@@ -1,0 +1,76 @@
+import {EventEmitter} from 'events';
+import dispatcher from '../dispatcher';
+import cookie from 'react-cookies';
+import format from 'format-number';
+
+class Withdraw extends EventEmitter{
+    constructor(){
+        super();
+     
+        this.amount = 0;
+        this.pageNumber = 1;
+        this.pageThreshold = 3;
+        this.balance = 700000;
+        this.newBalance = 700000;
+    }
+
+    setBankName(){}
+    setBankId(){}
+    setAmount(amount){
+        this.amount = amount;
+        this.newBalance = this.balance - this.amount;
+
+        this.emit('withdraw_amount_to_deduct');
+    }
+
+    getAmount(){
+        const formatStyle = format({integerSeparator:','});
+        
+        return formatStyle(this.amount) === '' ? '0.00':formatStyle(this.amount);
+    }
+
+    next(){
+        if(this.pageNumber < this.pageThreshold){
+            this.pageNumber = this.pageNumber + 1;
+
+            this.emit('withdraw_next');
+        }
+    }
+
+    back(){
+        if(this.pageNumber > 1){
+            this.pageNumber = this.pageNumber - 1;
+
+            this.emit('withdraw_back');
+        }
+    }
+
+    getNewBalance(){
+        const formatStyle = format({integerSeparator:','});
+        return formatStyle(this.newBalance) === '' ? '0.00':formatStyle(this.newBalance);
+    }
+
+    getBalance(){
+        const formatStyle = format({integerSeparator:','});
+        return formatStyle(this.balance) === '' ? '0.00':formatStyle(this.balance);
+    }
+
+    getPageNumber(){
+        return this.pageNumber;
+    }
+
+    handleActions(action){
+        switch(action.type){
+            // case 'MAIN_LOAD_OFFICERS' : {
+            //     break;
+            // } 
+            default:{}
+        }
+    }
+
+}
+
+const withdrawStore = new Withdraw();
+dispatcher.register(withdrawStore.handleActions.bind(withdrawStore));
+
+export default withdrawStore;

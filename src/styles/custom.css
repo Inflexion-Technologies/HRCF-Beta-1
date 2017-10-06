@@ -566,4 +566,127 @@
     font-weight: 600;
 }
 
+.withdraw{
 
+}
+
+.withdraw .operator{
+    font-size: 46px;
+    line-height: 0.8;
+}
+
+.withdraw .withdraw-widget{
+    background: #FFFFFF;
+    height: 95px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+.withdraw .withdraw-widget .amount{
+    font-size: 30px;
+    font-weight: 600;
+    color: #c62828;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 2px;
+}
+
+.withdraw .withdraw-widget .label{
+    color: #c62828;
+    text-align: center;
+    padding: 10px;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 2px;
+}
+
+.withdraw .withdraw-widget .small{
+    display: inline;
+    font-size: 10px;
+    color: #c62828;
+    padding: 10px;
+}
+
+.withdraw .operator{
+    font-size: 42px;
+    font-weight: 600;
+    color: #c62828;
+    line-height: 1.2;
+}
+
+.withdraw-wizard{
+    background: transparent;
+}
+
+.withdraw-wizard .stage{
+    height: 650px;
+}
+
+.withdraw-wizard .stage .wpanel{
+    padding-top: 120px;
+}
+
+.withdraw-wizard .stage .sider{
+    background: #FFFFFF;
+    padding-top: 50px;
+    height: 100%;
+}
+
+.withdraw-wizard .stage .dialog-title{
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 12px;
+    letter-spacing: 1px;
+
+}
+
+.withdraw-wizard .stage .wcontent{
+    padding: 20px;
+    height: 100%;
+}
+
+.withdraw-wizard .stage .action-btn{
+    color: #FEFEFE;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.withdraw-wizard .stage .target{
+    text-align: center;
+}
+
+.withdraw-wizard .stage .target .svg{
+    width: 54px;
+    height: 54px;
+}
+
+.kill-padding{
+    padding: 0;
+}
+
+.kill-padding-except-left{
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+
+.kill-padding-except-right{
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.stage1-style{
+    background: #0d47a1;
+}
+
+.stage2-style{
+    background : #e65100;
+}

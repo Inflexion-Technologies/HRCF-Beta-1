@@ -3,6 +3,7 @@ import SideNav from './SideNav';
 import Header from './Header';
 import Overlay from './aux/Overlay';
 import Dashboard from '../contents/Dashboard'
+import Withdraw from '../contents/Withdraw'
 import {Route, Switch, Redirect } from 'react-router-dom';
 import cookie from 'react-cookies';
 
@@ -61,6 +62,7 @@ class Main extends Component {
                     {/* Content */}
                     <Switch>
                         <Route exact path='/app/dashboard' component={Dashboard}/>
+                        <Route exact path='/app/withdraw' component={Withdraw}/>
                     </Switch>
                     
                     

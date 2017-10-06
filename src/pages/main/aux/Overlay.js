@@ -33,6 +33,7 @@ class Overlay extends Component {
     this.onBackClicked = this.onBackClicked.bind(this);
     this.onNextClicked = this.onNextClicked.bind(this);
     this.showNext = this.showNext.bind(this);
+    this.moveForward = this.moveForward.bind(this);
 
     this.nokError = 'Please Specify Next of Kin';
     this.msisdnError = 'Invalid Mobile Number';
@@ -41,6 +42,17 @@ class Overlay extends Component {
 
   componentWillMount(){
     
+  }
+
+  componentDidMount(){
+    this.bank1Component = this.refs.bank1;
+    this.bank2Component = this.refs.bank2;
+    this.approver1Component = this.refs.approver1;
+    this.approver2Component = this.refs.approver2;
+    this.uploadComponent = this.refs.upload;
+    this.reviewComponent = this.refs.review;
+
+    //console.log(this.bank1.valid());
   }
 
   onKinChanged(evt){
@@ -70,9 +82,16 @@ class Overlay extends Component {
   }
 
   onNextClicked(evt){
-    console.log('page num[Forward] => '+this.state.page);
+    //if(this.state.page === 1 && this.bank1Component.isValid()){
+      //console.log('Valid');
+      //this.moveForward();      
+    //}else{
+      this.moveForward();
+    //} 
+  }
+
+  moveForward(){
     if(this.state.page >= 1 && this.state.page <= 5){
-      console.log('Got inn');
       this.setState({
         page : this.state.page + 1
       });
@@ -80,13 +99,11 @@ class Overlay extends Component {
       if(this.state.page >= 5){
 
         this.assert = false;
-        console.log('Assert is false');
         this.setState({
           count : this.state.count + 1
         })
       }
     }
-    
   }
 
   getOptions(input, callback) {
@@ -97,6 +114,11 @@ class Overlay extends Component {
   showNext(show){
     console.log('show next '+show);
     this.sn = show;
+  }
+
+  isValid(bool){
+    console.log('Boll ::: '+bool);
+    return 
   }
 
   render() {
@@ -127,14 +149,14 @@ class Overlay extends Component {
                 <div className="col-md-8 input-container">
 
                     {/* <NextOfKin page={this.state.page} title="Next Of Kin"/> */}
-                    <Banks page={this.state.page} title="Bank Profiles #1" pageNumber="1" bankPlaceholder="Select Primary Bank"/>
-                    <Banks page={this.state.page} title="Bank Profiles #2 (Optional)" pageNumber="2" bankPlaceholder="Select Secondary Bank"/>
+                    <Banks ref="bank1" page={this.state.page} title="Bank Profiles #1" pageNumber="1" bankPlaceholder="Select Primary Bank" />
+                    <Banks ref="bank2" page={this.state.page} title="Bank Profiles #2 (Optional)" pageNumber="2" bankPlaceholder="Select Secondary Bank"/>
 
-                    <Approver page={this.state.page} title="Approver  #1" pageNumber="3"/>
-                    <Approver page={this.state.page} title="Approver  #2" pageNumber="4"/>
+                    <Approver ref="approver1" page={this.state.page} title="Approver  #1" pageNumber="3"/>
+                    <Approver ref="approver2" page={this.state.page} title="Approver  #2" pageNumber="4"/>
 
-                    <UploadID page={this.state.page} showNext={this.showNext} title="Upload National ID"/>
-                    <Review page={this.state.page} title="Review"/>
+                    <UploadID ref="upload" page={this.state.page} showNext={this.showNext} title="Upload National ID"/>
+                    <Review ref="review" page={this.state.page} title="Review"/>
                     <Complete page={this.state.page} />
 
                     <div className="row">

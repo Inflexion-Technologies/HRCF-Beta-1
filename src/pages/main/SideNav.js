@@ -73,6 +73,12 @@ class SideNav extends Component {
                       </Link>
                   </li>
                   <li>
+                      <Link to="/app/withdraw">
+                        <i className="fa fa-cog" aria-hidden="true"></i>
+                        Withdraw
+                      </Link>
+                  </li>
+                  <li>
 
                   <Link to="/app/settings">
                     <i className="fa fa-cog" aria-hidden="true"></i>
