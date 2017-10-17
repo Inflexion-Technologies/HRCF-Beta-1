@@ -56,8 +56,8 @@ getGeneratedId(count, type){
             id = count;
     }
 
-    console.log('H'+type+year+id+month);
-    return 'H'+type+year+id+month;
+    console.log(''+type+year+id+month);
+    return ''+type+year+id+month;
 }
 
 updateIndividualPaymentNumber(user, res){

@@ -566,6 +566,15 @@
     font-weight: 600;
 }
 
+.overlay .overlay-container .input-container .wizard-style .input-style{
+    padding-bottom: 10px;
+    color: #FEFEFE;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
 .withdraw{
 
 }
@@ -587,13 +596,11 @@
 .withdraw .withdraw-widget .amount{
     font-size: 30px;
     font-weight: 600;
-    color: #c62828;
     font-family: 'Lato', sans-serif;
     letter-spacing: 2px;
 }
 
 .withdraw .withdraw-widget .label{
-    color: #c62828;
     text-align: center;
     padding: 10px;
     font-family: 'Lato', sans-serif;
@@ -603,14 +610,12 @@
 .withdraw .withdraw-widget .small{
     display: inline;
     font-size: 10px;
-    color: #c62828;
     padding: 10px;
 }
 
 .withdraw .operator{
     font-size: 42px;
     font-weight: 600;
-    color: #c62828;
     line-height: 1.2;
 }
 
@@ -623,12 +628,35 @@
 }
 
 .withdraw-wizard .stage .wpanel{
-    padding-top: 120px;
+    padding-top: 20px;
+}
+
+.withdraw-wizard .stage .wpanel .logo{
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.withdraw-wizard .stage .wpanel .content-height{
+    height: 300px;
+}
+
+.withdraw-wizard .stage .wpanel .password-style{
+    color: #e65100;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border: none;
+}
+
+.withdraw-wizard .stage .wpanel .amount-style{    
+    color: #0d47a1;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 15px;
 }
 
 .withdraw-wizard .stage .sider{
     background: #FFFFFF;
-    padding-top: 50px;
+    padding-top: 30px;
     height: 100%;
 }
 
@@ -641,11 +669,31 @@
     padding-top: 100px;
     padding-bottom: 12px;
     letter-spacing: 1px;
-
 }
 
+.withdraw-wizard .stage .input-style{
+    padding-bottom: 5px;
+    color: #FEFEFE;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.withdraw-wizard .stage .confirm-label{
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+}
+
+.withdraw-wizard .stage .message-style{
+    color: #FFFFFF;
+}    
+
 .withdraw-wizard .stage .wcontent{
-    padding: 20px;
+    padding: 140px 30px;
     height: 100%;
 }
 
@@ -663,8 +711,17 @@
 }
 
 .withdraw-wizard .stage .target .svg{
-    width: 54px;
-    height: 54px;
+    width: 180px;
+}
+
+.withdraw-wizard .stage .date-picker-style{
+    width: 100%;
+    height: 33px;
+    border: 1px solid #d2d2d2;
+    font-size: 14px;
+    border-radius: 3px;
+    padding-left: 7px;
+    color: #999999;
 }
 
 .kill-padding{
@@ -690,3 +747,24 @@
 .stage2-style{
     background : #e65100;
 }
+
+.stage3-style{
+    background: #2e7d32;
+}
+
+.calculator-1{
+    color: #0d47a1;
+}
+
+.calculator-2{
+    color: #e65100
+}
+
+.calculator-3{
+    color: #2e7d32
+}
+
+.petit-margin{
+    margin-bottom: 5px;
+}
+

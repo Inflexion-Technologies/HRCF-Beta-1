@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 import WBanks from './withdraw_components/WBanks'
-import WAmount from './withdraw_components/WAmount'
+import WConfirm from './withdraw_components/WConfirm'
+import WMessage from './withdraw_components/WMessage'
+
 import WithdrawStore from '../../stores/WithdrawStore'
 
 
@@ -58,9 +60,25 @@ class Withdraw extends Component {
   }
 
   render() {
+    let calculator_color_style = '';
+    switch(parseInt(this.pageNumber)){
+        case 1 : {
+            calculator_color_style = 'calculator-1';
+            break;
+        }
+        case 2 : {
+            calculator_color_style = 'calculator-2';
+            break;
+        }
+        case 3 :{
+            calculator_color_style = 'calculator-3';
+            break;
+        }
+    }
+
     return (
             <div>
-                <div className="row withdraw">
+                <div className={"row withdraw "+calculator_color_style}>
                     <div className="col-md-4 col-xs-5 kill-padding-except-left">
                         <div className="withdraw-widget">
                             <div className="amount">{this.balance}
@@ -102,8 +120,9 @@ class Withdraw extends Component {
                 </div>
                 {/* Content */}
                 <div className="row withdraw-wizard">
-                    <WBanks title="Select A Bank" page={1} pageNumber={this.pageNumber}/>
-                    <WAmount title="Specify Amount" page={2} pageNumber={this.pageNumber}/>
+                    <WBanks page={1} pageNumber={this.pageNumber}/>
+                    <WConfirm page={2} pageNumber={this.pageNumber}/>
+                    <WMessage page={3} pageNumber={this.pageNumber}/>
                 </div>
                 <div className="row breaker"></div>
                 <div className="row">

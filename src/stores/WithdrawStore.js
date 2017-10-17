@@ -16,6 +16,7 @@ class Withdraw extends EventEmitter{
 
     setBankName(){}
     setBankId(){}
+
     setAmount(amount){
         this.amount = amount;
         this.newBalance = this.balance - this.amount;
@@ -45,12 +46,22 @@ class Withdraw extends EventEmitter{
         }
     }
 
+    reset(){
+        this.pageNumber = 1;
+    }
+
     getNewBalance(){
+
+        console.log('New Balance is '+this.newBalance);
+
         const formatStyle = format({integerSeparator:','});
         return formatStyle(this.newBalance) === '' ? '0.00':formatStyle(this.newBalance);
     }
 
     getBalance(){
+
+        console.log('Balance is '+this.newBalance);
+        
         const formatStyle = format({integerSeparator:','});
         return formatStyle(this.balance) === '' ? '0.00':formatStyle(this.balance);
     }
