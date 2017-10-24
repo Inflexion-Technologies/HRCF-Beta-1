@@ -151,7 +151,7 @@
     transition: margin-left .5s;
 
     transition: margin-left .5s;
-    padding-top: 70px;
+    padding-top: 85px;
     /* margin-left: 250px; */
 }
 
@@ -231,17 +231,28 @@
     background: #FFFFFF;
     width: 100%;
     left: 0;
-    height: 65px;
+    height: 80px;
     z-index: 2;
     opacity: 1;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
     color: #788288;
 }
 
+.main .header .hidden-menu{
+    margin-top: -11px;
+    text-align: center;
+    color: #00838f;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
 .main .header .header-logo-icon{
     float: left;
-    width: 120px;
-    height: 100%;
+    width: 84px;
+    height: 50%;
 }
 
 .main .header .header-switch-icon{
@@ -367,7 +378,7 @@
 
 .sidebar .sidenav .close-div{
     width: 100%;
-    padding: 10px;
+    padding: 28px 15px 0 15px;
     background: #01579b;
 }
 
@@ -594,7 +605,7 @@
 }
 
 .overlay .overlay-container .input-container .wizard-style .overlay-content-style{
-    height: 280px;
+    height: 262px;
 }
 
 .overlay .overlay-container .input-container .wizard-style .input-style{

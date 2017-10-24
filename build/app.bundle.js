@@ -1034,14 +1034,14 @@ var App = function () {
             var idTypesData = __webpack_require__(39);
 
             // dbConfig.sync().then(()=>{            
-            dbConfig.sync({ force: true }).then(function () {
-                trackModel.bulkCreate([{ count: 1 }, { count: 1 }]);
-                companyModel.bulkCreate([{ name: 'Anonymous' }]);
-                bankModel.bulkCreate(banksData);
-                branchModel.bulkCreate(branchesData);
-                icBankModel.bulkCreate(icBanksData);
-                idTypesModel.bulkCreate(idTypesData);
-            });
+            // dbConfig.sync({force:true}).then(()=>{
+            //     trackModel.bulkCreate([{count: 1},{count: 1}]);
+            //     companyModel.bulkCreate([{name : 'Anonymous'}]);
+            //     bankModel.bulkCreate(banksData);
+            //     branchModel.bulkCreate(branchesData);
+            //     icBankModel.bulkCreate(icBanksData);
+            //     idTypesModel.bulkCreate(idTypesData);         
+            // });
 
             var users = new _users_router2.default(usersModel, trackModel, companyModel);
             var approvers = new _approves_router2.default(approveModel);

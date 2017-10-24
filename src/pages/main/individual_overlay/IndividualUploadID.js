@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import Select from 'react-select';
 import FileUpload from 'react-fileupload';
 import OverlayStore from '../../../stores/OverlayStore';
 import * as OverlayAction from '../../../actions/OverlayAction';
 import * as utils from '../../../utils/utils';
 
-
-import 'react-select/dist/react-select.css';
 import '../../../bower_components/bootstrap/dist/css/bootstrap.css';
 import '../../../styles/font-awesome/css/font-awesome.css';
 import '../../../styles/custom.css';
@@ -25,6 +22,7 @@ class IndividualUploadID extends Component {
     }
 
     this.onIDNumberChanged = this.onIDNumberChanged.bind(this);
+    this.onIDTypeChange = this.onIDTypeChange.bind(this);
     this.loadID = this.loadID.bind(this);
 
     this.type = '';
@@ -57,13 +55,17 @@ class IndividualUploadID extends Component {
     })
   }
 
-  onIDTypeChange(evt){
+  onIDTypeChange(e){
     this.setState({
-      value : evt
+      value : e.target.value
     })
 
-    this.type = evt.label;
-    this.type_id = evt.value;
+    const id_types = OverlayStore.getIDTypes().find((id)=>{
+      return parseInt(e.target.value) === parseInt(id.value);
+    })
+
+    this.type = id_types.label;
+    this.type_id = e.target.value;
   }
 
   onNextClicked(evt){
@@ -78,11 +80,6 @@ class IndividualUploadID extends Component {
 
   onBackClicked(){
     OverlayStore.back();
-  }
-
-  getOptions(input, callback) {
-    const ids = OverlayStore.getIDTypes();
-    callback(null, {options: ids,complete: true});
   }
 
   refresh(){
@@ -135,6 +132,16 @@ class IndividualUploadID extends Component {
     return true;
   }
 
+  getSelectOptions(data){
+    if(data){
+      return data.map((d)=>{
+        return <option value={d.value}>{d.label}</option>
+      })
+    }else{
+      return <option value="0">Loading ...</option>
+    }
+  }
+
   render() {
     let show = false;
     let options={
@@ -160,8 +167,10 @@ class IndividualUploadID extends Component {
             <div className="clearfix"></div>
                 <div className="overlay-content-style">
                     <div className="form-style">
-                        <Select.Async multi={this.state.multi} placeholder="ID Type" value={this.state.value} onChange={this.onIDTypeChange.bind(this)} valueKey="value" labelKey="label" loadOptions={this.getOptions} />
-                        <span className={this.tError ? 'error' : 'vamus'}>{this.typeError}</span>
+                      <select className="form-control" defaultValue={this.state.value} onChange={this.onIDTypeChange}>
+                        {this.getSelectOptions(OverlayStore.getIDTypes())}
+                      </select>
+                    <span className={this.tError ? 'error' : 'vamus'}>{this.typeError}</span>
                     </div>
                 
                     <div className="form-style">

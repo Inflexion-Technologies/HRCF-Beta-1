@@ -52,28 +52,28 @@ class CorporateReview extends Component {
                 <div className="overlay-content-style">
 
                     <div className="col-md-6 col-xs-12">
-                        <div className="col-md-12 review-label">Account Name</div>
-                        <div className="col-md-12 review-value">{account_name}</div>
+                        <div className="col-md-12 col-xs-12 review-label">Account Name</div>
+                        <div className="col-md-12 col-xs-12 review-value">{account_name}</div>
 
-                        <div className="col-md-12 review-label">Account Number</div>
-                        <div className="col-md-12 review-value">{account_number}</div>
+                        <div className="col-md-12 col-xs-12 review-label">Account Number</div>
+                        <div className="col-md-12 col-xs-12 review-value">{account_number}</div>
 
-                        <div className="col-md-12 review-label">Bank</div>
-                        <div className="col-md-12 review-value">{primary_bank}, {primary_branch}</div>
+                        <div className="col-md-12 col-xs-12 review-label">Bank</div>
+                        <div className="col-md-12 col-xs-12 review-value">{primary_bank}, {primary_branch}</div>
 
-                        <div className="col-md-12 review-label">ID Details</div>
-                        <div className="col-md-12 review-value">{id_type}, {id_number}</div>
+                        <div className="col-md-12 col-xs-12 review-label">ID Details</div>
+                        <div className="col-md-12 col-xs-12 review-value">{id_type}, {id_number}</div>
                     </div>
 
                     <div className="col-md-6 col-xs-12">
-                        <div className="col-md-12 review-label">Approver(s)</div>
-                        <div className="col-md-12 review-value">{approver_name}</div>
+                        <div className="col-md-12 col-xs-12 review-label">Approver(s)</div>
+                        <div className="col-md-12 col-xs-12 review-value">{approver_name}</div>
 
-                        <div className="col-md-12 review-label">Approver(s) Mobile</div>
-                        <div className="col-md-12 review-value">{approver_msisdn}</div>
+                        <div className="col-md-12 col-xs-12 review-label">Approver(s) Mobile</div>
+                        <div className="col-md-12 col-xs-12 review-value">{approver_msisdn}</div>
 
-                        <div className="col-md-12 review-label">Approver(s) Email</div>
-                        <div className="col-md-12 review-value2">{approver_email}</div>
+                        <div className="col-md-12 col-xs-12 review-label">Approver(s) Email</div>
+                        <div className="col-md-12 col-xs-12 review-value2">{approver_email}</div>
                     </div>
 
                 </div>

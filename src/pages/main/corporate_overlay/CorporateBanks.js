@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import Select from 'react-select';
 import OverlayStore from '../../../stores/OverlayStore';
 import * as OverlayAction from '../../../actions/OverlayAction';
 
-import 'react-select/dist/react-select.css';
 import '../../../bower_components/bootstrap/dist/css/bootstrap.css';
 import '../../../styles/font-awesome/css/font-awesome.css';
 import '../../../styles/custom.css';
@@ -20,12 +18,13 @@ class CorporateBanks extends Component {
       nError : false,
       aError : false,
       account : '',
-      value : '',
-      bvalue : '',
+      value : 'Select A Bank',
+      bvalue : 'Select Branch',
       count : 0
     }
 
     this.onBankChange = this.onBankChange.bind(this);
+    this.onBranchChange = this.onBranchChange.bind(this);
     this.refresh = this.refresh.bind(this);
 
     this.bankNameError = 'Please Select a Bank';
@@ -92,17 +91,33 @@ class CorporateBanks extends Component {
 
   }
 
-  onBankChange(evt){
+  onBankChange(e){
     this.setState({
-      value : evt
+      value : e.target.value
     })
 
-    OverlayAction.loadOverlayBranches(evt.value);
+    OverlayAction.loadOverlayBranches(e.target.value);
 
-    console.log('EVT => '+evt.label);
+    const bank = OverlayStore.getBanks().find((bank)=>{
+      return parseInt(e.target.value) === parseInt(bank.value);
+    })
     
-    this.bank_id = evt.value;
-    this.bank_name = evt.label;
+    this.bank_id = e.target.value;
+    this.bank_name = bank.label;
+  }
+
+
+  onBranchChange(e){
+    this.setState({
+      bvalue : e.target.value
+    })
+
+    const branch = OverlayStore.getBranches().find((branch)=>{
+      return parseInt(e.target.value) === parseInt(branch.value);
+    })
+
+    this.branch_name = branch.label;
+    this.branch_id = e.target.value;
   }
 
   onNextClicked(evt){
@@ -188,33 +203,23 @@ class CorporateBanks extends Component {
     return true;
   }
 
-  onBranchChange(evt){
-    this.setState({
-      bvalue : evt
-    })
-
-    console.log('EVT => '+evt.label);
-    this.branch_name = evt.label;
-    this.branch_id = evt.value;
-  }
-
   onBackClicked(evt){
     console.log('Back clicked'+OverlayStore.getPage());
     OverlayStore.back();
   }
 
-  getOptions(input, callback) {
-    const banks = OverlayStore.getBanks();
-    callback(null, {options: banks, complete: true});
-  }
-
-  getBOptions(input, callback) {
-    const branches = OverlayStore.getBranches();
-    callback(null, {options: branches,complete: true});
-  }
-
   onOpen(evt){
     this.props.show();
+  }
+
+  getSelectOptions(data){
+    if(data){
+      return data.map((d)=>{
+        return <option value={d.value}>{d.label}</option>
+      })
+    }else{
+      return <option value="0">Loading ...</option>
+    }
   }
 
   render() {
@@ -230,14 +235,21 @@ class CorporateBanks extends Component {
             {this.props.validate ? <div></div> : <div className="skip-style" onClick={this.onSkip.bind(this)}>skip</div>}
             <div className="clearfix"></div>
               <div className="overlay-content-style">
+
                   <div className="form-style">
-                      <Select.Async multi={false} placeholder={this.props.bankPlaceholder} value={this.state.value} onChange={this.onBankChange.bind(this)} valueKey="value" labelKey="label" loadOptions={this.getOptions} />
+                      <select className="form-control" defaultValue={this.state.value} onChange={this.onBankChange}>
+                        {this.getSelectOptions(OverlayStore.getBanks())}
+                      </select>
                       <span className={this.bnkError ? 'error' : 'vamus'}>{this.bankNameError}</span>
                   </div>
+
                   <div className="form-style">
-                      <Select.Async placeholder="Select A Branch" value={this.state.bvalue} onChange={this.onBranchChange.bind(this)} valueKey="value" labelKey="label" loadOptions={this.getBOptions} />
+                      <select className="form-control" defaultValue={this.state.bvalue} onChange={this.onBranchChange}>
+                        {this.getSelectOptions(OverlayStore.getBranches())}
+                      </select>
                       <span className={this.brError ? 'error' : 'vamus'}>{this.bankBranchError}</span>
                   </div>
+
                   <div className="form-style">
                       <input type="text" className="form-control" placeholder="Account Name" value={this.state.account_name} onChange={this.onAccountNameChanged.bind(this)}/>
                       <span className={this.acError ? 'error' : 'vamus'}>{this.accountNameError}</span>

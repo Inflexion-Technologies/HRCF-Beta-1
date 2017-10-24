@@ -20,6 +20,7 @@ class OverlayStore extends EventEmitter{
    doBanksLoading(data){
     if(data){
         this.banks = [];
+        this.banks.push({value : 0, label : 'Select A Bank'});
         data.map((bank)=>{
             this.banks.push({value : bank.id, label : bank.name});
         });
@@ -31,6 +32,7 @@ class OverlayStore extends EventEmitter{
    doBranchLoading(data){
        if(data){
         this.branches = [];
+        this.branches.push({value: 0, label : 'Select Branch'});
         data.map((branch)=>{
             this.branches.push({value: branch.id, label : branch.name});
         })

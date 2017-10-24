@@ -16,7 +16,7 @@ export function registerSession(){
 export function login(username, password){
     axios.get('/api/utils/login/', {params :{username, password}})
     .then((res)=>{
-        if(res.data !== null){
+        if(res.data.user !== null && res.data.user !== undefined){
             dispatcher.dispatch({
                 type : "LOGIN_SUCCESS",
                 user: res.data.user,
@@ -27,5 +27,10 @@ export function login(username, password){
                 type : "LOGIN_FAILED"
             });
         }
-    });
+    })
+    .catch((error)=>{
+        dispatcher.dispatch({
+            type : "LOGIN_FAILED"
+        });
+    })
 }

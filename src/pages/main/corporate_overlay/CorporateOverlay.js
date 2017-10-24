@@ -80,7 +80,7 @@ class CorporateOverlay extends Component {
       <div className={this.props.show && this.isUncomplete ? "show overlay" : "overlay"}>
         <div className="container">
           <div className="row">
-            <div className="col-md-offset-3 col-md-6 overlay-container">
+            <div className="col-md-offset-3 col-md-6 col-xs-offset-1 col-xs-10 overlay-container">
               <div className="row dialog-header">
                 <div className="title">
                   Complete Your Profile
@@ -91,10 +91,8 @@ class CorporateOverlay extends Component {
                 <div></div>
               </div>
               <div className="row">
-                <div className="col-md-4 illustrate hidden-xs">
-                  <Img src={icam_icon} className="icon" />
-                </div>
-                <div className="col-md-8 input-container">
+                
+                  <div className="col-md-offset-2 col-md-8 col-xs-offset-1 col-xs-10 input-container">
                     <Banks ref="bank1" page={page} title="Bank Profiles #1" pageNumber={1} bankPlaceholder="Select Primary Bank" validate={true}/>
                     <Banks ref="bank2" page={page} title="Bank Profiles #2 (Optional)" pageNumber={2} bankPlaceholder="Select Secondary Bank" showNext={true} validate={false}/>
 
