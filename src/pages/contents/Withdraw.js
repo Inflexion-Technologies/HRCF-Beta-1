@@ -82,7 +82,6 @@ class Withdraw extends Component {
     let calculator_color_style = 'calculator-4';
     
     if(this.balance === '0'){
-        console.log('This . balance => '+this.balance);
         return (
             <div>
             <div className={"row withdraw "+calculator_color_style}>
@@ -91,13 +90,13 @@ class Withdraw extends Component {
                         <div className="amount">{this.balance}
                              <div className="small">GHS</div>
                         </div>
-                        <div className="label">Current Balance</div>
+                        <div className={"label "+calculator_color_style}>Current Balance</div>
                     </div>
                 </div>
 
                 <div className="col-md-1 col-xs-2 kill-padding">
                     <div className="withdraw-widget">
-                        <div className="label operator">-</div>
+                        <div className={"label operator "+calculator_color_style}>-</div>
                     </div>
                 </div>
 
@@ -106,13 +105,13 @@ class Withdraw extends Component {
                         <div className="amount">{this.withdrawAmount}
                             <div className="small">GHS</div>
                         </div>
-                        <div className="label">Withdraw Amount</div>
+                        <div className={"label "+calculator_color_style}>Withdraw Amount</div>
                     </div>
                 </div>
 
                 <div className="col-md-1 col-xs-2 kill-padding">
                     <div className="withdraw-widget">
-                        <div className="label operator">=</div>
+                        <div className={"label operator "+calculator_color_style}>=</div>
                     </div>
                 </div>
 
@@ -121,7 +120,7 @@ class Withdraw extends Component {
                         <div className="amount">{this.newBalance}
                             <div className="small">GHS</div>
                         </div>
-                        <div className="label">New Balance</div>
+                        <div className={"label "+calculator_color_style}>New Balance</div>
                     </div>
                 </div>
             </div>
