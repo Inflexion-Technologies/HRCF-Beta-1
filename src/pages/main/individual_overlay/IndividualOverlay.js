@@ -86,7 +86,7 @@ class IndividualOverlay extends Component {
                   Complete Your Profile
                 </div>
                 <div className="paginator">
-                  {page} <small>of</small>4
+                  {page} <small>of</small> 4
                 </div>
                 <div></div>
               </div>
