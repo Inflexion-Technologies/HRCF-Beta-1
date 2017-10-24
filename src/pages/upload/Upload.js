@@ -34,7 +34,8 @@ class Upload extends Component {
             isButtonDisabled : false,
             isBanksLoading : true,
             value : '',
-            multi : false
+            multi : false,
+            uploadFile : 'Browse Files'
         }
 
         //UploadAction.loadBanks();
@@ -103,28 +104,29 @@ class Upload extends Component {
 
     render() {
         const options={
-            baseUrl:'http://localhost:8001/api/utils/statement/upload',
+            baseUrl:'/api/utils/statement/upload',
             dataType : 'json',
             wrapperDisplay : 'block',
             multiple: true,
             numberLimit: 9,
             accept: 'application/xlsx',
             chooseAndUpload : false,
-            paramAddToField : {purpose: 'save'},
+            paramAddToField : {bank_id: '', description : ''},
             fileFieldName : 'file',
+            chooseFile : (files)=>{
+                this.setState({uploadFile : files[0].name});
+            }
         }
         return (
-            <div className="login">
-                <div className="ad col-md-8 hidden-sm hidden-xs">
-                    <div>
-                        <Img src={icam_icon} className="icon" />
-                    </div>
-                    <div className="col-md-12 target">
+            <div className="upload">
+                <div className="ad col-md-4 sider hidden-sm hidden-xs">
+                    
+                    <div className="col-md-12 target logo">
                         <ReactSVG path={thumb_icon} callback={svg => {}} className="svg" ref="chooseBtn"/>
                     </div>
                 </div>
 
-                <div className="control col-md-4 col-sm-12 col-xs-12">
+                <div className="content col-md-8 col-sm-12 col-xs-12">
                     <div className="sign-in-wrapper">
                         <div className="sign-container">
                             <div className="text-center">
@@ -132,7 +134,7 @@ class Upload extends Component {
                                     <Img src={icam_icon2} className="login-icon" />
                                 </h2>
                                 <br/>
-                                <h4 className="title-typo-style">Upload Bank Statememts</h4>
+                                <div className="title">Upload Bank Statememts</div>
                             </div>
 
                             <div className="sign-in-form">
@@ -148,7 +150,7 @@ class Upload extends Component {
 
                                 <FileUpload className="show" options={options}>
                                     <div ref="chooseBtn" className="form-group show">
-                                        <button className="btn btn-info btn-block" >Browse Files</button>
+                                        <button className="btn btn-info btn-block" >{this.state.uploadFile}</button>
                                     </div>
 
                                     <div className="clearfix"></div>
@@ -159,7 +161,6 @@ class Upload extends Component {
                                 </FileUpload>
                             
                                 <br />
-                                <Link to="/login" className="typo-style"><a className="btn btn-md btn-default btn-block typo-style">Back to Login</a></Link>
                             </div>
                             <div className="text-center copyright-txt">
                                 <small className="typo-style">IC Asset Managers  - Copyright © 2017</small>

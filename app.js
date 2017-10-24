@@ -15,6 +15,7 @@ import TransactionsRoutes from './router/transactions_router';
 import WithdrawalsRoutes from './router/withdrawals_router';
 import AuthRoutes from './router/auth_router';
 import BankStatementRoutes from './router/bank_statements_router';
+import MiscRoutes from './router/misc_router';
 
 import UtilsRoutes from './router/utils_router';
 import SessionsRouters from './router/session_router';
@@ -77,38 +78,40 @@ export default class App {
     }
 
     validate(req, res, next){
-        const app = express();
+        // const app = express();
 
-        //JSON Web Token Secret
-        app.set('token', d.config.secret);
+        // //JSON Web Token Secret
+        // app.set('token', d.config.secret);
 
-         // check header or url parameters or post parameters for token
-        const token = req.body.token || req.query.token || req.headers['x-access-token'];
+        //  // check header or url parameters or post parameters for token
+        // const token = req.body.token || req.query.token || req.headers['x-access-token'];
         
-        // decode token
-        if(token) {
+        // // decode token
+        // if(token) {
     
-            // verifies secret and checks exp
-            jwt.verify(token, app.get('token'), function(err, decoded) {      
-                if (err) {
-                    return res.json({ success: false, message: 'Failed to authenticate token.' });    
-                } else {
-                    // if everything is good, save to request for use in other routes
-                    req.decoded = decoded;    
-                    next();
-                }
-            });
+        //     // verifies secret and checks exp
+        //     jwt.verify(token, app.get('token'), function(err, decoded) {      
+        //         if (err) {
+        //             return res.json({ success: false, message: 'Failed to authenticate token.' });    
+        //         } else {
+        //             // if everything is good, save to request for use in other routes
+        //             req.decoded = decoded;    
+        //             next();
+        //         }
+        //     });
     
-        }else{
+        // }else{
     
-            // if there is no token
-            // return an error
-            return res.status(403).send({ 
-                success: false, 
-                message: 'No token provided.' 
-            });
+        //     // if there is no token
+        //     // return an error
+        //     return res.status(403).send({ 
+        //         success: false, 
+        //         message: 'No token provided.' 
+        //     });
     
-        }
+        // }
+
+        next();
     }
 
     initSQLAndRouters(app){
@@ -129,6 +132,7 @@ export default class App {
         const icBankModel = models.ICBankModel(dbConfig);
         const bankStatementModel = models.bankStatementModel(dbConfig);
         const idTypesModel = models.idModel(dbConfig);
+        const accountsModel = models.accountModel(dbConfig);
 
         //Setting relationships
         approveModel.belongsTo(companyModel);
@@ -144,27 +148,27 @@ export default class App {
 
         withdrawalModel.belongsTo(usersModel);
         withdrawalModel.belongsTo(bankModel);
+        withdrawalModel.belongsTo(accountsModel);
 
-        // usersModel.belongsToMany(approveModel, {through: 'user_approves'});
-        // usersModel.belongsToMany(branchModel, {through: 'user_branches'});
-
-        usersModel.hasMany(approveModel);
-        usersModel.hasMany(branchModel);
-        
         approveModel.belongsTo(usersModel);
-        // branchModel.belongsTo(usersModel);
 
-        //bankStatementModel.belongsTo(icBankModel);
+        accountsModel.belongsTo(usersModel);
+        accountsModel.belongsTo(branchModel);
+
+        usersModel.belongsToMany(approveModel, {through: 'user_approvers'});
+        approveModel.belongsToMany(usersModel, {through: 'user_approvers'});
+
+        usersModel.belongsToMany(accountsModel, {through: 'user_accounts'});        
+        accountsModel.belongsToMany(usersModel, {through: 'user_accounts'});
 
         //Loading Banks and Branches and IC Banks
-
         const banksData = require('./resources/banks.json');
         const branchesData = require('./resources/bank_branches.json');
         const icBanksData = require('./resources/ic_banks.json');
         const idTypesData = require('./resources/id_types.json');
 
         // dbConfig.sync().then(()=>{            
-        // //dbConfig.sync({force:true}).then(()=>{
+        // dbConfig.sync({force:true}).then(()=>{
         //     trackModel.bulkCreate([{count: 1},{count: 1}]);
         //     companyModel.bulkCreate([{name : 'Anonymous'}]);
         //     bankModel.bulkCreate(banksData);
@@ -173,7 +177,6 @@ export default class App {
         //     idTypesModel.bulkCreate(idTypesData);         
         // });
         
-
         const users = new UserRoutes(usersModel, trackModel, companyModel);
         const approvers = new ApproveRoutes(approveModel);
 
@@ -187,6 +190,7 @@ export default class App {
         const utils = new UtilsRoutes(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel);
         const auth = new AuthRoutes(usersModel);
         const bankstatement = new BankStatementRoutes(bankStatementModel, icBankModel, usersModel);
+        const misc = new MiscRoutes(usersModel, accountsModel, approveModel);
 
         //Set Middleware to check for sessions
         app.use('/api/v1/*', this.validate); 
@@ -200,6 +204,7 @@ export default class App {
         app.use('/api/v1/withdrawals', withdrawals.routes());  
         app.use('/api/v1/banks', banks.routes());  
         app.use('/api/v1/ic/statements', bankstatement.routes());
+        app.use('/api/v1/misc', misc.routes());
 
         app.use('/api/utils', utils.routes());
         app.use('/api/auth', auth.routes());

@@ -13,8 +13,7 @@ class SideNav extends Component {
     super(props);
 
     this.state ={
-      open : true,
-      is_admin : false
+      open : true
     }
 
     this.onCloseNav = this.onCloseNav.bind(this);
@@ -33,6 +32,13 @@ class SideNav extends Component {
     })
 
     this.props.onClose();
+  }
+
+  isAdmin(){
+    if(cookie.load('is_admin') === 'Y'){
+      return true;
+    }
+    return false;
   }
 
   render() {
@@ -66,8 +72,8 @@ class SideNav extends Component {
                     </Link>
                   </li>
 
-                  <li className={this.state.is_admin ? '':'hide'}>
-                      <Link to="/app/settings">
+                  <li className={this.isAdmin() ? '':'hide'}>
+                      <Link to="/app/upload">
                         <i className="fa fa-cog" aria-hidden="true"></i>
                         Upload
                       </Link>
@@ -78,12 +84,12 @@ class SideNav extends Component {
                         Withdraw
                       </Link>
                   </li>
-                  <li>
 
-                  <Link to="/app/settings">
-                    <i className="fa fa-cog" aria-hidden="true"></i>
-                    Settings
-                  </Link>
+                  <li>
+                    <Link to="/app/settings">
+                      <i className="fa fa-cog" aria-hidden="true"></i>
+                      Settings
+                    </Link>
                   </li>
                 </ul>
             </div>

@@ -62,6 +62,9 @@ getGeneratedId(count, type){
 
 updateIndividualPaymentNumber(user, res){
     const app = this;
+    const expressApp = express();
+    
+    expressApp.set('token', d.config.secret);
     
     if(user.type === 'I'){
         app.TracksModel.findById(1).then(track => {
@@ -76,7 +79,15 @@ updateIndividualPaymentNumber(user, res){
                     app.UsersModel.update({payment_number : paymentId, company_id : 1}, {where : {id : user.id}}).then(tmpuser=>{
                         if(tmpuser){
                             app.UsersModel.findOne({where : {id : user.id}, attributes : ['id','firstname','lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'status']}).then(user =>{
-                                res.status(200).json(user);                                    
+                                if(user){
+                                    const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '12h'});
+                                    res.status(200).json({
+                                        user : user,
+                                        success: true,
+                                        message: 'Successful',
+                                        token: token
+                                      });
+                                }                                    
                             })
                         }else{
                             res.status(400).send('Could not update');
@@ -94,6 +105,10 @@ updateIndividualPaymentNumber(user, res){
 
 updateCompanyPaymentNumber(user, res){
     const app = this;
+
+    const expressApp = express();
+    
+    expressApp.set('token', d.config.secret);
     
     if(user.type === 'C'){
         app.TracksModel.findById(2).then(track => {
@@ -113,7 +128,15 @@ updateCompanyPaymentNumber(user, res){
                             app.UsersModel.update({payment_number : paymentId, company_id: company.id}, {where : {id : user.id}}).then(tmpuser=>{
                                 if(tmpuser){
                                     app.UsersModel.findOne({where : {id : user.id}, attributes : ['id','firstname','lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'status']}).then(user =>{
-                                        res.status(200).json(user);                                    
+                                        if(user){
+                                            const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '12h'});
+                                            res.status(200).json({
+                                                user : user,
+                                                success: true,
+                                                message: 'Successful',
+                                                token: token
+                                              });
+                                        }
                                     })
                                 }else{
                                     res.status(400).send('Could not update');

@@ -454,7 +454,7 @@
 }
 
 .overlay .overlay-container{
-    height: 380px;
+    height: 416px;
     background: #0d47a1;
     margin-top: 50px;
 }
@@ -540,16 +540,31 @@
 
 .overlay .overlay-container .input-container .review .review-label{
     text-transform: uppercase;
-    font-size: 11px;
-    font-weight: 500;
+    font-size: 9px;
+    font-weight: 300;
     line-height: 1.6;
+    float: left;
+    padding-left: 0;
+    letter-spacing: 1px;
 }
 
 .overlay .overlay-container .input-container .review .review-value{
-    font-size: 13px;
+    font-size: 11px;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 1px;
+    float: left;
+    padding-bottom: 10px;
+    padding-left: 0;
+}
+
+.overlay .overlay-container .input-container .review .review-value2{
+    float: left;    
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding-bottom: 10px;
+    padding-left: 0;
 }
 
 .overlay .overlay-container .input-container input{
@@ -558,12 +573,28 @@
 }
 
 .overlay .overlay-container .input-container .wizard-style .dialog-title{
+    float: left;
     padding-bottom: 10px;
     color: #FEFEFE;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 12px;
     font-weight: 600;
+}
+
+.overlay .overlay-container .input-container .wizard-style .skip-style{
+    float: right;
+    line-height: 1.4;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding-right: 5px;
+    color: #ffb300;
+    font-weight: 600;
+}
+
+.overlay .overlay-container .input-container .wizard-style .overlay-content-style{
+    height: 280px;
 }
 
 .overlay .overlay-container .input-container .wizard-style .input-style{
@@ -697,6 +728,20 @@
     height: 100%;
 }
 
+.withdraw-wizard .stage .wcontent .no-funds-style{
+    color: #fefefe;
+    height: 100%;
+}
+
+.withdraw-wizard .stage .wcontent .no-funds-style .banks{
+    color: #fefefe;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 2px;
+}
+
 .withdraw-wizard .stage .action-btn{
     color: #FEFEFE;
     text-decoration: none;
@@ -722,6 +767,41 @@
     border-radius: 3px;
     padding-left: 7px;
     color: #999999;
+}
+
+.upload{
+    height: 755px;
+}
+
+.upload .target .svg{
+    width: 180px;
+}
+
+.upload .sider{
+    background: #FFFFFF;
+    padding-top: 30px;
+    height: 100%;
+}
+
+.upload .logo{
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.upload .content .upload-container{
+    max-width: 350px;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 0px auto;
+    position: relative;
+}
+
+.upload .content .title{
+    color: #0d47a1;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .kill-padding{
@@ -752,6 +832,10 @@
     background: #2e7d32;
 }
 
+.stage4-style{
+    background: #c62828
+}
+
 .calculator-1{
     color: #0d47a1;
 }
@@ -764,7 +848,15 @@
     color: #2e7d32
 }
 
+.calculator-4{
+    color: #c62828
+}
+
 .petit-margin{
     margin-bottom: 5px;
+}
+
+.form-style{
+    padding-bottom: 10px;
 }
 

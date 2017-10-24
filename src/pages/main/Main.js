@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import SideNav from './SideNav';
 import Header from './Header';
-import Overlay from './aux/Overlay';
+import CorporateOverlay from './corporate_overlay/CorporateOverlay';
+import IndividualOverlay from './individual_overlay/IndividualOverlay';
+
 import Dashboard from '../contents/Dashboard'
 import Withdraw from '../contents/Withdraw'
+import Upload from '../upload/Upload'
 import {Route, Switch, Redirect } from 'react-router-dom';
 import cookie from 'react-cookies';
 
@@ -41,17 +44,28 @@ class Main extends Component {
       })
   }
 
-  render() {
-    // if(cookie.load('token') === undefined){
-    //     return <Redirect to='/login' />;
-    // }else 
-    let showOverlay = false;
-    if(cookie.load('is_complete') === undefined || cookie.load('is_complete') === 'N'){
-        showOverlay = true;
+  showOverlay(){
+    console.log('Type => '+cookie.load('type'));
+    console.log('Is Complete => '+cookie.load('is_complete'));
+
+    if((cookie.load('is_complete') === undefined || cookie.load('is_complete') === 'false') && (cookie.load('type') === 'C')){
+        console.log('load corporate');
+        return <CorporateOverlay show={true}></CorporateOverlay>
+    }else if((cookie.load('is_complete') === undefined || cookie.load('is_complete') === 'false') && (cookie.load('type') === 'I')){
+        console.log('load individual');
+        return <IndividualOverlay show={true}></IndividualOverlay>
     }
+  }
+
+  render() {
+    // let showOverlay = false;
+    
+    // if(cookie.load('is_complete') === undefined || cookie.load('is_complete') === 'N'){
+    //     showOverlay = true;
+    // }
         return (
         <div className="container main">
-            <Overlay show={showOverlay} />
+            {this.showOverlay()}
             <Header user={this.user.firstname}></Header>
             <div className="row">  
                 <div className={this.state.fullScreen ? 'hidden-xs' : 'hidden-xs col-md-2'}>                
@@ -63,6 +77,7 @@ class Main extends Component {
                     <Switch>
                         <Route exact path='/app/dashboard' component={Dashboard}/>
                         <Route exact path='/app/withdraw' component={Withdraw}/>
+                        <Route exact path='/app/upload' component={Upload}/>
                     </Switch>
                     
                     

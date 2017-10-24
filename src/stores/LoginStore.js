@@ -36,6 +36,7 @@ class LoginStore extends EventEmitter{
         cookie.save('payment_number', data.payment_number);
         cookie.save('token', token);
         cookie.save('is_admin', data.is_admin);
+        cookie.save('is_complete', data.is_complete);
         
         this.emit('login_success')
     }

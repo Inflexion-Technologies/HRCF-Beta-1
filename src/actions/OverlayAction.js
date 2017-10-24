@@ -1,5 +1,6 @@
 import dispatcher from '../dispatcher';
 import axios from 'axios';
+import cookie from 'react-cookies';
 
 export function loadOverlayBanks(){
     axios.get('/api/utils/banks')
@@ -31,6 +32,20 @@ export function loadIDTypes(){
         if(res.data){
             dispatcher.dispatch({
                 type : "OVERLAY_ID_TYPES",
+                data: res.data
+            });
+        }
+    });
+}
+
+export function updateDetails(details){
+    const data = {...details, token : cookie.load('token')};
+    console.log('Sending data ....'+JSON.stringify(data));
+    axios.put('/api/v1/misc/user/'+cookie.load('id')+'/complete_registration', data)
+    .then((res)=>{
+        if(res.data){
+            dispatcher.dispatch({
+                type : "OVERLAY_UPDATE_DETAILS",
                 data: res.data
             });
         }

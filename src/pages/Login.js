@@ -218,7 +218,7 @@ class Login extends Component {
                                     <a href="#/"><small className="typo-style">Forgot password?</small></a>
                                     <p className="text-muted help-block"><small className="typo-style">Do not have an account?</small></p>
                                 </div>
-                                <Link to="/signup" className="typo-style"><a className="btn btn-md btn-default btn-block typo-style">Create an account</a></Link>
+                                <Link to="/signup" className="btn btn-md btn-default btn-block typo-style">Create an account</Link>
                             </div>
                             <div className="text-center copyright-txt">
                                 <small className="typo-style">IC Asset Managers  - Copyright © 2017</small>

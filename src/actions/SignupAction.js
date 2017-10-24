@@ -57,7 +57,7 @@ export function signupUser(user){
     axios.post('/api/utils/adduser/', user)
     .then(res => {
         if(res.data.id){
-            dispatcher.dispatch({type : "SIGNUP_COMPLETE", data : res.data});
+            dispatcher.dispatch({type : "SIGNUP_COMPLETE", data : res.data.user});
         }
     });
 }
@@ -66,7 +66,7 @@ export function signupCorporate(user){
     axios.post('/api/utils/adduser/', user)
     .then(res => {
         if(res.data.id){
-            dispatcher.dispatch({type : "SIGNUP_COMPLETE", data : res.data});
+            dispatcher.dispatch({type : "SIGNUP_COMPLETE", data : res.data.user});
         }
     });
 }

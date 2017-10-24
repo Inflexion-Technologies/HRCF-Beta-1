@@ -20,7 +20,9 @@ describe('Users#Check Fields', function(){
             json: true,
             body : {firstname : 'Emmanuel', lastname : 'Selby', email : 'selby@hrcf.com', msisdn : '0244000000', password : 'pa55w0rd01', type : 'I'},
         }, function(error, response, body){
-            user = body;
+            user = body.user;
+            token = body.token;
+            console.log(user);
             done();
         });	
     });
@@ -44,6 +46,25 @@ describe('Users#Check Fields', function(){
         expect(user).to.have.property('company_id');
     });
 });
+
+// describe('Users#Updating', function(){
+    
+//     it('do updating', function(done){
+//         request({
+//             uri: url+'v1/misc/user/1/complete_registration',
+//             method: 'PUT',
+//             json: true,
+//             body : {token: token, primary_account_number : '0090999898878', primary_branch_id : 459, primary_account_name : 'Justina Owusu',
+//                     primary_approver_first : 'Gideon', primary_approver_last : 'Kombian', primary_approver_email : 'gideon@gmail.com',
+//                     primary_approver_msisdn : '0233909090' },
+//         }, function(error, response, body){
+//             user = body;
+//             console.log(body);
+//             done();
+//         });	
+//     });
+    
+// });
 
 
 describe('Banks#Check Fields', function(){

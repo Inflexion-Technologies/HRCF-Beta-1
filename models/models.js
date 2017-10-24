@@ -1,18 +1,18 @@
-import {Sequelize, DataTypes} from 'sequelize';
+import {Sequelize} from 'sequelize';
 import _ from 'lodash';
 
 var utils = require('../services/utils');
 
 export function companyModel(config){
-	const company = config.define('companys', {
+	const company = config.define('company', {
       name: {
-        type: DataTypes.STRING(255)
+        type: Sequelize.STRING
       },
       location: {
-        type: DataTypes.STRING(255)
+        type: Sequelize.STRING
       },
       status: {
-        type: DataTypes.STRING(1),
+        type: Sequelize.STRING(1),
         defaultValue:'A'
       }
 	  }, {underscored: true});
@@ -21,23 +21,23 @@ export function companyModel(config){
 }
 
 export function transactionModel(config){
-	const transactions = config.define('transactions', {
+	const transactions = config.define('transaction', {
       type: {
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING,
         values : ['W','C']
       },
       amount : {
-        type : DataTypes.DOUBLE,
+        type : Sequelize.DOUBLE,
         defaultValue : 0
       },
       user_id : {
-        type : DataTypes.INTEGER
+        type : Sequelize.INTEGER
       },
       narration : {
-        type : DataTypes.STRING(255)
+        type : Sequelize.STRING
       },
       status: {
-        type: DataTypes.STRING(1),
+        type: Sequelize.STRING(1),
         defaultValue: 'A'
       }
 	  }, {underscored: true});
@@ -46,18 +46,21 @@ export function transactionModel(config){
 }
 
 export function withdrawalModel(config){
-	const withdrawals = config.define('withdrawals', {
+	const withdrawals = config.define('withdrawal', {
       amount: {
-        type: DataTypes.DOUBLE
+        type: Sequelize.DOUBLE
       },
       narration : {
-        type : DataTypes.STRING(255)
+        type : Sequelize.STRING
       },
       user_id : {
-        type : DataTypes.INTEGER
+        type : Sequelize.INTEGER
+      },
+      account_id:{
+        type : Sequelize.INTEGER
       },
       status: {
-        type: DataTypes.STRING(1),
+        type: Sequelize.STRING(1),
         defaultValue: 'A'
       }
 	  }, {underscored: true});
@@ -66,25 +69,25 @@ export function withdrawalModel(config){
 }
 
 export function creditModel(config){
-	const credits = config.define('credits', {
+	const credits = config.define('credit', {
       amount: {
-        type: DataTypes.DOUBLE
+        type: Sequelize.DOUBLE
       },
       type : {
-        type : DataTypes.ENUM,
+        type : Sequelize.ENUM,
         values : ['C','I']
       },
       user_id : {
-        type : DataTypes.INTEGER
+        type : Sequelize.INTEGER
       },
       bank_id :{
-        type : DataTypes.INTEGER
+        type : Sequelize.INTEGER
       },
       narration : {
-        type : DataTypes.STRING(255)
+        type : Sequelize.STRING
       },
       status: {
-        type: DataTypes.STRING(1),
+        type: Sequelize.STRING(1),
         defaultValue: 'A'
       }
 	  }, {underscored: true});
@@ -93,18 +96,18 @@ export function creditModel(config){
 }
 
 export function bankModel(config){
-	const banks = config.define('banks', {
+	const banks = config.define('bank', {
 	    name: {
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING,
         set(val) {
           this.setDataValue('name', _.capitalize(val).trim());
         }
       },
       code: {
-        type: DataTypes.STRING(255)
+        type: Sequelize.STRING
       },
 	    status: {
-        type: DataTypes.STRING(1),
+        type: Sequelize.STRING(1),
         defaultValue: 'A'
 	  }
 	}, {underscored: true});
@@ -113,15 +116,15 @@ export function bankModel(config){
 }
 
 export function idModel(config){
-	const ids = config.define('id_types', {
+	const ids = config.define('id_type', {
 	    name: {
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING,
         set(val) {
           this.setDataValue('name', _.capitalize(val).trim());
         }
       },
 	    status: {
-        type: DataTypes.STRING(1),
+        type: Sequelize.STRING(1),
         defaultValue: 'A'
 	  }
 	}, {underscored: true});
@@ -130,33 +133,33 @@ export function idModel(config){
 }
 
 export function bankStatementModel(config){
-  const bankStatements = config.define('bank_statements', {
+  const bankStatements = config.define('bank_statement', {
       ledger_account : {
-        type : DataTypes.STRING(255)
+        type : Sequelize.STRING
       },
       credit : {
-        type : DataTypes.DOUBLE
+        type : Sequelize.DOUBLE
       },
       debit : {
-        type : DataTypes.DOUBLE
+        type : Sequelize.DOUBLE
       },
       counterparty_code : {
-        type : DataTypes.STRING(255),
+        type : Sequelize.STRING,
       },
       account_number : {
-        type : DataTypes.STRING(255),
+        type : Sequelize.STRING,
       },
       description : {
-        type : DataTypes.STRING(255),
+        type : Sequelize.STRING,
       },
       sponsor_code : {
-        type : DataTypes.STRING(255),
+        type : Sequelize.STRING,
       },
       client_code : {
-        type : DataTypes.STRING(255),
+        type : Sequelize.STRING,
       },
 	    status: {
-        type: DataTypes.STRING(1),
+        type: Sequelize.STRING(1),
         defaultValue: 'A'
 	  }
 	}, {underscored: true});
@@ -165,19 +168,19 @@ export function bankStatementModel(config){
 }
 
 export function ICBankModel(config){
-	const icbanks = config.define('ic_banks', {
+	const icbanks = config.define('ic_bank', {
 	    name: {
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING,
         
       },
       account_number: {
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING,
         set(val) {
           this.setDataValue('account_number',val.trim());
         }
       },
 	    status: {
-        type: DataTypes.STRING(1),
+        type: Sequelize.STRING(1),
         defaultValue: 'A'
 	  }
 	}, {underscored: true});
@@ -186,15 +189,15 @@ export function ICBankModel(config){
 }
 
 export function branchModel(config){
-	const bankBranch = config.define('bank_branches', {
+	const bankBranch = config.define('bank_branch', {
 	    name: {
-        type: DataTypes.STRING(255)
+        type: Sequelize.STRING
       },
       code: {
-        type: DataTypes.STRING(255)
+        type: Sequelize.STRING
       },
 	    status: {
-        type: DataTypes.STRING(1),
+        type: Sequelize.STRING(1),
         defaultValue : 'A'
 	  }
 	}, {underscored: true});
@@ -202,13 +205,36 @@ export function branchModel(config){
 	return bankBranch;
 }
 
+export function accountModel(config){
+	const account = config.define('account', {
+      name : {
+        type : Sequelize.STRING
+      },
+	    user_id: {
+        type: Sequelize.INTEGER
+      },
+      account_number: {
+        type: Sequelize.STRING
+      },
+      bank_branch_id :{
+        type : Sequelize.INTEGER
+      },
+	    status: {
+        type: Sequelize.STRING(1),
+        defaultValue : 'A'
+	  }
+	}, {underscored: true});
+
+	return account;
+}
+
 export function trackModel(config){
-	const track = config.define('trackers', {
+	const track = config.define('tracker', {
     count: {
-      type: DataTypes.INTEGER
+      type: Sequelize.INTEGER
     },
     status: {
-      type: DataTypes.STRING(1),
+      type: Sequelize.STRING(1),
       defaultValue : 'A'
 	  }
 	}, {underscored: true});
@@ -217,22 +243,27 @@ export function trackModel(config){
 }
 
 export function approveModel(config){
-	const approvers = config.define('approvers', {
+	const approvers = config.define('approver', {
+      user_id : {
+        type : Sequelize.INTEGER
+      },
       firstname: {
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING,
         set(val) {
           this.setDataValue('firstname', _.capitalize(val).trim());
         }
       },
       lastname: {
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING,
         set(val) {
-          this.setDataValue('lastname', _.capitalize(val).trim());
-        }
+          if(val !== undefined && val !== null){
+            this.setDataValue('lastname', _.capitalize(val).trim());            
+          }else{
+            this.setDataValue('lastname', '');                        
+          }        }
       },
       email: {
-        type: DataTypes.STRING(255),
-        unique : true,
+        type: Sequelize.STRING,
         validate : {
             isEmail : true
         }, set(val) {
@@ -240,8 +271,7 @@ export function approveModel(config){
         }
       },
       msisdn: {
-        type: DataTypes.STRING(255),
-        unique : true,
+        type: Sequelize.STRING,
         validate : {
             isNumeric : true
         }, set(val) {
@@ -249,7 +279,7 @@ export function approveModel(config){
         }
       },
 	    status: {
-        type: DataTypes.STRING(1),
+        type: Sequelize.STRING(1),
         defaultValue : 'A'
 	  }
 	}, {underscored: true});
@@ -258,25 +288,29 @@ export function approveModel(config){
 }
 
 export function usersModel(config){
-	const users = config.define('users', {
+	const users = config.define('user', {
       firstname: {
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING,
         set(val) {
           this.setDataValue('firstname', _.capitalize(val).trim());
         }
       },
       lastname: {
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING,
         set(val) {
-          this.setDataValue('lastname', _.capitalize(val).trim());
+          if(val !== undefined && val !== null){
+            this.setDataValue('lastname', _.capitalize(val).trim());            
+          }else{
+            this.setDataValue('lastname', '');                        
+          }
         }
       },
       payment_number: {
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING,
         unique : true
       },
       email: {
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING,
         unique : true,
         validate : {
             isEmail : true
@@ -285,7 +319,7 @@ export function usersModel(config){
         }
       },
       msisdn: {
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING,
         unique : true,
         validate : {
             isNumeric : true
@@ -294,26 +328,26 @@ export function usersModel(config){
         }
       },
       balance : {
-        type : DataTypes.DOUBLE,
+        type : Sequelize.DOUBLE,
         defaultValue : 0
       },
       type: {
-        type: DataTypes.ENUM,
+        type: Sequelize.ENUM,
         values : ['C','I']
       },
       is_admin:{
-        type : DataTypes.ENUM,
+        type : Sequelize.ENUM,
         values : ['Y','N'],
         defaultValue : ['N']
       },
       kin:{
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING,
         set(val) {
           this.setDataValue('kin', _.capitalize(val).trim());
         }
       },
       kin_msisdn: {
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING,
         validate : {
             isNumeric : true
         }, set(val) {
@@ -321,17 +355,23 @@ export function usersModel(config){
         }
       },
       password: {
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING,
         set(val) {
           this.setDataValue('password', utils.getHash(val.trim()));
         }
-	    },
+      },
+      id_type_id : {
+        type : Sequelize.INTEGER
+      },
+      id_number : {
+        type : Sequelize.STRING
+      },
 	    is_complete: {
-        type: DataTypes.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         defaultValue : false
 	    },
 	    status: {
-        type: DataTypes.STRING(1),
+        type: Sequelize.STRING(1),
         defaultValue : 'A'
 	  }
   }, {underscored: true});

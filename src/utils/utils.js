@@ -63,3 +63,20 @@ import _ from 'lodash';
     export function redirect(link){
         this.props.history.push(link);
     }
+
+    export function isAccountNumber(text){
+        if(!(text.trim().length >= 13 && text.trim().length <= 16)){
+            return false;
+        }
+
+        const tmpText = _.toArray(text.trim());
+        const result = _.map(tmpText, (it)=>{
+                            if(!(_.toUpper(it) === _.toLower(it) && it !== ' ')){
+                                return false;
+                            }
+                        })
+
+        return !(_.includes(result, false));
+    }
+
+

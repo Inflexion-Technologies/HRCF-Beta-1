@@ -33,6 +33,17 @@ export default class TransactionsRoutes{
                })
             }); 
 
+        transactionsRouter.route('/balance/:user_id')
+            .get((req, res)=>{
+               app.UserModel.findOne({ where : {id : req.params.user_id, status : 'A'}, attributes : ['id','balance'] }).then(user =>{
+                    if(user){
+                        res.status(200).json(user);
+                    }else{
+                        res.status(403).send('Nothing Found');
+                    } 
+               })
+            }); 
+
         transactionsRouter.route('/')
             .post((req, res)=>{
                 if(req.body){

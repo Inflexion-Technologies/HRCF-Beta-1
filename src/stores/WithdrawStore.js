@@ -10,18 +10,33 @@ class Withdraw extends EventEmitter{
         this.amount = 0;
         this.pageNumber = 1;
         this.pageThreshold = 3;
-        this.balance = 700000;
-        this.newBalance = 700000;
+        this.balance = 0;
+        this.newBalance = 0;
+        this.isNewBalanceSet = false;
     }
 
     setBankName(){}
     setBankId(){}
+
+    reset(){
+        this.amount = 0;
+        this.pageNumber = 1;
+        this.balance = 0;
+        this.newBalance = 0;
+    }
 
     setAmount(amount){
         this.amount = amount;
         this.newBalance = this.balance - this.amount;
 
         this.emit('withdraw_amount_to_deduct');
+    }
+
+    setNewBalance(val){
+        if(!this.isNewBalanceSet){
+            this.newBalance = parseFloat(val);
+            this.isNewBalanceSet = true;            
+        }
     }
 
     getAmount(){
@@ -48,6 +63,12 @@ class Withdraw extends EventEmitter{
 
     reset(){
         this.pageNumber = 1;
+    }
+
+    setBalance(balance){
+        this.balance = parseFloat(balance);
+        console.log('Balance is => '+this.balance);
+        this.emit('withdraw_amount_to_deduct');        
     }
 
     getNewBalance(){
