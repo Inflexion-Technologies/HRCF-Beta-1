@@ -58,8 +58,8 @@ export function corporateSignupUser(user){
     
     if(user){
         axios.post('/api/utils/adduser/', user).then(res => {
-            if(res.data.id){
-                dispatcher.dispatch({type : "CORPORATE_SIGNUP_COMPLETE", data : res.data});
+            if(res.data.user.id){
+                dispatcher.dispatch({type : "CORPORATE_SIGNUP_COMPLETE", data : res.data.user, token : res.data.token});
             }
         });
     }else{

@@ -14,7 +14,6 @@ import * as CorporateSignupAction from '../../actions/CorporateSignupAction';
 import _ from 'lodash';
 
 import * as utils from '../../utils/utils';
-import cookie from 'react-cookies';
 import ReactSVG from 'react-svg';
 
 class CStageTwo extends Component {
@@ -151,12 +150,7 @@ class CStageTwo extends Component {
     }
 
     handleBrowserConfig(){
-        cookie.save('fname', this.user.firstname);
-        cookie.save('lname', this.user.lastname);
-        cookie.save('email', this.user.email);                
-        cookie.save('msisdn', this.user.msisdn);
-        cookie.save('pswd', this.user.password);
-        cookie.save('type', 'C');
+        
     }
 
     onFirstnameChanged(evt){

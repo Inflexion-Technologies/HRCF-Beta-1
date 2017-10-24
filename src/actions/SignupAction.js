@@ -56,8 +56,8 @@ export function validateEmail(user){
 export function signupUser(user){
     axios.post('/api/utils/adduser/', user)
     .then(res => {
-        if(res.data.id){
-            dispatcher.dispatch({type : "SIGNUP_COMPLETE", data : res.data.user});
+        if(res.data.user.id){
+            dispatcher.dispatch({type : "SIGNUP_COMPLETE", data : res.data.user, token : res.data.token});
         }
     });
 }
@@ -65,8 +65,8 @@ export function signupUser(user){
 export function signupCorporate(user){
     axios.post('/api/utils/adduser/', user)
     .then(res => {
-        if(res.data.id){
-            dispatcher.dispatch({type : "SIGNUP_COMPLETE", data : res.data.user});
+        if(res.data.user.id){
+            dispatcher.dispatch({type : "SIGNUP_COMPLETE", data : res.data.user, token : res.data.token});
         }
     });
 }

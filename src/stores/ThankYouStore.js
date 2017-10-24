@@ -9,8 +9,8 @@ class ThankYouStore extends EventEmitter{
 
     init (){
         this.user = {};
-        this.user.firstname = cookie.load('fname');
-        this.user.lastname = cookie.load('lname');
+        this.user.firstname = cookie.load('firstname');
+        this.user.lastname = cookie.load('lastname');
         this.user.msisdn = cookie.load('msisdn');
 
         this.emit('final');
@@ -18,8 +18,8 @@ class ThankYouStore extends EventEmitter{
 
     getUser(){  
         this.user = {};
-        this.user.firstname = cookie.load('fname');
-        this.user.lastname = cookie.load('lname');
+        this.user.firstname = cookie.load('firstname');
+        this.user.lastname = cookie.load('lastname');
         this.user.msisdn = cookie.load('msisdn');
 
         return this.user;

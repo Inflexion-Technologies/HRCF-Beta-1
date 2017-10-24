@@ -1,5 +1,6 @@
 import {EventEmitter} from 'events';
 import dispatcher from '../dispatcher';
+import cookie from 'react-cookies';
 
 class SignupStore extends EventEmitter{
     constructor(){
@@ -11,6 +12,8 @@ class SignupStore extends EventEmitter{
             msisdn : '',
             password : ''
         }
+
+        this.token = '';
     }
 
     initUser (...user){
@@ -42,12 +45,48 @@ class SignupStore extends EventEmitter{
         return this.user;
     }
 
-    onSignupComplete(data){
+    getToken(){
+        return this.token;
+    }
+
+    onSignupComplete(data, token){
+        this.user = data;
+        this.token = token;
+
+        this.resetCookie();
+
+        cookie.save('firstname', this.user.firstname);
+        cookie.save('lastname', this.user.lastname);
+        cookie.save('email', this.user.email);                
+        cookie.save('msisdn', this.user.msisdn);
+        cookie.save('token', this.token);
+        cookie.save('id', this.user.id);
+        cookie.save('type', this.user.type);
+        cookie.save('payment_number', this.user.payment_number);
+        cookie.save('is_admin', this.user.is_admin);
+        cookie.save('is_complete', this.user.is_complete);
+
         this.emit('signup_complete');
     }
 
-    onCorporateExist(action){
-        if(action.data){
+    resetCookie(){
+        cookie.remove('firstname');
+        cookie.remove('lastname');
+        cookie.remove('email');                
+        cookie.remove('msisdn');
+        cookie.remove('token');
+        cookie.remove('id');
+        cookie.remove('type');
+        cookie.remove('payment_number');
+        cookie.remove('is_admin');
+        cookie.remove('is_complete');
+    }
+
+    onCorporateExist(data, token){
+        if(data){
+            this.user = data;
+            this.token = token;
+
             this.emit('signup_corporate_exist');
         }else{
             this.emit('signup_corporate_not_exist');
@@ -68,11 +107,11 @@ class SignupStore extends EventEmitter{
                 break;
             } 
             case 'SIGNUP_COMPLETE' :{
-                this.onSignupComplete(action.data);
+                this.onSignupComplete(action.data, action.token);
                 break;
             }
             case 'CORPORATE_EXIST' :{
-                this.onCorporateExist(action);
+                this.onCorporateExist(action.data, action.token);
                 break;
             }
             default:{}

@@ -87,6 +87,7 @@ class Signup extends Component {
     }
 
     redirect(){
+        this.handleBrowserConfig();
         this.props.history.push('/final');
     }
 
@@ -150,11 +151,7 @@ class Signup extends Component {
     }
 
     handleBrowserConfig(){
-        cookie.save('fname', this.user.firstname);
-        cookie.save('lname', this.user.lastname);
-        cookie.save('email', this.user.email);                
-        cookie.save('msisdn', this.user.msisdn);
-        cookie.save('pswd', this.user.password);
+       
     }
 
     onFirstnameChanged(evt){
