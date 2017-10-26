@@ -155,19 +155,19 @@ class CorporateApprover extends Component {
                         <input type="text" className="form-control" placeholder="Name of Approver" value={this.state.approver} onChange={this.onApproverChanged.bind(this)}/>
                         <span className={this.nError ? 'error' : 'vamus'}>{this.approverNameError}</span>
                     </div>
-
+                    <div className="clearfix"></div>
                     <div className="form-style">
                         <input type="text" className="form-control" placeholder="Mobile" value={this.state.msisdn} onChange={this.onMobileChanged.bind(this)}/>
                         <span className={this.mError ? 'error' : 'vamus'}>{this.approverMsisdnError}</span>
                     </div>
-
+                    <div className="clearfix"></div>
                     <div className="form-style">
                         <input type="text" className="form-control" placeholder="Email" value={this.state.email} onChange={this.onEmailChanged.bind(this)}/>
                         <span className={this.eError ? 'error' : 'vamus'}>{this.approverEmailError}</span>
                     </div>
                   </div>
             </div>
-
+            <div className="clearfix"></div>
             <div className="row">
               <div className="col-md-12 col-xs-12">
                     <div className='col-md-6 col-xs-6'>

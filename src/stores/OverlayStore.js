@@ -15,6 +15,8 @@ class OverlayStore extends EventEmitter{
         this.user.primaryApprover = {};
         this.user.secondaryApprover = {};
         this.user.idInfo = {};
+        this.user.companyInfo = {};  
+        this.company = '';      
     }
 
    doBanksLoading(data){
@@ -61,6 +63,14 @@ class OverlayStore extends EventEmitter{
        }
    }
 
+   doCompanyDetails(data){
+       if(data){
+           this.company = data.name;
+
+           this.emit('overlay_company_detail');
+       }
+   }
+
    getPaymentNumber(){
        return cookie.load('payment_number');
    }
@@ -77,7 +87,7 @@ class OverlayStore extends EventEmitter{
            }
 
            case 'C' : {
-            this.pageThreshold = 6;
+            this.pageThreshold = 7;
             break;
            }
 
@@ -123,6 +133,11 @@ class OverlayStore extends EventEmitter{
     this.user.idInfo = detail;
    }
 
+   setCompanyInfo(detail){
+    this.user.companyInfo = {};
+    this.user.companyInfo = detail;
+   }
+
    getAllInfo(){
     let data = {};
 
@@ -138,13 +153,14 @@ class OverlayStore extends EventEmitter{
         data.primary_approver_last = cookie.load('lastname');               
         data.primary_approver_msisdn = cookie.load('msisdn');
         data.primary_approver_email = cookie.load('email');
-    }else if(this.pageThreshold === 6){
+    }else if(this.pageThreshold === 7){
         data.primary_approver_first = this.user.primaryApprover.approver === undefined ? '' : this.user.primaryApprover.approver.split(' ')[0];
         data.primary_approver_last = this.user.primaryApprover.approver === undefined ? '' : this.user.primaryApprover.approver.split(' ')[1];               
         data.primary_approver_msisdn = this.user.primaryApprover.approver_msisdn;
         data.primary_approver_email = this.user.primaryApprover.approver_email;
     }
     
+    data.reg_number = this.user.companyInfo.reg_number === undefined ? 0 : this.user.companyInfo.reg_number;
     data.id_type = this.user.idInfo.id_type;
     data.id_type_id = this.user.idInfo.id_type_id;
     data.id_number = this.user.idInfo.id_number;
@@ -196,6 +212,10 @@ class OverlayStore extends EventEmitter{
     return this.idTypes;
    }
 
+   getCompany(){
+    return this.company;
+   }
+
     handleActions(action){
         switch(action.type){
             case 'OVERLAY_BANKS_LOADED' : {
@@ -214,6 +234,12 @@ class OverlayStore extends EventEmitter{
                 this.doUpdateDetails(action.data);
                 break;
             } 
+            case 'OVERLAY_COMPANY_DETAILS' : {
+                this.doCompanyDetails(action.data);
+                break;
+            } 
+
+            
             
             default:{}
         }

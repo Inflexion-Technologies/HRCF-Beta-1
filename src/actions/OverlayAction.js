@@ -51,3 +51,16 @@ export function updateDetails(details){
         }
     });
 }
+
+export function getUserCompany(){
+    const data = {token : cookie.load('token')};
+    axios.get('/api/v1/misc/user/'+cookie.load('id')+'/company', {params : {data}})
+    .then((res)=>{
+        if(res.data){
+            dispatcher.dispatch({
+                type : "OVERLAY_COMPANY_DETAILS",
+                data: res.data
+            });
+        }
+    });
+}

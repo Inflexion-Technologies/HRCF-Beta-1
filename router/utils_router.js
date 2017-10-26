@@ -201,9 +201,9 @@ routes(){
                 });
             }
         }else{
-            res.status(200).send('Data not received');                                                                    
+            res.status(400).send('Data not received');                                                                    
         }
-    });  
+    });
 
     utilsRouter.route('/is_email_exist/:email')
         .get((req, res)=>{ 
@@ -216,7 +216,7 @@ routes(){
                     }
                 });
             }else{
-                res.status(200).send('Wrong EMAIL format');
+                res.status(400).send('Wrong EMAIL format');
             }
         });   
 

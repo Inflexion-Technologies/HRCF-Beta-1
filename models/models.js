@@ -11,6 +11,9 @@ export function companyModel(config){
       location: {
         type: Sequelize.STRING
       },
+      reg_number: {
+        type: Sequelize.STRING
+      },
       status: {
         type: Sequelize.STRING(1),
         defaultValue:'A'

@@ -7,7 +7,10 @@ import Approver from './CorporateApprover';
 import Review from './CorporateReview';
 import Complete from './CorporateComplete';
 import UploadID from './CorporateUploadID';
+import Registration from './CorporateCReg';
+
 import OverlayStore from '../../../stores/OverlayStore'
+import * as OverlayAction from '../../../actions/OverlayAction'
 
 import 'react-select/dist/react-select.css';
 import '../../../bower_components/bootstrap/dist/css/bootstrap.css';
@@ -36,7 +39,9 @@ class CorporateOverlay extends Component {
   }
 
   componentWillMount(){
-    OverlayStore.setOverlayType('C');    
+    OverlayStore.setOverlayType('C'); 
+    OverlayAction.getUserCompany();
+
     OverlayStore.on('overlay_page_changed', this.pageChanged);
     OverlayStore.on('overlay_update_successful', this.doOverlayUpdate);
   }
@@ -86,7 +91,7 @@ class CorporateOverlay extends Component {
                   Complete Your Profile
                 </div>
                 <div className="paginator">
-                  {page} <small>of</small> 6
+                  {page} <small>of</small> 7
                 </div>
                 <div></div>
               </div>
@@ -98,10 +103,9 @@ class CorporateOverlay extends Component {
 
                     <Approver ref="approver1" page={page} title="Approver  #1" pageNumber={3} validate={true}/>
                     <Approver ref="approver2" page={page} title="Approver  #2" pageNumber={4} validate={false}/>
-
-                    <UploadID ref="upload" page={page} title="Upload National ID" pageNumber={5} validate={true}/>
-                    <Review ref="review" page={page} title="Review" pageNumber={6}/>
-                    <Complete page={page} pageNumber={7}/>
+                    <Registration ref="registration" page={page} title="Company Info" pageNumber={5} validate={true} />
+                    <UploadID ref="upload" page={page} title="Upload National ID" pageNumber={6} validate={true}/>
+                    <Review ref="review" page={page} title="Review" pageNumber={7}/>
                   </div>
                 </div>
               </div>

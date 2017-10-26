@@ -16,6 +16,7 @@ import WithdrawalsRoutes from './router/withdrawals_router';
 import AuthRoutes from './router/auth_router';
 import BankStatementRoutes from './router/bank_statements_router';
 import MiscRoutes from './router/misc_router';
+import AccountsRoutes from './router/accounts_router'
 
 import UtilsRoutes from './router/utils_router';
 import SessionsRouters from './router/session_router';
@@ -190,7 +191,8 @@ export default class App {
         const utils = new UtilsRoutes(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel);
         const auth = new AuthRoutes(usersModel);
         const bankstatement = new BankStatementRoutes(bankStatementModel, icBankModel, usersModel);
-        const misc = new MiscRoutes(usersModel, accountsModel, approveModel);
+        const misc = new MiscRoutes(usersModel, accountsModel, approveModel, companyModel);
+        const accounts = new AccountsRoutes(accountsModel, branchModel, bankModel, usersModel);
 
         //Set Middleware to check for sessions
         app.use('/api/v1/*', this.validate); 
@@ -205,6 +207,8 @@ export default class App {
         app.use('/api/v1/banks', banks.routes());  
         app.use('/api/v1/ic/statements', bankstatement.routes());
         app.use('/api/v1/misc', misc.routes());
+        app.use('/api/v1/accounts', accounts.routes());
+        
 
         app.use('/api/utils', utils.routes());
         app.use('/api/auth', auth.routes());

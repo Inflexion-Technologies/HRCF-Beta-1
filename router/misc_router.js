@@ -2,10 +2,11 @@ import express from 'express';
 
 export default class MiscRoutes{
 
-    constructor(Users, Accounts, Approvers){
+    constructor(Users, Accounts, Approvers, Companys){
         this.Users = Users;
         this.Accounts = Accounts;
         this.Approvers = Approvers;
+        this.Companys = Companys;
     }
 
     routes(){
@@ -33,11 +34,17 @@ export default class MiscRoutes{
                 })
             });   
 
-        miscRouter.route('/units')
+        miscRouter.route('/user/:id/company')
             .get((req, res)=>{
-                // app.Banks.findById(req.params.id).then(bank => {
-                //     res.status(200).json(bank);
-                // })
+                app.Users.findOne({ where: {id : req.params.id, status: 'A'}}).then(user => {
+                    return user;
+                }).then((user)=>{
+                    return app.Companys.findOne({where :{id : user.company_id}}).then((company)=>{
+                        return company;
+                    })
+                }).then((company)=>{
+                    res.status(200).json(company);
+                })
             });  
 
         miscRouter.route('/')
@@ -78,7 +85,16 @@ export default class MiscRoutes{
             user.update({is_complete: true, id_type_id: req.body.id_type_id, id_number : req.body.id_number});
             return user;
         }).then((user)=>{
-            res.status(200).json(user);
+            if(!(parseInt(req.body.reg_number) === 0)){
+                return app.Companys.findOne({where :{id: user.company_id, status : 'A'}}).then((company)=>{
+                    company.update({reg_number : req.body.reg_number});
+                    return user;
+                })
+            }else{
+                return user;
+            }
+        }).then((user)=>{
+            res.status(200).json(user);            
         })
     }
 

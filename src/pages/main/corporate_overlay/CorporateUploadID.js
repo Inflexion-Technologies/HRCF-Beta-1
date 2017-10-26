@@ -15,6 +15,7 @@ class CorporateUploadID extends Component {
     super(props);
     this.state = {
       idnumber : '',
+      regNumber : '',
       multi : false,
       value : '',
       uploadFile : 'Browse Files',
@@ -166,18 +167,19 @@ class CorporateUploadID extends Component {
             <div className="dialog-title">{this.props.title}</div>
             <div className="clearfix"></div>
                 <div className="overlay-content-style">
+                    <div className="clearfix"></div>
                     <div className="form-style">
                       <select className="form-control" defaultValue={this.state.value} onChange={this.onIDTypeChange}>
                       {this.getSelectOptions(OverlayStore.getIDTypes())}
                       </select>
-                    <span className={this.tError ? 'error' : 'vamus'}>{this.typeError}</span>
+                      <span className={this.tError ? 'error' : 'vamus'}>{this.typeError}</span>
                     </div>
-                
+                    <div className="clearfix"></div>
                     <div className="form-style">
                         <input type="text" className="form-control" placeholder="ID Number" value={this.state.idnumber} onChange={this.onIDNumberChanged.bind(this)}/>
                         <span className={this.iError ? 'error' : 'vamus'}>{this.idnumberError}</span>
                     </div>
-
+                    <div className="clearfix"></div>
                     <FileUpload className="show" options={options}>
                         <div ref="chooseBtn" className="form-style show">
                             <button className="btn btn-info btn-block" >{this.state.uploadFile}</button>
@@ -190,6 +192,7 @@ class CorporateUploadID extends Component {
                             <span className={this.uError ? 'error' : 'vamus'}>{this.uploadError}</span>
                         </div>
                     </FileUpload>
+                    <div className="clearfix"></div>
                 </div>
             </div>
 

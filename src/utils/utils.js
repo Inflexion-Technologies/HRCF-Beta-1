@@ -79,4 +79,30 @@ import _ from 'lodash';
         return !(_.includes(result, false));
     }
 
+    export function isValidRegNumber(text){
+        if(!(text.trim().length == 11)){
+            return false;
+        }
+
+        const tmpText = _.toArray(text.trim().toLowerCase());
+
+        //First TWO character should be 'CS'
+        const result = _.map(tmpText, (it, i)=>{
+                            if(i === 0){
+                                if(!(it === 'c')){
+                                    return false;
+                                }
+                            }else if(i === 1){
+                                if(!(it === 's')){
+                                    return false;
+                                }
+                            }else if(!(Number.isInteger(parseInt(it)))){
+                                return false;
+                            }
+                        })
+        console.log('validating company reg. # '+result);
+
+        return !(_.includes(result, false));
+    }
+
 

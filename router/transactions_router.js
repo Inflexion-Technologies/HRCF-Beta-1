@@ -3,7 +3,7 @@ import request from 'request';
     
 export default class TransactionsRoutes{
 
-    constructor(TransactionModel, UserModel){
+    constructor(TransactionModel, UserModel ){
         this.TransactionModel = TransactionModel;
         this.UserModel = UserModel;
     }
@@ -42,7 +42,7 @@ export default class TransactionsRoutes{
                         res.status(403).send('Nothing Found');
                     } 
                })
-            }); 
+            });
 
         transactionsRouter.route('/')
             .post((req, res)=>{
@@ -54,6 +54,18 @@ export default class TransactionsRoutes{
                     res.status(200).send('Data not saved!');
                 }
             }); 
+
+        transactionsRouter.route('/request/:user_id')
+            .post((req, res)=>{
+                if(req.body){
+                    // app.TransactionModel.create(req.body).then((transaction)=>{
+                    //     res.status(200).json(transaction);                                
+                    // })
+                    res.status(200).json({success : true});
+                }else{
+                    res.status(200).send('Data not saved!');
+                }
+            });
 
         transactionsRouter.route('/:id')
             .delete((req, res)=>{

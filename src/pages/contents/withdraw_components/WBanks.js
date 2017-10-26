@@ -6,6 +6,10 @@ import DayPicker from "react-day-picker";
 import OverlayStore from '../../../stores/OverlayStore';
 import * as OverlayAction from '../../../actions/OverlayAction';
 import WithdrawStore from '../../../stores/WithdrawStore'
+import TransactionStore from '../../../stores/TransactionStore'
+import * as TransactionAction from '../../../actions/TransactionAction'
+
+
 import NumberFormat from 'react-number-format'
 
 import 'react-select/dist/react-select.css';
@@ -24,73 +28,80 @@ class WBanks extends Component {
   constructor(props){
     super(props);
     this.state = {
-      nError : false,
+      acctError : false,
       aError : false,
-      account : '',
+      account : 0,
       value : '',
       amount : 0,      
-      bvalue : '',
       remarks : '',
       count : 0
     }
 
-    this.onBankChange = this.onBankChange.bind(this);
-    this.accountError = 'Invalid Account Number';
-    this.loadBanks = this.loadBanks.bind(this);
-    this.loadBranches = this.loadBranches.bind(this);
+    this.accountError = 'Please Select Account';
+    this.acctError = false;
+
+    this.amountMsgError = 'You have insufficient balance';
+    this.amtError = false;
+
+    this.onAccountChanged = this.onAccountChanged.bind(this);
+    this.refresh = this.refresh.bind(this);
     this.isAllValid = true;
   }
 
   componentWillMount(){
-    OverlayAction.loadOverlayBanks();
-    OverlayStore.on('overlay_banks_loaded', this.loadBanks)
-    OverlayStore.on('overlay_branches_loaded', this.loadBranches)
+    TransactionAction.getAccount();
+    TransactionStore.on('transaction_user_accounts', this.refresh);    
   }
 
   componentWillUnMount(){
-    OverlayStore.removeListener('overlay_banks_loaded', this.loadBanks)
-    OverlayStore.removeListener('overlay_branches_loaded', this.loadBranches)
+    TransactionStore.removeListener('transaction_user_accounts', this.refresh);
   }
 
-  loadBanks(){
+  refresh(){
     this.setState({
-        count : this.state.count + 1
+      count : this.state.count + 1
     })
   }
 
-  valid(){
-    return this.isAllValid;
+  validate(){    
+    //Check Account
+    console.log('Account ID => '+this.state.account);
+    if(parseInt(this.state.account) > 0){
+      TransactionStore.setAccount(this.state.account);      
+      this.acctError = false;
+    }else{
+      this.accountError = 'Please Select Account';
+      this.acctError = true;
+      return false;
+    }
+
+    if(this.state.amount.includes(',')){
+      const amount = this.getConvertedToValue(this.state.amount);
+      TransactionStore.setAmount(amount);
+      this.amtError = false;
+    }else if(parseInt(this.state.amount) > 0){
+      TransactionStore.setAmount(this.state.amount);
+      this.amtError = false;
+    }else{
+      this.amtError = true;
+      return false;
+    }
+
+    if(parseInt(this.state.amount) > TransactionStore.getBalance()){
+      this.amtError = true;
+      this.amountMsgError = 'You have insufficient balance';
+      return false;
+    }else{
+      this.amtError = false;
+    }
+    
+    TransactionStore.setRemarks(this.state.remarks);
+    return true;
   }
 
-  loadBranches(){
+  onAccountChanged(e){
     this.setState({
-        count : this.state.count + 1
-    })
-  }
-
-  onAccountChanged(evt){
-    this.setState({
-        account : evt.target.value
-    })
-  }
-
-  onAccountNameChanged(evt){
-    this.setState({
-        account_name : evt.target.value
-    })
-  }
-
-  onBankChange(evt){
-    this.setState({
-      value : evt
-    })
-
-    OverlayAction.loadOverlayBranches(evt.value);
-  }
-
-  onBranchChange(evt){
-    this.setState({
-      bvalue : evt
+        account : e.target.value
     })
   }
 
@@ -116,22 +127,25 @@ class WBanks extends Component {
   
   }
 
-  getOptions(input, callback) {
-    const banks = OverlayStore.getBanks();
-    callback(null, {options: banks, complete: true});
-  }
-
-  getBOptions(input, callback) {
-    const branches = OverlayStore.getBranches();
-    callback(null, {options: branches,complete: true});
-  }
-
   onOpen(evt){
     this.props.show();
   }
 
   onNext(evt){
-    WithdrawStore.next();
+    if(this.validate()){
+      this.refresh();
+      WithdrawStore.next();      
+    }else{
+      this.refresh();
+    }
+  }
+
+  getSelectOptions(data){
+    if(data){
+      return data.map((d)=>{
+        return <option value={d.value}>{d.label}</option>
+      })
+    }
   }
 
   getConvertedToValue(val){
@@ -163,15 +177,19 @@ class WBanks extends Component {
                 <div className="col-md-3"></div>
                 <div className="col-md-6 wpanel">
                   <div className="content-height">
-                    <div className="input-style">Select A Bank</div>
+                    <div className="input-style">Select Account</div>
                     <div className="form-group">
-                      <Select.Async multi={false} placeholder={this.props.bankPlaceholder} value={this.state.value} onChange={this.onBankChange.bind(this)} valueKey="value" labelKey="label" loadOptions={this.getOptions} />
+                      <select className="form-control" value={this.state.account} onChange={this.onAccountChanged}>
+                      {this.getSelectOptions(TransactionStore.getSelectData())}
+                      </select>
+                      <span className={this.acctError ? 'error' : 'vamus'}>{this.accountError}</span>
                     </div>
 
                     <div className="input-style">Enter An Amount </div>
                     <div className="form-group">
                           {/* <input type="text" className="form-control" placeholder="0.00" value={this.state.amount} onChange={this.onAmountChanged.bind(this)} /> */}
                           <NumberFormat thousandSeparator={true} value={this.state.amount} className="form-control amount-style" onChange={this.onAmountChanged.bind(this)} />
+                          <span className={this.amtError ? 'error' : 'vamus'}>{this.amountMsgError}</span>
                     </div>
 
                     <div className="input-style">Remarks </div>

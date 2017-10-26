@@ -235,32 +235,33 @@ class CorporateBanks extends Component {
             {this.props.validate ? <div></div> : <div className="skip-style" onClick={this.onSkip.bind(this)}>skip</div>}
             <div className="clearfix"></div>
               <div className="overlay-content-style">
-
+                  <div className="clearfix"></div>
                   <div className="form-style">
                       <select className="form-control" defaultValue={this.state.value} onChange={this.onBankChange}>
                         {this.getSelectOptions(OverlayStore.getBanks())}
                       </select>
                       <span className={this.bnkError ? 'error' : 'vamus'}>{this.bankNameError}</span>
                   </div>
-
+                  <div className="clearfix"></div>
                   <div className="form-style">
                       <select className="form-control" defaultValue={this.state.bvalue} onChange={this.onBranchChange}>
                         {this.getSelectOptions(OverlayStore.getBranches())}
                       </select>
                       <span className={this.brError ? 'error' : 'vamus'}>{this.bankBranchError}</span>
                   </div>
-
+                  <div className="clearfix"></div>
                   <div className="form-style">
                       <input type="text" className="form-control" placeholder="Account Name" value={this.state.account_name} onChange={this.onAccountNameChanged.bind(this)}/>
                       <span className={this.acError ? 'error' : 'vamus'}>{this.accountNameError}</span>
                   </div>
+                  <div className="clearfix"></div>
                   <div className="form-style">
                       <input type="text" className="form-control" placeholder="Account Number" value={this.state.account} onChange={this.onAccountChanged.bind(this)}/>
                       <span className={this.anError ? 'error' : 'vamus'}>{this.accountNumberError}</span>
                   </div>
               </div>
             </div>
-
+            <div className="clearfix"></div>
             <div className="row">
                 {this.props.showNext ? <div className="col-md-12 col-xs-12">
                     <div className='col-md-6 col-xs-6'>
