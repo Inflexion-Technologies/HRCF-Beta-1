@@ -46,9 +46,14 @@ class TransactionStore extends EventEmitter{
     }
 
     doTransactionUserConfirmValid(data){
+
+        console.log('Came to confirm STORE');
+
         if(data.id && (data.msisdn === cookie.load('msisdn'))){
+            console.log('was valid');            
             this.emit('transaction_user_confirm_valid');
         }else{
+            console.log('was invalid');                        
             this.emit('transaction_user_confirm_invalid');
         }
     }
@@ -57,8 +62,12 @@ class TransactionStore extends EventEmitter{
         this.emit('transaction_user_confirm_invalid');
     }
 
-    doTransactionUserRequest(){
-        this.emit('transaction_user_confirm_request');
+    doTransactionUserRequest(data){
+        if(data.success){
+            this.emit('transaction_user_confirm_request');            
+        }else{
+            this.emit('transaction_user_failed_request');
+        }
     }
 
     setAccount(id){
@@ -147,7 +156,7 @@ class TransactionStore extends EventEmitter{
                 break;
             }
             case 'TRANSACTION_USER_REQUEST' : {
-                this.doTransactionUserRequest();
+                this.doTransactionUserRequest(action.data);
                 break;
             }
             

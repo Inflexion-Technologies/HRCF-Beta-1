@@ -3,7 +3,7 @@ import '../styles/App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Login from '../pages/Login';
-//import Signup from '../pages/Signup';
+import ConfirmTransaction from '../pages/ConfirmTransaction';
 import CStageOne from '../pages/corporate/CStageOne';
 import CStageTwo from '../pages/corporate/CStageTwo';
 import IStageOne from '../pages/individual/IStageOne';
@@ -29,6 +29,8 @@ class App extends Component {
         {/* <Route path="/app" component={Main} /> */}
         <Route path="/app" render={(props) => (<Main {...props} page='dashboard' /> )}/>
         <Route path="/upload" component={Upload} />
+        <Route path="/confirm/:key" component={ConfirmTransaction} />
+
       </div>
     </Router>
     );

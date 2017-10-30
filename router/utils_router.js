@@ -14,7 +14,7 @@ import jwt from 'jsonwebtoken';
 
 export default class UtilsRoutes{ 
 
-constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel){
+constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel, RequestModel, AccountModel, ApproveModel){
     this.app = this;
     this.UsersModel = UsersModel;
     this.TracksModel = TracksModel;    
@@ -22,6 +22,9 @@ constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDMod
     this.BankModel = BankModel;
     this.BranchModel = BranchModel;
     this.IDModel = IDModel;
+    this.RequestModel = RequestModel;
+    this.AccountModel = AccountModel;
+    this.ApproveModel = ApproveModel;
 }
 
 getGeneratedId(count, type){
@@ -192,9 +195,15 @@ routes(){
                     }
                 });
             }else if(utils.isValidMSISDN(req.query.username.trim())){
-                app.UsersModel.findOne({where : {msisdn : req.query.username, password : utils.getHash(req.query.password)}}).then(user => {
+                app.UsersModel.findOne({where : {msisdn : req.query.username, password : utils.getHash(req.query.password)}, attributes : ['id','firstname','lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'is_admin','status']}).then(user => {
                     if(user){
-                        res.status(200).json(user);
+                        const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '1h'});
+                        res.status(200).json({
+                            success: true,
+                            message: 'Successful',
+                            token: token,
+                            user : user
+                          });
                     }else{
                         res.status(400).send('something wrong happened');
                     }
@@ -423,8 +432,34 @@ routes(){
     //         res.status(200).send('successfull');
     //     })
 
+    utilsRouter.route('/transaction/details/:transaction_key')
+        .get((req, res)=> {
+            const key = req.params.transaction_key;
+
+            app.RequestModel.findOne({where : {uuid : key, status : 'P'}, include : [app.ApproveModel, app.UsersModel, {model : app.AccountModel, include : [{model : app.BranchModel, include : [{model : app.BankModel}]}]}]})
+            .then((request)=>{
+                if(request){
+                    let data = {};
+                    data.approver = request.approver.firstname;
+                    data.amount = request.amount;
+                    data.code = request.transaction_code;
+                    data.date = request.created_at;
+
+                    data.user = request.user.firstname;
+                    data.account_name = request.account.name;
+                    data.account_number = request.account.account_number;
+                    data.branch = request.account.bank_branch.name;
+                    data.bank = request.account.bank_branch.bank.name;
+
+                    res.status(200).json(data);
+                }else{
+                    res.status(400).send('No Data');
+                }
+            })
+        })
+
         return utilsRouter;
-}
+    }
 
     // upload(){
         

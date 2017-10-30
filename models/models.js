@@ -231,6 +231,36 @@ export function accountModel(config){
 	return account;
 }
 
+export function requestModel(config){
+	const request = config.define('transaction_request', {
+      uuid : {
+        type : Sequelize.UUID,
+        defaultValue : Sequelize.UUIDV1
+      },
+      transaction_code : {
+        type : Sequelize.STRING
+      },
+	    user_id: {
+        type: Sequelize.INTEGER
+      },
+      amount : {
+        type : Sequelize.INTEGER
+      },
+      approver_id : {
+        type : Sequelize.INTEGER
+      },
+      account_id: {
+        type: Sequelize.INTEGER
+      },
+	    status: {
+        type: Sequelize.STRING(1),
+        defaultValue : 'P'
+	    }
+	}, {underscored: true});
+
+	return request;
+}
+
 export function trackModel(config){
 	const track = config.define('tracker', {
     count: {

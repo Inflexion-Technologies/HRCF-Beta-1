@@ -1951,6 +1951,15 @@ Login
     border-radius: 5px;
     margin: 0px auto;
     position: relative; }
+
+    .sign-in-wrapper .confirm-container {
+      max-width: 480px;
+      padding: 20px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      margin: 0px auto;
+      position: relative; }
+
     .sign-in-wrapper .sign-container .copyright-txt {
       position: absolute;
       bottom: -25px;

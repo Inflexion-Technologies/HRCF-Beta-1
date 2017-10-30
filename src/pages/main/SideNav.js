@@ -20,6 +20,8 @@ class SideNav extends Component {
   }
 
   componentWillMount(){
+    this.payment_number = cookie.load('payment_number');
+    
   }
 
   returnToLogin(){
@@ -49,12 +51,12 @@ class SideNav extends Component {
 
             <div className="sidenav">
                 <div className="close-div">
-                  <i className="fa fa-eye-slash close-icon" onClick={this.onCloseNav} aria-hidden="true"></i>
+                  {/* <i className="fa fa-eye-slash close-icon" onClick={this.onCloseNav} aria-hidden="true"></i> */}
                 </div>
                 <div className="user-profile">
                     <div className="avatar">
                       <i className="fa fa-user-circle-o" aria-hidden="true"></i>
-                      <div className="details">IC User</div>
+                      <div className="details">{this.payment_number}</div>
                     </div>
                     <div className="clearfix"></div>
                 </div>
@@ -84,11 +86,10 @@ class SideNav extends Component {
                         Withdraw
                       </Link>
                   </li>
-
                   <li>
-                    <Link to="/app/settings">
+                    <Link to="/app/dashboard">
                       <i className="fa fa-cog" aria-hidden="true"></i>
-                      Settings
+                      Fund Account
                     </Link>
                   </li>
                 </ul>

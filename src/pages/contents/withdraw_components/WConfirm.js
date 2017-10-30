@@ -23,8 +23,9 @@ class WConfirm extends Component {
       password : '',
       count : 0
     }
+    this.requestNotSent = true;
 
-    this.userConfirmed = this.userConfirmed.bind(this);
+    // this.userConfirmed = this.userConfirmed.bind(this);
     this.proceed = this.proceed.bind(this);
     
     this.rejectTransaction = this.rejectTransaction.bind(this);
@@ -35,16 +36,19 @@ class WConfirm extends Component {
 
   componentWillMount(){
     WithdrawStore.setAmount('0.00');
-    TransactionStore.on('transaction_user_confirm_valid', this.userConfirmed);
+    // TransactionStore.on('transaction_user_confirm_valid', this.userConfirmed);
     TransactionStore.on('transaction_user_confirm_invalid', this.rejectTransaction);
     TransactionStore.on('transaction_user_confirm_request', this.proceed);    
-  }
+    TransactionStore.on('transaction_user_failed_request', this.rejectTransaction);    
+    
+}
 
   componentWillUnMount(){
-    TransactionStore.removeListener('transaction_user_confirm_valid', this.userConfirmed);
+    // TransactionStore.removeListener('transaction_user_confirm_valid', this.userConfirmed);
     TransactionStore.removeListener('transaction_user_confirm_invalid', this.rejectTransaction);
     TransactionStore.removeListener('transaction_user_confirm_request', this.proceed);        
-  }
+    TransactionStore.removeListener('transaction_user_failed_request', this.rejectTransaction);    
+}
 
   onPasswordChanged(e){
       this.setState({
@@ -52,17 +56,9 @@ class WConfirm extends Component {
       })
   }
 
-  userConfirmed(){
-      //Gather data
-      let detail = {};
-      detail.account_id = TransactionStore.getAccount();
-      detail.amount = TransactionStore.getAmount();
-      
-      TransactionAction.placeRequest(detail);
-  }
-
   proceed(){
-    WithdrawStore.next();    
+    WithdrawStore.next();   
+    console.log('Should move !'); 
   }
 
   rejectTransaction(){
@@ -92,8 +88,13 @@ class WConfirm extends Component {
 
   onConfirm(evt){
       if(this.validate()){
-        TransactionAction.isPasswordValid(this.state.password);
-        this.refresh();
+        let detail = {};
+
+        detail.account_id = TransactionStore.getAccount();
+        detail.amount = TransactionStore.getAmount();
+        detail.password = this.state.password;
+
+        TransactionAction.placeRequest(detail);
       }else{
         this.refresh();
       }

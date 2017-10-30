@@ -6,7 +6,12 @@ const config = {
     PORT:process.env.SERVER_PORT || 8001,
     secret : 'thequickfoxjumpedofthelazydog',
     uploadlocation : path.resolve(__dirname+'/resources'),
-    ext : 'xlsx'
+    ext : 'xlsx',
+    email_host : 'smtp.gmail.com',
+    email_port : '587',
+    email_secure : false,
+    email_username : 'noreply@icassetmanagers.com',
+    email_password : 'dqKZ%388'
 }
 
 const sequelize = new Sequelize(process.env.DB_NAME || 'HRCF', process.env.DB_USER || 'hrcf', process.env.DB_PASSWORD || 'pa55w0rd', {
@@ -23,4 +28,3 @@ const sequelize = new Sequelize(process.env.DB_NAME || 'HRCF', process.env.DB_US
 });
 
 module.exports = {config : config, sequelize : sequelize};
-

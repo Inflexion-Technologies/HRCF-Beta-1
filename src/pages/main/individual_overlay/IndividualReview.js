@@ -68,22 +68,6 @@ class IndividualReview extends Component {
                         <div className="clearfix"></div>
                         <div className="col-md-12 col-xs-12 review-value">{id_type}, {id_number}</div>
                     </div>
-
-                    <div className="col-md-6 col-xs-12">
-                        <div className="col-md-12 col-xs-12 review-label">Approver(s)</div>
-                        <div className="clearfix"></div>
-                        <div className="col-md-12 col-xs-12 review-value">{approver_name}</div>
-                        <div className="clearfix"></div>
-                        <div className="col-md-12 col-xs-12 review-label">Approver(s) Mobile</div>
-                        <div className="clearfix"></div>
-                        <div className="col-md-12 col-xs-12 review-value">{approver_msisdn}</div>
-                        <div className="clearfix"></div>
-                        <div className="col-md-12 col-xs-12 review-label">Approver(s) Email</div>
-                        <div className="clearfix"></div>
-                        <div className="col-md-12 col-xs-12 review-value2">{approver_email}</div>
-                        <div className="clearfix"></div>
-                    </div>
-
                 </div>
             </div>
 

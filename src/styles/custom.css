@@ -780,6 +780,48 @@
     color: #999999;
 }
 
+.confirm .sentence{
+    color: #efefef;
+    text-transform: uppercase;
+    font-size: 11px;
+    word-spacing: 6px;
+    letter-spacing: 1px;
+}
+
+.confirm .sentence .code{
+    text-transform: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.confirm .sentence .values{
+    font-weight: 600
+}
+
+.confirm .reject-btn{
+    background: none;
+    color: #FEFEFE;
+    border: 1px solid #BBBBBB;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    font-size: 15px;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;    
+}
+
+.confirm .approve-btn{
+    background: #2196f3;
+    color: #FEFEFE;
+    border-radius: 0;
+    border: none;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 .upload{
     height: 755px;
 }

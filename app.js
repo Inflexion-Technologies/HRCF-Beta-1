@@ -134,8 +134,14 @@ export default class App {
         const bankStatementModel = models.bankStatementModel(dbConfig);
         const idTypesModel = models.idModel(dbConfig);
         const accountsModel = models.accountModel(dbConfig);
+        const requestModel = models.requestModel(dbConfig);
 
         //Setting relationships
+
+        requestModel.belongsTo(usersModel);
+        requestModel.belongsTo(approveModel);
+        requestModel.belongsTo(accountsModel);
+
         approveModel.belongsTo(companyModel);
 
         branchModel.belongsTo(bankModel);
@@ -162,6 +168,7 @@ export default class App {
         usersModel.belongsToMany(accountsModel, {through: 'user_accounts'});        
         accountsModel.belongsToMany(usersModel, {through: 'user_accounts'});
 
+
         //Loading Banks and Branches and IC Banks
         const banksData = require('./resources/banks.json');
         const branchesData = require('./resources/bank_branches.json');
@@ -184,11 +191,11 @@ export default class App {
         const branches = new BranchesRoutes(branchModel);
         const companys = new CompanysRoutes(companyModel, usersModel);
         const credits = new CreditsRoutes(creditModel, bankModel, usersModel);
-        const transactions = new TransactionsRoutes(transactionModel, usersModel);
+        const transactions = new TransactionsRoutes(transactionModel, usersModel,requestModel, approveModel);
         const withdrawals = new WithdrawalsRoutes(withdrawalModel, usersModel);
         const banks = new BanksRoutes(bankModel);
         
-        const utils = new UtilsRoutes(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel);
+        const utils = new UtilsRoutes(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel, requestModel, accountsModel,approveModel);
         const auth = new AuthRoutes(usersModel);
         const bankstatement = new BankStatementRoutes(bankStatementModel, icBankModel, usersModel);
         const misc = new MiscRoutes(usersModel, accountsModel, approveModel, companyModel);

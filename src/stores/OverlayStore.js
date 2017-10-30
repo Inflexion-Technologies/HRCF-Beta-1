@@ -46,6 +46,7 @@ class OverlayStore extends EventEmitter{
    doIDTypesLoading(data){
        if(data){
            this.idTypes = [];
+           this.idTypes.push({value : 0, label : 'Select ID'});
            data.map((idType)=>{
                this.idTypes.push({value: idType.id, label: idType.name});
            })

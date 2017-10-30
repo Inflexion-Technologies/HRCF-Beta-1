@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.2ffe6e78.css",
-  "main.css.map": "static/css/main.2ffe6e78.css.map",
-  "main.js": "static/js/main.7a779d18.js",
-  "main.js.map": "static/js/main.7a779d18.js.map",
+  "main.css": "static/css/main.ad142457.css",
+  "main.css.map": "static/css/main.ad142457.css.map",
+  "main.js": "static/js/main.f141a896.js",
+  "main.js.map": "static/js/main.f141a896.js.map",
   "static/media/bank-building-b.svg": "static/media/bank-building-b.8cda48fd.svg",
   "static/media/check-square.svg": "static/media/check-square.7fb9d4fd.svg",
   "static/media/close-envelope.svg": "static/media/close-envelope.85748036.svg",
@@ -21,5 +21,6 @@
   "static/media/icon.svg": "static/media/icon.1af40fb8.svg",
   "static/media/sheets.svg": "static/media/sheets.bfcb4733.svg",
   "static/media/ssbb.svg": "static/media/ssbb.8f6860a4.svg",
-  "static/media/thumb.svg": "static/media/thumb.cb192409.svg"
+  "static/media/thumb.svg": "static/media/thumb.cb192409.svg",
+  "static/media/tick-box-with-a-check-mark.svg": "static/media/tick-box-with-a-check-mark.aa3c2269.svg"
 }

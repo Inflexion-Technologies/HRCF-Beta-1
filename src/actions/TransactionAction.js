@@ -49,6 +49,8 @@ export function placeRequest(detail){
     const id = cookie.load('id');
     const token = cookie.load('token');
 
+    console.log('Detail => '+JSON.stringify(detail));
+
     axios.post('/api/v1/transactions/request/'+id, {token,detail})
     .then((res)=>{
         if(res.data !== null){
@@ -65,7 +67,7 @@ export function isPasswordValid(password){
 
     axios.get('/api/utils/login/', {params :{username,password}})
     .then((res)=>{
-        if(res.data.user !== null){
+        if(res.data.user !== undefined){
             dispatcher.dispatch({
                 type : "TRANSACTION_USER_CONFIRM_VALID",
                 data: res.data.user

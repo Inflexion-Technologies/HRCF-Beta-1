@@ -39,7 +39,7 @@ class Header extends Component {
             <Link to="/app/dashboard" ><div className="col-xs-3">Home</div></Link>
             <div className="col-xs-3">History</div>
             <Link to="/app/withdraw" ><div className="col-xs-3">Withdraw</div></Link>
-            <div className="col-xs-3">Settings</div>
+            <div className="col-xs-3">Fund Account</div>
           </div>
         </div>
       </div>
