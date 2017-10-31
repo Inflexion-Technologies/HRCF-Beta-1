@@ -5,26 +5,28 @@ import cookie from 'react-cookies';
 class UploadStore extends EventEmitter{
     constructor(){
         super();
-        this.user = {
-            
-        }
+        
 
         this.banks = [];
     }
     
 
-    initUser (...user){
-        this.user = user;
-        this.emit('main');
-    }
-
     getBanks(){
         return this.banks;
+    }
+
+    getUserId(){
+        return cookie.load('id');
+    }
+
+    getToken(){
+        return cookie.load('token');
     }
 
     pushBanksLoad(banks){
         this.banks = [];
 
+        this.banks.push({value : 0, label : 'Select A Bank'});
         banks.map((bank)=>{
             this.banks.push({value: bank.id, label : bank.name});
         })

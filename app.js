@@ -20,6 +20,7 @@ import AccountsRoutes from './router/accounts_router'
 
 import UtilsRoutes from './router/utils_router';
 import SessionsRouters from './router/session_router';
+import UploadRoutes from './router/uploads_router';
 
 import * as models from './models/models';
 import * as d from './config';
@@ -79,40 +80,40 @@ export default class App {
     }
 
     validate(req, res, next){
-        // const app = express();
+        const app = express();
 
-        // //JSON Web Token Secret
-        // app.set('token', d.config.secret);
+        //JSON Web Token Secret
+        app.set('token', d.config.secret);
 
-        //  // check header or url parameters or post parameters for token
-        // const token = req.body.token || req.query.token || req.headers['x-access-token'];
+         // check header or url parameters or post parameters for token
+        const token = req.body.token || req.query.token || req.headers['x-access-token'];
         
-        // // decode token
-        // if(token) {
+        // decode token
+        if(token) {
     
-        //     // verifies secret and checks exp
-        //     jwt.verify(token, app.get('token'), function(err, decoded) {      
-        //         if (err) {
-        //             return res.json({ success: false, message: 'Failed to authenticate token.' });    
-        //         } else {
-        //             // if everything is good, save to request for use in other routes
-        //             req.decoded = decoded;    
-        //             next();
-        //         }
-        //     });
+            // verifies secret and checks exp
+            jwt.verify(token, app.get('token'), function(err, decoded) {      
+                if (err) {
+                    return res.json({ success: false, message: 'Failed to authenticate token.' });    
+                } else {
+                    // if everything is good, save to request for use in other routes
+                    req.decoded = decoded;    
+                    next();
+                }
+            });
     
-        // }else{
+        }else{
     
-        //     // if there is no token
-        //     // return an error
-        //     return res.status(403).send({ 
-        //         success: false, 
-        //         message: 'No token provided.' 
-        //     });
+            // if there is no token
+            // return an error
+            return res.status(403).send({ 
+                success: false, 
+                message: 'No token provided.' 
+            });
     
-        // }
+        }
 
-        next();
+        //next();
     }
 
     initSQLAndRouters(app){
@@ -195,11 +196,12 @@ export default class App {
         const withdrawals = new WithdrawalsRoutes(withdrawalModel, usersModel);
         const banks = new BanksRoutes(bankModel);
         
-        const utils = new UtilsRoutes(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel, requestModel, accountsModel,approveModel);
+        const utils = new UtilsRoutes(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel, requestModel, accountsModel,approveModel, icBankModel);
         const auth = new AuthRoutes(usersModel);
         const bankstatement = new BankStatementRoutes(bankStatementModel, icBankModel, usersModel);
         const misc = new MiscRoutes(usersModel, accountsModel, approveModel, companyModel);
         const accounts = new AccountsRoutes(accountsModel, branchModel, bankModel, usersModel);
+        const uploadStatement = new UploadRoutes();
 
         //Set Middleware to check for sessions
         app.use('/api/v1/*', this.validate); 
@@ -215,8 +217,8 @@ export default class App {
         app.use('/api/v1/ic/statements', bankstatement.routes());
         app.use('/api/v1/misc', misc.routes());
         app.use('/api/v1/accounts', accounts.routes());
+        app.use('/api/v1/uploads', uploadStatement.routes());
         
-
         app.use('/api/utils', utils.routes());
         app.use('/api/auth', auth.routes());
     }

@@ -89,7 +89,7 @@ class SideNav extends Component {
                   <li>
                     <Link to="/app/dashboard">
                       <i className="fa fa-cog" aria-hidden="true"></i>
-                      Fund Account
+                      Top-Up
                     </Link>
                   </li>
                 </ul>

@@ -8,10 +8,7 @@ import icam_icon2 from '../../icons/icam_logo_.png';
 import thumb_icon from '../../icons/sheets.svg';
 import {Link} from 'react-router-dom';
 
-import Select from 'react-select';
 import FileUpload from 'react-fileupload';
-
-// Be sure to include styles at some point, probably during your bootstrapping
 import 'react-select/dist/react-select.css';
 
 import UploadStore from '../../stores/UploadStore';
@@ -25,93 +22,72 @@ import ReactSVG from 'react-svg';
 class Upload extends Component {
     constructor(props){
         super(props);
-        this.loadBanks = this.loadBanks.bind(this);
         this.uploadButtonText = 'Upload';
         this.descriptionErrorMessage = 'Please Add A Description';
         this.allBanks = [];
         this.state = {
-            uError : false,
-            isButtonDisabled : false,
-            isBanksLoading : true,
-            value : '',
-            multi : false,
-            uploadFile : 'Browse Files'
+            bank : 0,
+            uploadFile : 'Browse Files',
+            desc : '',
+            count : 0
         }
 
-        //UploadAction.loadBanks();
+        this.refresh = this.refresh.bind(this);
+        this.onDescriptionChange = this.onDescriptionChange.bind(this);
+        this.onBankChanged= this.onBankChanged.bind(this);
     }
 
     componentWillMount(){
-        UploadAction.loadBanks();                
-        UploadStore.on('upload_banks_loaded',this.loadBanks);
+        UploadAction.loadICBanks();                
+        UploadStore.on('upload_banks_loaded',this.refresh);
         // this.clearCookies();
     }
 
     componentWillUnMount(){
-        UploadStore.removeListener('upload_banks_loaded',this.loadBanks);
+        UploadStore.removeListener('upload_banks_loaded',this.refresh);
     }
 
-    loadBanks(){
-        this.allBanks = UploadStore.getBanks();
-        console.log("Banks ::: "+JSON.stringify(this.allBanks));
+    onBankChanged(evt){
         this.setState({
-            isBanksLoading : false
+            bank : evt.target.value
         })
     }
 
-    handleKeyPress = (event) => {
-        if(event.key === 'Enter'){
-            this.onLoginClicked();
-        }
-    }
-
-    getOptions(input, callback) {
-        const banks = UploadStore.getBanks();
-        callback(null, {options: banks,complete: true});
-    };
-
-    clearCookies(){
-        cookie.remove('fname');
-        cookie.remove('lname');
-        cookie.remove('msisdn');
-        cookie.remove('pswd');
-    }
-
-    redirect(link){
-        this.props.history.push(link);
-    }
-
-    onBankChange(evt){
-        console.log('Value ::: '+JSON.stringify(evt));
+    refresh(){
         this.setState({
-            inputValue : evt.label
+            count : this.state.count + 1
         })
-    }
-
-    onChange(value){
-        this.setState({
-			value: value,
-		});
     }
 
     onDescriptionChange(evt){
-
+        this.setState({
+            desc : evt.target.value
+        })
     }
 
     onUploadClicked(){
 
     }
 
+    getSelectOptions(data){
+        if(data){
+          return data.map((d)=>{
+            return <option value={d.value}>{d.label}</option>
+          })
+        }
+    }
+
     render() {
         const options={
-            baseUrl:'/api/utils/statement/upload',
+            //baseUrl:'/api/v1/uploads',
+            baseUrl:'/api/utils/statement/upload',            
             dataType : 'json',
             wrapperDisplay : 'block',
             multiple: true,
             numberLimit: 9,
             accept: 'application/xlsx',
             chooseAndUpload : false,
-            paramAddToField : {bank_id: '', description : ''},
+            paramAddToField : {user_id : UploadStore.getUserId(), filename : this.state.uploadFile, token : UploadStore.getToken(), bank_id: this.state.bank, description : this.state.desc},
             fileFieldName : 'file',
             chooseFile : (files)=>{
                 this.setState({uploadFile : files[0].name});
@@ -140,11 +116,13 @@ class Upload extends Component {
                             <div className="sign-in-form">
 
                                 <div className="form-group">
-                                    <Select.Async multi={this.state.multi} placeholder="Select A Bank" value={this.state.value} onChange={this.onChange.bind(this)} valueKey="value" labelKey="label" loadOptions={this.getOptions} />
+                                    <select className="form-control" value={this.state.bank} onChange={this.onBankChanged}>
+                                        {this.getSelectOptions(UploadStore.getBanks())}
+                                    </select>                        
                                 </div>
 
                                 <div className="form-group">
-                                    <input type="text" className="form-control" placeholder="Description" onChange={this.onDescriptionChange.bind(this)} />
+                                    <input type="text" className="form-control" value={this.state.desc} placeholder="Description" onChange={this.onDescriptionChange.bind(this)} />
                                     <span className={this.state.uError ? 'error' : 'vamus'}>{this.descriptionErrorMessage}</span>
                                 </div>
 

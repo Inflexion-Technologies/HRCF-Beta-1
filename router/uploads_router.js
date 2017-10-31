@@ -26,8 +26,11 @@ routes(){
 
     uploadRouter.route('/')
     .post((req, res)=>{
+
+        console.log('bank_id => '+req.body.bank_id);
+
         const utils = require('../services/utils');
-        this.saveFile();
+        utils.saveFile(req, res);
     }); 
 
     uploadRouter.route('/:id')
@@ -37,7 +40,7 @@ routes(){
             });
         });
 
-    return banksRouter;
+    return uploadRouter;
 }
 
 saveFile(req, res){
@@ -131,31 +134,37 @@ compute(req, res, data){
                     }
                 });
 
-                const HRCFData = _.filter(transactionMap, (statement)=>{ return statement.client_code.trim().length === 12});
+                console.log('Transaction statement length => '+transactionMap.length+', Transaction => '+JSON.stringify(transactionMap));
 
+                const HRCFData = _.filter(transactionMap, (statement)=>{ return statement.client_code.trim().length === 11});
+
+                console.log('HRCF length => '+HRCFData.length);
+                
                 if(HRCFData){
                     let HRCFDataWithUserIds = [];
 
-                    async.map(HRCFData, (data, callback)=>{
-                        usersModel.findOne({where : {payment_number : data.client_code}, individualHooks: true}).then((user)=>{
+                        HRCFData.map((data)=>{
+                        usersModel.findOne({where : {payment_number : data.client_code}, individualHooks: true})
+                        .then((user)=>{
                             if(user){
-                                user.increment({'balance' : parseFloat(data.credit)}).then((user)=>{
-                                    callback(null, user);
+                                return user.increment({'balance' : parseFloat(data.credit)})
+                                .then((user)=>{
+                                    return user
                                 });  
-                                
-                                icBanksModel.findOne({where : {account_number : data.account_number}}).then((icBank)=>{
-                                    if(icBank){
-                                        creditModel.create({amount : data.credit,type : 'C',narration : data.description,user_id : user.id,bank_id:icBank.id});
-                                        transactionModel.create({amount : data.credit,type : 'C',narration : data.description,user_id : user.id});
-                                    }
-                                });
+                            }else{
+                                res.status(200).json({success : true});
                             }
-                        });
-                    }, (err, results)=>{
-                        if(err){
-                            console.log(err);
-                        }
-                    })
+                        }).then((user)=>{
+                            icBanksModel.findOne({where : {account_number : data.account_number}}).then((icBank)=>{
+                                if(icBank){
+                                    creditModel.create({amount : data.credit,type : 'C',narration : data.description,user_id : user.id,bank_id:icBank.id});
+                                    transactionModel.create({amount : data.credit,type : 'C',narration : data.description,user_id : user.id});
+                                }
+                            });
+
+                        })   
+                    });
+
                 }
 
                 //Create Bank Statement

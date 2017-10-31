@@ -140,6 +140,9 @@ export function bankStatementModel(config){
       ledger_account : {
         type : Sequelize.STRING
       },
+      ic_bank_id : {
+        type : Sequelize.INTEGER
+      },
       credit : {
         type : Sequelize.DOUBLE
       },

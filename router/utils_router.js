@@ -14,7 +14,7 @@ import jwt from 'jsonwebtoken';
 
 export default class UtilsRoutes{ 
 
-constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel, RequestModel, AccountModel, ApproveModel){
+constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel, RequestModel, AccountModel, ApproveModel, ICBankModel){
     this.app = this;
     this.UsersModel = UsersModel;
     this.TracksModel = TracksModel;    
@@ -25,6 +25,7 @@ constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDMod
     this.RequestModel = RequestModel;
     this.AccountModel = AccountModel;
     this.ApproveModel = ApproveModel;
+    this.ICBankModel = ICBankModel;
 }
 
 getGeneratedId(count, type){
@@ -229,9 +230,10 @@ routes(){
             }
         });   
 
-    utilsRouter.route('/banks')
+
+    utilsRouter.route('/icbanks')
         .get((req, res)=>{ 
-            app.BankModel.findAll({where : {status : 'A'}}).then((banks)=>{
+            app.ICBankModel.findAll({where : {status : 'A'}}).then((banks)=>{
                 res.status(200).json(banks);
             })
         }); 
@@ -245,7 +247,7 @@ routes(){
 
     utilsRouter.route('/branches/:bank_id')
         .get((req, res)=>{ 
-            app.BranchModel.findAll({where : {status : 'A', bank_id: req.params.bank_id}}).then((branches)=>{
+            app.BranchModel.findAll({where : {status : 'A', bank_id: req.params.bank_id}, order:[['name', 'ASC']]}).then((branches)=>{
                 res.status(200).json(branches);
             })
         });  
@@ -282,7 +284,7 @@ routes(){
 
     utilsRouter.route('/banks')
         .get((req, res)=>{  
-            app.BankModel.findAll({where : {status : 'A'}}).then(banks => {
+            app.BankModel.findAll({where : {status : 'A'}, order : [['name', 'ASC']]}).then(banks => {
                 if(banks){
                     res.status(200).json(banks);                    
                 }else{
@@ -398,9 +400,7 @@ routes(){
 
     utilsRouter.route('/statement/upload')
         .post((req, res)=> {
-            // req.file is the `avatar` file 
-            // req.body will hold the text fields, if there were any 
-           
+            
             utils.saveFile(req, res);
         })
 
@@ -408,29 +408,6 @@ routes(){
         .get((req, res)=> {
             //res.status(200).json(utils.xlsxToJSON('ecobank_test.xlsx'));
         })
-
-    // utilsRouter.route('/statement/upload')
-    //     .post((req, res)=> {
-    //         const formidable = require('formidable');
-    //         let form = new formidable.IncomingForm();
-            
-    //         form.parse(req, (err, fields, files)=>{
-    //             res.writeHead(200, {'content-type': 'text/plain'});
-    //             res.write('received upload:\n\n');
-    //             res.end(util_.inspect({fields: fields, files: files}));
-    //             console.log('Done writing ...');
-    //         });
-
-    //         //res.status(200).send('successfull');
-    //     })    
-
-    // utilsRouter.route('/statement/upload')
-    //     .post((req, res)=> {
-    //         console.log(req.fields);
-    //         console.log(req.files);
-
-    //         res.status(200).send('successfull');
-    //     })
 
     utilsRouter.route('/transaction/details/:transaction_key')
         .get((req, res)=> {
