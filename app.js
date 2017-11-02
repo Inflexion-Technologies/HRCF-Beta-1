@@ -136,8 +136,15 @@ export default class App {
         const idTypesModel = models.idModel(dbConfig);
         const accountsModel = models.accountModel(dbConfig);
         const requestModel = models.requestModel(dbConfig);
+        const imageMapperModel = models.imageMapModel(dbConfig);
+        const payoutModel = models.payoutRequestModel(dbConfig);
 
         //Setting relationships
+
+        payoutModel.belongsTo(usersModel);
+        payoutModel.belongsTo(accountsModel);
+
+        imageMapperModel.belongsTo(usersModel);
 
         requestModel.belongsTo(usersModel);
         requestModel.belongsTo(approveModel);
@@ -162,6 +169,8 @@ export default class App {
 
         accountsModel.belongsTo(usersModel);
         accountsModel.belongsTo(branchModel);
+
+
 
         usersModel.belongsToMany(approveModel, {through: 'user_approvers'});
         approveModel.belongsToMany(usersModel, {through: 'user_approvers'});
@@ -192,11 +201,11 @@ export default class App {
         const branches = new BranchesRoutes(branchModel);
         const companys = new CompanysRoutes(companyModel, usersModel);
         const credits = new CreditsRoutes(creditModel, bankModel, usersModel);
-        const transactions = new TransactionsRoutes(transactionModel, usersModel,requestModel, approveModel);
+        const transactions = new TransactionsRoutes(transactionModel, usersModel,requestModel, approveModel, creditModel);
         const withdrawals = new WithdrawalsRoutes(withdrawalModel, usersModel);
         const banks = new BanksRoutes(bankModel);
         
-        const utils = new UtilsRoutes(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel, requestModel, accountsModel,approveModel, icBankModel);
+        const utils = new UtilsRoutes(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel, requestModel, accountsModel,approveModel, icBankModel, payoutModel);
         const auth = new AuthRoutes(usersModel);
         const bankstatement = new BankStatementRoutes(bankStatementModel, icBankModel, usersModel);
         const misc = new MiscRoutes(usersModel, accountsModel, approveModel, companyModel);

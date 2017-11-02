@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactHighcharts from 'react-highcharts';
-
+import MainStore from '../../stores/MainStore';
+import * as MainAction from '../../actions/MainAction';
 
 import '../../bower_components/bootstrap/dist/css/bootstrap.css';
 import '../../styles/font-awesome/css/font-awesome.css';
@@ -11,8 +12,12 @@ import '../../styles/custom.css';
 class Dashboard extends Component {
 
     constructor(){
+
         super();
-       
+        this.state = {
+            count : 0
+        }
+        this.refresh = this.refresh.bind(this);
         this.line_config={
             
             title: {
@@ -117,7 +122,14 @@ class Dashboard extends Component {
     }
 
   componentWillMount(){
-     
+     MainAction.loadTotalBalance();
+     MainStore.on('dashboard_user_balance', this.refresh);
+  }
+
+  refresh(){
+      this.setState({
+          count : this.state.count + 1
+      })
   }
 
   render() {
@@ -126,14 +138,14 @@ class Dashboard extends Component {
                 <div className="row">
                     <div className="col-md-4 kill-padding-except-left">
                         <div className="dash-widget-contribution">
-                            <div className="amount">34,000 GHS</div>
+                            <div className="amount">{MainStore.getBalance()} GHS</div>
                             <div className="label">Total Balance</div>
                         </div>
                     </div>
 
                     <div className="col-md-4 kill-padding">
                         <div className="dash-widget-balance">
-                            <div className="amount">54,000 GHS</div>
+                            <div className="amount">{MainStore.getContribution()} GHS</div>
                             <div className="label">Total Contributions</div>
                         </div>
                     </div>

@@ -21,3 +21,45 @@ export function confirmTransactionDetails(key){
         });
     })
 }
+
+export function approveTransaction(key, uuid){
+    axios.post('/api/utils/transaction/approve/', {key, uuid})
+    .then((res)=>{
+        if(res.data){
+            dispatcher.dispatch({
+                type : "CONFIRM_TRANSACTION_APPROVE_SUCCESS",
+                data : res.data
+            });
+        }else{
+            dispatcher.dispatch({
+                type : "CONFIRM_TRANSACTION_APPROVE_FAILED"
+            });
+        }
+    })
+    .catch((error)=>{
+        dispatcher.dispatch({
+            type : "CONFIRM_TRANSACTION_APPROVE_FAILED"
+        });
+    })
+}
+
+export function rejectTransaction(uuid){
+    axios.post('/api/utils/transaction/reject/', {uuid})
+    .then((res)=>{
+        if(res.data){
+            dispatcher.dispatch({
+                type : "CONFIRM_TRANSACTION_REJECT_SUCCESS",
+                data : res.data
+            });
+        }else{
+            dispatcher.dispatch({
+                type : "CONFIRM_TRANSACTION_REJECT_FAILED"
+            });
+        }
+    })
+    .catch((error)=>{
+        dispatcher.dispatch({
+            type : "CONFIRM_TRANSACTION_REJECT_FAILED"
+        });
+    })
+}

@@ -14,7 +14,7 @@ import jwt from 'jsonwebtoken';
 
 export default class UtilsRoutes{ 
 
-constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel, RequestModel, AccountModel, ApproveModel, ICBankModel){
+constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel, RequestModel, AccountModel, ApproveModel, ICBankModel, PayOutModel){
     this.app = this;
     this.UsersModel = UsersModel;
     this.TracksModel = TracksModel;    
@@ -26,6 +26,7 @@ constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDMod
     this.AccountModel = AccountModel;
     this.ApproveModel = ApproveModel;
     this.ICBankModel = ICBankModel;
+    this.PayOutModel = PayOutModel;
 }
 
 getGeneratedId(count, type){
@@ -400,13 +401,76 @@ routes(){
 
     utilsRouter.route('/statement/upload')
         .post((req, res)=> {
-            
             utils.saveFile(req, res);
         })
 
-    utilsRouter.route('/statement/json')
-        .get((req, res)=> {
-            //res.status(200).json(utils.xlsxToJSON('ecobank_test.xlsx'));
+    utilsRouter.route('/national_id/upload')
+        .post((req, res)=> {
+            utils.saveID(req, res);
+        })
+
+    utilsRouter.route('/transaction/reject')
+        .post((req, res)=> {
+            const uuid = req.body.uuid;
+
+            app.RequestModel.findOne({where : {uuid, status: 'P'}})
+            .then((request)=>{
+                if(request){
+                    request.update({status : 'R'})
+                    .then((request)=>{
+                        app.RequestModel.findAll({where : {transaction_code:request.transaction_code}})
+                        .then((requests)=>{
+                            if(requests){
+                                requests.map((request, i)=>{
+                                    request.update({status: 'R'});
+                                    if(i === (requests.length-1)){
+                                        app.UsersModel.findOne({where : {id : request.user_id, status : 'A'}})
+                                        .then((user)=>{
+                                            user.increment({'balance' : parseFloat(request.amount)})
+                                            .then((user)=>{
+                                                res.status(200).json({success: true});
+                                            })
+                                        })
+                                    }
+                                })
+                            }
+                        })
+                    })
+                }else{
+                    res.status(400).json({success : false});
+                }
+
+            })
+        })
+
+    utilsRouter.route('/transaction/approve')
+        .post((req, res)=> {
+            app.RequestModel.findOne({where : {uuid : req.body.uuid, transaction_code: req.body.key, status : 'P'}})
+            .then((request)=>{
+                if(request){
+                    request.update({status : 'A'})
+                    .then((request)=>{
+                         app.RequestModel.findAll({where : {transaction_code: request.transaction_code, status: 'P'}})
+                        .then((requests)=>{
+                            if(requests === null || requests.length === 0){
+                                //all approval done
+                                 app.PayOutModel.create({user_id: request.user_id,
+                                                        amount: request.amount,
+                                                        account_id: request.account_id,
+                                                        request_date: request.created_at,
+                                                        status : 'P'})
+                                        .then((payout)=>{
+                                            res.status(200).json({success : true});                                    
+                                        })
+                            }else{
+                                res.status(200).json({success : true});
+                            }
+                        })                        
+                    })
+                }else{
+                    res.status(400).json({success : false});
+                }
+            })
         })
 
     utilsRouter.route('/transaction/details/:transaction_key')
@@ -419,7 +483,7 @@ routes(){
                     let data = {};
                     data.approver = request.approver.firstname;
                     data.amount = request.amount;
-                    data.code = request.transaction_code;
+                    //data.code = request.transaction_code;
                     data.date = request.created_at;
 
                     data.user = request.user.firstname;
@@ -437,23 +501,4 @@ routes(){
 
         return utilsRouter;
     }
-
-    // upload(){
-        
-    //     return multer({storage : this.storage()});
-    // }
-
-    // storage() {
-
-    //     return multer.diskStorage({
-    //             destination: (req, file, cb) => {
-    //                 cb(null, '/Users/selby/Documents/inflexion_hrcf/app/resources/')
-    //             },
-    //             filename: (req, file, cb) => {
-    //                 cb(null, file.file + '-' + Date.now())
-    //             }
-    //     });
-    // }
-
-
 }

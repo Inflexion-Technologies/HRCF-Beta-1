@@ -135,6 +135,23 @@ export function idModel(config){
 	return ids;
 }
 
+export function imageMapModel(config){
+	const mapper = config.define('id_map', {
+	    user_id: {
+        type: Sequelize.INTEGER,
+      },
+      filename : {
+        type : Sequelize.STRING
+      },
+	    status: {
+        type: Sequelize.STRING(1),
+        defaultValue: 'A'
+	  }
+	}, {underscored: true});
+
+	return mapper;
+}
+
 export function bankStatementModel(config){
   const bankStatements = config.define('bank_statement', {
       ledger_account : {
@@ -235,7 +252,7 @@ export function accountModel(config){
 }
 
 export function requestModel(config){
-	const request = config.define('transaction_request', {
+	const request = config.define('approve_request', {
       uuid : {
         type : Sequelize.UUID,
         defaultValue : Sequelize.UUIDV1
@@ -262,6 +279,29 @@ export function requestModel(config){
 	}, {underscored: true});
 
 	return request;
+}
+
+export function payoutRequestModel(config){
+	const payout_request = config.define('payout_request', {
+	    user_id: {
+        type: Sequelize.INTEGER
+      },
+      amount : {
+        type : Sequelize.INTEGER
+      },
+      account_id: {
+        type: Sequelize.INTEGER
+      },
+      request_date : {
+        type : Sequelize.DATE
+      },
+	    status: {
+        type: Sequelize.STRING(1),
+        defaultValue : 'P'
+	    }
+	}, {underscored: true});
+
+	return payout_request;
 }
 
 export function trackModel(config){

@@ -26,37 +26,57 @@ class ConfirmTransaction extends Component {
         }
 
         this.cError = false;
-        this.codeErrorMessage = 'code do not match'
+        this.codeErrorMessage = 'code do not match';
+        this.uuid = '';
 
         this.isButtonDisabled = false;
+        this.showRejectScreen = false;
+
         this.confirmButtonText = 'Confirm';
         this.loadData = this.loadData.bind(this);
         this.loadError = this.loadError.bind(this);
         this.refresh = this.refresh.bind(this);
+        this.codeError = this.codeError.bind(this);
+        this.rejectApproval = this.rejectApproval.bind(this);
     }
 
     componentWillMount(){
-       console.log('Key => '+this.props.match.params.key);
+       this.uuid = this.props.match.params.key;
 
-        ConfirmAction.confirmTransactionDetails(this.props.match.params.key);
+       ConfirmAction.confirmTransactionDetails(this.props.match.params.key);
 
        ConfirmStore.on('confirm_transaction_details_success', this.loadData);
        ConfirmStore.on('confirm_transaction_details_failed', this.loadError);
-    }
-
-    componentWillUnMount(){
+       ConfirmStore.on('confirm_transaction_approve_failed', this.codeError);
+       ConfirmStore.on('confirm_transaction_reject_success', this.rejectApproval);
        
     }
 
+    componentWillUnMount(){
+        ConfirmStore.removeListener('confirm_transaction_details_success', this.loadData);
+        ConfirmStore.removeListener('confirm_transaction_details_failed', this.loadError);
+        ConfirmStore.on('confirm_transaction_approve_failed', this.loadError);        
+    }
+
     loadData(){
-        this.showDetais = true;
-        this.setState({
-            count : this.state.count + 1
-        })
+        this.showDetails = true;
+        this.refresh();
     }
 
     loadError(){
-        this.showDetais = false;
+        this.showDetails = false;
+        this.refresh();
+    }
+
+    codeError(){
+        this.cError = true;
+        this.codeErrorMessage = 'wrong confirmation code';
+        this.refresh();
+    }
+
+    rejectApproval(){
+        this.showRejectScreen = true;
+        this.refresh();
     }
 
     refresh(){
@@ -78,13 +98,18 @@ class ConfirmTransaction extends Component {
     onConfirmClicked(evt){
         if(this.validate()){
             this.refresh();
+            ConfirmAction.approveTransaction(this.state.code, this.uuid);
         }else{
             this.refresh();
         }
     }
 
+    onRejectClicked(e){
+        ConfirmAction.rejectTransaction(this.uuid);
+    }
+
     validate(){
-        if(this.state.code !== ConfirmStore.getCode()){
+        if(this.state.code.length < 5){
             this.cError = true;
             this.codeErrorMessage = 'code do not match';
             return false;
@@ -102,6 +127,89 @@ class ConfirmTransaction extends Component {
     } 
 
     render() {
+        if(this.showRejectScreen){
+            return (
+                <div className="login confirm">
+                    <div className="ad col-md-6 hidden-sm hidden-xs">
+                        <div>
+                            <Img src={icam_icon} className="icon" />
+                        </div>
+                        <div className="col-md-12 target">
+                            <ReactSVG path={check_tick} callback={svg => {}} className="svg"/>
+                        </div>
+                    </div>
+    
+                    <div className="control col-md-6 col-sm-12 col-xs-12">
+                            <div className="sign-in-wrapper">
+                                <div className="confirm-container" >
+                                    <div className="text-center">
+                                        <h2 className="logo">
+                                            <Img src={icam_icon2} className="login-icon" />
+                                        </h2>
+                                        <br/>
+                                        <h4 className="title-typo-style">Confirm Transaction</h4>
+                                    </div>
+    
+                                    <div className="sign-in-form">
+    
+                                        <div className="form-group sentence">
+                                            
+                                            <div className="not-available">Request Has Been Rejected!</div>
+                                            <Link to="/login" className="btn btn-md btn-default btn-block reject-btn">login</Link>
+                                        </div>
+                                    <div className="text-center copyright-txt">
+                                        <small className="typo-style">IC Asset Managers  - Copyright © 2017</small>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                ); 
+        }
+
+
+        if(!this.showDetails){
+        return (
+            <div className="login confirm">
+                <div className="ad col-md-6 hidden-sm hidden-xs">
+                    <div>
+                        <Img src={icam_icon} className="icon" />
+                    </div>
+                    <div className="col-md-12 target">
+                        <ReactSVG path={check_tick} callback={svg => {}} className="svg"/>
+                    </div>
+                </div>
+
+                <div className="control col-md-6 col-sm-12 col-xs-12">
+                        <div className="sign-in-wrapper">
+                            <div className="confirm-container" >
+                                <div className="text-center">
+                                    <h2 className="logo">
+                                        <Img src={icam_icon2} className="login-icon" />
+                                    </h2>
+                                    <br/>
+                                    <h4 className="title-typo-style">Confirm Transaction</h4>
+                                </div>
+
+                                <div className="sign-in-form">
+
+                                    <div className="form-group sentence">
+                                        
+                                        <div className="not-available">Oops, Request Has Been Approved / Rejected!</div>
+                                        <Link to="/login" className="btn btn-md btn-default btn-block reject-btn">login</Link>
+                                    </div>
+                                <div className="text-center copyright-txt">
+                                    <small className="typo-style">IC Asset Managers  - Copyright © 2017</small>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            );
+        }
+
         return (
             <div className="login confirm">
                 <div className="ad col-md-6 hidden-sm hidden-xs">
@@ -128,14 +236,6 @@ class ConfirmTransaction extends Component {
 
                                 <div className="form-group sentence">
 
-                                    Dear {ConfirmStore.getApprover()},
-
-                                    <br/>
- 
-                                    A cash withdrawal has been initiated on your investment account held with us with the details below:
-                                    <br/>
-                                    <div className="breaker"></div>
-
                                     Initiator: <span className="values">{ConfirmStore.getRequester()}</span>
                                     <br/>
                                     <div className="breaker"></div>
@@ -153,17 +253,6 @@ class ConfirmTransaction extends Component {
                                     <br/>
                                     <div className="breaker"></div>
 
-
-
-                                    Your Approval Code is: <span className="code">{ConfirmStore.getCode()}</span> 
-                                    <br/>
-                                    <div className="breaker"></div>
-                                     
-                                    Click below to authorize the transaction by entering your approval code , or reject transaction.
-
-
-                                    This code is required to complete the transaction.
-
                                 </div>
                                 
                                 <div className="form-group">
@@ -176,7 +265,7 @@ class ConfirmTransaction extends Component {
                             
                                 <button className="btn btn-block approve-btn" onClick={this.onConfirmClicked.bind(this)} disabled={this.isButtonDisabled}>{this.confirmButtonText}</button>
                                 
-                                <Link to="/login" className="btn btn-md btn-default btn-block reject-btn">reject</Link>
+                                <button className="btn btn-md btn-default btn-block reject-btn" onClick={this.onRejectClicked.bind(this)}>reject</button>
                             </div>
                             <div className="text-center copyright-txt">
                                 <small className="typo-style">IC Asset Managers  - Copyright © 2017</small>

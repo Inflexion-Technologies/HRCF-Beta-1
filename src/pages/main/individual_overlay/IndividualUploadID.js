@@ -17,7 +17,7 @@ class IndividualUploadID extends Component {
       idnumber : '',
       multi : false,
       value : '',
-      uploadFile : 'Browse Files',
+      uploadFile : 'Upload File',
       count : 0
     }
 
@@ -145,14 +145,14 @@ class IndividualUploadID extends Component {
   render() {
     let show = false;
     let options={
-        baseUrl:'/api/utils/statement/upload',
+        baseUrl:'/api/utils/national_id/upload',
         dataType : 'json',
         wrapperDisplay : 'block',
         multiple: false,
         numberLimit: 1,
-        accept: 'application/xlsx',
-        chooseAndUpload : false,
-        paramAddToField : {purpose: 'save'},
+        accept: 'image/*',
+        chooseAndUpload : true,
+        paramAddToField : {user_id: OverlayStore.getUserId(), type : this.type},
         fileFieldName : 'file',
         chooseFile : (files)=>{
             this.setState({uploadFile : files[0].name});
@@ -178,7 +178,7 @@ class IndividualUploadID extends Component {
                         <span className={this.iError ? 'error' : 'vamus'}>{this.idnumberError}</span>
                     </div>
                     <div className="clearfix"></div>
-                    <FileUpload className="show" options={options}>
+                    {/* <FileUpload className="show" options={options}>
                         <div ref="chooseBtn" className="form-style show">
                             <button className="btn btn-info btn-block" >{this.state.uploadFile}</button>
                         </div>
@@ -189,6 +189,13 @@ class IndividualUploadID extends Component {
                             <button className="btn btn-info btn-block">Upload</button>
                             <span className={this.uError ? 'error' : 'vamus'}>{this.uploadError}</span>
                         </div>
+                    </FileUpload> */}
+                    <FileUpload className="show" options={options}>
+                        <div ref="chooseAndUpload" className="form-style show">
+                            <button className="btn btn-info btn-block" >{this.state.uploadFile}</button>
+                        </div>
+
+                        <div className="clearfix"></div>
                     </FileUpload>
                     <div className="clearfix"></div>
                 </div>

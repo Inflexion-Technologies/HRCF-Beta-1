@@ -139,6 +139,10 @@ class OverlayStore extends EventEmitter{
     this.user.companyInfo = detail;
    }
 
+   getUserId(){
+       return cookie.load('id');
+   }
+
    getAllInfo(){
     let data = {};
 

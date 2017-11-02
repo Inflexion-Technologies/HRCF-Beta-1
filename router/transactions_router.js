@@ -4,11 +4,12 @@ import gen from 'shortid';
     
 export default class TransactionsRoutes{
 
-    constructor(TransactionModel, UserModel, RequestModel, ApproveModel){
+    constructor(TransactionModel, UserModel, RequestModel, ApproveModel, CreditModel){
         this.TransactionModel = TransactionModel;
         this.UserModel = UserModel;
         this.RequestModel = RequestModel;
         this.ApproveModel = ApproveModel;
+        this.CreditModel = CreditModel;
     }
 
     routes(){
@@ -43,6 +44,28 @@ export default class TransactionsRoutes{
                         res.status(200).json(user);
                     }else{
                         res.status(403).send('Nothing Found');
+                    } 
+               })
+            });
+
+        // transactionsRouter.route('/interest/user/:user_id')
+        //     .get((req, res)=>{
+        //        app.UserModel.findOne({ where : {id : req.params.user_id, status : 'A'}, attributes : ['id','balance'] }).then(user =>{
+        //             if(user){
+        //                 res.status(200).json(user);
+        //             }else{
+        //                 res.status(403).send('Nothing Found');
+        //             } 
+        //        })
+        //     });
+
+        transactionsRouter.route('/contributions/user/:user_id')
+            .get((req, res)=>{
+               app.CreditModel.sum('amount', { where : {id : req.params.user_id, status : 'A'} }).then(credit =>{
+                    if(credit){
+                        res.status(200).json({total : credit});
+                    }else{
+                        res.status(403).send({total: 0});
                     } 
                })
             });
@@ -104,6 +127,7 @@ export default class TransactionsRoutes{
         .then((approvers)=>{
             return approvers.map((approver)=>{
                 const approver_id = approver.id;
+                const approve_name = approver.firstname;
                 let counter = 0;
 
                 return app.RequestModel.create({transaction_code, 
@@ -119,7 +143,7 @@ export default class TransactionsRoutes{
 
                                         if(counter === (approvers.length)){
                                             const utils = require('../services/utils');
-                                            utils.sendEmail(email, 'Confirm', request.uuid);
+                                            utils.sendApprovalEmail(approve_name, email, request.uuid, transaction_code);
                                             res.status(200).json({success : true})
                                         }
                                     })

@@ -1,13 +1,14 @@
 import {EventEmitter} from 'events';
 import dispatcher from '../dispatcher';
 import cookie from 'react-cookies';
+import format from 'format-number';
+
 
 class MainStore extends EventEmitter{
     constructor(){
         super();
-        this.user = {
-            
-        }
+        this.balance = 0;
+        this.contribution = 0;
     }
 
     initUser (...user){
@@ -28,9 +29,40 @@ class MainStore extends EventEmitter{
         return this.user;
     }
 
+    doDashboardUserBalance(data){
+        if(data.balance){
+            this.balance = data.balance;
+            this.emit('dashboard_user_balance');
+        }
+    }
+
+    doDashboardUserContribution(data){
+        if(data.balance){
+            this.contribution = data.balance;
+            this.emit('dashboard_user_contribution');
+        }
+    }
+
+    getBalance(){
+        const formatStyle = format({integerSeparator:','});
+        
+        return formatStyle(this.balance) === '' ? '0.00':formatStyle(this.balance);
+    }
+
+    getContribution(){
+        const formatStyle = format({integerSeparator:','});
+        
+        return formatStyle(this.contribution) === '' ? '0.00':formatStyle(this.contribution);
+    }
+
     handleActions(action){
         switch(action.type){
-            case 'MAIN_LOAD_OFFICERS' : {
+            case 'DASHBOARD_USER_BALANCE' : {
+                this.doDashboardUserBalance(action.data);
+                break;
+            } 
+            case 'DASHBOARD_USER_CONTRIBUTION' : {
+                this.doDashboardUserContribution(action.data);
                 break;
             } 
             default:{}

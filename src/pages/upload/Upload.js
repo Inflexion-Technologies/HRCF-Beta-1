@@ -121,10 +121,10 @@ class Upload extends Component {
                                     </select>                        
                                 </div>
 
-                                <div className="form-group">
+                                {/* <div className="form-group">
                                     <input type="text" className="form-control" value={this.state.desc} placeholder="Description" onChange={this.onDescriptionChange.bind(this)} />
                                     <span className={this.state.uError ? 'error' : 'vamus'}>{this.descriptionErrorMessage}</span>
-                                </div>
+                                </div> */}
 
                                 <FileUpload className="show" options={options}>
                                     <div ref="chooseBtn" className="form-group show">

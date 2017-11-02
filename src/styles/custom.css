@@ -798,6 +798,15 @@
     font-weight: 600
 }
 
+.confirm .sentence .not-available{
+    color: #FEFEFE;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
 .confirm .reject-btn{
     background: none;
     color: #FEFEFE;

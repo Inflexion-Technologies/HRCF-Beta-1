@@ -76,8 +76,8 @@ module.exports = require("express");
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 
-var Sequelize = __webpack_require__(11);
-var path = __webpack_require__(5);
+var Sequelize = __webpack_require__(13);
+var path = __webpack_require__(4);
 
 var config = {
     IP: process.env.SERVER_IP || 'http://localhost',
@@ -115,7 +115,7 @@ module.exports = { config: config, sequelize: sequelize };
 "use strict";
 
 
-var _ = __webpack_require__(4);
+var _ = __webpack_require__(6);
 
 exports.getHash = function (password) {
     var crypto = __webpack_require__(31);
@@ -159,8 +159,8 @@ exports.xlsxToJSON = function (filename) {
 
 exports.sendEmail = function (sender, title, message) {
     var config = __webpack_require__(1).config;
-    var smtpTransport = __webpack_require__(12);
-    var nodemailer = __webpack_require__(13);
+    var smtpTransport = __webpack_require__(14);
+    var nodemailer = __webpack_require__(15);
 
     // create reusable transporter object using the default SMTP transport
     var transporter = nodemailer.createTransport(smtpTransport({
@@ -193,16 +193,72 @@ exports.sendEmail = function (sender, title, message) {
     });
 };
 
+exports.saveID = function (req, res) {
+    var models = __webpack_require__(5);
+    var sequelize = __webpack_require__(1).sequelize;
+    var usersModel = models.usersModel(sequelize);
+    var imageMapModel = models.imageMapModel(sequelize);
+
+    var imgFilename = '';
+    var fs = __webpack_require__(8);
+    var multer = __webpack_require__(9);
+    var storage = multer.diskStorage({
+        destination: function destination(req, file, callback) {
+            var path = __webpack_require__(4);
+            var dest = path.resolve('./uploads');
+            fs.ensureDirSync(dest);
+            callback(null, dest);
+        },
+        filename: function filename(req, file, callback) {
+            imgFilename = Date.now() + '.jpg';
+            callback(null, imgFilename);
+        }
+    });
+    var upload = multer({
+        storage: storage,
+        limits: {
+            fileSize: 256 * 1024 * 1024
+        },
+        fileFilter: function fileFilter(req, file, cb) {
+            cb(null, true);
+        }
+    }).single('file');
+
+    upload(req, res, function (err) {
+        if (err) {
+            console.log(err);
+            return res.end('Error');
+        } else {
+            if (req.file && req.body) {
+                console.log(req.file);
+                console.log(req.body);
+                var user_id = req.body.user_id;
+
+                imageMapModel.findOne({ where: { user_id: user_id, status: 'A' } }).then(function (mapper) {
+                    if (mapper) {
+                        mapper.update({ filename: imgFilename });
+                    } else {
+                        imageMapModel.create({ user_id: req.body.user_id, filename: imgFilename });
+                    }
+                    res.status(200).json({ success: true });
+                });
+            } else {
+                res.end('Unsuccessful Upload');
+            }
+        }
+    });
+};
+
 exports.saveFile = function (req, res) {
-    var models = __webpack_require__(6);
+    var models = __webpack_require__(5);
     var sequelize = __webpack_require__(1).sequelize;
     var usersModel = models.usersModel(sequelize);
 
-    var fs = __webpack_require__(14);
-    var multer = __webpack_require__(15);
+    var fs = __webpack_require__(8);
+    var multer = __webpack_require__(9);
     var storage = multer.diskStorage({
         destination: function destination(req, file, callback) {
-            var path = __webpack_require__(5);
+            var path = __webpack_require__(4);
             var dest = path.resolve('./uploads');
             fs.ensureDirSync(dest);
             callback(null, dest);
@@ -230,13 +286,15 @@ exports.saveFile = function (req, res) {
                 console.log(req.file);
                 console.log(req.body);
 
+                var ic_bank_id = req.body.bank_id;
+
                 usersModel.findOne({ where: { id: req.body.user_id, is_admin: 'Y', status: 'A' } }).then(function (user) {
                     if (user) {
                         var parseXlsx = __webpack_require__(7);
 
                         parseXlsx(req.file.path, function (err, data) {
                             if (err) throw err;
-                            compute(req, res, data);
+                            compute(req, res, data, ic_bank_id);
                         });
                     } else {
                         res.status(400).json({ success: false });
@@ -249,10 +307,17 @@ exports.saveFile = function (req, res) {
     });
 };
 
+exports.sendApprovalEmail = function (name, email, uuid, code) {
+    var config = __webpack_require__(1).config;
+
+    var baseUrl = config.IP + ':' + config.PORT;
+    sendEmail(email, 'Approve Request', approveEmailTemplate(baseUrl, code, name, uuid));
+};
+
 var sendEmail = function sendEmail(sender, title, message) {
     var config = __webpack_require__(1).config;
-    var smtpTransport = __webpack_require__(12);
-    var nodemailer = __webpack_require__(13);
+    var smtpTransport = __webpack_require__(14);
+    var nodemailer = __webpack_require__(15);
 
     // create reusable transporter object using the default SMTP transport
     var transporter = nodemailer.createTransport(smtpTransport({
@@ -267,7 +332,7 @@ var sendEmail = function sendEmail(sender, title, message) {
 
     // setup email data with unicode symbols
     var mailOptions = {
-        from: '"HRCF Confirmation" <noreply@icassetmanagers.com>', // sender address
+        from: '"HRCF" <noreply@icassetmanagers.com>', // sender address
         to: sender, // list of receivers
         subject: title, // Subject line
         html: message // plain text body
@@ -284,12 +349,12 @@ var sendEmail = function sendEmail(sender, title, message) {
     });
 };
 
-var compute = function compute(req, res, data) {
+var compute = function compute(req, res, data, ic_bank_id) {
     if (data) {
-        var _ = __webpack_require__(4);
+        var _ = __webpack_require__(6);
 
         //Import Models
-        var models = __webpack_require__(6);
+        var models = __webpack_require__(5);
         var sequelize = __webpack_require__(1).sequelize;
 
         var creditModel = models.creditModel(sequelize);
@@ -362,7 +427,8 @@ var compute = function compute(req, res, data) {
                     description: data.description,
                     sponsor_code: data.sponsor_code,
                     client_code: data.client_code,
-                    account_number: data.account_number
+                    account_number: data.account_number,
+                    ic_bank_id: ic_bank_id
                 });
             });
         } else {
@@ -373,12 +439,17 @@ var compute = function compute(req, res, data) {
 
 var registeringEmailTemplate = function registeringEmailTemplate(name) {
 
-    return '<html>\n        <head>\n        \n            <meta charset="utf-8" http-equiv="Content-Type" content="text/html" />\n            <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />\n            <meta name="format-detection" content="telephone=no" />\n              <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />\n            <title>HRCF</title>\n            <style type="text/css">\n                \n                @import url(https://fonts.googleapis.com/css?family=Fredoka+One);\n                @import url(https://fonts.googleapis.com/css?family=Quicksand);\n                @import url(https://fonts.googleapis.com/css?family=Open+Sans);\n        \n                .ReadMsgBody{width:100%;background-color:#ffffff;}\n                .ExternalClass{width:100%;background-color:#ffffff;}\n                .ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{line-height:100%;}\n                html{width: 100%;}\n                body{-webkit-text-size-adjust:none;-ms-text-size-adjust:none;margin:0;padding:0;}\n                table{border-spacing:0;border-collapse:collapse;}\n                table td{border-collapse:collapse;}\n                img{display:block !important;}\n                a{text-decoration:none;color:#e91e63;}\n        \n                @media only screen and (max-width:640px) {\n                    body{width:auto !important;}\n                    table[class="tab-1"] {width:450px !important;}\n                    table[class="tab-2"] {width:47% !important;text-align:left !important;}\n                    table[class="tab-3"] {width:100% !important;text-align:center !important;}\n                    img[class="img-1"] {width:100% !important;height:auto !important;}\n                }\n        \n                /* ==> Responsive CSS For Phones <== */\n                @media only screen and (max-width:480px) {\n                    body { width: auto !important; }\n                    table[class="tab-1"] {width:290px !important;}\n                    table[class="tab-2"] {width:100% !important;text-align:left !important;}\n                    table[class="tab-3"] {width:100% !important;text-align:center !important;}\n                    img[class="img-1"] {width:100% !important;}\n                }\n        \n            </style>\n        </head>\n        <body bgcolor="#f6f6f6">\n            <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">\n                <tr >\n                    <td align="center">\n                        <table class="tab-1" align="center" cellspacing="0" cellpadding="0" width="600">\n        \n                            <tr><td height="60"></td></tr>\n                            <!-- Logo -->\n                            <tr>\n                                        <td align="center">\n                                            <img src="img/01-logo.png" alt="Logo" width="87">\n                                        </td>\n        \n                            </tr>\n        \n                            <tr><td height="35"></td></tr>\n        \n                            <tr>\n                                <td>\n        \n                                    <table class="tab-3" width="600" align="left" cellspacing="0" cellpadding="0" bgcolor="#fff" >\n                                        <tr >\n                                            <td align="left" style="font-family: \'open Sans\', sans-serif; font-weight: bold; letter-spacing: 1px; color: #737f8d; font-size: 20px;padding-top: 80px; padding-left: 80px; padding-right: 80px">\n                                                Hey ' + name + ',\n                                            </td>\n                                        </tr>\n                                        <tr><td height="10"></td></tr>\n                                        <tr>\n        \n                                            <td align="left" style="color: #737f8d; font-family: \'open sans\',sans-serif; font-weight: normal; font-size: 17px;padding-bottom: 50px; padding-left: 80px; padding-right: 80px">\n                                                Thanks for registering for an account on HRCF! Before we get started, we just need to confirm that this is you. Click below to verify your email address:\n                                            </td>\n                                        </tr>\n                                        <tr>\n                                            <td style="padding-bottom: 50px; padding-left: 80px; padding-right: 80px" >\n                                                <table align="center" bgcolor="#0d47a1" >\n                                                    <tr >\n                                                        <td align="center" style="font-family: \'open sans\', sans-serif; font-weight: bold; letter-spacing: 2px; border: 1px solid #0d47a1; padding: 13px 35px;">\n                                                            <a href="#" style="color: #fff">VERIFY</a>\n                                                        </td>\n                                                    </tr>\n                                                </table>\n                                            </td>\n                                        </tr>\n                                    </table>\n                                    <tr>\n                                            <td style="padding-top: 10px; font-family: \'open sans\', sans-serif; " align="center">\n                                                <p style="color:#737f8d;text-align:\'center\' ">\n                                                    <small >\n                                                        <span >You\'re receiving this email because you signed up for and account on HRCF</span><br />\n                                                        <span >The Victoria, Plot No. 131. North Labone, Accra-Ghana </span><br />\n                                                        <span >P.M.B 104, GP Accra - Ghana</span>\n                                                    </small>\n                                                </p>\n                                            </td>\n                                        </tr>\n        \n                                    \n                                    \n                                </td>\n                            </tr>\n        \n                            <tr><td height="60"></td></tr>\n        \n                        </table>\n                    </td>\n                </tr>\n            </table>\n         </body>\n        </html>';
+    return '<html>\n       <head>\n       \n           <meta charset="utf-8" http-equiv="Content-Type" content="text/html" />\n           <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />\n           <meta name="format-detection" content="telephone=no" />\n             <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />\n           <title>HRCF</title>\n           <style type="text/css">\n               \n               /* ==> Importing Fonts <== */\n               @import url(https://fonts.googleapis.com/css?family=Fredoka+One);\n               @import url(https://fonts.googleapis.com/css?family=Quicksand);\n               @import url(https://fonts.googleapis.com/css?family=Open+Sans);\n       \n               /* ==> Global CSS <== */\n               .ReadMsgBody{width:100%;background-color:#ffffff;}\n               .ExternalClass{width:100%;background-color:#ffffff;}\n               .ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{line-height:100%;}\n               html{width: 100%;}\n               body{-webkit-text-size-adjust:none;-ms-text-size-adjust:none;margin:0;padding:0;}\n               table{border-spacing:0;border-collapse:collapse;}\n               table td{border-collapse:collapse;}\n               img{display:block !important;}\n               a{text-decoration:none;color:#e91e63;}\n       \n               /* ==> Responsive CSS For Tablets <== */\n               @media only screen and (max-width:640px) {\n                   body{width:auto !important;}\n                   table[class="tab-1"] {width:450px !important;}\n                   table[class="tab-2"] {width:47% !important;text-align:left !important;}\n                   table[class="tab-3"] {width:100% !important;text-align:center !important;}\n                   img[class="img-1"] {width:100% !important;height:auto !important;}\n               }\n       \n               /* ==> Responsive CSS For Phones <== */\n               @media only screen and (max-width:480px) {\n                   body { width: auto !important; }\n                   table[class="tab-1"] {width:290px !important;}\n                   table[class="tab-2"] {width:100% !important;text-align:left !important;}\n                   table[class="tab-3"] {width:100% !important;text-align:center !important;}\n                   img[class="img-1"] {width:100% !important;}\n               }\n       \n           </style>\n       </head>\n       <body bgcolor="#f6f6f6">\n           <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">\n               <tr >\n                   <td align="center">\n                       <table class="tab-1" align="center" cellspacing="0" cellpadding="0" width="600">\n       \n                           <tr><td height="60"></td></tr>\n                           <!-- Logo -->\n                           <tr>\n                                       <td align="center">\n                                           <img src="img/01-logo.png" alt="Logo" width="87">\n                                       </td>\n       \n                           </tr>\n       \n                           <tr><td height="35"></td></tr>\n       \n                           <tr>\n                               <td>\n       \n                                   <table class="tab-3" width="600" align="left" cellspacing="0" cellpadding="0" bgcolor="#fff" >\n                                       <tr >\n                                           <td align="left" style="font-family: \'open Sans\', sans-serif; font-weight: bold; letter-spacing: 1px; color: #737f8d; font-size: 20px;padding-top: 50px; padding-left: 40px; padding-right: 40px">\n                                               Hey' + name + ',\n                                           </td>\n                                       </tr>\n                                       <tr><td height="10"></td></tr>\n                                       <tr>\n       \n                                           <td align="left" style="color: #737f8d; font-family: \'open sans\',sans-serif; font-weight: normal; font-size: 17px;padding-bottom: 50px; padding-left: 40px; padding-right: 40px">\n                                               Thanks for registering for an account on HRCF! Before we get started, we just need to confirm that this is you. Click below to verify your email address:\n                                           </td>\n                                       </tr>\n                                       <tr>\n                                           <td style="padding-bottom: 50px; padding-left: 40px; padding-right: 40px" >\n                                               <table align="center" bgcolor="#0d47a1" >\n                                                   <tr >\n                                                       <td align="center" style="font-family: \'open sans\', sans-serif; font-weight: bold; letter-spacing: 2px; border: 1px solid #0d47a1; padding: 15px 25px;">\n                                                           <a href="#" style="color: #fff">VERIFY</a>\n                                                       </td>\n                                                   </tr>\n                                               </table>\n                                           </td>\n                                       </tr>\n                                   </table>\n                                   <tr>\n                                           <td style="padding-top: 10px; font-family: \'open sans\', sans-serif; " align="center">\n                                               <p style="color:#737f8d;text-align:\'center\' ">\n                                                   <small >\n                                                       <span >You\'re receiving this email because you signed up for and account on HRCF</span><br />\n                                                       <span >The Victoria, Plot No. 131. North Labone, Accra-Ghana </span><br />\n                                                       <span >P.M.B 104, GP Accra - Ghana</span>\n                                                   </small>\n                                               </p>\n                                           </td>\n                                       </tr>\n       \n                                   \n                                   \n                               </td>\n                           </tr>\n       \n                           <tr><td height="60"></td></tr>\n       \n                       </table>\n                   </td>\n               </tr>\n           </table>\n        </body>\n       </html>';
 };
 
 var creditEmailTemplate = function creditEmailTemplate(name, amount, balance) {
 
-    return '<html>\n         <head>\n         \n             <meta charset="utf-8" http-equiv="Content-Type" content="text/html" />\n             <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />\n             <meta name="format-detection" content="telephone=no" />\n               <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />\n             <title>HRCF</title>\n             <style type="text/css">\n                 \n                 @import url(https://fonts.googleapis.com/css?family=Fredoka+One);\n                 @import url(https://fonts.googleapis.com/css?family=Quicksand);\n                 @import url(https://fonts.googleapis.com/css?family=Open+Sans);\n         \n                 .ReadMsgBody{width:100%;background-color:#ffffff;}\n                 .ExternalClass{width:100%;background-color:#ffffff;}\n                 .ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{line-height:100%;}\n                 html{width: 100%;}\n                 body{-webkit-text-size-adjust:none;-ms-text-size-adjust:none;margin:0;padding:0;}\n                 table{border-spacing:0;border-collapse:collapse;}\n                 table td{border-collapse:collapse;}\n                 img{display:block !important;}\n                 a{text-decoration:none;color:#e91e63;}\n         \n                 @media only screen and (max-width:640px) {\n                     body{width:auto !important;}\n                     table[class="tab-1"] {width:450px !important;}\n                     table[class="tab-2"] {width:47% !important;text-align:left !important;}\n                     table[class="tab-3"] {width:100% !important;text-align:center !important;}\n                     img[class="img-1"] {width:100% !important;height:auto !important;}\n                 }\n         \n                 /* ==> Responsive CSS For Phones <== */\n                 @media only screen and (max-width:480px) {\n                     body { width: auto !important; }\n                     table[class="tab-1"] {width:290px !important;}\n                     table[class="tab-2"] {width:100% !important;text-align:left !important;}\n                     table[class="tab-3"] {width:100% !important;text-align:center !important;}\n                     img[class="img-1"] {width:100% !important;}\n                 }\n         \n             </style>\n         </head>\n         <body bgcolor="#f6f6f6">\n             <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">\n                 <tr >\n                     <td align="center">\n                         <table class="tab-1" align="center" cellspacing="0" cellpadding="0" width="600">\n         \n                             <tr><td height="60"></td></tr>\n                             <!-- Logo -->\n                             <tr>\n                                         <td align="center">\n                                             <img src="img/01-logo.png" alt="Logo" width="87">\n                                         </td>\n         \n                             </tr>\n         \n                             <tr><td height="35"></td></tr>\n         \n                             <tr>\n                                 <td>\n         \n                                     <table class="tab-3" width="600" align="left" cellspacing="0" cellpadding="0" bgcolor="#fff" >\n                                         <tr >\n                                             <td align="left" style="font-family: \'open Sans\', sans-serif; font-weight: bold; letter-spacing: 1px; color: #737f8d; font-size: 20px;padding-top: 80px; padding-left: 80px; padding-right: 80px">\n                                                 Hey ' + name + ',\n                                             </td>\n                                         </tr>\n                                         <tr><td height="10"></td></tr>\n                                         <tr>\n         \n                                             <td align="left" style="color: #737f8d; font-family: \'open sans\',sans-serif; font-weight: normal; font-size: 17px;padding-bottom: 50px; padding-left: 80px; padding-right: 80px">\n                                                 Thanks for registering for an account on HRCF! Before we get started, we just need to confirm that this is you. Click below to verify your email address:\n                                             </td>\n                                         </tr>\n                                         <tr>\n                                             <td style="padding-bottom: 50px; padding-left: 80px; padding-right: 80px" >\n                                                 <table align="center" bgcolor="#0d47a1" >\n                                                     <tr >\n                                                         <td align="center" style="font-family: \'open sans\', sans-serif; font-weight: bold; letter-spacing: 2px; border: 1px solid #0d47a1; padding: 13px 35px;">\n                                                             <a href="#" style="color: #fff">VERIFY</a>\n                                                         </td>\n                                                     </tr>\n                                                 </table>\n                                             </td>\n                                         </tr>\n                                     </table>\n                                     <tr>\n                                             <td style="padding-top: 10px; font-family: \'open sans\', sans-serif; " align="center">\n                                                 <p style="color:#737f8d;text-align:\'center\' ">\n                                                     <small >\n                                                         <span >You\'re receiving this email because you signed up for and account on HRCF</span><br />\n                                                         <span >The Victoria, Plot No. 131. North Labone, Accra-Ghana </span><br />\n                                                         <span >P.M.B 104, GP Accra - Ghana</span>\n                                                     </small>\n                                                 </p>\n                                             </td>\n                                         </tr>\n         \n                                     \n                                     \n                                 </td>\n                             </tr>\n         \n                             <tr><td height="60"></td></tr>\n         \n                         </table>\n                     </td>\n                 </tr>\n             </table>\n          </body>\n         </html>';
+    return '<html>\n        <head>\n        \n            <meta charset="utf-8" http-equiv="Content-Type" content="text/html" />\n            <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />\n            <meta name="format-detection" content="telephone=no" />\n              <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />\n            <title>HRCF</title>\n            <style type="text/css">\n                \n                /* ==> Importing Fonts <== */\n                @import url(https://fonts.googleapis.com/css?family=Fredoka+One);\n                @import url(https://fonts.googleapis.com/css?family=Quicksand);\n                @import url(https://fonts.googleapis.com/css?family=Open+Sans);\n        \n                /* ==> Global CSS <== */\n                .ReadMsgBody{width:100%;background-color:#ffffff;}\n                .ExternalClass{width:100%;background-color:#ffffff;}\n                .ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{line-height:100%;}\n                html{width: 100%;}\n                body{-webkit-text-size-adjust:none;-ms-text-size-adjust:none;margin:0;padding:0;}\n                table{border-spacing:0;border-collapse:collapse;}\n                table td{border-collapse:collapse;}\n                img{display:block !important;}\n                a{text-decoration:none;color:#e91e63;}\n        \n                /* ==> Responsive CSS For Tablets <== */\n                @media only screen and (max-width:640px) {\n                    body{width:auto !important;}\n                    table[class="tab-1"] {width:450px !important;}\n                    table[class="tab-2"] {width:47% !important;text-align:left !important;}\n                    table[class="tab-3"] {width:100% !important;text-align:center !important;}\n                    img[class="img-1"] {width:100% !important;height:auto !important;}\n                }\n        \n                /* ==> Responsive CSS For Phones <== */\n                @media only screen and (max-width:480px) {\n                    body { width: auto !important; }\n                    table[class="tab-1"] {width:290px !important;}\n                    table[class="tab-2"] {width:100% !important;text-align:left !important;}\n                    table[class="tab-3"] {width:100% !important;text-align:center !important;}\n                    img[class="img-1"] {width:100% !important;}\n                }\n        \n            </style>\n        </head>\n        <body bgcolor="#f6f6f6">\n            <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">\n                <tr >\n                    <td align="center">\n                        <table class="tab-1" align="center" cellspacing="0" cellpadding="0" width="600">\n        \n                            <tr><td height="60"></td></tr>\n                            <!-- Logo -->\n                            <tr>\n                                        <td align="center">\n                                            <img src="img/01-logo.png" alt="Logo" width="87">\n                                        </td>\n        \n                            </tr>\n        \n                            <tr><td height="35"></td></tr>\n        \n                            <tr>\n                                <td>\n        \n                                    <table class="tab-3" width="600" align="left" cellspacing="0" cellpadding="0" bgcolor="#fff" >\n                                        <tr >\n                                            <td align="left" style="font-family: \'open Sans\', sans-serif; font-weight: bold; letter-spacing: 1px; color: #737f8d; font-size: 20px;padding-top: 50px; padding-left: 40px; padding-right: 40px">\n                                                Hey ' + name + ',\n                                            </td>\n                                        </tr>\n                                        <tr><td height="10"></td></tr>\n                                        <tr>\n        \n                                            <td align="left" style="color: #737f8d; font-family: \'open sans\',sans-serif; font-weight: normal; font-size: 17px;padding-bottom: 50px; padding-left: 40px; padding-right: 40px">\n                                                Thanks for registering for an account on HRCF! Before we get started, we just need to confirm that this is you. Click below to verify your email address:\n                                            </td>\n                                        </tr>\n                                        <tr>\n                                            <td style="padding-bottom: 50px; padding-left: 40px; padding-right: 40px" >\n                                                <table align="center" bgcolor="#0d47a1" >\n                                                    <tr >\n                                                        <td align="center" style="font-family: \'open sans\', sans-serif; font-weight: bold; letter-spacing: 2px; border: 1px solid #0d47a1; padding: 15px 25px;">\n                                                            <a href="#" style="color: #fff">VERIFY</a>\n                                                        </td>\n                                                    </tr>\n                                                </table>\n                                            </td>\n                                        </tr>\n                                    </table>\n                                    <tr>\n                                            <td style="padding-top: 10px; font-family: \'open sans\', sans-serif; " align="center">\n                                                <p style="color:#737f8d;text-align:\'center\' ">\n                                                    <small >\n                                                        <span >You\'re receiving this email because you signed up for and account on HRCF</span><br />\n                                                        <span >The Victoria, Plot No. 131. North Labone, Accra-Ghana </span><br />\n                                                        <span >P.M.B 104, GP Accra - Ghana</span>\n                                                    </small>\n                                                </p>\n                                            </td>\n                                        </tr>\n        \n                                    \n                                    \n                                </td>\n                            </tr>\n        \n                            <tr><td height="60"></td></tr>\n        \n                        </table>\n                    </td>\n                </tr>\n            </table>\n         </body>\n        </html>';
+};
+
+var approveEmailTemplate = function approveEmailTemplate(baseUrl, code, name, uuid) {
+
+    return '<html>\n        <head>\n        \n            <meta charset="utf-8" http-equiv="Content-Type" content="text/html" />\n            <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />\n            <meta name="format-detection" content="telephone=no" />\n              <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />\n            <title>HRCF</title>\n            <style type="text/css">\n                \n                /* ==> Importing Fonts <== */\n                @import url(https://fonts.googleapis.com/css?family=Fredoka+One);\n                @import url(https://fonts.googleapis.com/css?family=Quicksand);\n                @import url(https://fonts.googleapis.com/css?family=Open+Sans);\n        \n                /* ==> Global CSS <== */\n                .ReadMsgBody{width:100%;background-color:#ffffff;}\n                .ExternalClass{width:100%;background-color:#ffffff;}\n                .ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{line-height:100%;}\n                html{width: 100%;}\n                body{-webkit-text-size-adjust:none;-ms-text-size-adjust:none;margin:0;padding:0;}\n                table{border-spacing:0;border-collapse:collapse;}\n                table td{border-collapse:collapse;}\n                img{display:block !important;}\n                a{text-decoration:none;color:#e91e63;}\n        \n                /* ==> Responsive CSS For Tablets <== */\n                @media only screen and (max-width:640px) {\n                    body{width:auto !important;}\n                    table[class="tab-1"] {width:450px !important;}\n                    table[class="tab-2"] {width:47% !important;text-align:left !important;}\n                    table[class="tab-3"] {width:100% !important;text-align:center !important;}\n                    img[class="img-1"] {width:100% !important;height:auto !important;}\n                }\n        \n                /* ==> Responsive CSS For Phones <== */\n                @media only screen and (max-width:480px) {\n                    body { width: auto !important; }\n                    table[class="tab-1"] {width:290px !important;}\n                    table[class="tab-2"] {width:100% !important;text-align:left !important;}\n                    table[class="tab-3"] {width:100% !important;text-align:center !important;}\n                    img[class="img-1"] {width:100% !important;}\n                }\n        \n            </style>\n        </head>\n        <body bgcolor="#f6f6f6">\n            <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">\n                <tr >\n                    <td align="center">\n                        <table class="tab-1" align="center" cellspacing="0" cellpadding="0" width="600">\n        \n                            <tr><td height="60"></td></tr>\n                            <!-- Logo -->\n                            <tr>\n                                        <td align="center">\n                                            <img src="img/01-logo.png" alt="Logo" width="87">\n                                        </td>\n        \n                            </tr>\n        \n                            <tr><td height="35"></td></tr>\n        \n                            <tr>\n                                <td>\n        \n                                    <table class="tab-3" width="600" align="left" cellspacing="0" cellpadding="0" bgcolor="#fff" >\n                                        <tr >\n                                            <td align="left" style="font-family: \'open Sans\', sans-serif;letter-spacing: 1px; color: #737f8d; font-size: 20px;padding-top: 50px; padding-left: 40px; padding-right: 40px">\n                                            Dear ' + name + ',\n                                            <br>\n                                            <br>\n                                            A cash withdrawal has been initiated on your investment account held with us\n                                            </td>\n                                        </tr>\n                                        <tr><td height="10"></td></tr>\n                                        <tr>\n        \n                                            <td align="left" style="color: #737f8d; font-family: \'open sans\',sans-serif; font-weight: normal; font-size: 17px;padding-bottom: 50px; padding-left: 40px; padding-right: 40px">\n                                            </td>\n                                        </tr>\n\n                                        <tr>\n                                            <td align="left" style="color: #737f8d; font-family: \'open sans\',sans-serif; font-weight: normal; font-size: 17px;padding-bottom: 50px; padding-left: 40px; padding-right: 40px;word-spacing: 3px;">\n                                                Your approval code: <span style="font-weight:600;font-size: 24px;letter-spacing: 1px">' + code + '</span>\n                                                <br>\n                                                <br>\n                                                Click below to authorize the transaction by entering your approval code, or reject transaction. <br/>\n                                                This code is required to complete the transaction.\n                                            </td>\n                                        </tr>\n\n                                        <tr>\n                                            <td style="padding-bottom: 50px; padding-left: 40px; padding-right: 40px" >\n                                                <table align="center" bgcolor="#0d47a1" >\n                                                    <tr >\n                                                        <td align="center" style="font-family: \'open sans\', sans-serif; font-weight: bold; letter-spacing: 2px; border: 1px solid #0d47a1; padding: 15px 25px;">\n                                                            <a href="' + baseUrl + '/confirm/' + uuid + '" style="color: #fff">GO TO APPROVE</a>\n                                                        </td>\n                                                    </tr>\n                                                </table>\n                                            </td>\n                                        </tr>\n                                    </table>\n                                    <tr>\n                                            <td style="padding-top: 10px; font-family: \'open sans\', sans-serif; " align="center">\n                                                <p style="color:#737f8d;text-align:\'center\' ">\n                                                    <small >\n                                                        <span >You\'re receiving this email because you signed up for and account on HRCF</span><br />\n                                                        <span >The Victoria, Plot No. 131. North Labone, Accra-Ghana </span><br />\n                                                        <span >P.M.B 104, GP Accra - Ghana</span>\n                                                    </small>\n                                                </p>\n                                            </td>\n                                        </tr>\n        \n                                    \n                                    \n                                </td>\n                            </tr>\n        \n                            <tr><td height="60"></td></tr>\n        \n                        </table>\n                    </td>\n                </tr>\n            </table>\n         </body>\n        </html>';
 };
 
 // var compute = function(req, res, data){
@@ -484,16 +555,10 @@ module.exports = require("request");
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = require("lodash");
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
 module.exports = require("path");
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -508,18 +573,20 @@ exports.withdrawalModel = withdrawalModel;
 exports.creditModel = creditModel;
 exports.bankModel = bankModel;
 exports.idModel = idModel;
+exports.imageMapModel = imageMapModel;
 exports.bankStatementModel = bankStatementModel;
 exports.ICBankModel = ICBankModel;
 exports.branchModel = branchModel;
 exports.accountModel = accountModel;
 exports.requestModel = requestModel;
+exports.payoutRequestModel = payoutRequestModel;
 exports.trackModel = trackModel;
 exports.approveModel = approveModel;
 exports.usersModel = usersModel;
 
-var _sequelize = __webpack_require__(11);
+var _sequelize = __webpack_require__(13);
 
-var _lodash = __webpack_require__(4);
+var _lodash = __webpack_require__(6);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -659,6 +726,23 @@ function idModel(config) {
   return ids;
 }
 
+function imageMapModel(config) {
+  var mapper = config.define('id_map', {
+    user_id: {
+      type: _sequelize.Sequelize.INTEGER
+    },
+    filename: {
+      type: _sequelize.Sequelize.STRING
+    },
+    status: {
+      type: _sequelize.Sequelize.STRING(1),
+      defaultValue: 'A'
+    }
+  }, { underscored: true });
+
+  return mapper;
+}
+
 function bankStatementModel(config) {
   var bankStatements = config.define('bank_statement', {
     ledger_account: {
@@ -759,7 +843,7 @@ function accountModel(config) {
 }
 
 function requestModel(config) {
-  var request = config.define('transaction_request', {
+  var request = config.define('approve_request', {
     uuid: {
       type: _sequelize.Sequelize.UUID,
       defaultValue: _sequelize.Sequelize.UUIDV1
@@ -786,6 +870,29 @@ function requestModel(config) {
   }, { underscored: true });
 
   return request;
+}
+
+function payoutRequestModel(config) {
+  var payout_request = config.define('payout_request', {
+    user_id: {
+      type: _sequelize.Sequelize.INTEGER
+    },
+    amount: {
+      type: _sequelize.Sequelize.INTEGER
+    },
+    account_id: {
+      type: _sequelize.Sequelize.INTEGER
+    },
+    request_date: {
+      type: _sequelize.Sequelize.DATE
+    },
+    status: {
+      type: _sequelize.Sequelize.STRING(1),
+      defaultValue: 'P'
+    }
+  }, { underscored: true });
+
+  return payout_request;
 }
 
 function trackModel(config) {
@@ -941,6 +1048,12 @@ function usersModel(config) {
 }
 
 /***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("lodash");
+
+/***/ }),
 /* 7 */
 /***/ (function(module, exports) {
 
@@ -950,49 +1063,49 @@ module.exports = require("excel");
 /* 8 */
 /***/ (function(module, exports) {
 
-module.exports = require("jsonwebtoken");
+module.exports = require("fs-extended");
 
 /***/ }),
 /* 9 */
 /***/ (function(module, exports) {
 
-module.exports = require("body-parser");
+module.exports = require("multer");
 
 /***/ }),
 /* 10 */
 /***/ (function(module, exports) {
 
-module.exports = require("dateformat");
+module.exports = require("jsonwebtoken");
 
 /***/ }),
 /* 11 */
 /***/ (function(module, exports) {
 
-module.exports = require("sequelize");
+module.exports = require("body-parser");
 
 /***/ }),
 /* 12 */
 /***/ (function(module, exports) {
 
-module.exports = require("nodemailer-smtp-transport");
+module.exports = require("dateformat");
 
 /***/ }),
 /* 13 */
 /***/ (function(module, exports) {
 
-module.exports = require("nodemailer");
+module.exports = require("sequelize");
 
 /***/ }),
 /* 14 */
 /***/ (function(module, exports) {
 
-module.exports = require("fs-extended");
+module.exports = require("nodemailer-smtp-transport");
 
 /***/ }),
 /* 15 */
 /***/ (function(module, exports) {
 
-module.exports = require("multer");
+module.exports = require("nodemailer");
 
 /***/ }),
 /* 16 */
@@ -1027,7 +1140,7 @@ var _cookieParser = __webpack_require__(19);
 
 var _cookieParser2 = _interopRequireDefault(_cookieParser);
 
-var _bodyParser = __webpack_require__(9);
+var _bodyParser = __webpack_require__(11);
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
@@ -1103,7 +1216,7 @@ var _uploads_router = __webpack_require__(40);
 
 var _uploads_router2 = _interopRequireDefault(_uploads_router);
 
-var _models = __webpack_require__(6);
+var _models = __webpack_require__(5);
 
 var models = _interopRequireWildcard(_models);
 
@@ -1115,7 +1228,7 @@ var _request = __webpack_require__(3);
 
 var _request2 = _interopRequireDefault(_request);
 
-var _jsonwebtoken = __webpack_require__(8);
+var _jsonwebtoken = __webpack_require__(10);
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
@@ -1233,8 +1346,15 @@ var App = function () {
             var idTypesModel = models.idModel(dbConfig);
             var accountsModel = models.accountModel(dbConfig);
             var requestModel = models.requestModel(dbConfig);
+            var imageMapperModel = models.imageMapModel(dbConfig);
+            var payoutModel = models.payoutRequestModel(dbConfig);
 
             //Setting relationships
+
+            payoutModel.belongsTo(usersModel);
+            payoutModel.belongsTo(accountsModel);
+
+            imageMapperModel.belongsTo(usersModel);
 
             requestModel.belongsTo(usersModel);
             requestModel.belongsTo(approveModel);
@@ -1288,11 +1408,11 @@ var App = function () {
             var branches = new _branches_router2.default(branchModel);
             var companys = new _companys_router2.default(companyModel, usersModel);
             var credits = new _credits_router2.default(creditModel, bankModel, usersModel);
-            var transactions = new _transactions_router2.default(transactionModel, usersModel, requestModel, approveModel);
+            var transactions = new _transactions_router2.default(transactionModel, usersModel, requestModel, approveModel, creditModel);
             var withdrawals = new _withdrawals_router2.default(withdrawalModel, usersModel);
             var banks = new _banks_router2.default(bankModel);
 
-            var utils = new _utils_router2.default(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel, requestModel, accountsModel, approveModel, icBankModel);
+            var utils = new _utils_router2.default(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel, requestModel, accountsModel, approveModel, icBankModel, payoutModel);
             var auth = new _auth_router2.default(usersModel);
             var bankstatement = new _bank_statements_router2.default(bankStatementModel, icBankModel, usersModel);
             var misc = new _misc_router2.default(usersModel, accountsModel, approveModel, companyModel);
@@ -1377,7 +1497,7 @@ var _express = __webpack_require__(0);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _dateformat = __webpack_require__(10);
+var _dateformat = __webpack_require__(12);
 
 var _dateformat2 = _interopRequireDefault(_dateformat);
 
@@ -2006,13 +2126,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var TransactionsRoutes = function () {
-    function TransactionsRoutes(TransactionModel, UserModel, RequestModel, ApproveModel) {
+    function TransactionsRoutes(TransactionModel, UserModel, RequestModel, ApproveModel, CreditModel) {
         _classCallCheck(this, TransactionsRoutes);
 
         this.TransactionModel = TransactionModel;
         this.UserModel = UserModel;
         this.RequestModel = RequestModel;
         this.ApproveModel = ApproveModel;
+        this.CreditModel = CreditModel;
     }
 
     _createClass(TransactionsRoutes, [{
@@ -2045,6 +2166,27 @@ var TransactionsRoutes = function () {
                         res.status(200).json(user);
                     } else {
                         res.status(403).send('Nothing Found');
+                    }
+                });
+            });
+
+            // transactionsRouter.route('/interest/user/:user_id')
+            //     .get((req, res)=>{
+            //        app.UserModel.findOne({ where : {id : req.params.user_id, status : 'A'}, attributes : ['id','balance'] }).then(user =>{
+            //             if(user){
+            //                 res.status(200).json(user);
+            //             }else{
+            //                 res.status(403).send('Nothing Found');
+            //             } 
+            //        })
+            //     });
+
+            transactionsRouter.route('/contributions/user/:user_id').get(function (req, res) {
+                app.CreditModel.sum('amount', { where: { id: req.params.user_id, status: 'A' } }).then(function (credit) {
+                    if (credit) {
+                        res.status(200).json({ total: credit });
+                    } else {
+                        res.status(403).send({ total: 0 });
                     }
                 });
             });
@@ -2099,6 +2241,7 @@ var TransactionsRoutes = function () {
             app.ApproveModel.findAll({ where: { user_id: user_id, status: 'A' } }).then(function (approvers) {
                 return approvers.map(function (approver) {
                     var approver_id = approver.id;
+                    var approve_name = approver.firstname;
                     var counter = 0;
 
                     return app.RequestModel.create({ transaction_code: transaction_code,
@@ -2113,7 +2256,7 @@ var TransactionsRoutes = function () {
 
                         if (counter === approvers.length) {
                             var utils = __webpack_require__(2);
-                            utils.sendEmail(email, 'Confirm', request.uuid);
+                            utils.sendApprovalEmail(approve_name, email, request.uuid, transaction_code);
                             res.status(200).json({ success: true });
                         }
                     });
@@ -2240,7 +2383,7 @@ var _express = __webpack_require__(0);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _jsonwebtoken = __webpack_require__(8);
+var _jsonwebtoken = __webpack_require__(10);
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
@@ -2765,7 +2908,7 @@ var _request = __webpack_require__(3);
 
 var _request2 = _interopRequireDefault(_request);
 
-var _dateformat = __webpack_require__(10);
+var _dateformat = __webpack_require__(12);
 
 var _dateformat2 = _interopRequireDefault(_dateformat);
 
@@ -2773,11 +2916,11 @@ var _config = __webpack_require__(1);
 
 var d = _interopRequireWildcard(_config);
 
-var _path = __webpack_require__(5);
+var _path = __webpack_require__(4);
 
 var _path2 = _interopRequireDefault(_path);
 
-var _bodyParser = __webpack_require__(9);
+var _bodyParser = __webpack_require__(11);
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
@@ -2785,7 +2928,7 @@ var _util = __webpack_require__(38);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _jsonwebtoken = __webpack_require__(8);
+var _jsonwebtoken = __webpack_require__(10);
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
@@ -2799,7 +2942,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 var UtilsRoutes = function () {
-    function UtilsRoutes(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel, RequestModel, AccountModel, ApproveModel, ICBankModel) {
+    function UtilsRoutes(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel, RequestModel, AccountModel, ApproveModel, ICBankModel, PayOutModel) {
         _classCallCheck(this, UtilsRoutes);
 
         this.app = this;
@@ -2813,6 +2956,7 @@ var UtilsRoutes = function () {
         this.AccountModel = AccountModel;
         this.ApproveModel = ApproveModel;
         this.ICBankModel = ICBankModel;
+        this.PayOutModel = PayOutModel;
     }
 
     _createClass(UtilsRoutes, [{
@@ -3178,12 +3322,63 @@ var UtilsRoutes = function () {
             });
 
             utilsRouter.route('/statement/upload').post(function (req, res) {
-
                 utils.saveFile(req, res);
             });
 
-            utilsRouter.route('/statement/json').get(function (req, res) {
-                //res.status(200).json(utils.xlsxToJSON('ecobank_test.xlsx'));
+            utilsRouter.route('/national_id/upload').post(function (req, res) {
+                utils.saveID(req, res);
+            });
+
+            utilsRouter.route('/transaction/reject').post(function (req, res) {
+                var uuid = req.body.uuid;
+
+                app.RequestModel.findOne({ where: { uuid: uuid, status: 'P' } }).then(function (request) {
+                    if (request) {
+                        request.update({ status: 'R' }).then(function (request) {
+                            app.RequestModel.findAll({ where: { transaction_code: request.transaction_code } }).then(function (requests) {
+                                if (requests) {
+                                    requests.map(function (request, i) {
+                                        request.update({ status: 'R' });
+                                        if (i === requests.length - 1) {
+                                            app.UsersModel.findOne({ where: { id: request.user_id, status: 'A' } }).then(function (user) {
+                                                user.increment({ 'balance': parseFloat(request.amount) }).then(function (user) {
+                                                    res.status(200).json({ success: true });
+                                                });
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    } else {
+                        res.status(400).json({ success: false });
+                    }
+                });
+            });
+
+            utilsRouter.route('/transaction/approve').post(function (req, res) {
+                app.RequestModel.findOne({ where: { uuid: req.body.uuid, transaction_code: req.body.key, status: 'P' } }).then(function (request) {
+                    if (request) {
+                        request.update({ status: 'A' }).then(function (request) {
+                            app.RequestModel.findAll({ where: { transaction_code: request.transaction_code, status: 'P' } }).then(function (requests) {
+                                if (requests === null || requests.length === 0) {
+                                    //all approval done
+                                    app.PayOutModel.create({ user_id: request.user_id,
+                                        amount: request.amount,
+                                        account_id: request.account_id,
+                                        request_date: request.created_at,
+                                        status: 'P' }).then(function (payout) {
+                                        res.status(200).json({ success: true });
+                                    });
+                                } else {
+                                    res.status(200).json({ success: true });
+                                }
+                            });
+                        });
+                    } else {
+                        res.status(400).json({ success: false });
+                    }
+                });
             });
 
             utilsRouter.route('/transaction/details/:transaction_key').get(function (req, res) {
@@ -3194,7 +3389,7 @@ var UtilsRoutes = function () {
                         var data = {};
                         data.approver = request.approver.firstname;
                         data.amount = request.amount;
-                        data.code = request.transaction_code;
+                        //data.code = request.transaction_code;
                         data.date = request.created_at;
 
                         data.user = request.user.firstname;
@@ -3212,25 +3407,6 @@ var UtilsRoutes = function () {
 
             return utilsRouter;
         }
-
-        // upload(){
-
-        //     return multer({storage : this.storage()});
-        // }
-
-        // storage() {
-
-        //     return multer.diskStorage({
-        //             destination: (req, file, cb) => {
-        //                 cb(null, '/Users/selby/Documents/inflexion_hrcf/app/resources/')
-        //             },
-        //             filename: (req, file, cb) => {
-        //                 cb(null, file.file + '-' + Date.now())
-        //             }
-        //     });
-        // }
-
-
     }]);
 
     return UtilsRoutes;
@@ -3379,11 +3555,11 @@ var UploadRoutes = function () {
         value: function saveFile(req, res) {
             var _this = this;
 
-            var fs = __webpack_require__(14);
-            var multer = __webpack_require__(15);
+            var fs = __webpack_require__(8);
+            var multer = __webpack_require__(9);
             var storage = multer.diskStorage({
                 destination: function destination(req, file, callback) {
-                    var path = __webpack_require__(5);
+                    var path = __webpack_require__(4);
                     var dest = path.resolve('./uploads');
                     fs.ensureDirSync(dest);
                     callback(null, dest);
@@ -3433,10 +3609,10 @@ var UploadRoutes = function () {
         key: 'compute',
         value: function compute(req, res, data) {
             if (data) {
-                var _ = __webpack_require__(4);
+                var _ = __webpack_require__(6);
 
                 //Import Models
-                var models = __webpack_require__(6);
+                var models = __webpack_require__(5);
                 var sequelize = __webpack_require__(1).sequelize;
 
                 var creditModel = models.creditModel(sequelize);

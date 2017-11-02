@@ -1,6 +1,8 @@
 import {EventEmitter} from 'events';
 import dispatcher from '../dispatcher';
 import cookie from 'react-cookies';
+import format from 'format-number';
+
 
 class ConfirmStore extends EventEmitter{
     constructor(){
@@ -13,7 +15,7 @@ class ConfirmStore extends EventEmitter{
             this.approver = data.approver;
             this.user = data.user;
             this.amount = data.amount;
-            this.code = data.code;
+            //this.code = data.code;
             this.account_name = data.account_name;
             this.account_number = data.account_number;
             this.branch = data.branch;
@@ -30,6 +32,14 @@ class ConfirmStore extends EventEmitter{
         this.emit('confirm_transaction_details_failed');        
     }
 
+    doConfirmTransactionApproveFailed(){
+        this.emit('confirm_transaction_approve_failed');
+    }
+
+    doConfirmTransactionRejectSuccess(){
+        this.emit('confirm_transaction_reject_success');
+    }
+
     getApprover(){
         return this.approver;
     }
@@ -39,11 +49,15 @@ class ConfirmStore extends EventEmitter{
     }
 
     getAmount(){
-        return this.amount;
+        console.log('New Balance is '+this.newBalance);
+        
+        const formatStyle = format({integerSeparator:','});
+
+        return formatStyle(this.amount) === '' ? '0.00':formatStyle(this.amount)+'.00';
     }
 
     getCode(){
-        return this.code;
+        return '0000';
     }
 
     getAccountName(){
@@ -74,8 +88,19 @@ class ConfirmStore extends EventEmitter{
             }
             case 'CONFIRM_TRANSACTION_DETAILS_FAILED' : {
                 this.doConfirmTransactionDetailsFailed();
+                
                 break;
             }
+            case 'CONFIRM_TRANSACTION_APPROVE_FAILED' : {
+                this.doConfirmTransactionApproveFailed();
+                break;
+            }
+            case 'CONFIRM_TRANSACTION_REJECT_SUCCESS' : {
+                this.doConfirmTransactionRejectSuccess();
+                break;
+            }
+
+            
             
             default:{}
         }

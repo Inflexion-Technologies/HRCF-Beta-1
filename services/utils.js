@@ -79,6 +79,65 @@ exports.sendEmail = function(sender, title, message){
     });
 }
 
+
+exports.saveID = function(req, res){
+    const models = require('../models/models');
+    const sequelize = require('../config').sequelize;    
+    const usersModel = models.usersModel(sequelize);
+    const imageMapModel = models.imageMapModel(sequelize);
+
+    var imgFilename = '';
+    var fs = require('fs-extended');
+    var multer = require('multer');
+    var storage = multer.diskStorage({
+        destination: function (req, file, callback) {
+            var path = require('path');
+            var dest = path.resolve('./uploads');
+            fs.ensureDirSync(dest);
+            callback(null, dest);
+          },
+        filename: function (req, file, callback) {
+            imgFilename = Date.now()+'.jpg';
+            callback(null, imgFilename);
+          }
+    });
+    var upload = multer({
+        storage: storage,
+        limits: {
+            fileSize: 256 * 1024 * 1024
+        },
+        fileFilter: function(req, file, cb) {
+            cb(null, true)
+       }
+    }).single('file');
+
+    upload(req, res, function(err) {
+        if (err) {
+            console.log(err);
+            return res.end('Error');
+        } else {
+            if(req.file && req.body){
+                console.log(req.file);
+                console.log(req.body);
+                const user_id = req.body.user_id;
+
+                imageMapModel.findOne({where : {user_id , status : 'A'}})
+                .then((mapper)=>{
+                    if(mapper){
+                        mapper.update({filename : imgFilename});
+                    }else{
+                        imageMapModel.create({user_id : req.body.user_id, filename : imgFilename});
+                    }
+                    res.status(200).json({success : true});
+                })
+
+            }else{
+                res.end('Unsuccessful Upload');
+            }
+        }
+    });
+}
+
 exports.saveFile = function(req, res){
     const models = require('../models/models');
     const sequelize = require('../config').sequelize;    
@@ -116,6 +175,7 @@ exports.saveFile = function(req, res){
                 console.log(req.file);
                 console.log(req.body);
 
+                const ic_bank_id = req.body.bank_id;
 
                 usersModel.findOne({where : {id : req.body.user_id, is_admin : 'Y', status : 'A'}})
                 .then(function(user){
@@ -124,7 +184,7 @@ exports.saveFile = function(req, res){
                         
                          parseXlsx(req.file.path, function(err, data) {
                              if(err) throw err;
-                             compute(req, res, data);
+                             compute(req, res, data, ic_bank_id);
                          });
                     }else{
                         res.status(400).json({success: false});
@@ -137,6 +197,13 @@ exports.saveFile = function(req, res){
         }
     });
 }
+
+exports.sendApprovalEmail = function(name, email, uuid, code){
+    var config = require('../config').config;
+
+    var baseUrl = config.IP+':'+config.PORT;
+    sendEmail(email, 'Approve Request', approveEmailTemplate(baseUrl, code, name, uuid));
+} 
 
 var sendEmail = function(sender, title, message){
     var config = require('../config').config;
@@ -174,7 +241,7 @@ var sendEmail = function(sender, title, message){
     });
 }
 
-var compute = function(req, res, data){
+var compute = function(req, res, data, ic_bank_id){
     if(data){
         var _ = require('lodash');
 
@@ -262,7 +329,8 @@ var compute = function(req, res, data){
                         description : data.description,
                         sponsor_code : data.sponsor_code,
                         client_code : data.client_code,
-                        account_number : data.account_number
+                        account_number : data.account_number,
+                        ic_bank_id
                     })
                 })
                 
@@ -275,6 +343,126 @@ var compute = function(req, res, data){
 var registeringEmailTemplate = function(name){
    
        return `<html>
+       <head>
+       
+           <meta charset="utf-8" http-equiv="Content-Type" content="text/html" />
+           <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+           <meta name="format-detection" content="telephone=no" />
+             <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+           <title>HRCF</title>
+           <style type="text/css">
+               
+               /* ==> Importing Fonts <== */
+               @import url(https://fonts.googleapis.com/css?family=Fredoka+One);
+               @import url(https://fonts.googleapis.com/css?family=Quicksand);
+               @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+       
+               /* ==> Global CSS <== */
+               .ReadMsgBody{width:100%;background-color:#ffffff;}
+               .ExternalClass{width:100%;background-color:#ffffff;}
+               .ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{line-height:100%;}
+               html{width: 100%;}
+               body{-webkit-text-size-adjust:none;-ms-text-size-adjust:none;margin:0;padding:0;}
+               table{border-spacing:0;border-collapse:collapse;}
+               table td{border-collapse:collapse;}
+               img{display:block !important;}
+               a{text-decoration:none;color:#e91e63;}
+       
+               /* ==> Responsive CSS For Tablets <== */
+               @media only screen and (max-width:640px) {
+                   body{width:auto !important;}
+                   table[class="tab-1"] {width:450px !important;}
+                   table[class="tab-2"] {width:47% !important;text-align:left !important;}
+                   table[class="tab-3"] {width:100% !important;text-align:center !important;}
+                   img[class="img-1"] {width:100% !important;height:auto !important;}
+               }
+       
+               /* ==> Responsive CSS For Phones <== */
+               @media only screen and (max-width:480px) {
+                   body { width: auto !important; }
+                   table[class="tab-1"] {width:290px !important;}
+                   table[class="tab-2"] {width:100% !important;text-align:left !important;}
+                   table[class="tab-3"] {width:100% !important;text-align:center !important;}
+                   img[class="img-1"] {width:100% !important;}
+               }
+       
+           </style>
+       </head>
+       <body bgcolor="#f6f6f6">
+           <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
+               <tr >
+                   <td align="center">
+                       <table class="tab-1" align="center" cellspacing="0" cellpadding="0" width="600">
+       
+                           <tr><td height="60"></td></tr>
+                           <!-- Logo -->
+                           <tr>
+                                       <td align="center">
+                                           <img src="img/01-logo.png" alt="Logo" width="87">
+                                       </td>
+       
+                           </tr>
+       
+                           <tr><td height="35"></td></tr>
+       
+                           <tr>
+                               <td>
+       
+                                   <table class="tab-3" width="600" align="left" cellspacing="0" cellpadding="0" bgcolor="#fff" >
+                                       <tr >
+                                           <td align="left" style="font-family: 'open Sans', sans-serif; font-weight: bold; letter-spacing: 1px; color: #737f8d; font-size: 20px;padding-top: 50px; padding-left: 40px; padding-right: 40px">
+                                               Hey`+name+`,
+                                           </td>
+                                       </tr>
+                                       <tr><td height="10"></td></tr>
+                                       <tr>
+       
+                                           <td align="left" style="color: #737f8d; font-family: 'open sans',sans-serif; font-weight: normal; font-size: 17px;padding-bottom: 50px; padding-left: 40px; padding-right: 40px">
+                                               Thanks for registering for an account on HRCF! Before we get started, we just need to confirm that this is you. Click below to verify your email address:
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td style="padding-bottom: 50px; padding-left: 40px; padding-right: 40px" >
+                                               <table align="center" bgcolor="#0d47a1" >
+                                                   <tr >
+                                                       <td align="center" style="font-family: 'open sans', sans-serif; font-weight: bold; letter-spacing: 2px; border: 1px solid #0d47a1; padding: 15px 25px;">
+                                                           <a href="#" style="color: #fff">VERIFY</a>
+                                                       </td>
+                                                   </tr>
+                                               </table>
+                                           </td>
+                                       </tr>
+                                   </table>
+                                   <tr>
+                                           <td style="padding-top: 10px; font-family: 'open sans', sans-serif; " align="center">
+                                               <p style="color:#737f8d;text-align:'center' ">
+                                                   <small >
+                                                       <span >You're receiving this email because you signed up for and account on HRCF</span><br />
+                                                       <span >The Victoria, Plot No. 131. North Labone, Accra-Ghana </span><br />
+                                                       <span >P.M.B 104, GP Accra - Ghana</span>
+                                                   </small>
+                                               </p>
+                                           </td>
+                                       </tr>
+       
+                                   
+                                   
+                               </td>
+                           </tr>
+       
+                           <tr><td height="60"></td></tr>
+       
+                       </table>
+                   </td>
+               </tr>
+           </table>
+        </body>
+       </html>`
+}
+
+var creditEmailTemplate = function(name, amount, balance){
+    
+        return `<html>
         <head>
         
             <meta charset="utf-8" http-equiv="Content-Type" content="text/html" />
@@ -284,10 +472,12 @@ var registeringEmailTemplate = function(name){
             <title>HRCF</title>
             <style type="text/css">
                 
+                /* ==> Importing Fonts <== */
                 @import url(https://fonts.googleapis.com/css?family=Fredoka+One);
                 @import url(https://fonts.googleapis.com/css?family=Quicksand);
                 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
         
+                /* ==> Global CSS <== */
                 .ReadMsgBody{width:100%;background-color:#ffffff;}
                 .ExternalClass{width:100%;background-color:#ffffff;}
                 .ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{line-height:100%;}
@@ -298,6 +488,7 @@ var registeringEmailTemplate = function(name){
                 img{display:block !important;}
                 a{text-decoration:none;color:#e91e63;}
         
+                /* ==> Responsive CSS For Tablets <== */
                 @media only screen and (max-width:640px) {
                     body{width:auto !important;}
                     table[class="tab-1"] {width:450px !important;}
@@ -339,22 +530,22 @@ var registeringEmailTemplate = function(name){
         
                                     <table class="tab-3" width="600" align="left" cellspacing="0" cellpadding="0" bgcolor="#fff" >
                                         <tr >
-                                            <td align="left" style="font-family: 'open Sans', sans-serif; font-weight: bold; letter-spacing: 1px; color: #737f8d; font-size: 20px;padding-top: 80px; padding-left: 80px; padding-right: 80px">
+                                            <td align="left" style="font-family: 'open Sans', sans-serif; font-weight: bold; letter-spacing: 1px; color: #737f8d; font-size: 20px;padding-top: 50px; padding-left: 40px; padding-right: 40px">
                                                 Hey `+name+`,
                                             </td>
                                         </tr>
                                         <tr><td height="10"></td></tr>
                                         <tr>
         
-                                            <td align="left" style="color: #737f8d; font-family: 'open sans',sans-serif; font-weight: normal; font-size: 17px;padding-bottom: 50px; padding-left: 80px; padding-right: 80px">
+                                            <td align="left" style="color: #737f8d; font-family: 'open sans',sans-serif; font-weight: normal; font-size: 17px;padding-bottom: 50px; padding-left: 40px; padding-right: 40px">
                                                 Thanks for registering for an account on HRCF! Before we get started, we just need to confirm that this is you. Click below to verify your email address:
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="padding-bottom: 50px; padding-left: 80px; padding-right: 80px" >
+                                            <td style="padding-bottom: 50px; padding-left: 40px; padding-right: 40px" >
                                                 <table align="center" bgcolor="#0d47a1" >
                                                     <tr >
-                                                        <td align="center" style="font-family: 'open sans', sans-serif; font-weight: bold; letter-spacing: 2px; border: 1px solid #0d47a1; padding: 13px 35px;">
+                                                        <td align="center" style="font-family: 'open sans', sans-serif; font-weight: bold; letter-spacing: 2px; border: 1px solid #0d47a1; padding: 15px 25px;">
                                                             <a href="#" style="color: #fff">VERIFY</a>
                                                         </td>
                                                     </tr>
@@ -387,125 +578,141 @@ var registeringEmailTemplate = function(name){
             </table>
          </body>
         </html>`
-}
-
-var creditEmailTemplate = function(name, amount, balance){
-    
-        return `<html>
-         <head>
-         
-             <meta charset="utf-8" http-equiv="Content-Type" content="text/html" />
-             <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-             <meta name="format-detection" content="telephone=no" />
-               <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
-             <title>HRCF</title>
-             <style type="text/css">
-                 
-                 @import url(https://fonts.googleapis.com/css?family=Fredoka+One);
-                 @import url(https://fonts.googleapis.com/css?family=Quicksand);
-                 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-         
-                 .ReadMsgBody{width:100%;background-color:#ffffff;}
-                 .ExternalClass{width:100%;background-color:#ffffff;}
-                 .ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{line-height:100%;}
-                 html{width: 100%;}
-                 body{-webkit-text-size-adjust:none;-ms-text-size-adjust:none;margin:0;padding:0;}
-                 table{border-spacing:0;border-collapse:collapse;}
-                 table td{border-collapse:collapse;}
-                 img{display:block !important;}
-                 a{text-decoration:none;color:#e91e63;}
-         
-                 @media only screen and (max-width:640px) {
-                     body{width:auto !important;}
-                     table[class="tab-1"] {width:450px !important;}
-                     table[class="tab-2"] {width:47% !important;text-align:left !important;}
-                     table[class="tab-3"] {width:100% !important;text-align:center !important;}
-                     img[class="img-1"] {width:100% !important;height:auto !important;}
-                 }
-         
-                 /* ==> Responsive CSS For Phones <== */
-                 @media only screen and (max-width:480px) {
-                     body { width: auto !important; }
-                     table[class="tab-1"] {width:290px !important;}
-                     table[class="tab-2"] {width:100% !important;text-align:left !important;}
-                     table[class="tab-3"] {width:100% !important;text-align:center !important;}
-                     img[class="img-1"] {width:100% !important;}
-                 }
-         
-             </style>
-         </head>
-         <body bgcolor="#f6f6f6">
-             <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
-                 <tr >
-                     <td align="center">
-                         <table class="tab-1" align="center" cellspacing="0" cellpadding="0" width="600">
-         
-                             <tr><td height="60"></td></tr>
-                             <!-- Logo -->
-                             <tr>
-                                         <td align="center">
-                                             <img src="img/01-logo.png" alt="Logo" width="87">
-                                         </td>
-         
-                             </tr>
-         
-                             <tr><td height="35"></td></tr>
-         
-                             <tr>
-                                 <td>
-         
-                                     <table class="tab-3" width="600" align="left" cellspacing="0" cellpadding="0" bgcolor="#fff" >
-                                         <tr >
-                                             <td align="left" style="font-family: 'open Sans', sans-serif; font-weight: bold; letter-spacing: 1px; color: #737f8d; font-size: 20px;padding-top: 80px; padding-left: 80px; padding-right: 80px">
-                                                 Hey `+name+`,
-                                             </td>
-                                         </tr>
-                                         <tr><td height="10"></td></tr>
-                                         <tr>
-         
-                                             <td align="left" style="color: #737f8d; font-family: 'open sans',sans-serif; font-weight: normal; font-size: 17px;padding-bottom: 50px; padding-left: 80px; padding-right: 80px">
-                                                 Thanks for registering for an account on HRCF! Before we get started, we just need to confirm that this is you. Click below to verify your email address:
-                                             </td>
-                                         </tr>
-                                         <tr>
-                                             <td style="padding-bottom: 50px; padding-left: 80px; padding-right: 80px" >
-                                                 <table align="center" bgcolor="#0d47a1" >
-                                                     <tr >
-                                                         <td align="center" style="font-family: 'open sans', sans-serif; font-weight: bold; letter-spacing: 2px; border: 1px solid #0d47a1; padding: 13px 35px;">
-                                                             <a href="#" style="color: #fff">VERIFY</a>
-                                                         </td>
-                                                     </tr>
-                                                 </table>
-                                             </td>
-                                         </tr>
-                                     </table>
-                                     <tr>
-                                             <td style="padding-top: 10px; font-family: 'open sans', sans-serif; " align="center">
-                                                 <p style="color:#737f8d;text-align:'center' ">
-                                                     <small >
-                                                         <span >You're receiving this email because you signed up for and account on HRCF</span><br />
-                                                         <span >The Victoria, Plot No. 131. North Labone, Accra-Ghana </span><br />
-                                                         <span >P.M.B 104, GP Accra - Ghana</span>
-                                                     </small>
-                                                 </p>
-                                             </td>
-                                         </tr>
-         
-                                     
-                                     
-                                 </td>
-                             </tr>
-         
-                             <tr><td height="60"></td></tr>
-         
-                         </table>
-                     </td>
-                 </tr>
-             </table>
-          </body>
-         </html>`
  }
 
+ 
+ var approveEmailTemplate = function(baseUrl, code, name, uuid){
+    
+        return `<html>
+        <head>
+        
+            <meta charset="utf-8" http-equiv="Content-Type" content="text/html" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+            <meta name="format-detection" content="telephone=no" />
+              <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+            <title>HRCF</title>
+            <style type="text/css">
+                
+                /* ==> Importing Fonts <== */
+                @import url(https://fonts.googleapis.com/css?family=Fredoka+One);
+                @import url(https://fonts.googleapis.com/css?family=Quicksand);
+                @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+        
+                /* ==> Global CSS <== */
+                .ReadMsgBody{width:100%;background-color:#ffffff;}
+                .ExternalClass{width:100%;background-color:#ffffff;}
+                .ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{line-height:100%;}
+                html{width: 100%;}
+                body{-webkit-text-size-adjust:none;-ms-text-size-adjust:none;margin:0;padding:0;}
+                table{border-spacing:0;border-collapse:collapse;}
+                table td{border-collapse:collapse;}
+                img{display:block !important;}
+                a{text-decoration:none;color:#e91e63;}
+        
+                /* ==> Responsive CSS For Tablets <== */
+                @media only screen and (max-width:640px) {
+                    body{width:auto !important;}
+                    table[class="tab-1"] {width:450px !important;}
+                    table[class="tab-2"] {width:47% !important;text-align:left !important;}
+                    table[class="tab-3"] {width:100% !important;text-align:center !important;}
+                    img[class="img-1"] {width:100% !important;height:auto !important;}
+                }
+        
+                /* ==> Responsive CSS For Phones <== */
+                @media only screen and (max-width:480px) {
+                    body { width: auto !important; }
+                    table[class="tab-1"] {width:290px !important;}
+                    table[class="tab-2"] {width:100% !important;text-align:left !important;}
+                    table[class="tab-3"] {width:100% !important;text-align:center !important;}
+                    img[class="img-1"] {width:100% !important;}
+                }
+        
+            </style>
+        </head>
+        <body bgcolor="#f6f6f6">
+            <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
+                <tr >
+                    <td align="center">
+                        <table class="tab-1" align="center" cellspacing="0" cellpadding="0" width="600">
+        
+                            <tr><td height="60"></td></tr>
+                            <!-- Logo -->
+                            <tr>
+                                        <td align="center">
+                                            <img src="img/01-logo.png" alt="Logo" width="87">
+                                        </td>
+        
+                            </tr>
+        
+                            <tr><td height="35"></td></tr>
+        
+                            <tr>
+                                <td>
+        
+                                    <table class="tab-3" width="600" align="left" cellspacing="0" cellpadding="0" bgcolor="#fff" >
+                                        <tr >
+                                            <td align="left" style="font-family: 'open Sans', sans-serif;letter-spacing: 1px; color: #737f8d; font-size: 20px;padding-top: 50px; padding-left: 40px; padding-right: 40px">
+                                            Dear `+name+`,
+                                            <br>
+                                            <br>
+                                            A cash withdrawal has been initiated on your investment account held with us
+                                            </td>
+                                        </tr>
+                                        <tr><td height="10"></td></tr>
+                                        <tr>
+        
+                                            <td align="left" style="color: #737f8d; font-family: 'open sans',sans-serif; font-weight: normal; font-size: 17px;padding-bottom: 50px; padding-left: 40px; padding-right: 40px">
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td align="left" style="color: #737f8d; font-family: 'open sans',sans-serif; font-weight: normal; font-size: 17px;padding-bottom: 50px; padding-left: 40px; padding-right: 40px;word-spacing: 3px;">
+                                                Your approval code: <span style="font-weight:600;font-size: 24px;letter-spacing: 1px">`+code+`</span>
+                                                <br>
+                                                <br>
+                                                Click below to authorize the transaction by entering your approval code, or reject transaction. <br/>
+                                                This code is required to complete the transaction.
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="padding-bottom: 50px; padding-left: 40px; padding-right: 40px" >
+                                                <table align="center" bgcolor="#0d47a1" >
+                                                    <tr >
+                                                        <td align="center" style="font-family: 'open sans', sans-serif; font-weight: bold; letter-spacing: 2px; border: 1px solid #0d47a1; padding: 15px 25px;">
+                                                            <a href="`+baseUrl+`/confirm/`+uuid+`" style="color: #fff">GO TO APPROVE</a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <tr>
+                                            <td style="padding-top: 10px; font-family: 'open sans', sans-serif; " align="center">
+                                                <p style="color:#737f8d;text-align:'center' ">
+                                                    <small >
+                                                        <span >You're receiving this email because you signed up for and account on HRCF</span><br />
+                                                        <span >The Victoria, Plot No. 131. North Labone, Accra-Ghana </span><br />
+                                                        <span >P.M.B 104, GP Accra - Ghana</span>
+                                                    </small>
+                                                </p>
+                                            </td>
+                                        </tr>
+        
+                                    
+                                    
+                                </td>
+                            </tr>
+        
+                            <tr><td height="60"></td></tr>
+        
+                        </table>
+                    </td>
+                </tr>
+            </table>
+         </body>
+        </html>`
+ }
 
 
 // var compute = function(req, res, data){
