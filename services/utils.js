@@ -180,12 +180,12 @@ exports.saveFile = function(req, res){
                 usersModel.findOne({where : {id : req.body.user_id, is_admin : 'Y', status : 'A'}})
                 .then(function(user){
                     if(user){
-                        const parseXlsx = require('excel');
+                        var parseXlsx = require('excel');
                         
-                         parseXlsx(req.file.path, function(err, data) {
-                             if(err) throw err;
-                             compute(req, res, data, ic_bank_id);
-                         });
+                        parseXlsx(req.file.path, function(err, data) {
+                            if(err) throw err;
+                            compute(req, res, data, ic_bank_id);
+                        });
                     }else{
                         res.status(400).json({success: false});
                     }
@@ -255,8 +255,6 @@ var compute = function(req, res, data, ic_bank_id){
         const bankStatementModel = models.bankStatementModel(sequelize);
         const icBanksModel = models.ICBankModel(sequelize);
 
-        var async = require('async');
-        var map = require("async/map");
         //Verify fields
         const fields = data[0];
 
