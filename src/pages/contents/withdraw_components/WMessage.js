@@ -5,9 +5,6 @@ import * as OverlayAction from '../../../actions/OverlayAction';
 import WithdrawStore from '../../../stores/WithdrawStore'
 import {Link} from 'react-router-dom';
 
-import CountDown from '../../CountDownTimer';
-
-
 import envelop from '../../../icons/close-envelope.svg';
 import '../../../bower_components/bootstrap/dist/css/bootstrap.css';
 import '../../../styles/font-awesome/css/font-awesome.css';
@@ -38,8 +35,8 @@ class WMessage extends Component {
 
   redirectToApp(){
     this.resetWithdrawPage();
-    window.location.href = '/app/dashboard' 
-    //this.props.history.push('/app/dashboard');        
+    //window.location.href = '/app/dashboard' 
+    //this.context.history.push('/app/dashboard');        
   }
 
   stop(){
@@ -71,8 +68,9 @@ class WMessage extends Component {
                 <div className="col-md-6 wpanel">
                   <div className="content-height">
                     <div className="form-group message">
-                    <span className="message-style">You have successfully completed the withdrawal proccess. You will be automatically logged in 
-                        <span><CountDown duration={10} stop={this.stop.bind(this)}/></span>secs. Thank you.
+                    <span className="message-style">You have successfully initiated the withdrawal proccess.
+                         Please check your mail to complete the approval process.
+                         Thank you.
                     </span>
                     <span></span>
                     </div>
