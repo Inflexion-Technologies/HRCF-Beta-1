@@ -38,8 +38,8 @@ class WMessage extends Component {
 
   redirectToApp(){
     this.resetWithdrawPage();
-    //window.location.href = '/app/dashboard' 
-    this.props.history.push('/app/dashboard');        
+    window.location.href = '/app/dashboard' 
+    //this.props.history.push('/app/dashboard');        
   }
 
   stop(){
