@@ -18,6 +18,7 @@ class IndividualBanks extends Component {
       nError : false,
       aError : false,
       account : '',
+      account_name : OverlayStore.getFirstName()+' '+OverlayStore.getLastName(),
       value : 'Select A Bank',
       bvalue : 'Select Branch',
       count : 0
@@ -251,7 +252,7 @@ class IndividualBanks extends Component {
                   </div>
                   <div className="clearfix"></div>
                   <div className="form-style">
-                      <input type="text" className="form-control" placeholder="Account Name" value={this.state.account_name} onChange={this.onAccountNameChanged.bind(this)}/>
+                      <input type="text" className="form-control" placeholder="Account Name" value={this.state.account_name} onChange={this.onAccountNameChanged.bind(this)} disabled/>
                       <span className={this.acError ? 'error' : 'vamus'}>{this.accountNameError}</span>
                   </div>
                   <div className="clearfix"></div>

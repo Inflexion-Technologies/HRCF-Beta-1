@@ -77,7 +77,7 @@ module.exports = require("express");
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 
 var Sequelize = __webpack_require__(13);
-var path = __webpack_require__(6);
+var path = __webpack_require__(4);
 
 var config = {
     IP: process.env.SERVER_IP || 'http://localhost',
@@ -115,7 +115,7 @@ module.exports = { config: config, sequelize: sequelize };
 "use strict";
 
 
-var _ = __webpack_require__(5);
+var _ = __webpack_require__(6);
 
 exports.getHash = function (password) {
     var crypto = __webpack_require__(29);
@@ -194,7 +194,7 @@ exports.sendEmail = function (sender, title, message) {
 };
 
 exports.saveID = function (req, res) {
-    var models = __webpack_require__(4);
+    var models = __webpack_require__(5);
     var sequelize = __webpack_require__(1).sequelize;
     var usersModel = models.usersModel(sequelize);
     var imageMapModel = models.imageMapModel(sequelize);
@@ -204,7 +204,7 @@ exports.saveID = function (req, res) {
     var multer = __webpack_require__(8);
     var storage = multer.diskStorage({
         destination: function destination(req, file, callback) {
-            var path = __webpack_require__(6);
+            var path = __webpack_require__(4);
             var dest = path.resolve('./uploads');
             fs.ensureDirSync(dest);
             callback(null, dest);
@@ -250,7 +250,7 @@ exports.saveID = function (req, res) {
 };
 
 exports.saveFile = function (req, res) {
-    var models = __webpack_require__(4);
+    var models = __webpack_require__(5);
     var sequelize = __webpack_require__(1).sequelize;
     var usersModel = models.usersModel(sequelize);
 
@@ -258,7 +258,7 @@ exports.saveFile = function (req, res) {
     var multer = __webpack_require__(8);
     var storage = multer.diskStorage({
         destination: function destination(req, file, callback) {
-            var path = __webpack_require__(6);
+            var path = __webpack_require__(4);
             var dest = path.resolve('./uploads');
             fs.ensureDirSync(dest);
             callback(null, dest);
@@ -361,10 +361,10 @@ var sendEmail = function sendEmail(sender, title, message) {
 
 var compute2 = function compute2(req, res, data, ic_bank_id) {
     if (data) {
-        var _ = __webpack_require__(5);
+        var _ = __webpack_require__(6);
 
         //Import Models
-        var models = __webpack_require__(4);
+        var models = __webpack_require__(5);
         var sequelize = __webpack_require__(1).sequelize;
 
         var creditModel = models.creditModel(sequelize);
@@ -442,10 +442,10 @@ var compute2 = function compute2(req, res, data, ic_bank_id) {
 
 var compute = function compute(req, res, data, ic_bank_id) {
     if (data) {
-        var _ = __webpack_require__(5);
+        var _ = __webpack_require__(6);
 
         //Import Models
-        var models = __webpack_require__(4);
+        var models = __webpack_require__(5);
         var sequelize = __webpack_require__(1).sequelize;
 
         var creditModel = models.creditModel(sequelize);
@@ -657,6 +657,12 @@ module.exports = require("request");
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -684,7 +690,7 @@ exports.usersModel = usersModel;
 
 var _sequelize = __webpack_require__(13);
 
-var _lodash = __webpack_require__(5);
+var _lodash = __webpack_require__(6);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -793,6 +799,22 @@ function bankModel(config) {
       type: _sequelize.Sequelize.STRING,
       set: function set(val) {
         this.setDataValue('name', _lodash2.default.capitalize(val).trim());
+      },
+      get: function get() {
+        var name = this.getDataValue('name');
+        // 'this' allows you to access attributes of the instance
+
+        var nameTokens = name.split(' ');
+        if (nameTokens.length === 1) {
+          return _lodash2.default.capitalize(nameTokens);
+        } else {
+          var tmpName = '';
+          nameTokens.map(function (n) {
+            tmpName = tmpName + _lodash2.default.capitalize(n) + ' ';
+          });
+
+          return tmpName.trim();
+        }
       }
     },
     code: {
@@ -906,7 +928,23 @@ function ICBankModel(config) {
 function branchModel(config) {
   var bankBranch = config.define('bank_branch', {
     name: {
-      type: _sequelize.Sequelize.STRING
+      type: _sequelize.Sequelize.STRING,
+      get: function get() {
+        var name = this.getDataValue('name');
+        // 'this' allows you to access attributes of the instance
+
+        var nameTokens = name.split(' ');
+        if (nameTokens.length === 1) {
+          return _lodash2.default.capitalize(nameTokens);
+        } else {
+          var tmpName = '';
+          nameTokens.map(function (n) {
+            tmpName = tmpName + _lodash2.default.capitalize(n) + ' ';
+          });
+
+          return tmpName.trim();
+        }
+      }
     },
     code: {
       type: _sequelize.Sequelize.STRING
@@ -1149,16 +1187,10 @@ function usersModel(config) {
 }
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = require("lodash");
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports) {
 
-module.exports = require("path");
+module.exports = require("lodash");
 
 /***/ }),
 /* 7 */
@@ -1219,7 +1251,7 @@ module.exports = require("nodemailer");
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(__dirname) {
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -1311,7 +1343,7 @@ var _uploads_router = __webpack_require__(39);
 
 var _uploads_router2 = _interopRequireDefault(_uploads_router);
 
-var _models = __webpack_require__(4);
+var _models = __webpack_require__(5);
 
 var models = _interopRequireWildcard(_models);
 
@@ -1326,6 +1358,10 @@ var _request2 = _interopRequireDefault(_request);
 var _jsonwebtoken = __webpack_require__(9);
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
+
+var _path = __webpack_require__(4);
+
+var _path2 = _interopRequireDefault(_path);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -1380,7 +1416,7 @@ var App = function () {
             });
 
             app.get('/', function (req, res) {
-                res.redirect('./index.html');
+                res.sendFile(_path2.default.join(__dirname, 'build', 'index.html'));
             });
         }
     }, {
@@ -1550,6 +1586,7 @@ exports.default = App;
 
 
 var server = new App();
+/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ }),
 /* 17 */
@@ -3017,7 +3054,7 @@ var _config = __webpack_require__(1);
 
 var d = _interopRequireWildcard(_config);
 
-var _path = __webpack_require__(6);
+var _path = __webpack_require__(4);
 
 var _path2 = _interopRequireDefault(_path);
 
@@ -3660,7 +3697,7 @@ var UploadRoutes = function () {
             var multer = __webpack_require__(8);
             var storage = multer.diskStorage({
                 destination: function destination(req, file, callback) {
-                    var path = __webpack_require__(6);
+                    var path = __webpack_require__(4);
                     var dest = path.resolve('./uploads');
                     fs.ensureDirSync(dest);
                     callback(null, dest);
@@ -3710,10 +3747,10 @@ var UploadRoutes = function () {
         key: 'compute',
         value: function compute(req, res, data) {
             if (data) {
-                var _ = __webpack_require__(5);
+                var _ = __webpack_require__(6);
 
                 //Import Models
-                var models = __webpack_require__(4);
+                var models = __webpack_require__(5);
                 var sequelize = __webpack_require__(1).sequelize;
 
                 var creditModel = models.creditModel(sequelize);

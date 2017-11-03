@@ -8,7 +8,7 @@ import _ from 'lodash';
 
         const tmpText = _.toArray(text.trim());
         const result = _.map(tmpText, (it)=>{
-                            if(_.toUpper(it) === _.toLower(it) && it !== ' '){
+                            if(_.toUpper(it) === _.toLower(it) && it !== ' ' && it !== '-'){
                                 return false;
                             }
                         })

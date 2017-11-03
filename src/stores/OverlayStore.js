@@ -80,6 +80,10 @@ class OverlayStore extends EventEmitter{
        return cookie.load('firstname');
    }
 
+   getLastName(){
+       return cookie.load('lastname');
+   }
+
    setOverlayType(val){
        switch(val){
            case 'I' : {

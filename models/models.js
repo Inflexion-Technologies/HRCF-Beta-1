@@ -104,6 +104,22 @@ export function bankModel(config){
         type: Sequelize.STRING,
         set(val) {
           this.setDataValue('name', _.capitalize(val).trim());
+        },
+        get() {
+          const name = this.getDataValue('name');
+          // 'this' allows you to access attributes of the instance
+
+          const nameTokens = name.split(' ');
+          if(nameTokens.length === 1){
+            return _.capitalize(nameTokens);
+          }else{
+            let tmpName = '';
+            nameTokens.map((n)=>{
+              tmpName = tmpName+_.capitalize(n)+' ';
+            })
+
+            return tmpName.trim();
+          }
         }
       },
       code: {
@@ -217,7 +233,23 @@ export function ICBankModel(config){
 export function branchModel(config){
 	const bankBranch = config.define('bank_branch', {
 	    name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        get() {
+          const name = this.getDataValue('name');
+          // 'this' allows you to access attributes of the instance
+
+          const nameTokens = name.split(' ');
+          if(nameTokens.length === 1){
+            return _.capitalize(nameTokens);
+          }else{
+            let tmpName = '';
+            nameTokens.map((n)=>{
+              tmpName = tmpName+_.capitalize(n)+' ';
+            })
+
+            return tmpName.trim();
+          }
+        }
       },
       code: {
         type: Sequelize.STRING

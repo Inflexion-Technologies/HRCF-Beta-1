@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import OverlayStore from '../../../stores/OverlayStore';
 import * as OverlayAction from '../../../actions/OverlayAction';
 import WithdrawStore from '../../../stores/WithdrawStore'
+import {Link} from 'react-router-dom';
 
 import CountDown from '../../CountDownTimer';
 
@@ -37,7 +38,8 @@ class WMessage extends Component {
 
   redirectToApp(){
     this.resetWithdrawPage();
-    window.location.href = '/app/dashboard'    
+    //window.location.href = '/app/dashboard' 
+    this.props.history.push('/app/dashboard');        
   }
 
   stop(){
@@ -77,7 +79,7 @@ class WMessage extends Component {
                  </div>
 
                   <div className="form-group">
-                    <a className="btn btn-md btn-default btn-block action-btn" onClick={this.onNext.bind(this)}>Back To Dashboard</a>
+                    <Link to="/app/dashboard" className="btn btn-md btn-default btn-block action-btn">Back To Dashboard</Link>
                   </div>
                 </div>
                 <div className="col-md-3"></div>
