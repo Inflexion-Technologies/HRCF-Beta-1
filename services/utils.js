@@ -180,12 +180,23 @@ exports.saveFile = function(req, res){
                 usersModel.findOne({where : {id : req.body.user_id, is_admin : 'Y', status : 'A'}})
                 .then(function(user){
                     if(user){
-                        var parseXlsx = require('excel');
+                        // var parseXlsx = require('excel');
                         
-                        parseXlsx(req.file.path, function(err, data) {
-                            if(err) throw err;
-                            compute(req, res, data, ic_bank_id);
-                        });
+                        // parseXlsx(req.file.path, function(err, data) {
+                        //     if(err) throw err;
+                        //     compute(req, res, data, ic_bank_id);
+                        // });
+
+
+                        var xlsx = require('xlsx');
+                        var workbook = xlsx.readFile(req.file.path);
+                        var worksheet = workbook.Sheets[workbook.SheetNames[0]];
+                        var data = xlsx.utils.sheet_to_json(worksheet);
+
+                        console.log('sheet => '+JSON.stringify(data));
+
+                        compute2(req, res, data, ic_bank_id);
+
                     }else{
                         res.status(400).json({success: false});
                     }
@@ -240,6 +251,95 @@ var sendEmail = function(sender, title, message){
         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
     });
 }
+
+var compute2 = function(req, res, data, ic_bank_id){
+    if(data){
+        var _ = require('lodash');
+
+        //Import Models
+        const models = require('../models/models');
+        const sequelize = require('../config').sequelize;
+
+        const creditModel = models.creditModel(sequelize);
+        const transactionModel = models.transactionModel(sequelize);
+        const usersModel = models.usersModel(sequelize);
+        const bankStatementModel = models.bankStatementModel(sequelize);
+        const icBanksModel = models.ICBankModel(sequelize);
+
+        if(data){
+
+                console.log('header passed');
+                //Prepare objects for transactions
+                var transactionMap = [];
+                
+                data.map((obj, i)=>{
+                    transactionMap.push({date : obj.date, account_number : obj.bank_account, ledger_account : obj.ledger_account, credit : getNumber(obj.credit), debit : getNumber(obj.debit), description : obj.description, client_code : obj.client_code, fund_code : obj.fund_code, currency : obj.currency, security_issuer_code: obj.security_issuer_code});
+                });
+
+                console.log('Transaction statement length => '+transactionMap.length+', Transaction => '+JSON.stringify(transactionMap));
+
+                const HRCFData = _.filter(transactionMap, (statement)=>{ return statement.client_code.trim().length === 11});
+
+                console.log('HRCF length => '+HRCFData.length);
+                
+                if(HRCFData){
+                    let HRCFDataWithUserIds = [];
+
+                    HRCFData.map((data)=>{
+                        usersModel.findOne({where : {payment_number : data.client_code}, individualHooks: true})
+                        .then((user)=>{
+                            if(user){
+                                const credit = data.credit.trim();
+                                return user.increment({'balance' : parseFloat(credit)})
+                                .then((user)=>{
+                                    const newBalance = user.balance;
+                                    //Send an email
+                                    sendEmail(user.email, 'Account Update', creditEmailTemplate(user.firstname, credit, newBalance));
+                                    return user
+                                });  
+                            }
+                        }).then((user)=>{
+                            if(user){
+                                icBanksModel.findOne({where : {account_number : data.account_number, status : 'A'}}).then((icBank)=>{
+                                    if(icBank){
+                                        creditModel.create({amount : data.credit,type : 'C',narration : data.description,user_id : user.id,bank_id:icBank.id});
+                                        transactionModel.create({amount : data.credit,type : 'C',narration : data.description,user_id : user.id});
+                                    }
+                                });
+                            }
+
+                        })   
+                    });
+
+                }
+
+                res.status(200).json({success : true});
+
+                //Create Bank Statement
+                transactionMap.map((data, i)=>{
+                    return bankStatementModel.create({ledger_account : data.ledger_account,
+                        credit : data.credit,
+                        debit : data.debit,
+                        description : data.description,
+                        fund_code : data.fund_code,
+                        client_code : data.client_code,
+                        security_issuer_code : data.security_issuer_code,
+                        currency : data.currency,                        
+                        account_number : data.account_number,
+                        ic_bank_id
+                    })
+                })
+                
+        }else{
+            console.log('Wrong fields ...');
+        }
+    }
+}
+
+
+
+
+
 
 var compute = function(req, res, data, ic_bank_id){
     if(data){
@@ -336,6 +436,22 @@ var compute = function(req, res, data, ic_bank_id){
             console.log('Wrong fields ...');
         }
     }
+}
+
+var getNumber = function(value){
+    if(value.includes(',')){
+        var valueTokens = value.split(',');
+        var newValue = '';
+
+        valueTokens.map((token)=>{
+            newValue = newValue + token;
+        })
+
+        return newValue;
+    }
+
+
+    return value;
 }
 
 var registeringEmailTemplate = function(name){

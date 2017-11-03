@@ -166,19 +166,22 @@ export function bankStatementModel(config){
       debit : {
         type : Sequelize.DOUBLE
       },
-      counterparty_code : {
+      fund_code : {
+        type : Sequelize.STRING
+      },
+      client_code : {
         type : Sequelize.STRING,
+      },
+      currency : {
+        type : Sequelize.STRING
+      },
+      security_issuer_code : {
+        type : Sequelize.STRING
       },
       account_number : {
         type : Sequelize.STRING,
       },
       description : {
-        type : Sequelize.STRING,
-      },
-      sponsor_code : {
-        type : Sequelize.STRING,
-      },
-      client_code : {
         type : Sequelize.STRING,
       },
 	    status: {
