@@ -44,13 +44,13 @@ class MainStore extends EventEmitter{
     }
 
     getBalance(){
-        const formatStyle = format({integerSeparator:','});
+        const formatStyle = format({integerSeparator:',', round : 2});
         
         return formatStyle(this.balance) === '' ? '0.00':formatStyle(this.balance);
     }
 
     getContribution(){
-        const formatStyle = format({integerSeparator:','});
+        const formatStyle = format({integerSeparator:',', round : 2});
         
         return formatStyle(this.contribution) === '' ? '0.00':formatStyle(this.contribution);
     }

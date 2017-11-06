@@ -7,6 +7,8 @@ import IndividualOverlay from './individual_overlay/IndividualOverlay';
 import Dashboard from '../contents/Dashboard'
 import Withdraw from '../contents/Withdraw'
 import Upload from '../upload/Upload'
+import Fund from '../contents/Fund'
+
 import {Route, Switch, Redirect } from 'react-router-dom';
 import cookie from 'react-cookies';
 
@@ -58,11 +60,7 @@ class Main extends Component {
   }
 
   render() {
-    // let showOverlay = false;
-    
-    // if(cookie.load('is_complete') === undefined || cookie.load('is_complete') === 'N'){
-    //     showOverlay = true;
-    // }
+   
         return (
         <div className="container main">
             {this.showOverlay()}
@@ -78,6 +76,7 @@ class Main extends Component {
                         <Route exact path='/app/dashboard' component={Dashboard}/>
                         <Route exact path='/app/withdraw' component={Withdraw}/>
                         <Route exact path='/app/upload' component={Upload}/>
+                        <Route exact path='/app/fund' component={Fund}/>
                     </Switch>
                     
                     

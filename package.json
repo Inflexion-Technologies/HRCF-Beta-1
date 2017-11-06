@@ -74,7 +74,7 @@
     "build-app": "webpack",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "start-app": "react-scripts build && webpack && forever start ./build/app.bundle.js",
+    "start-app": "react-scripts build && webpack && node ./build/app.bundle.js",
     "test-server": "mocha test/test.js",
     "start-server": "webpack && node ./build/app.bundle.js"
   }

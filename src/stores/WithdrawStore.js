@@ -40,7 +40,7 @@ class Withdraw extends EventEmitter{
     }
 
     getAmount(){
-        const formatStyle = format({integerSeparator:','});
+        const formatStyle = format({integerSeparator:',', round : 2});
         
         return formatStyle(this.amount) === '' ? '0.00':formatStyle(this.amount);
     }
@@ -75,7 +75,7 @@ class Withdraw extends EventEmitter{
 
         console.log('New Balance is '+this.newBalance);
 
-        const formatStyle = format({integerSeparator:','});
+        const formatStyle = format({integerSeparator:',', round : 2});
         return formatStyle(this.newBalance) === '' ? '0.00':formatStyle(this.newBalance);
     }
 
@@ -83,7 +83,7 @@ class Withdraw extends EventEmitter{
 
         console.log('Balance is '+this.newBalance);
         
-        const formatStyle = format({integerSeparator:','});
+        const formatStyle = format({integerSeparator:',', round : 2});
         return formatStyle(this.balance) === '' ? '0.00':formatStyle(this.balance);
     }
 
