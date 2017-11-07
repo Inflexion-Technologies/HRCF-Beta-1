@@ -28,6 +28,7 @@ import request from 'request';
 
 import jwt from 'jsonwebtoken';
 import path from 'path';
+import time from 'time';
 
 
 export default class App {
@@ -151,6 +152,8 @@ export default class App {
         requestModel.belongsTo(approveModel);
         requestModel.belongsTo(accountsModel);
 
+        bankStatementModel.belongsTo(icBankModel);
+
         approveModel.belongsTo(companyModel);
 
         branchModel.belongsTo(bankModel);
@@ -170,8 +173,6 @@ export default class App {
 
         accountsModel.belongsTo(usersModel);
         accountsModel.belongsTo(branchModel);
-
-
 
         usersModel.belongsToMany(approveModel, {through: 'user_approvers'});
         approveModel.belongsToMany(usersModel, {through: 'user_approvers'});
@@ -231,6 +232,8 @@ export default class App {
         
         app.use('/api/utils', utils.routes());
         app.use('/api/auth', auth.routes());
+
+        this.runCron();
     }
 
     finalize(app){
@@ -238,6 +241,73 @@ export default class App {
         app.listen(parseInt(PORT), ()=>{
             console.log('Running on PORT ::: '+PORT);
         });
+    }
+
+    creditAllUsers(assume_nav){
+        const dbConfig = d.sequelize;        
+        const usersModel = models.usersModel(dbConfig);
+        const creditModel = models.creditModel(dbConfig);
+
+        usersModel.sum('balance', {where :{status : 'A'}}).then((totalBalance)=>{
+            if(parseFloat(totalBalance) > 0){
+                const nav = (parseFloat(assume_nav) - parseFloat(totalBalance));
+                if(nav < 1) return;
+
+                usersModel.findAll({ where : {status : 'A'}}).then((users)=>{
+                    users.map((user)=>{
+                        const interest = (parseFloat(user.balance)/parseFloat(totalBalance))*parseFloat(nav);
+                        user.increment({'balance': interest})
+                        .then((user)=>{
+                            if(user){
+                                creditModel.create({amount : interest, 
+                                    type : 'I', 
+                                    user_id: user.id, 
+                                    narration: 'Interest'});
+                            }
+                        })
+                    })
+                })
+
+
+            }
+        })
+        
+    }
+
+    getNAV(){
+        var app = this;
+        var request = require('request'),
+        dateFormat = require('dateformat'),
+        yesterday = new Date().setDate(new Date().getDate()-1),
+        yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
+        url = d.config.ams;
+
+        request({
+            uri: url+yesterday_formatted,
+            method: 'GET',
+            json: true,
+        }, function(error, res, body){
+            app.creditAllUsers(body.payload.nav);
+        });	
+    }
+
+    runCron(){
+        const time = require('time');
+
+        const t = new time.Date();
+        t.setTimezone('UMT');
+        
+        setInterval(()=>{
+            const hour = time.localtime(t/1000).hours;
+            // if(parseInt(hour) === 16 || parseInt(hour) === 0){
+            //     this.getNAV();
+            // }
+
+            if(parseInt(hour) === 0){
+                this.getNAV();
+            }
+            
+        }, 60*60*1000);
     }
 
 }

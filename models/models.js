@@ -173,6 +173,9 @@ export function bankStatementModel(config){
       ledger_account : {
         type : Sequelize.STRING
       },
+      date : {
+        type : Sequelize.DATE
+      },
       ic_bank_id : {
         type : Sequelize.INTEGER
       },
@@ -189,6 +192,12 @@ export function bankStatementModel(config){
         type : Sequelize.STRING,
       },
       currency : {
+        type : Sequelize.STRING
+      },
+      counter_party_code : {
+        type : Sequelize.STRING
+      },
+      sponsor_code : {
         type : Sequelize.STRING
       },
       security_issuer_code : {

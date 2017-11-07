@@ -7,6 +7,8 @@ const config = {
     secret : 'thequickfoxjumpedofthelazydog',
     uploadlocation : path.resolve(__dirname+'/resources'),
     ext : 'xlsx',
+    ams: 'http://217.174.240.226:8080/fam-rest/rest/api/eod?fundCode=ICAMGHRCF&valueDate=',
+    cron_balance_time : 0,
     email_host : 'smtp.gmail.com',
     email_port : '587',
     email_secure : false,

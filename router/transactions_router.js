@@ -18,21 +18,21 @@ export default class TransactionsRoutes{
 
         transactionsRouter.route('/')
             .get((req, res)=>{  
-                app.TransactionModel.findAll({where: {status:'A'}, limit: 150,  include: [app.UserModel] }).then(transactions => {
+                app.TransactionModel.findAll({where: {status:'A'},  include: [{model : app.UserModel, attributes:['firstname', 'lastname', 'payment_number', 'email', 'msisdn']}] }).then(transactions => {
                     res.status(200).json(transactions);
                 })
             });   
 
         transactionsRouter.route('/:id')
             .get((req, res)=>{
-                app.TransactionModel.findById(req.params.id).then(transaction => {
+                app.TransactionModel.findOne({where: {id : req.params.id, status:'A'},  include: [{model : app.UserModel, attributes:['firstname', 'lastname', 'payment_number', 'email', 'msisdn']}] }).then(transaction => {
                     res.status(200).json(transaction);
                 })
             }); 
 
         transactionsRouter.route('/user_id/:user_id')
             .get((req, res)=>{
-               app.TransactionModel.findOne({ where : {user_id : req.params.user_id},  include: [app.UserModel] }).then(transaction =>{
+               app.TransactionModel.findOne({ where : {user_id : req.params.user_id},  include: [{model : app.UserModel, attributes:['firstname', 'lastname', 'payment_number', 'email', 'msisdn']}] }).then(transaction =>{
                    res.status(200).json(transaction);
                })
             }); 

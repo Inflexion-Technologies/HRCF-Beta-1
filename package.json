@@ -27,7 +27,7 @@
     "busboy": "^0.2.14",
     "client-sessions": "^0.8.0",
     "cookie-parser": "^1.4.3",
-    "dateformat": "^2.0.0",
+    "dateformat": "^2.2.0",
     "excel": "^0.1.7",
     "express": "^4.15.4",
     "express-session": "^1.15.5",
@@ -64,6 +64,7 @@
     "sequelize": "^4.5.0",
     "shortid": "^2.2.8",
     "sync": "^0.2.5",
+    "time": "^0.12.0",
     "webpack": "^3.5.2",
     "webpack-node-externals": "^1.6.0",
     "xlsx": "^0.11.7"
@@ -74,7 +75,7 @@
     "build-app": "webpack",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "start-app": "react-scripts build && webpack && forever start ./build/app.bundle.js",
+    "start-app": "react-scripts build && webpack && node ./build/app.bundle.js",
     "test-server": "mocha test/test.js",
     "start-server": "webpack && node ./build/app.bundle.js"
   }

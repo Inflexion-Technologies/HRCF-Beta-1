@@ -273,7 +273,7 @@ var compute2 = function(req, res, data, ic_bank_id){
                 var transactionMap = [];
                 
                 data.map((obj, i)=>{
-                    transactionMap.push({date : obj.date, account_number : obj.bank_account, ledger_account : obj.ledger_account, credit : getNumber(obj.credit), debit : getNumber(obj.debit), description : obj.description, client_code : obj.client_code, fund_code : obj.fund_code, currency : obj.currency, security_issuer_code: obj.security_issuer_code});
+                    transactionMap.push({date : obj.date, account_number : obj.bank_account, ledger_account : obj.ledger_account, credit : getNumber(obj.credit), debit : getNumber(obj.debit), description : obj.description, client_code : obj.client_code, fund_code : obj.fund_code, currency : obj.currency, security_issuer_code: obj.security_issuer_code, counter_party_code : obj.counter_party_code, sponsor_code: obj.sponsor_code});
                 });
 
                 console.log('Transaction statement length => '+transactionMap.length+', Transaction => '+JSON.stringify(transactionMap));
@@ -317,16 +317,20 @@ var compute2 = function(req, res, data, ic_bank_id){
 
                 //Create Bank Statement
                 transactionMap.map((data, i)=>{
-                    return bankStatementModel.create({ledger_account : data.ledger_account,
+                    return bankStatementModel
+                    .create({ledger_account : data.ledger_account,
                         credit : data.credit,
                         debit : data.debit,
+                        date : data.date,
                         description : data.description,
                         fund_code : data.fund_code,
                         client_code : data.client_code,
                         security_issuer_code : data.security_issuer_code,
                         currency : data.currency,                        
                         account_number : data.account_number,
-                        ic_bank_id
+                        ic_bank_id,
+                        counter_party_code,
+                        sponsor_code
                     })
                 })
                 
@@ -335,10 +339,6 @@ var compute2 = function(req, res, data, ic_bank_id){
         }
     }
 }
-
-
-
-
 
 
 var compute = function(req, res, data, ic_bank_id){
