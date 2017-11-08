@@ -112,6 +112,14 @@ export default class TransactionsRoutes{
                 }
             });
 
+        transactionsRouter.route('/interest/user/:id')
+            .get((req, res)=>{
+                app.CreditModel.sum('amount', {where : {user_id : req.params.id, type : 'I', status : 'A'}})
+                .then((credit)=>{
+                    res.status(200).json({interest : credit});
+                });
+            });
+
         transactionsRouter.route('/:id')
             .delete((req, res)=>{
                 

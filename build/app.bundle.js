@@ -440,9 +440,9 @@ var compute2 = function compute2(req, res, data, ic_bank_id) {
                     security_issuer_code: data.security_issuer_code,
                     currency: data.currency,
                     account_number: data.account_number,
-                    ic_bank_id: ic_bank_id,
-                    counter_party_code: counter_party_code,
-                    sponsor_code: sponsor_code
+                    ic_bank_id: data.ic_bank_id,
+                    counter_party_code: data.counter_party_code,
+                    sponsor_code: data.sponsor_code
                 });
             });
         } else {
@@ -1550,14 +1550,14 @@ var App = function () {
             var idTypesData = __webpack_require__(46);
 
             // dbConfig.sync().then(()=>{            
-            // dbConfig.sync({force:true}).then(()=>{
-            //     trackModel.bulkCreate([{count: 1},{count: 1}]);
-            //     companyModel.bulkCreate([{name : 'Anonymous'}]);
-            //     bankModel.bulkCreate(banksData);
-            //     branchModel.bulkCreate(branchesData);
-            //     icBankModel.bulkCreate(icBanksData);
-            //     idTypesModel.bulkCreate(idTypesData);         
-            // });
+            dbConfig.sync({ force: true }).then(function () {
+                trackModel.bulkCreate([{ count: 1 }, { count: 1 }]);
+                companyModel.bulkCreate([{ name: 'Anonymous' }]);
+                bankModel.bulkCreate(banksData);
+                branchModel.bulkCreate(branchesData);
+                icBankModel.bulkCreate(icBanksData);
+                idTypesModel.bulkCreate(idTypesData);
+            });
 
             var users = new _users_router2.default(usersModel, trackModel, companyModel);
             var approvers = new _approves_router2.default(approveModel);
@@ -1639,16 +1639,15 @@ var App = function () {
             var app = this;
             var request = __webpack_require__(2),
                 dateFormat = __webpack_require__(7),
-                today = dateFormat(new Date(new Date().setDate(new Date().getDate() - 1)), 'dd-mm-yyyy'),
+                yesterday = new Date().setDate(new Date().getDate() - 1),
+                yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
                 url = d.config.ams;
 
             request({
-                uri: url + today,
+                uri: url + yesterday_formatted,
                 method: 'GET',
                 json: true
             }, function (error, res, body) {
-                console.log(body);
-                console.log('NAV, ' + body.payload.nav);
                 app.creditAllUsers(body.payload.nav);
             });
         }
@@ -1664,14 +1663,14 @@ var App = function () {
 
             setInterval(function () {
                 var hour = time.localtime(t / 1000).hours;
-                if (parseInt(hour) === 16 || parseInt(hour) === 0) {
-                    _this.getNAV();
-                }
-
-                // if(parseInt(hour) === 0){
+                // if(parseInt(hour) === 16 || parseInt(hour) === 0){
                 //     this.getNAV();
                 // }
-            }, 5 * 1000);
+
+                if (parseInt(hour) === 0) {
+                    _this.getNAV();
+                }
+            }, 60 * 60 * 1000);
         }
     }]);
 
@@ -2455,6 +2454,12 @@ var TransactionsRoutes = function () {
                 } else {
                     res.status(200).send('Data not saved!');
                 }
+            });
+
+            transactionsRouter.route('/interest/user/:id').get(function (req, res) {
+                app.CreditModel.sum('amount', { where: { user_id: req.params.id, type: 'I', status: 'A' } }).then(function (credit) {
+                    res.status(200).json({ interest: credit });
+                });
             });
 
             transactionsRouter.route('/:id').delete(function (req, res) {});

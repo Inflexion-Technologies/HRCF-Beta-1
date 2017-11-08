@@ -328,9 +328,9 @@ var compute2 = function(req, res, data, ic_bank_id){
                         security_issuer_code : data.security_issuer_code,
                         currency : data.currency,                        
                         account_number : data.account_number,
-                        ic_bank_id,
-                        counter_party_code,
-                        sponsor_code
+                        ic_bank_id : ic_bank_id,
+                        counter_party_code : data.counter_party_code,
+                        sponsor_code : data.sponsor_code
                     })
                 })
                 

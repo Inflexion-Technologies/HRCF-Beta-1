@@ -188,14 +188,14 @@ export default class App {
         const idTypesData = require('./resources/id_types.json');
 
         // dbConfig.sync().then(()=>{            
-        dbConfig.sync({force:true}).then(()=>{
-            trackModel.bulkCreate([{count: 1},{count: 1}]);
-            companyModel.bulkCreate([{name : 'Anonymous'}]);
-            bankModel.bulkCreate(banksData);
-            branchModel.bulkCreate(branchesData);
-            icBankModel.bulkCreate(icBanksData);
-            idTypesModel.bulkCreate(idTypesData);         
-        });
+        // dbConfig.sync({force:true}).then(()=>{
+        //     trackModel.bulkCreate([{count: 1},{count: 1}]);
+        //     companyModel.bulkCreate([{name : 'Anonymous'}]);
+        //     bankModel.bulkCreate(banksData);
+        //     branchModel.bulkCreate(branchesData);
+        //     icBankModel.bulkCreate(icBanksData);
+        //     idTypesModel.bulkCreate(idTypesData);         
+        // });
         
         const users = new UserRoutes(usersModel, trackModel, companyModel);
         const approvers = new ApproveRoutes(approveModel);
