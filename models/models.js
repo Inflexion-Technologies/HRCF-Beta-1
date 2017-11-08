@@ -26,8 +26,8 @@ export function companyModel(config){
 export function transactionModel(config){
 	const transactions = config.define('transaction', {
       type: {
-        type: Sequelize.STRING,
-        values : ['W','C']
+        type: Sequelize.ENUM,
+        values : ['W','C','I']
       },
       amount : {
         type : Sequelize.DOUBLE,
@@ -52,9 +52,6 @@ export function withdrawalModel(config){
 	const withdrawals = config.define('withdrawal', {
       amount: {
         type: Sequelize.DOUBLE
-      },
-      narration : {
-        type : Sequelize.STRING
       },
       user_id : {
         type : Sequelize.INTEGER
@@ -447,7 +444,11 @@ export function usersModel(config){
           this.setDataValue('msisdn', (val).trim());
         }
       },
-      balance : {
+      available_balance : {
+        type : Sequelize.DOUBLE,
+        defaultValue : 0
+      },
+      actual_balance : {
         type : Sequelize.DOUBLE,
         defaultValue : 0
       },

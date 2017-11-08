@@ -6,7 +6,8 @@ class TransactionStore extends EventEmitter{
     constructor(){
         super();
         this.account_id = 0;
-        this.balance = 0;
+        this.actual_balance = 0;
+        this.available_balance = 0;        
         this.accounts = [];
         this.selectData = [];
         this.account_id = 0;
@@ -25,8 +26,10 @@ class TransactionStore extends EventEmitter{
     }
 
     doTransactionUserBalance(data){
-        if(data.balance !== null){
-            this.balance = data.balance;
+        if(data.actual_balance !== null && data.available_balance !== null){
+            this.actual_balance = data.actual_balance;
+            this.available_balance = data.available_balance;
+
             console.log('Store Balance => '+this.balance);
             this.emit('transaction_user_balance');
         }
@@ -83,8 +86,12 @@ class TransactionStore extends EventEmitter{
     }
 
 
-    getBalance(){
-        return parseFloat(this.balance);
+    getActualBalance(){
+        return parseFloat(this.actual_balance);
+    }
+
+    getAvailableBalance(){
+        return parseFloat(this.available_balance);
     }
 
     getBank(){

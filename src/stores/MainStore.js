@@ -7,7 +7,9 @@ import format from 'format-number';
 class MainStore extends EventEmitter{
     constructor(){
         super();
-        this.balance = 0;
+        this.available_balance = 0;
+        this.actual_balance = 0;
+        this.interest = 0;
         this.contribution = 0;
     }
 
@@ -30,23 +32,39 @@ class MainStore extends EventEmitter{
     }
 
     doDashboardUserBalance(data){
-        if(data.balance){
-            this.balance = data.balance;
+        if(data.actual_balance && data.available_balance){
+            this.actual_balance = data.actual_balance;            
+            this.available_balance = data.available_balance;
+            
+            console.log('Balances set ...');
             this.emit('dashboard_user_balance');
         }
     }
 
     doDashboardUserContribution(data){
-        if(data.balance){
-            this.contribution = data.balance;
+        if(data.contribution){
+            this.contribution = data.contribution;
             this.emit('dashboard_user_contribution');
         }
     }
 
-    getBalance(){
+    doDashboardUserInterest(data){
+        if(data.credit){
+            this.interest = data.credit;
+            this.emit('dashboard_user_interest');            
+        }
+    }
+
+    getActualBalance(){
         const formatStyle = format({integerSeparator:',', round : 2});
         
-        return formatStyle(this.balance) === '' ? '0.00':formatStyle(this.balance);
+        return formatStyle(this.actual_balance) === '' ? '0.00':formatStyle(this.actual_balance);
+    }
+
+    getAvailableBalance(){
+        const formatStyle = format({integerSeparator:',', round : 2});
+        
+        return formatStyle(this.available_balance) === '' ? '0.00':formatStyle(this.available_balance);
     }
 
     getContribution(){
@@ -55,10 +73,20 @@ class MainStore extends EventEmitter{
         return formatStyle(this.contribution) === '' ? '0.00':formatStyle(this.contribution);
     }
 
+    getInterest(){
+        const formatStyle = format({integerSeparator:',', round : 2});
+        
+        return formatStyle(this.interest) === '' ? '0.00':formatStyle(this.interest);
+    }
+
     handleActions(action){
         switch(action.type){
             case 'DASHBOARD_USER_BALANCE' : {
                 this.doDashboardUserBalance(action.data);
+                break;
+            } 
+            case 'DASHBOARD_USER_BALANCE' : {
+                this.doDashboardUserInterest(action.data);
                 break;
             } 
             case 'DASHBOARD_USER_CONTRIBUTION' : {

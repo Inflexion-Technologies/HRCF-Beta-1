@@ -290,9 +290,11 @@ var compute2 = function(req, res, data, ic_bank_id){
                         .then((user)=>{
                             if(user){
                                 const credit = data.credit.trim();
-                                return user.increment({'balance' : parseFloat(credit)})
+                                return user.increment({'actual_balance' : parseFloat(credit)})
                                 .then((user)=>{
-                                    const newBalance = user.balance;
+                                    user.increment({'available_balance' : parseFloat(credit)});
+
+                                    const newBalance = user.available_balance;
                                     //Send an email
                                     sendEmail(user.email, 'Account Update', creditEmailTemplate(user.firstname, credit, newBalance));
                                     return user
@@ -331,104 +333,6 @@ var compute2 = function(req, res, data, ic_bank_id){
                         ic_bank_id : ic_bank_id,
                         counter_party_code : data.counter_party_code,
                         sponsor_code : data.sponsor_code
-                    })
-                })
-                
-        }else{
-            console.log('Wrong fields ...');
-        }
-    }
-}
-
-
-var compute = function(req, res, data, ic_bank_id){
-    if(data){
-        var _ = require('lodash');
-
-        //Import Models
-        const models = require('../models/models');
-        const sequelize = require('../config').sequelize;
-
-        const creditModel = models.creditModel(sequelize);
-        const transactionModel = models.transactionModel(sequelize);
-        const usersModel = models.usersModel(sequelize);
-        const bankStatementModel = models.bankStatementModel(sequelize);
-        const icBanksModel = models.ICBankModel(sequelize);
-
-        //Verify fields
-        const fields = data[0];
-
-        if(fields[0].trim().toLowerCase() === 'date' && 
-            fields[1].trim().toLowerCase() === 'bank account no' &&
-            fields[2].trim().toLowerCase() === 'ledger account' &&
-            fields[3].trim().toLowerCase() === 'credit' &&
-            fields[4].trim().toLowerCase() === 'debit' &&
-            fields[5].trim().toLowerCase() === 'counterparty code' &&
-            fields[6].trim().toLowerCase() === 'description' && 
-            fields[7].trim().toLowerCase() === 'sponsor code' && 
-            fields[8].trim().toLowerCase() === 'client code'){
-
-                console.log('header passed');
-                //Prepare objects for transactions
-                var transactionMap = [];
-                
-                data.map((obj, i)=>{
-                    if(i > 0){
-                        const objArray = obj.toString().split(',');
-                        if(objArray[0].trim().length > 3){
-                            transactionMap.push({date : objArray[0], account_number : objArray[1], ledger_account : objArray[2], credit : objArray[3], debit : objArray[4], counterparty_code : objArray[5], description : objArray[6], sponsor_code : objArray[7], client_code : objArray[8]});
-                        }
-                    }
-                });
-
-                console.log('Transaction statement length => '+transactionMap.length+', Transaction => '+JSON.stringify(transactionMap));
-
-                const HRCFData = _.filter(transactionMap, (statement)=>{ return statement.client_code.trim().length === 11});
-
-                console.log('HRCF length => '+HRCFData.length);
-                
-                if(HRCFData){
-                    let HRCFDataWithUserIds = [];
-
-                    HRCFData.map((data)=>{
-                        usersModel.findOne({where : {payment_number : data.client_code}, individualHooks: true})
-                        .then((user)=>{
-                            if(user){
-                                const credit = data.credit;
-                                return user.increment({'balance' : parseFloat(data.credit)})
-                                .then((user)=>{
-                                    const newBalance = user.balance;
-                                    //Send an email
-                                    sendEmail(user.email, 'Account Update', creditEmailTemplate(user.firstname, credit, newBalance));
-                                    return user
-                                });  
-                            }
-                        }).then((user)=>{
-                            icBanksModel.findOne({where : {account_number : data.account_number, status : 'A'}}).then((icBank)=>{
-                                if(icBank){
-                                    creditModel.create({amount : data.credit,type : 'C',narration : data.description,user_id : user.id,bank_id:icBank.id});
-                                    transactionModel.create({amount : data.credit,type : 'C',narration : data.description,user_id : user.id});
-                                }
-                            });
-
-                        })   
-                    });
-
-                }
-
-                res.status(200).json({success : true});
-
-                //Create Bank Statement
-                transactionMap.map((data, i)=>{
-                    return bankStatementModel.create({ledger_account : data.ledger_account,
-                        credit : data.credit,
-                        debit : data.debit,
-                        counterparty_code : data.counterparty_code,
-                        description : data.description,
-                        sponsor_code : data.sponsor_code,
-                        client_code : data.client_code,
-                        account_number : data.account_number,
-                        ic_bank_id
                     })
                 })
                 

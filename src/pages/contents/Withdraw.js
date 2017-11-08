@@ -7,7 +7,6 @@ import WTopUp from './withdraw_components/WTopUp'
 
 import * as TransactionAction from '../../actions/TransactionAction'
 
-
 import WithdrawStore from '../../stores/WithdrawStore'
 import TransactionStore from '../../stores/TransactionStore'
 
@@ -50,11 +49,10 @@ class Withdraw extends Component {
   }
 
   updateBalance(){
-      this.balance = TransactionStore.getBalance();
-      console.log('Balance From Store => '+TransactionStore.getBalance());
+      this.balance = TransactionStore.getAvailableBalance();
+      console.log('Balance From Store => '+TransactionStore.getAvailableBalance());
 
-      WithdrawStore.setBalance(TransactionStore.getBalance());
-      WithdrawStore.setBalance(TransactionStore.getBalance());
+      WithdrawStore.setBalance(TransactionStore.getAvailableBalance());
 
       this.setState({
           count : this.state.count + 1
@@ -90,7 +88,7 @@ class Withdraw extends Component {
                         <div className="amount">{this.balance}
                              <div className="small">GHS</div>
                         </div>
-                        <div className={"label "+calculator_color_style}>Current Balance</div>
+                        <div className={"label "+calculator_color_style}>Available Balance</div>
                     </div>
                 </div>
 
@@ -120,7 +118,7 @@ class Withdraw extends Component {
                         <div className="amount">{this.newBalance}
                             <div className="small">GHS</div>
                         </div>
-                        <div className={"label "+calculator_color_style}>New Balance</div>
+                        <div className={"label "+calculator_color_style}>New Available Balance</div>
                     </div>
                 </div>
             </div>
@@ -161,7 +159,7 @@ class Withdraw extends Component {
                             <div className="amount">{this.balance}
                                  <div className="small">GHS</div>
                             </div>
-                            <div className={"label "+calculator_color_style}>Current Balance</div>
+                            <div className={"label "+calculator_color_style}>Available Balance</div>
                         </div>
                     </div>
 
@@ -191,7 +189,7 @@ class Withdraw extends Component {
                             <div className="amount">{this.newBalance}
                                 <div className="small">GHS</div>
                             </div>
-                            <div className={"label "+calculator_color_style}>New Balance</div>
+                            <div className={"label "+calculator_color_style}>New Available Balance</div>
                         </div>
                     </div>
                 </div>

@@ -49,7 +49,7 @@ export default class AccountsRoutes{
 
         accountsRouter.route('/balance/:user_id')
             .get((req, res)=>{
-               app.UserModel.findOne({ where : {id : req.params.user_id, status : 'A'}, attributes : ['id','balance'] }).then(user =>{
+               app.UserModel.findOne({ where : {id : req.params.user_id, status : 'A'}, attributes : ['id','available_balance', 'actual_balance'] }).then(user =>{
                     if(user){
                         res.status(200).json(user);
                     }else{

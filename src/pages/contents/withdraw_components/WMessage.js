@@ -26,7 +26,7 @@ class WMessage extends Component {
   }
 
   componentWillMount(){
-  
+    this.autoResetPage();
   }
 
   componentWillUnMount(){
@@ -36,7 +36,18 @@ class WMessage extends Component {
   redirectToApp(){
     this.resetWithdrawPage();
     //window.location.href = '/app/dashboard' 
-    //this.context.history.push('/app/dashboard');        
+    //this.context.history.push('/app/dashboard');  
+
+  }
+
+  autoResetPage(){
+    const app = this;
+
+    clearTimeout(this.timer);
+    
+    this.timer = setTimeout(()=>{
+      app.resetWithdrawPage();
+    }, 2000);
   }
 
   stop(){

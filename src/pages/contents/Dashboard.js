@@ -123,7 +123,12 @@ class Dashboard extends Component {
 
   componentWillMount(){
      MainAction.loadTotalBalance();
+     MainAction.loadTotalContribution();
+     MainAction.loadTotalInterest();
+
      MainStore.on('dashboard_user_balance', this.refresh);
+     MainStore.on('dashboard_user_contribution', this.refresh);
+     MainStore.on('dashboard_user_interest', this.refresh);
   }
 
   refresh(){
@@ -136,24 +141,24 @@ class Dashboard extends Component {
     return (
             <div>
                 <div className="row">
-                    <div className="col-md-4 kill-padding-except-left">
+                    <div className="col-md-4 col-xs-12 kill-padding-except-left">
                         <div className="dash-widget-contribution">
-                            <div className="amount">{MainStore.getBalance()} GHS</div>
-                            <div className="label">Total Balance</div>
-                        </div>
-                    </div>
-
-                    <div className="col-md-4 kill-padding">
-                        <div className="dash-widget-balance">
+                            <div className="label">Total Contribution</div>
                             <div className="amount">{MainStore.getContribution()} GHS</div>
-                            <div className="label">Total Contributions</div>
                         </div>
                     </div>
 
-                    <div className="col-md-4 kill-padding-except-right">
-                        <div className="dash-widget-interest">
-                            <div className="amount">5,000 GHS</div>
+                    <div className="col-md-4 col-xs-12 kill-padding">
+                        <div className="dash-widget-balance">
                             <div className="label">Total Interest</div>
+                            <div className="amount">{MainStore.getInterest()} GHS</div>
+                        </div>
+                    </div>
+
+                    <div className="col-md-4 col-xs-12 kill-padding-except-right">
+                        <div className="dash-widget-available-balance">
+                            <div className="label">Available Balance</div>
+                            <div className="amount">{MainStore.getAvailableBalance()} GHS</div>
                         </div>
                     </div>
                 </div>

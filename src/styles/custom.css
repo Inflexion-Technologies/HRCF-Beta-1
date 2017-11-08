@@ -168,14 +168,17 @@
 .main .dash-widget-contribution .amount{
     font-size: 30px;
     font-weight: 600;
+    font-family: 'Lato', sans-serif;
     color: #eeeeee;
+    letter-spacing: 1px;
 }
 
 .main .dash-widget-contribution .label{
-    font-size: 11px;
-    font-weight: 600;
-    color: #333333;
+    font-size: 10px;
+    font-weight: 800;
+    color: #fefefe;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .main .dash-widget-balance{
@@ -188,17 +191,47 @@
     padding: 10px;
 }
 
+.main .dash-widget-available-balance{
+    background: #ff3d00;
+    color: #fff;
+    border: 1px solid #ff3d00;
+    height: 95px;
+    text-align: right;
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+.main .dash-widget-available-balance .amount{
+    font-size: 30px;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+    color : #eeeeee;
+    letter-spacing: 1px;
+}
+
+.main .dash-widget-available-balance .label{
+    font-size: 10px;
+    font-weight: 800;
+    color: #fefefe;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}    
+
 .main .dash-widget-balance .amount{
     font-size: 30px;
     font-weight: 600;
+    font-family: 'Lato', sans-serif;
     color: #01579b;
+    letter-spacing: 1px;
 }
 
 .main .dash-widget-balance .label{
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 10px;
+    font-weight: 800;
     color: #01579b;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .main .dash-widget-interest{
@@ -214,14 +247,17 @@
 .main .dash-widget-interest .amount{
     font-size: 30px;
     font-weight: 600;
+    font-family: 'Lato', sans-serif;
     color: #eeeeee;
+    letter-spacing: 1px;
 }
 
 .main .dash-widget-interest .label{
-    font-size: 11px;
-    font-weight: 600;
-    color: #333333;
+    font-size: 10px;
+    font-weight: 800;
+    color: #fefefe;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .main .header{

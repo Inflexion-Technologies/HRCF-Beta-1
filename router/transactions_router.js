@@ -39,7 +39,7 @@ export default class TransactionsRoutes{
 
         transactionsRouter.route('/balance/:user_id')
             .get((req, res)=>{
-               app.UserModel.findOne({ where : {id : req.params.user_id, status : 'A'}, attributes : ['id','balance'] }).then(user =>{
+               app.UserModel.findOne({ where : {id : req.params.user_id, status : 'A'}, attributes : ['id','available_balance', 'actual_balance'] }).then(user =>{
                     if(user){
                         res.status(200).json(user);
                     }else{
@@ -61,13 +61,34 @@ export default class TransactionsRoutes{
 
         transactionsRouter.route('/contributions/user/:user_id')
             .get((req, res)=>{
-               app.CreditModel.sum('amount', { where : {id : req.params.user_id, status : 'A'} }).then(credit =>{
-                    if(credit){
-                        res.status(200).json({total : credit});
+            
+               //Contributions First
+               app.TransactionModel.sum('amount', {where :{type : 'C', status : 'A', user_id : req.params.user_id}})
+               .then((credit)=>{
+                   if(credit){
+                        const total_credits = credit;
+                        app.TransactionModel.sum('amount', {where : {type : 'W', status : 'A', user_id : req.params.user_id}})
+                        .then((withdraw_amount)=>{
+                            const total_contribution = total_credits - withdraw_amount;
+                            res.status(200).json({contribution : total_contribution});
+                        })
                     }else{
-                        res.status(403).send({total: 0});
-                    } 
+                        res.status(400).json({contribution : 0});
+                    }
                })
+
+            });
+
+        transactionsRouter.route('/interest/user/:id')
+            .get((req, res)=>{
+                app.TransactionModel.sum('amount', {where : {user_id : req.params.id, type : 'I', status : 'A'}})
+                .then((interest)=>{
+                    if(interest){
+                        res.status(200).json({interest})
+                    }else{
+                        res.status(400).json({interest : 0});
+                    }
+                });
             });
 
         transactionsRouter.route('/')
@@ -99,7 +120,8 @@ export default class TransactionsRoutes{
                     //Verify User
                     app.UserModel.findOne({where : {id : user_id, password : utils.getHash(password)}}).then(user => {
                         if(user){
-                            user.decrement({'balance' : parseFloat(amount)}).then((user)=>{
+                            user.decrement({'available_balance' : parseFloat(amount)}).then((user)=>{
+                                console.log('Available balance Debited!');
                                 app.placeRequest(res, user_id, user.email, amount, account_id, transaction_code);
                             }); 
                         }else{
@@ -110,14 +132,6 @@ export default class TransactionsRoutes{
                 }else{
                     res.status(200).send('Data not saved!');
                 }
-            });
-
-        transactionsRouter.route('/interest/user/:id')
-            .get((req, res)=>{
-                app.CreditModel.sum('amount', {where : {user_id : req.params.id, type : 'I', status : 'A'}})
-                .then((credit)=>{
-                    res.status(200).json({interest : credit});
-                });
             });
 
         transactionsRouter.route('/:id')

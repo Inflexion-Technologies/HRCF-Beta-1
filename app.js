@@ -207,7 +207,7 @@ export default class App {
         const withdrawals = new WithdrawalsRoutes(withdrawalModel, usersModel);
         const banks = new BanksRoutes(bankModel);
         
-        const utils = new UtilsRoutes(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel, requestModel, accountsModel,approveModel, icBankModel, payoutModel);
+        const utils = new UtilsRoutes(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel, requestModel, accountsModel,approveModel, icBankModel, payoutModel, withdrawalModel, transactionModel);
         const auth = new AuthRoutes(usersModel);
         const bankstatement = new BankStatementRoutes(bankStatementModel, icBankModel, usersModel);
         const misc = new MiscRoutes(usersModel, accountsModel, approveModel, companyModel);
@@ -247,28 +247,32 @@ export default class App {
         const dbConfig = d.sequelize;        
         const usersModel = models.usersModel(dbConfig);
         const creditModel = models.creditModel(dbConfig);
+        const transaction = models.transactionModel(dbConfig);
 
-        usersModel.sum('balance', {where :{status : 'A'}}).then((totalBalance)=>{
-            if(parseFloat(totalBalance) > 0){
-                const nav = (parseFloat(assume_nav) - parseFloat(totalBalance));
+        usersModel.sum('actual_balance', {where :{status : 'A'}}).then((totalActualBalance)=>{
+            if(parseFloat(totalActualBalance) > 0){
+                const nav = (parseFloat(assume_nav) - parseFloat(totalActualBalance));
                 if(nav < 1) return;
 
                 usersModel.findAll({ where : {status : 'A'}}).then((users)=>{
                     users.map((user)=>{
-                        const interest = (parseFloat(user.balance)/parseFloat(totalBalance))*parseFloat(nav);
-                        user.increment({'balance': interest})
+                        const interest = (parseFloat(user.balance)/parseFloat(totalActualBalance))*parseFloat(nav);
+                        user.increment({'actual_balance': interest});
+                        user.increment({'available_balance': interest})                        
                         .then((user)=>{
                             if(user){
                                 creditModel.create({amount : interest, 
                                     type : 'I', 
                                     user_id: user.id, 
                                     narration: 'Interest'});
+                                transaction.create({type : 'I', 
+                                    amount : interest, 
+                                    user_id : user.id, 
+                                    narration : 'Interest'});
                             }
                         })
                     })
                 })
-
-
             }
         })
         

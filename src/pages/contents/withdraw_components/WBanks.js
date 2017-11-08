@@ -87,7 +87,7 @@ class WBanks extends Component {
       return false;
     }
 
-    if(parseInt(this.state.amount) > TransactionStore.getBalance()){
+    if(parseInt(this.state.amount) > TransactionStore.getAvailableBalance()){
       this.amtError = true;
       this.amountMsgError = 'You have insufficient balance';
       return false;

@@ -14,7 +14,7 @@ import jwt from 'jsonwebtoken';
 
 export default class UtilsRoutes{ 
 
-constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel, RequestModel, AccountModel, ApproveModel, ICBankModel, PayOutModel){
+constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel, RequestModel, AccountModel, ApproveModel, ICBankModel, PayOutModel, WithdrawModel, TransactionModel){
     this.app = this;
     this.UsersModel = UsersModel;
     this.TracksModel = TracksModel;    
@@ -27,6 +27,8 @@ constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDMod
     this.ApproveModel = ApproveModel;
     this.ICBankModel = ICBankModel;
     this.PayOutModel = PayOutModel;
+    this.WithdrawModel = WithdrawModel;
+    this.TransactionModel = TransactionModel;
 }
 
 getGeneratedId(count, type){
@@ -426,7 +428,7 @@ routes(){
                                     if(i === (requests.length-1)){
                                         app.UsersModel.findOne({where : {id : request.user_id, status : 'A'}})
                                         .then((user)=>{
-                                            user.increment({'balance' : parseFloat(request.amount)})
+                                            user.increment({'available_balance' : parseFloat(request.amount)})
                                             .then((user)=>{
                                                 res.status(200).json({success: true});
                                             })
@@ -448,6 +450,15 @@ routes(){
             app.RequestModel.findOne({where : {uuid : req.body.uuid, transaction_code: req.body.key, status : 'P'}})
             .then((request)=>{
                 if(request){
+                    app.UsersModel.findOne({where : {id : request.user_id, status : 'A'}})
+                    .then((user)=>{
+                        user.decrement({'actual_balance' : parseFloat(request.amount)})
+                        .then((user)=>{
+                            app.WithdrawModel.create({amount : request.amount, user_id : user.id, account_id: request.account_id});
+                            app.TransactionModel.create({type : 'W', amount: request.amount, user_id:user.id,narration: 'Withdraw'});
+                        })                       
+                    });
+
                     request.update({status : 'A'})
                     .then((request)=>{
                          app.RequestModel.findAll({where : {transaction_code: request.transaction_code, status: 'P'}})
