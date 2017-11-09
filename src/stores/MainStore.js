@@ -55,6 +55,14 @@ class MainStore extends EventEmitter{
         }
     }
 
+    getUserName(){
+        return this.getUser().firstname +' '+this.getUser().lastname;
+    }
+
+    getPaymentCode(){
+        return this.getUser().payment_id;
+    }
+
     getActualBalance(){
         const formatStyle = format({integerSeparator:',', round : 2});
         

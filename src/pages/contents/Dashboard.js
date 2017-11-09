@@ -141,26 +141,50 @@ class Dashboard extends Component {
     return (
             <div>
                 <div className="row">
-                    <div className="col-md-4 col-xs-12 kill-padding-except-left">
+                    <div className="hidden-xs hidden-sm col-md-4 kill-padding-except-left">
                         <div className="dash-widget-contribution">
                             <div className="label">Total Contribution</div>
                             <div className="amount">{MainStore.getContribution()} GHS</div>
                         </div>
                     </div>
 
-                    <div className="col-md-4 col-xs-12 kill-padding">
+                    <div className="hidden-xs hidden-sm col-md-4 kill-padding">
                         <div className="dash-widget-balance">
                             <div className="label">Total Interest</div>
                             <div className="amount">{MainStore.getInterest()} GHS</div>
                         </div>
                     </div>
 
-                    <div className="col-md-4 col-xs-12 kill-padding-except-right">
+                    <div className="hidden-xs hidden-sm col-md-4 kill-padding-except-right">
                         <div className="dash-widget-available-balance">
                             <div className="label">Available Balance</div>
                             <div className="amount">{MainStore.getAvailableBalance()} GHS</div>
                         </div>
                     </div>
+
+
+                    <div className="hidden-md hidden-lg col-xs-12 col-sm-12">
+                        <div className="dash-widget-contribution">
+                            <div className="label">Total Contribution</div>
+                            <div className="amount">{MainStore.getContribution()} GHS</div>
+                        </div>
+                    </div>
+
+                    <div className="hidden-md hidden-lg col-xs-12 col-sm-12">
+                        <div className="dash-widget-balance">
+                            <div className="label">Total Interest</div>
+                            <div className="amount">{MainStore.getInterest()} GHS</div>
+                        </div>
+                    </div>
+
+                    <div className="hidden-md hidden-lg col-xs-12 col-sm-12">
+                        <div className="dash-widget-available-balance">
+                            <div className="label">Available Balance</div>
+                            <div className="amount">{MainStore.getAvailableBalance()} GHS</div>
+                        </div>
+                    </div>
+
+
                 </div>
                 {/* Content */}
                 <div className="row">
@@ -170,10 +194,18 @@ class Dashboard extends Component {
                 </div>
                 <div className="row breaker"></div>
                 <div className="row">
-                    <div className="col-md-6 kill-padding-except-left">
+                    <div className="hidden-xs hidden-sm col-lg-6 col-md-6 kill-padding-except-left">
                         <ReactHighcharts config={this.bar_config}></ReactHighcharts>
                     </div>
-                    <div className="col-md-6 kill-padding-except-right">
+                    <div className="hidden-xs hidden-sm col-lg-6 col-md-6 kill-padding-except-right">
+                        <ReactHighcharts config={this.pie_config}></ReactHighcharts>
+                    </div>
+
+
+                    <div className="hidden-lg hidden-md col-xs-12 col-sm-12">
+                        <ReactHighcharts config={this.bar_config}></ReactHighcharts>
+                    </div>
+                    <div className="hidden-lg hidden-md col-xs-12 col-sm-12">
                         <ReactHighcharts config={this.pie_config}></ReactHighcharts>
                     </div>
                 </div>

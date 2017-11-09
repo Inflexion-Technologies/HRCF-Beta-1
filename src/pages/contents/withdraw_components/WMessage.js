@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import OverlayStore from '../../../stores/OverlayStore';
+import CountDown from '../../CountDownTimer'
 import * as OverlayAction from '../../../actions/OverlayAction';
 import WithdrawStore from '../../../stores/WithdrawStore'
 import {Link} from 'react-router-dom';
@@ -9,6 +10,7 @@ import envelop from '../../../icons/close-envelope.svg';
 import '../../../bower_components/bootstrap/dist/css/bootstrap.css';
 import '../../../styles/font-awesome/css/font-awesome.css';
 import '../../../styles/custom.css';
+import { Redirect } from 'react-router';
 
 
 import ReactSVG from 'react-svg';
@@ -17,27 +19,20 @@ import ReactSVG from 'react-svg';
 //import _ from 'lodash';
 
 class WMessage extends Component {
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
     this.state = {
-      count : 0
+      count : 0,
+      redirect : false
     }
-    this.type = 'I'
+    this.type = 'I';
   }
 
   componentWillMount(){
-    this.autoResetPage();
   }
 
   componentWillUnMount(){
     
-  }
-
-  redirectToApp(){
-    this.resetWithdrawPage();
-    //window.location.href = '/app/dashboard' 
-    //this.context.history.push('/app/dashboard');  
-
   }
 
   autoResetPage(){
@@ -51,7 +46,11 @@ class WMessage extends Component {
   }
 
   stop(){
-    this.redirectToApp();        
+    this.resetWithdrawPage();
+    //this.props.router.push('/app/dashboard');  
+    this.setState({
+      redirect : true
+    })
   }
 
   resetWithdrawPage(){
@@ -63,7 +62,14 @@ class WMessage extends Component {
   }
 
   render() {
+
     let show = false;
+    if(this.state.redirect){
+      return (
+        <Redirect push to="/app/dashboard"/>        
+      );
+    }
+
     if(this.props.page === parseInt(this.props.pageNumber)){
       show = true;
       
@@ -82,13 +88,16 @@ class WMessage extends Component {
                     <span className="message-style">You have successfully initiated the withdrawal proccess.
                          Please check your mail to complete the approval process.
                          Thank you.
+                         
                     </span>
                     <span></span>
                     </div>
                  </div>
 
                   <div className="form-group">
-                    <Link to="/app/dashboard" className="btn btn-md btn-default btn-block action-btn">Back To Dashboard</Link>
+                    <Link to="/app/dashboard" className="btn btn-md btn-default btn-block action-btn">Back To Dashboard in 
+                    <span><CountDown duration={10} stop={this.stop.bind(this)}/></span>secs
+                    </Link>
                   </div>
                 </div>
                 <div className="col-md-3"></div>

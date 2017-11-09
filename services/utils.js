@@ -598,6 +598,8 @@ var creditEmailTemplate = function(name, amount, balance){
         </html>`
  }
 
+ var welcomeEmailTemplate = function(name){}
+
  
  var approveEmailTemplate = function(baseUrl, code, name, uuid){
     
