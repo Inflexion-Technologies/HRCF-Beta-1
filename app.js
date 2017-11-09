@@ -28,8 +28,6 @@ import request from 'request';
 
 import jwt from 'jsonwebtoken';
 import path from 'path';
-import time from 'time';
-
 
 export default class App {
 
@@ -233,7 +231,7 @@ export default class App {
         app.use('/api/utils', utils.routes());
         app.use('/api/auth', auth.routes());
 
-        //this.runCron();
+        this.runCron();
     }
 
     finalize(app){
@@ -243,76 +241,70 @@ export default class App {
         });
     }
 
-    // creditAllUsers(assume_nav){
-    //     const dbConfig = d.sequelize;        
-    //     const usersModel = models.usersModel(dbConfig);
-    //     const creditModel = models.creditModel(dbConfig);
-    //     const transaction = models.transactionModel(dbConfig);
+    creditAllUsers(assume_nav){
+        const dbConfig = d.sequelize;        
+        const usersModel = models.usersModel(dbConfig);
+        const creditModel = models.creditModel(dbConfig);
+        const transaction = models.transactionModel(dbConfig);
 
-    //     usersModel.sum('actual_balance', {where :{status : 'A'}}).then((totalActualBalance)=>{
-    //         if(parseFloat(totalActualBalance) > 0){
-    //             const nav = (parseFloat(assume_nav) - parseFloat(totalActualBalance));
-    //             if(nav < 1) return;
+        usersModel.sum('actual_balance', {where :{status : 'A'}}).then((totalActualBalance)=>{
+            if(parseFloat(totalActualBalance) > 0){
+                const nav = (parseFloat(assume_nav) - parseFloat(totalActualBalance));
+                if(nav < 1) return;
 
-    //             usersModel.findAll({ where : {status : 'A'}}).then((users)=>{
-    //                 users.map((user)=>{
-    //                     const interest = (parseFloat(user.balance)/parseFloat(totalActualBalance))*parseFloat(nav);
-    //                     user.increment({'actual_balance': interest});
-    //                     user.increment({'available_balance': interest})                        
-    //                     .then((user)=>{
-    //                         if(user){
-    //                             creditModel.create({amount : interest, 
-    //                                 type : 'I', 
-    //                                 user_id: user.id, 
-    //                                 narration: 'Interest'});
-    //                             transaction.create({type : 'I', 
-    //                                 amount : interest, 
-    //                                 user_id : user.id, 
-    //                                 narration : 'Interest'});
-    //                         }
-    //                     })
-    //                 })
-    //             })
-    //         }
-    //     })
+                usersModel.findAll({ where : {status : 'A'}}).then((users)=>{
+                    users.map((user)=>{
+                        const interest = (parseFloat(user.balance)/parseFloat(totalActualBalance))*parseFloat(nav);
+                        user.increment({'actual_balance': interest});
+                        user.increment({'available_balance': interest})                        
+                        .then((user)=>{
+                            if(user){
+                                creditModel.create({amount : interest, 
+                                    type : 'I', 
+                                    user_id: user.id, 
+                                    narration: 'Interest'});
+                                transaction.create({type : 'I', 
+                                    amount : interest, 
+                                    user_id : user.id, 
+                                    narration : 'Interest'});
+                            }
+                        })
+                    })
+                })
+            }
+        })
         
-    // }
+    }
 
-    // getNAV(){
-    //     var app = this;
-    //     var request = require('request'),
-    //     dateFormat = require('dateformat'),
-    //     yesterday = new Date().setDate(new Date().getDate()-1),
-    //     yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
-    //     url = d.config.ams;
+    getNAV(){
+        var app = this;
+        var request = require('request'),
+        dateFormat = require('dateformat'),
+        yesterday = new Date().setDate(new Date().getDate()-1),
+        yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
+        url = d.config.ams;
 
-    //     request({
-    //         uri: url+yesterday_formatted,
-    //         method: 'GET',
-    //         json: true,
-    //     }, function(error, res, body){
-    //         app.creditAllUsers(body.payload.nav);
-    //     });	
-    // }
+        request({
+            uri: url+yesterday_formatted,
+            method: 'GET',
+            json: true,
+        }, function(error, res, body){
+            app.creditAllUsers(body.payload.nav);
+        });	
+    }
 
-    // runCron(){
-    //     const time = require('time');
+    runCron(){
 
-    //     const t = new time.Date();
-    //     t.setTimezone('UMT');
-        
-    //     setInterval(()=>{
-    //         const hour = time.localtime(t/1000).hours;
-    //         // if(parseInt(hour) === 16 || parseInt(hour) === 0){
-    //         //     this.getNAV();
-    //         // }
+        setInterval(()=>{
+            var dateFormat = require('dateformat');
+            const hour = dateFormat(new Date(), 'H');
 
-    //         if(parseInt(hour) === 0){
-    //             this.getNAV();
-    //         }
+            if(parseInt(hour) === 0){
+                this.getNAV();
+            }
             
-    //     }, 60*60*1000);
-    // }
+        }, 60*60*1000);
+    }
 
 }
 
