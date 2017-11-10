@@ -120,7 +120,7 @@ class Main extends Component {
                           <div className="payment-code">{MainStore.getPaymentCode()}</div>
                           <div className="clearfix"></div>
                           <br/>
-                          <div className="available-label">Available Balance</div>
+                          <div className="available-label">Balance</div>
                           <div className="available-value">{MainStore.getAvailableBalance()} GHS</div>
                       </div>
                       <div className="clearfix"></div>
@@ -159,7 +159,7 @@ class Main extends Component {
                     <div className={this.state.fullScreen ? 'hidden-xs' : 'hidden-xs col-md-2'}>                
                         <SideNav onClose={this.hideSideNav}></SideNav>
                     </div>
-                    <div className={this.state.fullScreen ? "col-xs-12 col-md-12 content" : "col-xs-12 col-md-10 content"}>
+                    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 content">
                         
                         {/* Content */}
                         <Switch>

@@ -70,6 +70,7 @@ getGeneratedId(count, type){
 updateIndividualPaymentNumber(user, res){
     const app = this;
     const expressApp = express();
+    const utils = require('../services/utils');    
     
     expressApp.set('token', d.config.secret);
     
@@ -94,6 +95,7 @@ updateIndividualPaymentNumber(user, res){
                                         message: 'Successful',
                                         token: token
                                       });
+                                    utils.sendWelcomeMail(user.email, user.firstname);
                                 }                                    
                             })
                         }else{
@@ -471,7 +473,22 @@ routes(){
                                                         request_date: request.created_at,
                                                         status : 'P'})
                                         .then((payout)=>{
-                                            res.status(200).json({success : true});                                    
+                                            if(payout){
+
+                                                app.UsersModel.findOne({where :{id : payout.user_id, status : 'A'}})
+                                                .then((user)=>{
+                                                    if(user){
+                                                        app.AccountModel.findOne({where :{id : payout.account_id, status : 'A'}, include : [{model : app.BranchModel, include: [{model : app.BankModel}] }] })
+                                                        .then((account)=>{
+                                                            utils.sendDebitMail(user.email, user.firstname, payout.amount, payout.request_date, account.bank_branch.bank.name, account.name, account.account_number);                                                            
+                                                            res.status(200).json({success : true});                                                            
+                                                        })
+                                                    }else{
+                                                        res.status(200).json({success : true});                                                           
+                                                    }
+                                                })
+                                                
+                                            }                                 
                                         })
                             }else{
                                 res.status(200).json({success : true});

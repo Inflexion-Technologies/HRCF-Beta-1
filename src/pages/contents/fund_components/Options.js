@@ -79,7 +79,7 @@ class Options extends Component {
                     </div>
                     <br/>
                     <br/><br/>
-                    <div className="col-md-12" style={{marginTop: "12px"}}>
+                    <div className="col-md-12" style={{marginTop: "50px"}}>
                         <div className="col-md-4 col-xs-4">
                             <Img src={visa} style={{width: '100%'}} />
                         </div>
