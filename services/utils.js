@@ -1092,7 +1092,7 @@ var creditEmailTemplate = function(name, amount, date){
                                                 <table align="center" bgcolor="#0d47a1" >
                                                     <tr >
                                                         <td align="center" style="font-family: 'open sans', sans-serif; font-weight: bold; letter-spacing: 2px; border: 1px solid #0d47a1; padding: 15px 25px;">
-                                                            <a href="`+baseUrl+`/confirm/`+uuid+`" style="color: #fff">GO TO APPROVE</a>
+                                                            <a href="`+baseUrl+`/#/confirm/`+uuid+`" style="color: #fff">GO TO APPROVE</a>
                                                         </td>
                                                     </tr>
                                                 </table>
