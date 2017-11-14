@@ -1051,7 +1051,9 @@ var creditEmailTemplate = function(name, amount, date){
                             <!-- Logo -->
                             <tr>
                                         <td align="center">
-                                            <img src="img/01-logo.png" alt="Logo" width="87">
+                                            <a href="#" class="editable-img">
+                                                <img editable="true" mc:edit="image001" src="http://icassetmanagers.com/images/asset-mgt.jpg" style="display:block; line-height:0; font-size:0; border:0; margin: 0 auto;" border="0" alt="image"  />
+                                            </a>
                                         </td>
         
                             </tr>
