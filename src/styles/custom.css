@@ -1,4 +1,11 @@
 @media only screen and (min-width: 768px) {
+    .main .content{
+        background: #eaeaea;
+        padding: 5px;
+        margin-top: -5px;
+        min-height: 500px;
+    }
+
     .login .control{
         background: #0d47a1;
         height: 800px;
@@ -53,6 +60,12 @@
 }
 
 @media only screen and (max-width: 768px) {
+    .main .content{
+        background: #eaeaea;
+        padding: 5px;
+        margin-top: -5px;
+    }
+
     .login .control{
         background: #0d47a1;
         height: 570px;
@@ -457,12 +470,6 @@
     padding: 10px;
 }
 
-.main .content{
-    background: #eaeaea;
-    padding: 5px;
-    margin-top: -5px;
-}
-
 .sidebar{
     display: block;
     width: 250px;
@@ -480,7 +487,7 @@
 
 .sidebar .sidenav {
     height: 100%; /* 100% Full-height */
-    width: 99%; /* 0 width - change this with JavaScript */
+    width: 99.6%; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
     z-index: 0; /* Stay on top */
     top: 0;
