@@ -64,6 +64,7 @@
         background: #eaeaea;
         padding: 5px;
         margin-top: -5px;
+        min-height: 510px;
     }
 
     .login .control{
