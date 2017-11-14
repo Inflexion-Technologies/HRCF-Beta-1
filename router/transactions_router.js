@@ -1,6 +1,7 @@
 import express from 'express';
 import request from 'request';
 import gen from 'shortid';
+import _ from 'lodash'
     
 export default class TransactionsRoutes{
 
@@ -48,17 +49,6 @@ export default class TransactionsRoutes{
                })
             });
 
-        // transactionsRouter.route('/interest/user/:user_id')
-        //     .get((req, res)=>{
-        //        app.UserModel.findOne({ where : {id : req.params.user_id, status : 'A'}, attributes : ['id','balance'] }).then(user =>{
-        //             if(user){
-        //                 res.status(200).json(user);
-        //             }else{
-        //                 res.status(403).send('Nothing Found');
-        //             } 
-        //        })
-        //     });
-
         transactionsRouter.route('/contributions/user/:user_id')
             .get((req, res)=>{
             
@@ -73,7 +63,7 @@ export default class TransactionsRoutes{
                             res.status(200).json({contribution : total_contribution});
                         })
                     }else{
-                        res.status(400).json({contribution : 0});
+                        res.status(200).json({contribution : 0});
                     }
                })
 
@@ -86,9 +76,53 @@ export default class TransactionsRoutes{
                     if(interest){
                         res.status(200).json({interest})
                     }else{
-                        res.status(400).json({interest : 0});
+                        res.status(200).json({interest : 0});
                     }
                 });
+            });
+
+        transactionsRouter.route('/history/user/:id')
+            .get((req, res)=>{
+
+                //Find pending transactions
+                app.RequestModel.findAll({where : {user_id : req.params.id, status : 'P'}, order:[['id', 'DESC']]})
+                .then((requests)=>{
+                    if(requests){
+                        //Got some pending requests
+                        app.TransactionModel.findAll({where : {user_id :req.params.id}, order:[['id', 'DESC']] })
+                        .then((transactions)=>{
+                            if(transactions){
+                                //Prepare a collection and send back
+                                let collection = [];
+
+                                const utils = require('../services/utils');    
+                                const uniqRequest = utils.getUniqCollection(requests, 'transaction_code');
+
+                                uniqRequest.map((request)=>{
+                                    return collection.push({date : request.created_at, 
+                                                    transaction: 'Withdraw',
+                                                    amount : request.amount,
+                                                    status : 'Pending'});
+                                })
+
+                                transactions.map((transaction)=>{
+                                    collection.push({date : transaction.created_at,
+                                                    transaction: transaction.narration,
+                                                    amount : transaction.amount,
+                                                    status : 'Successful'});
+                                })
+
+                                res.status(200).json(collection);
+                            }
+                        })
+                    }else{
+                        //Got no pending requests
+                        app.TransactionModel.findAll({where : {user_id : req.params.id}, order:[['id', 'DESC']]})
+                        .then((transactions)=>{
+                            res.status(200).json(transactions);
+                        })
+                    }
+                })
             });
 
         transactionsRouter.route('/')

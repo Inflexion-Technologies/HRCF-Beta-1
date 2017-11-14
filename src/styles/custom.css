@@ -1,3 +1,119 @@
+@media only screen and (min-width: 768px) {
+    .login .control{
+        background: #0d47a1;
+        height: 800px;
+    }
+
+    .review .control{
+        background: #0d47a1;
+        height: 800px;
+    }
+
+    .signup .control {
+        background: #0d47a1;
+        height: 800px;
+    }
+
+    .withdraw-wizard .stage{
+        height: 650px;
+    }
+    
+    .withdraw-wizard .stage .wcontent {
+        padding: 60px 30px;
+        height: 100%;
+    }
+
+    .upload{
+        height: 755px;        
+    }
+
+    .withdraw .withdraw-widget .label {
+        text-align: center;
+        padding: 10px;
+        font-family: Lato,sans-serif;
+        letter-spacing: 2px;
+        font-size: 12px;
+    }
+
+    .withdraw .withdraw-widget .amount {
+        font-size: 32px;
+        font-weight: 600;
+        font-family: Lato,sans-serif;
+        letter-spacing: 2px;
+    }
+
+    .profile{
+        height: 650px;
+        background: #0d47a1;
+    }
+
+    .profile .content-container{
+        padding-top: 80px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .login .control{
+        background: #0d47a1;
+        height: 570px;
+    }
+
+    .review .control{
+        background: #0d47a1;
+        height: 570px;
+    }
+
+    .signup .control {
+        background: #0d47a1;
+        height: 570px;
+    }
+
+    .withdraw-wizard .stage{
+        height: 500px;
+    }
+
+    .withdraw-wizard .stage .wcontent {
+        padding: 20px 10px;
+        height: 100%;
+    }
+
+    .signup .m-style{
+        height: 678px;
+    }
+
+    .upload{
+        height: 500px;
+    }
+
+    .withdraw .withdraw-widget .label {
+        text-align: center;
+        padding: 10px;
+        font-family: Lato,sans-serif;
+        letter-spacing: 2px;
+        font-size: 9px;
+    }
+
+    .withdraw .withdraw-widget .amount {
+        font-size: 18px;
+        font-weight: 600;
+        font-family: Lato,sans-serif;
+        letter-spacing: 2px;
+        padding-top: 12px;
+    }
+
+    .profile{
+        height: 500px;
+        background: #0d47a1;
+    }
+
+    .profile .content-container{
+        padding-top: 10px;
+    }
+}
+
+
+
+
 .login{
     margin: auto;
 }
@@ -29,11 +145,6 @@
 .login .ad .thumb{
     padding-top: 50px;
     margin: auto;
-}
-
-.login .control{
-    background: #0d47a1;
-    height: 800px;
 }
 
 .login-icon{
@@ -85,11 +196,6 @@
     margin: auto;
 }
 
-.signup .control{
-    background: #0d47a1;
-    height: 800px;
-}
-
 .signup .anchor-text{
     font-size: 12px;
     letter-spacing: 2px;
@@ -129,11 +235,6 @@
 .review .ad .thumb{
     padding-top: 50px;
     margin: auto;
-}
-
-.review .control{
-    background: #0d47a1;
-    height: 800px;
 }
 
 .review .message{
@@ -379,7 +480,7 @@
 
 .sidebar .sidenav {
     height: 100%; /* 100% Full-height */
-    width: 100%; /* 0 width - change this with JavaScript */
+    width: 99%; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
     z-index: 0; /* Stay on top */
     top: 0;
@@ -546,19 +647,15 @@
     -ms-transform: translate(-50%,-50%);
 }
 
-.overlay .overlay-container{
-    height: 416px;
-    background: #0d47a1;
-    margin-top: 50px;
+.profile .ad{
+    height: 650px;
+    background: #fff;
+    margin-top: -39px;
+    margin-left: -16px;
 }
 
-.overlay .overlay-container .dialog-header{
-    border-bottom: 1px solid;
-    color: #fefefe;    
-}
-
-.overlay .overlay-container .dialog-header .title{
-    float : left;
+.profile .dialog-header .title{
+    text-align : center;
     padding : 10px;
     color: #fefefe;
     font-weight: 500;
@@ -566,7 +663,7 @@
     font-size: 13px;
 }
 
-.overlay .overlay-container .dialog-header .paginator{
+.profile .paginator{
     float : right;
     padding : 10px 15px;
     color: #fefefe;
@@ -575,29 +672,29 @@
     font-size: 13px;
 }
 
-.overlay .overlay-container.icon{
+.profile .content-container .icon{
     width: 100px;
     padding: 10px;
 }
 
-.overlay .overlay-container .illustrate{
+.profile .content-container .illustrate{
     height: 209px;
     padding: 50px;
 }   
 
-.overlay .overlay-container .illustrate .icon{
+.profile .content-container .illustrate .icon{
     width: 100px;
 }
 
-.overlay .overlay-container .input-container{
+.profile .content-container .input-container{
     padding-top: 20px
 }  
 
-.overlay .overlay-container .input-container .wizard-style{
+.profile .content-container .input-container .wizard-style{
     height: 274px;
 }  
 
-.overlay .overlay-container .input-container .update-btn{
+.profile .content-container .input-container .update-btn{
     color: #FEFEFE;
     text-decoration: none;
     text-transform: uppercase;
@@ -606,11 +703,11 @@
     font-weight: 500;
 } 
 
-.overlay .overlay-container .input-container .update-btn:hover{
+.profile .content-container .input-container .update-btn:hover{
     text-decoration: none;
 } 
 
-.overlay .overlay-container .input-container .typo-style{
+.profile .content-container .input-container .typo-style{
     color: #FEFEFE;
     text-decoration: none;
     text-transform: uppercase;
@@ -619,7 +716,7 @@
     letter-spacing: 2px;
 }
 
-.overlay .overlay-container .input-container .congrats{
+.profile .content-container .input-container .congrats{
     font-size: 13px;
     letter-spacing: 2px;
     font-weight: 500;
@@ -627,11 +724,11 @@
     text-transform: uppercase;
 }
 
-.overlay .overlay-container .input-container .review{
+.profile .content-container .input-container .review{
     color: #FEFEFE;
 }
 
-.overlay .overlay-container .input-container .review .review-label{
+.profile .content-container .input-container .review .review-label{
     text-transform: uppercase;
     font-size: 9px;
     font-weight: 300;
@@ -641,7 +738,7 @@
     letter-spacing: 1px;
 }
 
-.overlay .overlay-container .input-container .review .review-value{
+.profile .content-container .input-container .review .review-value{
     font-size: 11px;
     text-transform: uppercase;
     font-weight: 600;
@@ -651,7 +748,7 @@
     padding-left: 0;
 }
 
-.overlay .overlay-container .input-container .review .review-value2{
+.profile .content-container .input-container .review .review-value2{
     float: left;    
     font-size: 11px;
     font-weight: 600;
@@ -660,12 +757,12 @@
     padding-left: 0;
 }
 
-.overlay .overlay-container .input-container input{
+.overlay .content-container .input-container input{
     /* background: transparent;
     color: #FEFEFE; */
 }
 
-.overlay .overlay-container .input-container .wizard-style .dialog-title{
+.profile .content-container .input-container .wizard-style .dialog-title{
     float: left;
     padding-bottom: 10px;
     color: #FEFEFE;
@@ -675,7 +772,7 @@
     font-weight: 600;
 }
 
-.overlay .overlay-container .input-container .wizard-style .skip-style{
+.profile .content-container .input-container .wizard-style .skip-style{
     float: right;
     line-height: 1.4;
     text-transform: uppercase;
@@ -684,13 +781,15 @@
     padding-right: 5px;
     color: #ffb300;
     font-weight: 600;
+    padding-bottom: 10px;
+    cursor: pointer;
 }
 
-.overlay .overlay-container .input-container .wizard-style .overlay-content-style{
+.profile .content-container .input-container .wizard-style .overlay-content-style{
     height: 262px;
 }
 
-.overlay .overlay-container .input-container .wizard-style .input-style{
+.profile .content-container .input-container .wizard-style .input-style{
     padding-bottom: 10px;
     color: #FEFEFE;
     text-transform: uppercase;
@@ -717,20 +816,6 @@
     padding: 10px;
 }
 
-.withdraw .withdraw-widget .amount{
-    font-size: 30px;
-    font-weight: 600;
-    font-family: 'Lato', sans-serif;
-    letter-spacing: 2px;
-}
-
-.withdraw .withdraw-widget .label{
-    text-align: center;
-    padding: 10px;
-    font-family: 'Lato', sans-serif;
-    letter-spacing: 2px;
-}
-
 .withdraw .withdraw-widget .small{
     display: inline;
     font-size: 10px;
@@ -747,9 +832,7 @@
     background: transparent;
 }
 
-.withdraw-wizard .stage{
-    height: 650px;
-}
+
 
 .withdraw-wizard .stage .wpanel{
     padding-top: 20px;
@@ -816,11 +899,6 @@
     color: #FFFFFF;
 }    
 
-.withdraw-wizard .stage .wcontent{
-    padding: 60px 30px;
-    height: 100%;
-}
-
 .withdraw-wizard .stage .wcontent .no-funds-style{
     color: #fefefe;
     height: 100%;
@@ -860,6 +938,54 @@
     border-radius: 3px;
     padding-left: 7px;
     color: #999999;
+}
+
+.history .history-header{
+    
+}
+
+.history .history-header .d-heading{
+    text-align: center;
+    padding: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 13px;
+    background: #eeeeee;
+    border: 1px solid #dddddd;
+    font-weight: 600;
+    color: #555;
+}
+
+.history .history-content .d-item{
+    text-align: center;
+    padding: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    background: #fff;
+    border: 1px solid #eeeeee;
+}
+
+.history .history-header .m-heading{
+    text-align: center;
+    padding: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10px;
+    background: #eeeeee;
+    border: 1px solid #dddddd;
+    font-weight: 600;
+    color: #555;
+}
+
+.history .history-content .m-item{
+    text-align: center;
+    padding: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10px;
+    background: #fff;
+    border: 1px solid #eeeeee;
 }
 
 .confirm .sentence{
@@ -1009,10 +1135,6 @@
     font-size: 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
-}
-
-.upload{
-    height: 755px;
 }
 
 .upload .target .svg{

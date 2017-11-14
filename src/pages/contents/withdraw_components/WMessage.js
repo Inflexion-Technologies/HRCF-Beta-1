@@ -95,8 +95,10 @@ class WMessage extends Component {
                  </div>
 
                   <div className="form-group">
-                    <Link to="/app/dashboard" className="btn btn-md btn-default btn-block action-btn">Back To Dashboard in 
-                    <span><CountDown duration={10} stop={this.stop.bind(this)}/></span>secs
+                    <Link to="/app/dashboard" className="btn btn-md btn-default btn-block action-btn">Go To Dashboard in 
+                      <span>
+                        <CountDown duration={10} stop={this.stop.bind(this)}/>
+                      </span>secs
                     </Link>
                   </div>
                 </div>

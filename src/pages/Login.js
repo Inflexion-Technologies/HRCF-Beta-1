@@ -35,10 +35,12 @@ class Login extends Component {
             isButtonDisabled: false,
             uError : false
         }
+
+        LoginStore.resetCookies();        
     }
 
-
     componentWillMount(){
+        LoginStore.resetCookies();
         LoginStore.on('login_ready', this.onLoginReady);
         LoginStore.on('login', this.onLogin);
         LoginStore.on('login_success', this.onLoginSuccess);

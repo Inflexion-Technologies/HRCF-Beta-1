@@ -48,7 +48,7 @@ class Options extends Component {
                       <ReactSVG path={wallet} callback={svg => {}} className="svg"/>
                   </div>
               </div>
-              <div className="col-md-8 wcontent" style={{color: '#c62828',padding: "60px 30px"}}>
+              <div className="col-md-8 wcontent" style={{color: '#c62828'}}>
                 <div className="col-md-3"></div>
                 <div className="col-md-6 wpanel">
                   <div className="content-height">

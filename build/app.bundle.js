@@ -74,50 +74,9 @@ module.exports = require("express");
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(__dirname) {
-
-var Sequelize = __webpack_require__(10);
-var path = __webpack_require__(4);
-
-var config = {
-    IP: process.env.SERVER_IP || 'http://localhost',
-    PORT: process.env.SERVER_PORT || 8001,
-    secret: 'thequickfoxjumpedofthelazydog',
-    uploadlocation: path.resolve(__dirname + '/resources'),
-    ext: 'xlsx',
-    ams: 'http://217.174.240.226:8080/fam-rest/rest/api/eod?fundCode=ICAMGHRCF&valueDate=',
-    cron_balance_time: 0,
-    email_host: 'smtp.gmail.com',
-    email_port: '587',
-    email_secure: false,
-    email_username: 'noreply@icassetmanagers.com',
-    email_password: 'dqKZ%388'
-};
-
-var sequelize = new Sequelize(process.env.DB_NAME || 'HRCF', process.env.DB_USER || 'hrcf', process.env.DB_PASSWORD || 'pa55w0rd', {
-    host: process.env.DB_HOST || 'localhost',
-    //dialect: 'postgres',
-    dialect: process.env.DB_DIALECT || 'mysql',
-    pool: {
-        max: 1,
-        min: 0,
-        idle: 10000,
-        acquire: 20000,
-        handleDisconnects: true
-    }
-});
-
-module.exports = { config: config, sequelize: sequelize };
-/* WEBPACK VAR INJECTION */}.call(exports, "/"))
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 
 
-var _ = __webpack_require__(7);
+var _ = __webpack_require__(4);
 
 exports.getHash = function (password) {
     var crypto = __webpack_require__(28);
@@ -160,7 +119,7 @@ exports.xlsxToJSON = function (filename) {
 };
 
 exports.sendEmail = function (sender, title, message) {
-    var config = __webpack_require__(1).config;
+    var config = __webpack_require__(2).config;
     var smtpTransport = __webpack_require__(11);
     var nodemailer = __webpack_require__(12);
 
@@ -196,8 +155,8 @@ exports.sendEmail = function (sender, title, message) {
 };
 
 exports.saveID = function (req, res) {
-    var models = __webpack_require__(6);
-    var sequelize = __webpack_require__(1).sequelize;
+    var models = __webpack_require__(7);
+    var sequelize = __webpack_require__(2).sequelize;
     var usersModel = models.usersModel(sequelize);
     var imageMapModel = models.imageMapModel(sequelize);
 
@@ -206,7 +165,7 @@ exports.saveID = function (req, res) {
     var multer = __webpack_require__(14);
     var storage = multer.diskStorage({
         destination: function destination(req, file, callback) {
-            var path = __webpack_require__(4);
+            var path = __webpack_require__(5);
             var dest = path.resolve('./uploads');
             fs.ensureDirSync(dest);
             callback(null, dest);
@@ -252,15 +211,15 @@ exports.saveID = function (req, res) {
 };
 
 exports.saveFile = function (req, res) {
-    var models = __webpack_require__(6);
-    var sequelize = __webpack_require__(1).sequelize;
+    var models = __webpack_require__(7);
+    var sequelize = __webpack_require__(2).sequelize;
     var usersModel = models.usersModel(sequelize);
 
     var fs = __webpack_require__(13);
     var multer = __webpack_require__(14);
     var storage = multer.diskStorage({
         destination: function destination(req, file, callback) {
-            var path = __webpack_require__(4);
+            var path = __webpack_require__(5);
             var dest = path.resolve('./uploads');
             fs.ensureDirSync(dest);
             callback(null, dest);
@@ -320,14 +279,14 @@ exports.saveFile = function (req, res) {
 };
 
 exports.sendApprovalEmail = function (name, email, uuid, code) {
-    var config = __webpack_require__(1).config;
+    var config = __webpack_require__(2).config;
 
     var baseUrl = config.IP + ':' + config.PORT;
     sendEmail(email, 'Approve Request', approveEmailTemplate(baseUrl, code, name, uuid));
 };
 
 var sendEmail = function sendEmail(sender, title, message) {
-    var config = __webpack_require__(1).config;
+    var config = __webpack_require__(2).config;
     var smtpTransport = __webpack_require__(11);
     var nodemailer = __webpack_require__(12);
 
@@ -376,6 +335,31 @@ exports.sendCreditMail = function (email, name, amount, date) {
     sendEmail(email, 'Credit', msg);
 };
 
+exports.getUniqCollection = function (data, field) {
+    var _ = __webpack_require__(4);
+
+    var allValues = [];
+
+    data.map(function (d) {
+        return allValues.push(d[field]);
+    });
+
+    var uniqFields = _.uniq(allValues);
+
+    var filteredData = [];
+
+    uniqFields.map(function (d) {
+        var found = data.find(function (ld) {
+            return ld[field] === d;
+        });
+        if (found) {
+            filteredData.push(found);
+        }
+    });
+
+    return filteredData;
+};
+
 var sendCreditMail2 = function sendCreditMail2(email, name, amount, date) {
     var msg = creditEmailTemplate(name, amount, date);
     sendEmail(email, 'Credit', msg);
@@ -383,11 +367,11 @@ var sendCreditMail2 = function sendCreditMail2(email, name, amount, date) {
 
 var compute2 = function compute2(req, res, data, ic_bank_id) {
     if (data) {
-        var _ = __webpack_require__(7);
+        var _ = __webpack_require__(4);
 
         //Import Models
-        var models = __webpack_require__(6);
-        var sequelize = __webpack_require__(1).sequelize;
+        var models = __webpack_require__(7);
+        var sequelize = __webpack_require__(2).sequelize;
 
         var creditModel = models.creditModel(sequelize);
         var transactionModel = models.transactionModel(sequelize);
@@ -506,6 +490,48 @@ var debitEmailTemplate = function debitEmailTemplate(name, amount, date, bank, a
 };
 
 /***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(__dirname) {
+
+var Sequelize = __webpack_require__(10);
+var path = __webpack_require__(5);
+
+var config = {
+    IP: process.env.SERVER_IP || 'http://104.155.93.65',
+    PORT: process.env.SERVER_PORT || 8001,
+    secret: 'thequickfoxjumpedofthelazydog',
+    uploadlocation: path.resolve(__dirname + '/resources'),
+    ext: 'xlsx',
+    ams: 'http://217.174.240.226:8080/fam-rest/rest/api/eod?fundCode=ICAMGHRCF&valueDate=',
+    cron_balance_time: 0,
+    email_host: 'smtp.gmail.com',
+    email_port: '587',
+    email_secure: false,
+    email_username: 'noreply@icassetmanagers.com',
+    email_password: 'dqKZ%388',
+    prepare: false
+};
+
+var sequelize = new Sequelize(process.env.DB_NAME || 'HRCF', process.env.DB_USER || 'hrcf', process.env.DB_PASSWORD || 'pa55w0rd', {
+    host: process.env.DB_HOST || 'localhost',
+    //dialect: 'postgres',
+    dialect: process.env.DB_DIALECT || 'mysql',
+    pool: {
+        max: 1,
+        min: 0,
+        idle: 10000,
+        acquire: 20000,
+        handleDisconnects: true
+    }
+});
+
+module.exports = { config: config, sequelize: sequelize };
+/* WEBPACK VAR INJECTION */}.call(exports, "/"))
+
+/***/ }),
 /* 3 */
 /***/ (function(module, exports) {
 
@@ -515,16 +541,22 @@ module.exports = require("request");
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = require("path");
+module.exports = require("lodash");
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports) {
 
-module.exports = require("dateformat");
+module.exports = require("path");
 
 /***/ }),
 /* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("dateformat");
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -552,13 +584,13 @@ exports.usersModel = usersModel;
 
 var _sequelize = __webpack_require__(10);
 
-var _lodash = __webpack_require__(7);
+var _lodash = __webpack_require__(4);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(1);
 
 function companyModel(config) {
   var company = config.define('company', {
@@ -1059,12 +1091,6 @@ function usersModel(config) {
 }
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports = require("lodash");
-
-/***/ }),
 /* 8 */
 /***/ (function(module, exports) {
 
@@ -1203,11 +1229,11 @@ var _uploads_router = __webpack_require__(39);
 
 var _uploads_router2 = _interopRequireDefault(_uploads_router);
 
-var _models = __webpack_require__(6);
+var _models = __webpack_require__(7);
 
 var models = _interopRequireWildcard(_models);
 
-var _config = __webpack_require__(1);
+var _config = __webpack_require__(2);
 
 var d = _interopRequireWildcard(_config);
 
@@ -1219,7 +1245,7 @@ var _jsonwebtoken = __webpack_require__(8);
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
-var _path = __webpack_require__(4);
+var _path = __webpack_require__(5);
 
 var _path2 = _interopRequireDefault(_path);
 
@@ -1278,6 +1304,13 @@ var App = function () {
             app.get('/', function (req, res) {
                 res.sendFile(_path2.default.join(__dirname, 'build', 'index.html'));
             });
+        }
+    }, {
+        key: 'servePages',
+        value: function servePages(req, res) {
+            var app = (0, _express2.default)();
+
+            res.sendFile('build/index.html', { root: __dirname });
         }
     }, {
         key: 'validate',
@@ -1385,15 +1418,17 @@ var App = function () {
             var icBanksData = __webpack_require__(42);
             var idTypesData = __webpack_require__(43);
 
-            // dbConfig.sync().then(()=>{            
-            // dbConfig.sync({force:true}).then(()=>{
-            //     trackModel.bulkCreate([{count: 1},{count: 1}]);
-            //     companyModel.bulkCreate([{name : 'Anonymous'}]);
-            //     bankModel.bulkCreate(banksData);
-            //     branchModel.bulkCreate(branchesData);
-            //     icBankModel.bulkCreate(icBanksData);
-            //     idTypesModel.bulkCreate(idTypesData);         
-            // });
+            // dbConfig.sync().then(()=>{  
+            if (d.config.prepare) {
+                dbConfig.sync({ force: true }).then(function () {
+                    trackModel.bulkCreate([{ count: 1 }, { count: 1 }]);
+                    companyModel.bulkCreate([{ name: 'Anonymous' }]);
+                    bankModel.bulkCreate(banksData);
+                    branchModel.bulkCreate(branchesData);
+                    icBankModel.bulkCreate(icBanksData);
+                    idTypesModel.bulkCreate(idTypesData);
+                });
+            }
 
             var users = new _users_router2.default(usersModel, trackModel, companyModel);
             var approvers = new _approves_router2.default(approveModel);
@@ -1480,7 +1515,7 @@ var App = function () {
         value: function getNAV() {
             var app = this;
             var request = __webpack_require__(3),
-                dateFormat = __webpack_require__(5),
+                dateFormat = __webpack_require__(6),
                 yesterday = new Date().setDate(new Date().getDate() - 1),
                 yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
                 url = d.config.ams;
@@ -1499,7 +1534,7 @@ var App = function () {
             var _this = this;
 
             setInterval(function () {
-                var dateFormat = __webpack_require__(5);
+                var dateFormat = __webpack_require__(6);
                 var hour = dateFormat(new Date(), 'H');
 
                 if (parseInt(hour) === 0) {
@@ -1559,7 +1594,7 @@ var _express = __webpack_require__(0);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _dateformat = __webpack_require__(5);
+var _dateformat = __webpack_require__(6);
 
 var _dateformat2 = _interopRequireDefault(_dateformat);
 
@@ -1882,7 +1917,7 @@ var BanksRoutes = function () {
             var banksRouter = _express2.default.Router();
 
             banksRouter.route('/').get(function (req, res) {
-                app.Banks.findAll({ where: { status: 'A' }, limit: 150 }).then(function (banks) {
+                app.Banks.findAll({ where: { status: 'A' } }).then(function (banks) {
                     res.status(200).json(banks);
                 });
             });
@@ -1954,7 +1989,7 @@ var BranchesRoutes = function () {
             var branchesRouter = _express2.default.Router();
 
             branchesRouter.route('/').get(function (req, res) {
-                app.BranchModel.findAll({ where: { status: 'A' }, limit: 150 }).then(function (branches) {
+                app.BranchModel.findAll({ where: { status: 'A' } }).then(function (branches) {
                     res.status(200).json(branches);
                 });
             });
@@ -2183,6 +2218,10 @@ var _shortid = __webpack_require__(27);
 
 var _shortid2 = _interopRequireDefault(_shortid);
 
+var _lodash = __webpack_require__(4);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2232,17 +2271,6 @@ var TransactionsRoutes = function () {
                 });
             });
 
-            // transactionsRouter.route('/interest/user/:user_id')
-            //     .get((req, res)=>{
-            //        app.UserModel.findOne({ where : {id : req.params.user_id, status : 'A'}, attributes : ['id','balance'] }).then(user =>{
-            //             if(user){
-            //                 res.status(200).json(user);
-            //             }else{
-            //                 res.status(403).send('Nothing Found');
-            //             } 
-            //        })
-            //     });
-
             transactionsRouter.route('/contributions/user/:user_id').get(function (req, res) {
 
                 //Contributions First
@@ -2254,7 +2282,7 @@ var TransactionsRoutes = function () {
                             res.status(200).json({ contribution: total_contribution });
                         });
                     } else {
-                        res.status(400).json({ contribution: 0 });
+                        res.status(200).json({ contribution: 0 });
                     }
                 });
             });
@@ -2264,7 +2292,47 @@ var TransactionsRoutes = function () {
                     if (interest) {
                         res.status(200).json({ interest: interest });
                     } else {
-                        res.status(400).json({ interest: 0 });
+                        res.status(200).json({ interest: 0 });
+                    }
+                });
+            });
+
+            transactionsRouter.route('/history/user/:id').get(function (req, res) {
+
+                //Find pending transactions
+                app.RequestModel.findAll({ where: { user_id: req.params.id, status: 'P' }, order: [['id', 'DESC']] }).then(function (requests) {
+                    if (requests) {
+                        //Got some pending requests
+                        app.TransactionModel.findAll({ where: { user_id: req.params.id }, order: [['id', 'DESC']] }).then(function (transactions) {
+                            if (transactions) {
+                                //Prepare a collection and send back
+                                var collection = [];
+
+                                var utils = __webpack_require__(1);
+                                var uniqRequest = utils.getUniqCollection(requests, 'transaction_code');
+
+                                uniqRequest.map(function (request) {
+                                    return collection.push({ date: request.created_at,
+                                        transaction: 'Withdraw',
+                                        amount: request.amount,
+                                        status: 'Pending' });
+                                });
+
+                                transactions.map(function (transaction) {
+                                    collection.push({ date: transaction.created_at,
+                                        transaction: transaction.narration,
+                                        amount: transaction.amount,
+                                        status: 'Successful' });
+                                });
+
+                                res.status(200).json(collection);
+                            }
+                        });
+                    } else {
+                        //Got no pending requests
+                        app.TransactionModel.findAll({ where: { user_id: req.params.id }, order: [['id', 'DESC']] }).then(function (transactions) {
+                            res.status(200).json(transactions);
+                        });
                     }
                 });
             });
@@ -2286,7 +2354,7 @@ var TransactionsRoutes = function () {
                     var account_id = req.body.detail.account_id;
                     var password = req.body.detail.password;
                     var transaction_code = _shortid2.default.generate();
-                    var utils = __webpack_require__(2);
+                    var utils = __webpack_require__(1);
 
                     console.log('Amount => ' + amount + ', account => ' + account_id);
 
@@ -2334,7 +2402,7 @@ var TransactionsRoutes = function () {
                         }
 
                         if (counter === approvers.length) {
-                            var utils = __webpack_require__(2);
+                            var utils = __webpack_require__(1);
                             utils.sendApprovalEmail(approve_name, email, request.uuid, transaction_code);
                             res.status(200).json({ success: true });
                         }
@@ -2478,7 +2546,7 @@ var _jsonwebtoken = __webpack_require__(8);
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
-var _config = __webpack_require__(1);
+var _config = __webpack_require__(2);
 
 var d = _interopRequireWildcard(_config);
 
@@ -2500,7 +2568,7 @@ var AuthRoutes = function () {
         value: function routes() {
             var app = this;
             var authRouter = _express2.default.Router();
-            var utils = __webpack_require__(2);
+            var utils = __webpack_require__(1);
             var expressApp = (0, _express2.default)();
 
             expressApp.set('token', d.config.secret);
@@ -2617,7 +2685,7 @@ var BankStatementRoutes = function () {
         value: function routes() {
             var app = this;
             var bankStatementRouter = _express2.default.Router();
-            var utils = __webpack_require__(2);
+            var utils = __webpack_require__(1);
 
             //Middleware to check all request comes from an admin
             bankStatementRouter.use('/*', function (req, res, next) {
@@ -2997,15 +3065,15 @@ var _request = __webpack_require__(3);
 
 var _request2 = _interopRequireDefault(_request);
 
-var _dateformat = __webpack_require__(5);
+var _dateformat = __webpack_require__(6);
 
 var _dateformat2 = _interopRequireDefault(_dateformat);
 
-var _config = __webpack_require__(1);
+var _config = __webpack_require__(2);
 
 var d = _interopRequireWildcard(_config);
 
-var _path = __webpack_require__(4);
+var _path = __webpack_require__(5);
 
 var _path2 = _interopRequireDefault(_path);
 
@@ -3097,7 +3165,7 @@ var UtilsRoutes = function () {
         value: function updateIndividualPaymentNumber(user, res) {
             var app = this;
             var expressApp = (0, _express2.default)();
-            var utils = __webpack_require__(2);
+            var utils = __webpack_require__(1);
 
             expressApp.set('token', d.config.secret);
 
@@ -3204,7 +3272,7 @@ var UtilsRoutes = function () {
             //utilsRouter.use(express_formidable());
 
 
-            var utils = __webpack_require__(2);
+            var utils = __webpack_require__(1);
             //let upload  = multer({storage: app.storage}).any();
 
             expressApp.set('token', d.config.secret);
@@ -3549,7 +3617,7 @@ var _express = __webpack_require__(0);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _config = __webpack_require__(1);
+var _config = __webpack_require__(2);
 
 var d = _interopRequireWildcard(_config);
 
@@ -3571,7 +3639,7 @@ var SessionRoutes = function () {
         value: function routes() {
             var app = this;
             var sessionsRouter = _express2.default.Router();
-            var utils = __webpack_require__(2);
+            var utils = __webpack_require__(1);
 
             sessionsRouter.route('/register').get(function (req, res) {
                 var username = d.config.sessions_username;
@@ -3650,7 +3718,7 @@ var UploadRoutes = function () {
 
                 console.log('bank_id => ' + req.body.bank_id);
 
-                var utils = __webpack_require__(2);
+                var utils = __webpack_require__(1);
                 utils.saveFile(req, res);
             });
 

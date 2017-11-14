@@ -32,27 +32,21 @@ class MainStore extends EventEmitter{
     }
 
     doDashboardUserBalance(data){
-        if(data.actual_balance && data.available_balance){
-            this.actual_balance = data.actual_balance;            
-            this.available_balance = data.available_balance;
-            
-            console.log('Balances set ...');
-            this.emit('dashboard_user_balance');
-        }
+        this.actual_balance = data.actual_balance;            
+        this.available_balance = data.available_balance;
+        
+        console.log('Balances set ...');
+        this.emit('dashboard_user_balance');
     }
 
     doDashboardUserContribution(data){
-        if(data.contribution){
-            this.contribution = data.contribution;
-            this.emit('dashboard_user_contribution');
-        }
+        this.contribution = data.contribution;
+        this.emit('dashboard_user_contribution');
     }
 
     doDashboardUserInterest(data){
-        if(data.credit){
-            this.interest = data.credit;
-            this.emit('dashboard_user_interest');            
-        }
+        this.interest = data.credit;
+        this.emit('dashboard_user_interest');            
     }
 
     getUserName(){

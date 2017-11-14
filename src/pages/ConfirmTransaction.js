@@ -31,6 +31,7 @@ class ConfirmTransaction extends Component {
 
         this.isButtonDisabled = false;
         this.showRejectScreen = false;
+        this.approveSuccess = false;
 
         this.confirmButtonText = 'Confirm';
         this.loadData = this.loadData.bind(this);
@@ -38,6 +39,7 @@ class ConfirmTransaction extends Component {
         this.refresh = this.refresh.bind(this);
         this.codeError = this.codeError.bind(this);
         this.rejectApproval = this.rejectApproval.bind(this);
+        this.showApproveSuccessPage = this.showApproveSuccessPage.bind(this);
     }
 
     componentWillMount(){
@@ -45,6 +47,7 @@ class ConfirmTransaction extends Component {
 
        ConfirmAction.confirmTransactionDetails(this.props.match.params.key);
 
+       ConfirmStore.on('confirm_transaction_approve_success', this.showApproveSuccessPage);
        ConfirmStore.on('confirm_transaction_details_success', this.loadData);
        ConfirmStore.on('confirm_transaction_details_failed', this.loadError);
        ConfirmStore.on('confirm_transaction_approve_failed', this.codeError);
@@ -83,6 +86,11 @@ class ConfirmTransaction extends Component {
         this.setState({
             count : this.state.count + 1
         })
+    }
+
+    showApproveSuccessPage(){
+        this.approveSuccess = true;
+        this.refresh();
     }
 
     handleKeyPress = (event) => {
@@ -127,6 +135,49 @@ class ConfirmTransaction extends Component {
     } 
 
     render() {
+
+        if(this.approveSuccess){
+            return (
+                <div className="login confirm">
+                    <div className="ad col-md-6 hidden-sm hidden-xs">
+                        <div>
+                            <Img src={icam_icon} className="icon" />
+                        </div>
+                        <div className="col-md-12 target">
+                            <ReactSVG path={check_tick} callback={svg => {}} className="svg"/>
+                        </div>
+                    </div>
+    
+                    <div className="control col-md-6 col-sm-12 col-xs-12">
+                            <div className="sign-in-wrapper">
+                                <div className="confirm-container" >
+                                    <div className="text-center">
+                                        <h2 className="logo">
+                                            <Img src={icam_icon2} className="login-icon" />
+                                        </h2>
+                                        <br/>
+                                        <h4 className="title-typo-style">Confirm Transaction</h4>
+                                    </div>
+    
+                                    <div className="sign-in-form">
+    
+                                        <div className="form-group sentence">
+                                            
+                                            <div className="not-available">You have successfully approved the request. Thank you.</div>
+                                            <Link to="/login" className="btn btn-md btn-default btn-block reject-btn">login</Link>
+                                        </div>
+                                    <div className="text-center copyright-txt">
+                                        <small className="typo-style">IC Asset Managers  - Copyright © 2017</small>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                );
+            }
+
+
         if(this.showRejectScreen){
             return (
                 <div className="login confirm">

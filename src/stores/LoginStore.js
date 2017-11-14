@@ -41,6 +41,20 @@ class LoginStore extends EventEmitter{
         this.emit('login_success')
     }
 
+    resetCookies(){
+        cookie.remove('firstname');
+        cookie.remove('lastname');
+        cookie.remove('id');
+        cookie.remove('type');
+        cookie.remove('msisdn');
+        cookie.remove('email');
+        cookie.remove('payment_number');
+        cookie.remove('token');
+        cookie.remove('is_admin');
+        cookie.remove('is_complete');
+        
+    }
+
     emitReadyLogin(data){
         if(data.session){
             this.emit('login_ready');

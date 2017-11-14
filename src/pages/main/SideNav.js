@@ -43,6 +43,14 @@ class SideNav extends Component {
     return false;
   }
 
+  isComplete(){
+    if(cookie.load('is_complete') === 'true'){
+      return true;
+    }
+
+    return false;
+  }
+
   render() {
     
         return (
@@ -68,7 +76,7 @@ class SideNav extends Component {
                     </Link>
                   </li>
                   <li>
-                      <Link to="/app/dashboard">
+                      <Link to="/app/history">
                         <i className="fa fa-history" aria-hidden="true"></i>
                         History
                     </Link>
@@ -90,6 +98,12 @@ class SideNav extends Component {
                       <Link to="/app/fund">
                         <i className="fa fa-cog" aria-hidden="true"></i>
                         Fund Account
+                      </Link>
+                  </li>
+                  <li className={this.isComplete() ? 'hide':''}>
+                      <Link to="/app/profile">
+                        <i className="fa fa-cog" aria-hidden="true"></i>
+                        Complete Profile
                       </Link>
                   </li>
                 </ul>

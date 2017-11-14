@@ -267,6 +267,29 @@ exports.sendCreditMail = function(email, name, amount, date){
     sendEmail(email, 'Credit', msg);
 }
 
+exports.getUniqCollection = function(data, field){
+    var _ = require('lodash');
+
+    var allValues = [];
+
+    data.map((d)=>{
+      return allValues.push(d[field]);
+    })
+
+    var uniqFields = _.uniq(allValues);
+    
+    var filteredData = [];
+
+    uniqFields.map((d)=>{
+        const found = data.find((ld)=>{return ld[field] === d});
+        if(found){
+            filteredData.push(found);
+        }
+    });
+
+    return filteredData;
+}
+
 var sendCreditMail2 = function(email, name, amount, date){
     const msg = creditEmailTemplate(name, amount, date);
     sendEmail(email, 'Credit', msg);

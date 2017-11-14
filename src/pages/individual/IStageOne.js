@@ -322,7 +322,7 @@ class IStageOne extends Component {
                     </div>
                 </div>
 
-                <div className="control col-md-4 col-sm-12 col-xs-12">
+                <div className="control col-md-4 col-sm-12 col-xs-12 m-style">
                     <div className="sign-in-wrapper">
                         <div className="sign-container">
                             <div className="text-center">

@@ -40,6 +40,10 @@ class ConfirmStore extends EventEmitter{
         this.emit('confirm_transaction_reject_success');
     }
 
+    doConfirmTransactionApproveSuccess(){
+        this.emit('confirm_transaction_approve_success')
+    }
+
     getApprover(){
         return this.approver;
     }
@@ -97,6 +101,10 @@ class ConfirmStore extends EventEmitter{
             }
             case 'CONFIRM_TRANSACTION_REJECT_SUCCESS' : {
                 this.doConfirmTransactionRejectSuccess();
+                break;
+            }
+            case 'CONFIRM_TRANSACTION_APPROVE_SUCCESS' : {
+                this.doConfirmTransactionApproveSuccess();
                 break;
             }
 

@@ -12,7 +12,7 @@ export default class BanksRoutes{
 
         banksRouter.route('/')
             .get((req, res)=>{  
-                app.Banks.findAll({ where: {status: 'A'}, limit: 150}).then(banks => {
+                app.Banks.findAll({ where: {status: 'A'}}).then(banks => {
                     res.status(200).json(banks);
                 })
             });   

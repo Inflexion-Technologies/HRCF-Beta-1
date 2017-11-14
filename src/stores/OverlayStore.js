@@ -59,7 +59,7 @@ class OverlayStore extends EventEmitter{
        if(data.is_complete){
            console.log('Details Complete !!!!');
 
-           cookie.save('is_complete', 'Y');           
+           cookie.save('is_complete', 'true');           
            this.emit('overlay_update_successful');
        }
    }

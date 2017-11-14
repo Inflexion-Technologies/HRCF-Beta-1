@@ -12,7 +12,7 @@ routes(){
 
     branchesRouter.route('/')
         .get((req, res)=>{  
-            app.BranchModel.findAll({ where: {status: 'A'}, limit: 150}).then(branches => {
+            app.BranchModel.findAll({ where: {status: 'A'}}).then(branches => {
                 res.status(200).json(branches);
             })
         });   

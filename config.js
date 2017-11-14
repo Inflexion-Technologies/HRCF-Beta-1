@@ -2,7 +2,7 @@ var Sequelize = require('sequelize');
 var path = require('path');
 
 const config = {
-    IP : process.env.SERVER_IP || 'http://localhost',
+    IP : process.env.SERVER_IP || 'http://104.155.93.65',
     PORT:process.env.SERVER_PORT || 8001,
     secret : 'thequickfoxjumpedofthelazydog',
     uploadlocation : path.resolve(__dirname+'/resources'),

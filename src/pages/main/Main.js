@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import SideNav from './SideNav';
 import Header from './Header';
-import CorporateOverlay from './corporate_overlay/CorporateOverlay';
-import IndividualOverlay from './individual_overlay/IndividualOverlay';
 
 import Dashboard from '../contents/Dashboard'
 import Withdraw from '../contents/Withdraw'
+import HistoryApp from '../contents/History'
 import Upload from '../upload/Upload'
 import Fund from '../contents/Fund'
+import Profile from '../contents/Profile'
 
 import {Route, Switch, Redirect } from 'react-router-dom';
 import cookie from 'react-cookies';
@@ -68,6 +68,11 @@ class Main extends Component {
       this.clearDrawer();      
   }
 
+  onHistory(){
+      this.props.history.push('/app/history');
+      this.clearDrawer();
+  }
+
   onUpload(){
     if(cookie.load('is_admin') === 'Y'){
         this.props.history.push('/app/upload');   
@@ -85,6 +90,13 @@ class Main extends Component {
       this.clearDrawer();      
   }
 
+  onCompleteProfile(){
+    if(cookie.load('is_complete') === 'false'){        
+        this.props.history.push('/app/profile');
+        this.clearDrawer();  
+    }  
+  }
+
   getUploadView(){
       if(cookie.load('is_admin') === 'Y'){
           return <div> <div className="menu" onClick={this.onUpload.bind(this)}>Upload</div>
@@ -92,18 +104,12 @@ class Main extends Component {
       }
   }
 
-  showOverlay(){
-    console.log('Type => '+cookie.load('type'));
-    console.log('Is Complete => '+cookie.load('is_complete'));
-
-    if((cookie.load('is_complete') === undefined || cookie.load('is_complete') === 'false') && (cookie.load('type') === 'C')){
-        console.log('load corporate');
-        return <CorporateOverlay show={true}></CorporateOverlay>
-    }else if((cookie.load('is_complete') === undefined || cookie.load('is_complete') === 'false') && (cookie.load('type') === 'I')){
-        console.log('load individual');
-        return <IndividualOverlay show={true}></IndividualOverlay>
+  getCompleteProfileView(){
+    if(cookie.load('is_complete') === 'false'){
+        return <div> <div className="menu" onClick={this.onCompleteProfile.bind(this)}>Complete Profile</div>
+              <div className="clearfix"></div></div>
     }
-  }
+}
 
   sideDrawer(){
     return (<div className="side-drawer">
@@ -130,12 +136,14 @@ class Main extends Component {
                   <div className="list">
                       <div className="menu" onClick={this.onDashboard.bind(this)}>Dashboard</div>
                       <div className="clearfix"></div>
-                      <div className="menu">History</div>
+                      <div className="menu" onClick={this.onHistory.bind(this)}>History</div>
                       <div className="clearfix"></div>
                       {this.getUploadView()}
                       <div className="menu" onClick={this.onWithdrawal.bind(this)}>Withdraw</div>
                       <div className="clearfix"></div>
                       <div className="menu"onClick={this.onFundAccount.bind(this)}>Fund Account</div>
+                      <div className="clearfix"></div>
+                      {this.getCompleteProfileView()}
                   </div>
 
               </div>
@@ -153,7 +161,6 @@ class Main extends Component {
         <div>
             {this.showMobileDrawer ? this.sideDrawer() : ''}
             <div className="container main">
-                {this.showOverlay()}
                 <Header user={this.user.firstname} show={true} showdrawer={this.drawerCommand.bind(this)}></Header>
                 <div className="row">  
                     <div className={this.state.fullScreen ? 'hidden-xs' : 'hidden-xs col-md-2'}>                
@@ -166,7 +173,9 @@ class Main extends Component {
                             <Route exact path='/app/dashboard' component={Dashboard}/>
                             <Route exact path='/app/withdraw' component={Withdraw}/>
                             <Route exact path='/app/upload' component={Upload}/>
+                            <Route exact path='/app/history' component={HistoryApp}/>
                             <Route exact path='/app/fund' component={Fund}/>
+                            <Route exact path='/app/profile' component={Profile}/>
                         </Switch>
                         
                         

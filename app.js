@@ -64,7 +64,6 @@ export default class App {
 
         app.use(express.static('build'));
 
-
         //Disable cache
         app.use((req, res, next) => {
             res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
@@ -76,7 +75,12 @@ export default class App {
         app.get('/', (req, res)=>{
             res.sendFile(path.join(__dirname, 'build', 'index.html'));
         });
+    }
 
+    servePages(req, res){
+        const app = express();
+
+        res.sendFile('build/index.html' , { root : __dirname});
     }
 
     validate(req, res, next){
@@ -212,7 +216,7 @@ export default class App {
         const bankstatement = new BankStatementRoutes(bankStatementModel, icBankModel, usersModel);
         const misc = new MiscRoutes(usersModel, accountsModel, approveModel, companyModel);
         const accounts = new AccountsRoutes(accountsModel, branchModel, bankModel, usersModel);
-        const uploadStatement = new UploadRoutes();
+        const uploadStatement = new UploadRoutes();      
 
         //Set Middleware to check for sessions
         app.use('/api/v1/*', this.validate); 
