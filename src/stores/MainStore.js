@@ -49,6 +49,10 @@ class MainStore extends EventEmitter{
         this.emit('dashboard_user_interest');            
     }
 
+    broadcastClick(){
+        this.emit('main_click_triggered');
+    }
+
     getUserName(){
         return this.getUser().firstname +' '+this.getUser().lastname;
     }

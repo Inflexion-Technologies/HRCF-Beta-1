@@ -138,6 +138,34 @@ exports.saveID = function(req, res){
     });
 }
 
+exports.capitalizeWord = function(name){
+    var _ = require('lodash');
+    
+    var value = _.capitalize(name);
+
+    if(value.includes('-')){
+        var tokens = value.split('-');
+        var newName = '';
+        tokens.map((tmpName)=>{
+            newName = newName +_.capitalize(tmpName.trim())+'-';
+        });
+
+        value = newName.substr(0,newName.length-1);
+    }
+
+    if(value.includes(' ')){
+        var tokens = value.split(' ');
+        var newName = '';
+        tokens.map((tmpName)=>{
+            newName = newName +_.capitalize(tmpName.trim())+' ';
+        });
+
+        value = newName.trim(); 
+    }
+
+    return value;
+}
+
 exports.saveFile = function(req, res){
     const models = require('../models/models');
     const sequelize = require('../config').sequelize;    

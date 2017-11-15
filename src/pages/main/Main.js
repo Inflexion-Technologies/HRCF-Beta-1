@@ -30,15 +30,12 @@ class Main extends Component {
         }
         this.hideSideNav = this.hideSideNav.bind(this);
         this.refresh = this.refresh.bind(this);
+        this.notifiers = this.notifiers.bind(this);
     }
 
   componentWillMount(){
-      this.setState({
-          fullScreen : false
-      });
-
       this.user = MainStore.getUser();
-      console.log(JSON.stringify(this.user));
+      MainStore.on('main_click_triggered', this.notifiers);
   }
 
   refresh(){
@@ -56,6 +53,14 @@ class Main extends Component {
   clearDrawer(){
     this.showMobileDrawer = false;
     this.refresh();
+  }
+
+  notifiers(){
+    console.log('notifier');
+
+    if(this.showMobileDrawer){
+        this.clearDrawer();        
+    }    
   }
 
   onLogout(){
@@ -97,6 +102,11 @@ class Main extends Component {
     }  
   }
 
+  onContainerClicked(){
+      //Fire click
+      MainStore.broadcastClick();
+  }
+
   getUploadView(){
       if(cookie.load('is_admin') === 'Y'){
           return <div> <div className="menu" onClick={this.onUpload.bind(this)}>Upload</div>
@@ -109,7 +119,7 @@ class Main extends Component {
         return <div> <div className="menu" onClick={this.onCompleteProfile.bind(this)}>Complete Profile</div>
               <div className="clearfix"></div></div>
     }
-}
+  }
 
   sideDrawer(){
     return (<div className="side-drawer">
@@ -162,7 +172,7 @@ class Main extends Component {
             {this.showMobileDrawer ? this.sideDrawer() : ''}
             <div className="container main">
                 <Header user={this.user.firstname} show={true} showdrawer={this.drawerCommand.bind(this)}></Header>
-                <div className="row">  
+                <div className="row"  onClick={this.onContainerClicked.bind(this)}>  
                     <div className={this.state.fullScreen ? 'hidden-xs' : 'hidden-xs col-md-2'}>                
                         <SideNav onClose={this.hideSideNav}></SideNav>
                     </div>
@@ -177,8 +187,6 @@ class Main extends Component {
                             <Route exact path='/app/fund' component={Fund}/>
                             <Route exact path='/app/profile' component={Profile}/>
                         </Switch>
-                        
-                        
                     </div>
                 </div>
             </div>

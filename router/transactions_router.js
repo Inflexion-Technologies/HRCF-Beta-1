@@ -156,7 +156,7 @@ export default class TransactionsRoutes{
                         if(user){
                             user.decrement({'available_balance' : parseFloat(amount)}).then((user)=>{
                                 console.log('Available balance Debited!');
-                                app.placeRequest(res, user_id, user.email, amount, account_id, transaction_code);
+                                app.placeRequest(res, user_id, amount, account_id, transaction_code);
                             }); 
                         }else{
                             res.status(400).json({success : false});
@@ -176,14 +176,15 @@ export default class TransactionsRoutes{
         return transactionsRouter;
     }
 
-    placeRequest(res, user_id, email, amount, account_id, transaction_code){
+    placeRequest(res, user_id, amount, account_id, transaction_code){
         const app = this;
 
         app.ApproveModel.findAll({where : {user_id, status : 'A'}})
         .then((approvers)=>{
-            return approvers.map((approver)=>{
+             approvers.map((approver)=>{
                 const approver_id = approver.id;
                 const approve_name = approver.firstname;
+                const email = approver.email;
                 let counter = 0;
 
                 return app.RequestModel.create({transaction_code, 

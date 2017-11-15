@@ -367,17 +367,18 @@ export function approveModel(config){
       firstname: {
         type: Sequelize.STRING,
         set(val) {
-          this.setDataValue('firstname', _.capitalize(val).trim());
+          this.setDataValue('firstname', utils.capitalizeWord(val).trim());
         }
       },
       lastname: {
         type: Sequelize.STRING,
         set(val) {
           if(val !== undefined && val !== null){
-            this.setDataValue('lastname', _.capitalize(val).trim());            
+            this.setDataValue('lastname', utils.capitalizeWord(val).trim());            
           }else{
             this.setDataValue('lastname', '');                        
-          }        }
+          }    
+        }
       },
       email: {
         type: Sequelize.STRING,
@@ -409,14 +410,14 @@ export function usersModel(config){
       firstname: {
         type: Sequelize.STRING,
         set(val) {
-          this.setDataValue('firstname', _.capitalize(val).trim());
+          this.setDataValue('firstname', utils.capitalizeWord(val).trim());
         }
       },
       lastname: {
         type: Sequelize.STRING,
         set(val) {
           if(val !== undefined && val !== null){
-            this.setDataValue('lastname', _.capitalize(val).trim());            
+            this.setDataValue('lastname', utils.capitalizeWord(val).trim());            
           }else{
             this.setDataValue('lastname', '');                        
           }

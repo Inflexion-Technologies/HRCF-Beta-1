@@ -307,9 +307,9 @@
 }
 
 .main .dash-widget-available-balance{
-    background: #ff3d00;
+    background: #2e7d32;
     color: #fff;
-    border: 1px solid #ff3d00;
+    border: 1px solid #2e7d32;
     height: 95px;
     text-align: right;
     width: 100%;
@@ -1025,7 +1025,7 @@
 
 .side-drawer{
     position: absolute;
-    width: 275px;
+    width: 255px;
     height: 100%;
     background: #000;
     opacity: 0.8;

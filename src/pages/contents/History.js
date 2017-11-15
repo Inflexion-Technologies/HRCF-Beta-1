@@ -37,7 +37,7 @@ class History extends Component {
   getLongDate(date){
     const dateFormat = require('dateformat');
 
-    return dateFormat(new Date(date), 'dddd, mmmm dS, yyyy');
+    return dateFormat(new Date(date), 'ddd, mmmm dS, yyyy');
   }
 
   getShortDate(date){

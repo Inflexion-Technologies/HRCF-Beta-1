@@ -303,6 +303,7 @@ routes(){
         
           if(Object.keys(req.body) != 0){
                 req.body.is_admin = 'N';
+
                 app.UsersModel.create(req.body).then((user)=>{
                     if(user && req.body.type === 'C'){
                         user.lname = req.body.lname;
@@ -314,7 +315,7 @@ routes(){
                     }
                 });
           }else if(Object.keys(req.query) != 0){
-                req.query.is_admin = 'N';            
+                req.query.is_admin = 'N';    
                 app.UsersModel.create(req.query).then((user)=>{
                     if(user && req.query.type === 'C'){
                         user.lname = req.query.lname;
