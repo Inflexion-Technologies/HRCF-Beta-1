@@ -181,11 +181,12 @@ export default class TransactionsRoutes{
 
         app.ApproveModel.findAll({where : {user_id, status : 'A'}})
         .then((approvers)=>{
-             return approvers.map((approver)=>{
+            let counter = 0;
+            approvers.map((approver)=>{
                 const approver_id = approver.id;
                 const approve_name = approver.firstname;
                 const email = approver.email;
-                let counter = 0;
+                counter = counter + 1;
 
                 return app.RequestModel.create({transaction_code, 
                                         user_id,
@@ -194,13 +195,10 @@ export default class TransactionsRoutes{
                                         approver_id
                                     })
                                     .then((request)=>{
-                                        if(request){
-                                            counter = counter + 1;
-                                        }
-
+                                        const utils = require('../services/utils');
+                                        utils.sendApprovalEmail(approve_name, email, request.uuid, transaction_code);
+                                        
                                         if(counter === (approvers.length)){
-                                            const utils = require('../services/utils');
-                                            utils.sendApprovalEmail(approve_name, email, request.uuid, transaction_code);
                                             res.status(200).json({success : true})
                                         }
                                     })
