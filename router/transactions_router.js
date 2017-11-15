@@ -181,7 +181,7 @@ export default class TransactionsRoutes{
 
         app.ApproveModel.findAll({where : {user_id, status : 'A'}})
         .then((approvers)=>{
-             approvers.map((approver)=>{
+             return approvers.map((approver)=>{
                 const approver_id = approver.id;
                 const approve_name = approver.firstname;
                 const email = approver.email;
