@@ -260,7 +260,7 @@ export default class App {
 
                 usersModel.findAll({ where : {status : 'A'}}).then((users)=>{
                     users.map((user)=>{
-                        const interest = (parseFloat(user.balance)/parseFloat(totalActualBalance))*parseFloat(nav);
+                        const interest = (parseFloat(user.actual_balance)/parseFloat(totalActualBalance))*parseFloat(nav);
                         user.increment({'actual_balance': interest});
                         user.increment({'available_balance': interest})                        
                         .then((user)=>{
