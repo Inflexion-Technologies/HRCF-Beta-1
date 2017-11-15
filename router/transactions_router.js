@@ -186,7 +186,7 @@ export default class TransactionsRoutes{
                 const approver_id = approver.id;
                 const approve_name = approver.firstname;
                 const email = approver.email;
-                counter = counter + 1;
+                
 
                 return app.RequestModel.create({transaction_code, 
                                         user_id,
@@ -197,7 +197,7 @@ export default class TransactionsRoutes{
                                     .then((request)=>{
                                         const utils = require('../services/utils');
                                         utils.sendApprovalEmail(approve_name, email, request.uuid, transaction_code);
-                                        
+                                        counter = counter + 1;
                                         if(counter === (approvers.length)){
                                             res.status(200).json({success : true})
                                         }
