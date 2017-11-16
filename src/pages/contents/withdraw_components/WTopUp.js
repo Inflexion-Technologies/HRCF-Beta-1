@@ -167,9 +167,10 @@ class WTopUp extends Component {
                     <div className="input-style" style={{fontWeight: '600',fontSize: '14px'}}>Sorry, No Funds Available</div>
 
                     <div className="form-group no-funds-style">
-                      <div>Dear {OverlayStore.getFirstName()}, </div>
+                      
                       <div className="clearfix"></div>
-                      <div className="breaker"></div>                      <div>please fund your account with any of these </div>
+                      <div className="breaker"></div>    
+                      <div>please fund your account with any of these </div>
                       <div>Banks below with your personal account number <span>{OverlayStore.getPaymentNumber()}</span></div>
                       <div className="clearfix"></div>
                       <div className="breaker"></div>
@@ -178,13 +179,13 @@ class WTopUp extends Component {
                       <div className="breaker"></div>
 
 
-                      <div className="banks">Ecobank</div>
+                      {/* <div className="banks">Ecobank</div> */}
                       <div className="banks">Guaranty Trust Bank (GTB)</div>
-                      <div className="banks">Stanbic Bank</div>
+                      {/* <div className="banks">Stanbic Bank</div>
                       <div className="banks">Cal Bank</div>
                       <div className="banks">Standard Chartered Bank</div>
                       <div className="banks">Barlays Bank</div>
-                      <div className="banks">HFC Bank</div>
+                      <div className="banks">HFC Bank</div> */}
                     </div>
 
                     

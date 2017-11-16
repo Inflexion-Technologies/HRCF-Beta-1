@@ -446,8 +446,8 @@
 
 .main .header .header-logo-icon{
     float: left;
-    width: 84px;
-    height: 50%;
+    width: 120px;
+    height: 100%;
 }
 
 .main .header .header-switch-icon{
@@ -660,6 +660,12 @@
     background: #fff;
     margin-top: -39px;
     margin-left: -16px;
+    padding-top: 150px;
+    padding-left: 75px;
+}
+
+.profile .icon{
+    width : 215px;
 }
 
 .profile .dialog-header .title{
@@ -935,7 +941,7 @@
 }
 
 .withdraw-wizard .stage .target .svg{
-    width: 180px;
+    width: 215px;
 }
 
 .withdraw-wizard .stage .date-picker-style{
@@ -1146,12 +1152,12 @@
 }
 
 .upload .target .svg{
-    width: 180px;
+    width: 215px;
 }
 
 .upload .sider{
     background: #FFFFFF;
-    padding-top: 30px;
+    padding-top: 180px;
     height: 100%;
 }
 

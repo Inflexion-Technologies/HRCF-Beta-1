@@ -84,25 +84,25 @@ class SideNav extends Component {
 
                   <li className={this.isAdmin() ? '':'hide'}>
                       <Link to="/app/upload">
-                        <i className="fa fa-cog" aria-hidden="true"></i>
+                        <i className="fa fa-upload" aria-hidden="true"></i>
                         Upload
                       </Link>
                   </li>
                   <li>
                       <Link to="/app/withdraw">
-                        <i className="fa fa-cog" aria-hidden="true"></i>
+                        <i className="fa fa-money" aria-hidden="true"></i>
                         Withdraw
                       </Link>
                   </li>
                   <li>
                       <Link to="/app/fund">
-                        <i className="fa fa-cog" aria-hidden="true"></i>
+                        <i className="fa fa-university" aria-hidden="true"></i>
                         Fund Account
                       </Link>
                   </li>
                   <li className={this.isComplete() ? 'hide':''}>
                       <Link to="/app/profile">
-                        <i className="fa fa-cog" aria-hidden="true"></i>
+                        <i className="fa fa-user" aria-hidden="true"></i>
                         Complete Profile
                       </Link>
                   </li>

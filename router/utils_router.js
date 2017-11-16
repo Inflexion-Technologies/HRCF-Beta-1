@@ -88,7 +88,7 @@ updateIndividualPaymentNumber(user, res){
                         if(tmpuser){
                             app.UsersModel.findOne({where : {id : user.id}, attributes : ['id','firstname','lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'status']}).then(user =>{
                                 if(user){
-                                    const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '12h'});
+                                    const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '1d'});
                                     res.status(200).json({
                                         user : user,
                                         success: true,
@@ -138,7 +138,7 @@ updateCompanyPaymentNumber(user, res){
                                 if(tmpuser){
                                     app.UsersModel.findOne({where : {id : user.id}, attributes : ['id','firstname','lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'status']}).then(user =>{
                                         if(user){
-                                            const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '12h'});
+                                            const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '1d'});
                                             res.status(200).json({
                                                 user : user,
                                                 success: true,
@@ -189,7 +189,7 @@ routes(){
             if(utils.isValidEmail(req.query.username.trim())){
                 app.UsersModel.findOne({where : {email : req.query.username, password : utils.getHash(req.query.password)}, attributes : ['id','firstname','lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'is_admin','status']}).then(user => {
                     if(user){
-                        const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '1h'});
+                        const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '1d'});
                         res.status(200).json({
                             success: true,
                             message: 'Successful',
@@ -203,7 +203,7 @@ routes(){
             }else if(utils.isValidMSISDN(req.query.username.trim())){
                 app.UsersModel.findOne({where : {msisdn : req.query.username, password : utils.getHash(req.query.password)}, attributes : ['id','firstname','lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'is_admin','status']}).then(user => {
                     if(user){
-                        const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '1h'});
+                        const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '1d'});
                         res.status(200).json({
                             success: true,
                             message: 'Successful',

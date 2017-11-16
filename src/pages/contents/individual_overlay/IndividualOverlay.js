@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Img from 'react-image';
 import icam_icon from '../../../icons/icam_logo.png';
 // import NextOfKin from './NextOfKin';
 import Banks from './IndividualBanks';
@@ -8,6 +7,8 @@ import Review from './IndividualReview';
 import Complete from './IndividualComplete';
 import UploadID from './IndividualUploadID';
 import OverlayStore from '../../../stores/OverlayStore'
+import Img from 'react-image';
+import form_icon from '../../../icons/forms.svg'
 
 import 'react-select/dist/react-select.css';
 import '../../../bower_components/bootstrap/dist/css/bootstrap.css';
@@ -82,7 +83,9 @@ class IndividualOverlay extends Component {
                   {page} <small>of</small> 4
               </div>
               <div className="clearfix"></div>
-              <div className="hidden-xs hidden-sm col-md-4 col-lg-4 ad"></div>
+              <div className="hidden-xs hidden-sm col-md-4 col-lg-4 ad">
+                <Img src={form_icon} className="icon"/>
+              </div>
 
               <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 content-container">
                 <div className="dialog-header">

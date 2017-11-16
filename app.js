@@ -142,6 +142,7 @@ export default class App {
         const requestModel = models.requestModel(dbConfig);
         const imageMapperModel = models.imageMapModel(dbConfig);
         const payoutModel = models.payoutRequestModel(dbConfig);
+        const navStoreModel = models.navStoreModel(dbConfig);
 
         //Setting relationships
 
@@ -278,8 +279,16 @@ export default class App {
                     })
                 })
             }
-        })
-        
+        })   
+    }
+
+    saveNAV(payload){
+        const dbConfig = d.sequelize;        
+        const navStoreModel = models.navStoreModel(dbConfig);
+
+        navStoreModel.create({nav : payload.nav,
+             nav_per_unit : payload.navPerUnit, 
+             gain_loss : payload.gainLoss});
     }
 
     getNAV(){
@@ -296,6 +305,7 @@ export default class App {
             json: true,
         }, function(error, res, body){
             app.creditAllUsers(body.payload.nav);
+            app.saveNAV(body.payload);
         });	
     }
 

@@ -22,7 +22,7 @@ export default class AuthRoutes{
                     if(utils.isValidEmail(req.query.username.trim())){
                         app.UserModel.findOne({ where: {email: req.query.username,  password : utils.getHash(req.query.password)}}).then(user => {
                             if(user){
-                                const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '1h'});
+                                const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '1d'});
                                 res.status(200).json({
                                     success: true,
                                     message: 'Successful',
@@ -35,7 +35,7 @@ export default class AuthRoutes{
                     }else if(utils.isValidMSISDN(req.query.username.trim())){
                         app.UserModel.findOne({ where: {email: req.query.username,  password : utils.getHash(req.query.password)}}).then(user => {
                             if(user){
-                                const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '1h'});
+                                const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '1d'});
                                 res.status(200).json({
                                     success: true,
                                     message: 'Successful',
@@ -60,7 +60,7 @@ export default class AuthRoutes{
                     if(utils.isValidEmail(req.body.username.trim())){
                         app.UserModel.findOne({ where: {email: req.body.username,  password : utils.getHash(req.body.password)}}).then(user => {
                             if(user){
-                                const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '1h'});
+                                const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '1d'});
                                 res.status(200).json({
                                     success: true,
                                     message: 'Successful',
@@ -73,7 +73,7 @@ export default class AuthRoutes{
                     }else if(utils.isValidMSISDN(req.body.username.trim())){
                         app.UserModel.findOne({ where: {email: req.body.username,  password : utils.getHash(req.body.password)}}).then(user => {
                             if(user){
-                                const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '1h'});
+                                const token = jwt.sign({user}, expressApp.get('token'), {expiresIn: '1d'});
                                 res.status(200).json({
                                     success: true,
                                     message: 'Successful',

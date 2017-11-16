@@ -607,6 +607,7 @@ exports.accountModel = accountModel;
 exports.requestModel = requestModel;
 exports.payoutRequestModel = payoutRequestModel;
 exports.trackModel = trackModel;
+exports.navStoreModel = navStoreModel;
 exports.approveModel = approveModel;
 exports.usersModel = usersModel;
 
@@ -974,6 +975,26 @@ function trackModel(config) {
   }, { underscored: true });
 
   return track;
+}
+
+function navStoreModel(config) {
+  var nav = config.define('navStore', {
+    nav: {
+      type: _sequelize.Sequelize.INTEGER
+    },
+    nav_per_unit: {
+      type: _sequelize.Sequelize.INTEGER
+    },
+    gain_loss: {
+      type: _sequelize.Sequelize.INTEGER
+    },
+    status: {
+      type: _sequelize.Sequelize.STRING(1),
+      defaultValue: 'A'
+    }
+  }, { underscored: true });
+
+  return nav;
 }
 
 function approveModel(config) {
@@ -1400,6 +1421,7 @@ var App = function () {
             var requestModel = models.requestModel(dbConfig);
             var imageMapperModel = models.imageMapModel(dbConfig);
             var payoutModel = models.payoutRequestModel(dbConfig);
+            var navStoreModel = models.navStoreModel(dbConfig);
 
             //Setting relationships
 
@@ -1539,6 +1561,16 @@ var App = function () {
             });
         }
     }, {
+        key: 'saveNAV',
+        value: function saveNAV(payload) {
+            var dbConfig = d.sequelize;
+            var navStoreModel = models.navStoreModel(dbConfig);
+
+            navStoreModel.create({ nav: payload.nav,
+                nav_per_unit: payload.navPerUnit,
+                gain_loss: payload.gainLoss });
+        }
+    }, {
         key: 'getNAV',
         value: function getNAV() {
             var app = this;
@@ -1554,6 +1586,7 @@ var App = function () {
                 json: true
             }, function (error, res, body) {
                 app.creditAllUsers(body.payload.nav);
+                app.saveNAV(body.payload);
             });
         }
     }, {
@@ -2375,6 +2408,12 @@ var TransactionsRoutes = function () {
                 }
             });
 
+            transactionsRouter.route('/interest_chart/:user_id').get(function (req, res) {
+                app.TransactionModel.findAll({ where: { id: req.params.user_id, type: 'I', status: 'A' } }).then(function (interests) {
+                    res.status(200).json(interests);
+                });
+            });
+
             transactionsRouter.route('/request/:user_id').post(function (req, res) {
                 if (req.body) {
                     var user_id = req.params.user_id;
@@ -2393,7 +2432,7 @@ var TransactionsRoutes = function () {
                         if (user) {
                             user.decrement({ 'available_balance': parseFloat(amount) }).then(function (user) {
                                 console.log('Available balance Debited!');
-                                app.placeRequest(res, user_id, user.email, amount, account_id, transaction_code);
+                                app.placeRequest(res, user_id, amount, account_id, transaction_code);
                             });
                         } else {
                             res.status(400).json({ success: false });
@@ -2410,14 +2449,15 @@ var TransactionsRoutes = function () {
         }
     }, {
         key: 'placeRequest',
-        value: function placeRequest(res, user_id, email, amount, account_id, transaction_code) {
+        value: function placeRequest(res, user_id, amount, account_id, transaction_code) {
             var app = this;
 
             app.ApproveModel.findAll({ where: { user_id: user_id, status: 'A' } }).then(function (approvers) {
-                return approvers.map(function (approver) {
+                var counter = 0;
+                approvers.map(function (approver) {
                     var approver_id = approver.id;
                     var approve_name = approver.firstname;
-                    var counter = 0;
+                    var email = approver.email;
 
                     return app.RequestModel.create({ transaction_code: transaction_code,
                         user_id: user_id,
@@ -2425,13 +2465,10 @@ var TransactionsRoutes = function () {
                         account_id: account_id,
                         approver_id: approver_id
                     }).then(function (request) {
-                        if (request) {
-                            counter = counter + 1;
-                        }
-
+                        var utils = __webpack_require__(1);
+                        utils.sendApprovalEmail(approve_name, email, request.uuid, transaction_code);
+                        counter = counter + 1;
                         if (counter === approvers.length) {
-                            var utils = __webpack_require__(1);
-                            utils.sendApprovalEmail(approve_name, email, request.uuid, transaction_code);
                             res.status(200).json({ success: true });
                         }
                     });
@@ -2606,7 +2643,7 @@ var AuthRoutes = function () {
                     if (utils.isValidEmail(req.query.username.trim())) {
                         app.UserModel.findOne({ where: { email: req.query.username, password: utils.getHash(req.query.password) } }).then(function (user) {
                             if (user) {
-                                var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '1h' });
+                                var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '1d' });
                                 res.status(200).json({
                                     success: true,
                                     message: 'Successful',
@@ -2619,7 +2656,7 @@ var AuthRoutes = function () {
                     } else if (utils.isValidMSISDN(req.query.username.trim())) {
                         app.UserModel.findOne({ where: { email: req.query.username, password: utils.getHash(req.query.password) } }).then(function (user) {
                             if (user) {
-                                var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '1h' });
+                                var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '1d' });
                                 res.status(200).json({
                                     success: true,
                                     message: 'Successful',
@@ -2641,7 +2678,7 @@ var AuthRoutes = function () {
                     if (utils.isValidEmail(req.body.username.trim())) {
                         app.UserModel.findOne({ where: { email: req.body.username, password: utils.getHash(req.body.password) } }).then(function (user) {
                             if (user) {
-                                var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '1h' });
+                                var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '1d' });
                                 res.status(200).json({
                                     success: true,
                                     message: 'Successful',
@@ -2654,7 +2691,7 @@ var AuthRoutes = function () {
                     } else if (utils.isValidMSISDN(req.body.username.trim())) {
                         app.UserModel.findOne({ where: { email: req.body.username, password: utils.getHash(req.body.password) } }).then(function (user) {
                             if (user) {
-                                var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '1h' });
+                                var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '1d' });
                                 res.status(200).json({
                                     success: true,
                                     message: 'Successful',
@@ -3211,7 +3248,7 @@ var UtilsRoutes = function () {
                                 if (tmpuser) {
                                     app.UsersModel.findOne({ where: { id: user.id }, attributes: ['id', 'firstname', 'lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'status'] }).then(function (user) {
                                         if (user) {
-                                            var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '12h' });
+                                            var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '1d' });
                                             res.status(200).json({
                                                 user: user,
                                                 success: true,
@@ -3262,7 +3299,7 @@ var UtilsRoutes = function () {
                                         if (tmpuser) {
                                             app.UsersModel.findOne({ where: { id: user.id }, attributes: ['id', 'firstname', 'lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'status'] }).then(function (user) {
                                                 if (user) {
-                                                    var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '12h' });
+                                                    var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '1d' });
                                                     res.status(200).json({
                                                         user: user,
                                                         success: true,
@@ -3311,7 +3348,7 @@ var UtilsRoutes = function () {
                     if (utils.isValidEmail(req.query.username.trim())) {
                         app.UsersModel.findOne({ where: { email: req.query.username, password: utils.getHash(req.query.password) }, attributes: ['id', 'firstname', 'lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'is_admin', 'status'] }).then(function (user) {
                             if (user) {
-                                var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '1h' });
+                                var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '1d' });
                                 res.status(200).json({
                                     success: true,
                                     message: 'Successful',
@@ -3325,7 +3362,7 @@ var UtilsRoutes = function () {
                     } else if (utils.isValidMSISDN(req.query.username.trim())) {
                         app.UsersModel.findOne({ where: { msisdn: req.query.username, password: utils.getHash(req.query.password) }, attributes: ['id', 'firstname', 'lastname', 'email', 'msisdn', 'type', 'kin', 'kin_msisdn', 'company_id', 'payment_number', 'is_complete', 'is_admin', 'status'] }).then(function (user) {
                             if (user) {
-                                var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '1h' });
+                                var token = _jsonwebtoken2.default.sign({ user: user }, expressApp.get('token'), { expiresIn: '1d' });
                                 res.status(200).json({
                                     success: true,
                                     message: 'Successful',

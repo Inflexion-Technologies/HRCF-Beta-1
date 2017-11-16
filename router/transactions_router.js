@@ -136,6 +136,14 @@ export default class TransactionsRoutes{
                 }
             }); 
 
+        transactionsRouter.route('/interest_chart/:user_id')
+            .get((req, res)=>{
+                app.TransactionModel.findAll({where : {id : req.params.user_id, type : 'I', status : 'A'}})
+                .then((interests)=>{
+                    res.status(200).json(interests);
+                })
+            }); 
+
         transactionsRouter.route('/request/:user_id')
             .post((req, res)=>{
                 if(req.body){

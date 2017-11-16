@@ -359,6 +359,26 @@ export function trackModel(config){
 	return track;
 }
 
+export function navStoreModel(config){
+	const nav = config.define('navStore', {
+    nav: {
+      type: Sequelize.INTEGER
+    },
+    nav_per_unit: {
+      type: Sequelize.INTEGER
+    },
+    gain_loss: {
+      type: Sequelize.INTEGER
+    },
+    status: {
+      type: Sequelize.STRING(1),
+      defaultValue : 'A'
+	  }
+	}, {underscored: true});
+
+	return nav;
+}
+
 export function approveModel(config){
 	const approvers = config.define('approver', {
       user_id : {
