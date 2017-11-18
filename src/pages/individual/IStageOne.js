@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../bower_components/bootstrap/dist/css/bootstrap.css';
+import '../../styles/font-awesome/css/font-awesome.css';
 import '../../styles/main.css';
 import '../../styles/custom.css';
 import Img from 'react-image';
@@ -49,7 +50,8 @@ class IStageOne extends Component {
             mError : false,
             pError : false,
             signupButtonText : 'Register',
-            isButtonDisabled : false
+            isButtonDisabled : false,
+            showPassword : false
         }
     }
 
@@ -198,6 +200,12 @@ class IStageOne extends Component {
             this.handleBrowserConfig();
             SignupAction.validateEmail(this.user);
         }
+    }
+
+    onEyeClicked(evt){
+        this.setState({
+            showPassword : !this.state.showPassword
+        })
     }
 
     disableButton(isDisable, label){
@@ -351,7 +359,14 @@ class IStageOne extends Component {
                                     <span className={this.state.mError ? 'error' : 'vamus'}>{this.msisdnErrorText}</span>
                                 </div>
                                 <div className="form-group">
-                                    <input type="password" className="form-control" placeholder="Password" value={this.state.password} onChange={this.onPasswordChanged.bind(this)}/>
+                                    <div className="col-md-10 col-lg-10 col-xs-10 col-sm-10 kill-padding">
+                                        <input type={this.state.showPassword ? 'text': 'password'} className="form-control" style={{borderRadius : '4px 0px 0px 4px', borderRight : '0'}} placeholder="Password" value={this.state.password} onChange={this.onPasswordChanged.bind(this)}/>
+                                    </div>
+                                    <div className="col-md-2 col-lg-2 col-xs-2 col-sm-2 kill-padding">
+                                        <div className="btn btn-md btn-default btn-block typo-style password-style">
+                                            <i className={this.state.showPassword ? 'fa fa-eye eye-style' : 'fa fa-eye-slash eye-style'} aria-hidden="true" onClick={this.onEyeClicked.bind(this)}></i>
+                                        </div>
+                                    </div>
                                     <span className={this.state.pError ? 'error' : 'vamus'}>{this.passwordErrorText}</span>
                                 </div>
                             

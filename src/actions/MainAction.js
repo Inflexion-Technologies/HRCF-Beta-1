@@ -49,3 +49,20 @@ const token = cookie.load('token');
         }
     });
 }
+
+export function requestReset(email){
+
+    axios.post('/api/utils/forgot/'+email)
+    .then((res)=>{
+        if(res.data.success === true){
+            dispatcher.dispatch({
+                type : "FORGOT_REQUEST_SUCCESS",
+                data: true
+            });
+        }
+    }).catch((error)=>{
+        dispatcher.dispatch({
+            type : "FORGOT_REQUEST_FAILED"
+        });
+    })
+}

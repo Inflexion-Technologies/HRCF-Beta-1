@@ -978,7 +978,7 @@ function trackModel(config) {
 }
 
 function navStoreModel(config) {
-  var nav = config.define('navStore', {
+  var nav = config.define('nav_store', {
     nav: {
       type: _sequelize.Sequelize.INTEGER
     },

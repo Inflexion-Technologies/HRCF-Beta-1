@@ -49,6 +49,14 @@ class MainStore extends EventEmitter{
         this.emit('dashboard_user_interest');            
     }
 
+    doForgotRequest(status){
+        if(status){
+            this.emit('reset_password_success');
+        }else{
+            this.emit('reset_password_failed');
+        }
+    }
+
     broadcastClick(){
         this.emit('main_click_triggered');
     }
@@ -97,6 +105,14 @@ class MainStore extends EventEmitter{
             } 
             case 'DASHBOARD_USER_CONTRIBUTION' : {
                 this.doDashboardUserContribution(action.data);
+                break;
+            } 
+            case 'FORGOT_REQUEST_SUCCESS' : {
+                this.doForgotRequest(true);
+                break;
+            } 
+            case 'FORGOT_REQUEST_FAILED' : {
+                this.doForgotRequest(false);
                 break;
             } 
             default:{}

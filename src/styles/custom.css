@@ -215,6 +215,17 @@
     letter-spacing: 2px;
 }
 
+.sign-in-form .password-style{
+    height: 34px;
+    border-radius: 0px 4px 4px 0px;
+    border-left: 0;
+    background: #fff;
+}
+
+.sign-in-form .eye-style{
+    color : #0d47a1;
+}
+
 .target{
     text-align: center;
 }
@@ -1000,6 +1011,15 @@
     font-size: 10px;
     background: #fff;
     border: 1px solid #eeeeee;
+}
+
+.history .history-content .no-available-data{
+    text-align: center;
+    padding: 30px 0 20px 0;
+    font-size: 15px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: #c62828;
 }
 
 .confirm .sentence{

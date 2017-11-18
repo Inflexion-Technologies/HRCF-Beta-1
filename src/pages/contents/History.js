@@ -54,7 +54,32 @@ class History extends Component {
   constructDesktopHistoryTable(data){
     const app = this;
 
-      return (
+    if(data.length === 0){
+        return (
+            <div>
+              <div className="history-header"> 
+                  <div className="col-md-3 col-lg-3 d-heading">
+                      Date
+                  </div>
+                  <div className="col-md-3 col-lg-3 d-heading">
+                      Transaction
+                  </div>
+                  <div className="col-md-3 col-lg-3 d-heading">
+                      Amount
+                  </div>
+                  <div className="col-md-3 col-lg-3 d-heading">
+                      Status
+                  </div>
+              </div>
+              <div className="history-content">
+                   <div className="col-md-12 col-lg-12 no-available-data">
+                        No Available History
+                   </div>
+              </div>
+            </div>)
+    }else{
+
+    return (
       <div>
         <div className="history-header"> 
             <div className="col-md-3 col-lg-3 d-heading">
@@ -89,40 +114,65 @@ class History extends Component {
              })}
         </div>
       </div>)
+    }
+
   }
 
   constructMobileHistoryTable(data){
     const app = this;
 
-      return (
-      <div>
-        <div className="history-header"> 
-            <div className="col-xs-4 col-sm-4 m-heading">
-                Date
+    if(data.length === 0){
+        return (
+            <div>
+              <div className="history-header"> 
+                  <div className="col-xs-4 col-sm-4 m-heading">
+                      Date
+                  </div>
+                  <div className="col-xs-4 col-sm-4 m-heading">
+                      Transaction
+                  </div>
+                  <div className="col-xs-4 col-sm-4 m-heading">
+                      Amount
+                  </div>
+              </div>
+              <div className="history-content">
+                <div className="col-xs-12 col-sm-12 no-available-data">
+                        No Available History
+                </div> 
+              </div>
+            </div>)
+    }else{
+
+        return (
+        <div>
+            <div className="history-header"> 
+                <div className="col-xs-4 col-sm-4 m-heading">
+                    Date
+                </div>
+                <div className="col-xs-4 col-sm-4 m-heading">
+                    Transaction
+                </div>
+                <div className="col-xs-4 col-sm-4 m-heading">
+                    Amount
+                </div>
             </div>
-            <div className="col-xs-4 col-sm-4 m-heading">
-                Transaction
+            <div className="history-content">
+                {data.map((d)=>{
+                return <div>
+                            <div className="col-xs-4 col-sm-4 m-item">
+                                {app.getShortDate(d.date)}
+                            </div>
+                            <div className="col-xs-4 col-sm-4 m-item">
+                                {d.transaction}
+                            </div>
+                            <div className="col-xs-4 col-sm-4 m-item">
+                                {app.getFormattedNumbers(d.amount)} GHS
+                            </div>
+                        </div>
+                })}
             </div>
-            <div className="col-xs-4 col-sm-4 m-heading">
-                Amount
-            </div>
-        </div>
-        <div className="history-content">
-             {data.map((d)=>{
-               return <div>
-                        <div className="col-xs-4 col-sm-4 m-item">
-                            {app.getShortDate(d.date)}
-                        </div>
-                        <div className="col-xs-4 col-sm-4 m-item">
-                            {d.transaction}
-                        </div>
-                        <div className="col-xs-4 col-sm-4 m-item">
-                            {app.getFormattedNumbers(d.amount)} GHS
-                        </div>
-                    </div>
-             })}
-        </div>
-      </div>)
+        </div>)
+    }
   }
 
 

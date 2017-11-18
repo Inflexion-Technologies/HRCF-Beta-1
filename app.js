@@ -143,9 +143,10 @@ export default class App {
         const imageMapperModel = models.imageMapModel(dbConfig);
         const payoutModel = models.payoutRequestModel(dbConfig);
         const navStoreModel = models.navStoreModel(dbConfig);
+        const forgotModel = models.forgotModel(dbConfig);
 
         //Setting relationships
-
+        forgotModel.belongsTo(usersModel);
         payoutModel.belongsTo(usersModel);
         payoutModel.belongsTo(accountsModel);
 
@@ -212,7 +213,7 @@ export default class App {
         const withdrawals = new WithdrawalsRoutes(withdrawalModel, usersModel);
         const banks = new BanksRoutes(bankModel);
         
-        const utils = new UtilsRoutes(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel, requestModel, accountsModel,approveModel, icBankModel, payoutModel, withdrawalModel, transactionModel);
+        const utils = new UtilsRoutes(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel, requestModel, accountsModel,approveModel, icBankModel, payoutModel, withdrawalModel, transactionModel, forgotModel);
         const auth = new AuthRoutes(usersModel);
         const bankstatement = new BankStatementRoutes(bankStatementModel, icBankModel, usersModel);
         const misc = new MiscRoutes(usersModel, accountsModel, approveModel, companyModel);

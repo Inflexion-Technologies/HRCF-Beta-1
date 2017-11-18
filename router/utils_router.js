@@ -14,7 +14,7 @@ import jwt from 'jsonwebtoken';
 
 export default class UtilsRoutes{ 
 
-constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel, RequestModel, AccountModel, ApproveModel, ICBankModel, PayOutModel, WithdrawModel, TransactionModel){
+constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel, RequestModel, AccountModel, ApproveModel, ICBankModel, PayOutModel, WithdrawModel, TransactionModel, ForgotModel){
     this.app = this;
     this.UsersModel = UsersModel;
     this.TracksModel = TracksModel;    
@@ -29,6 +29,7 @@ constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDMod
     this.PayOutModel = PayOutModel;
     this.WithdrawModel = WithdrawModel;
     this.TransactionModel = TransactionModel;
+    this.ForgotModel = ForgotModel;
 }
 
 getGeneratedId(count, type){
@@ -296,6 +297,32 @@ routes(){
                     res.status(200).send('No Banks Available');                                        
                 }
             });
+        });
+
+    utilsRouter.route('/forgot/:email')
+        .post((req, res)=>{  
+            //////////////////////////////////////////////
+            if(utils.isValidEmail(req.params.email)){
+                app.UsersModel.findOne({where : {email : req.params.email,
+                                                status : 'A'}})
+                .then((user)=>{
+                    if(user){
+                        
+                        app.ForgotModel.create({user_id:user.id})
+                        .then((forgot)=>{
+                            if(forgot){
+                                //Push email notification
+                                utils.sendResetMail(user.email, user.firstname);
+                                res.status(200).json({success : true});
+                            }
+                        })
+                    }else{
+                        res.status(400).json({success : false});
+                    }
+                })
+            }else{
+                res.status(400).json({success : false});
+            }
         });
 
     utilsRouter.route('/adduser')

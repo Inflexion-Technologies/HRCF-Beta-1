@@ -295,6 +295,12 @@ exports.sendCreditMail = function(email, name, amount, date){
     sendEmail(email, 'Credit', msg);
 }
 
+exports.sendResetMail = function(email, name){
+    const url = '';
+    const msg = forgotEmailTemplate(name, url);
+    sendEmail(email, 'Reset Password', msg);
+}
+
 exports.getUniqCollection = function(data, field){
     var _ = require('lodash');
 
@@ -427,6 +433,11 @@ var getNumber = function(value){
 
 
     return value;
+}
+
+var forgotEmailTemplate = function(name, url){
+    return `Dear `+name+`, Please click on this link to reset
+     your password. `+url+``;
 }
 
 var registeringEmailTemplate = function(name){

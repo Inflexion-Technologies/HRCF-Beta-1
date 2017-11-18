@@ -322,6 +322,24 @@ export function requestModel(config){
 	return request;
 }
 
+export function forgotModel(config){
+	const forgot = config.define('forgot_password', {
+      uuid : {
+        type : Sequelize.UUID,
+        defaultValue : Sequelize.UUIDV1
+      },
+	    user_id: {
+        type: Sequelize.INTEGER
+      },
+	    status: {
+        type: Sequelize.STRING(1),
+        defaultValue : 'P'
+	    }
+	}, {underscored: true});
+
+	return forgot;
+}
+
 export function payoutRequestModel(config){
 	const payout_request = config.define('payout_request', {
 	    user_id: {
@@ -360,7 +378,7 @@ export function trackModel(config){
 }
 
 export function navStoreModel(config){
-	const nav = config.define('navStore', {
+	const nav = config.define('nav_store', {
     nav: {
       type: Sequelize.INTEGER
     },
