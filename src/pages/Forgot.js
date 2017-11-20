@@ -35,7 +35,7 @@ class Forgot extends Component {
 
         this.state = {    
             email : '',
-            signupButtonText : 'Reset',
+            signupButtonText : 'Submit',
             count : 0
         }
 
@@ -59,6 +59,8 @@ class Forgot extends Component {
 
     requestComplete(){
         this.resetSuccess = true;
+        this.disableButton(false, 'Submit');
+        
         this.refresh();
     }
 
@@ -84,7 +86,7 @@ class Forgot extends Component {
             eError : true
         })
 
-        this.disableButton(false, 'Reset');
+        this.disableButton(false, 'Submit');
     }
 
     emailExists(){
@@ -103,7 +105,7 @@ class Forgot extends Component {
         this.setState({
             eError : true
         })
-
+        this.disableButton(false, 'Submit');        
     }
 
     onEmailChanged(evt){
@@ -116,9 +118,8 @@ class Forgot extends Component {
         if(this.doValidate()){
             //Set up user
             this.disableButton(true, 'Please Wait ...');
-
-            this.grabDetails();
-            this.handleBrowserConfig();
+            this.user = {};
+            this.user.email = this.state.email;
             SignupAction.validateEmail(this.user);
         }
     }
@@ -133,12 +134,12 @@ class Forgot extends Component {
     doValidate(){
         
         if(this.state.email && utils.isEmail(this.state.email)){
-            this.msisdnErrorText = "";
-            
+            this.emailErrorText = "";
             this.setState({
-                email : this.state.email, 
                 eError : false
             })
+            
+            return true;
         }else{
             this.emailErrorText = "Please Enter Correct Email";
             
@@ -148,8 +149,6 @@ class Forgot extends Component {
 
             return false;
         }
-
-        return true;
     }
 
     render() {
@@ -179,7 +178,7 @@ class Forgot extends Component {
                                     <div className="sign-in-form">
                                     
                                         <div className="form-group">
-                                            <h3>An email has been sent to you. Please follow the link to reset your password. Thank You.</h3>
+                                            <div style={{color: '#fefefe', fontSize: '14px', letterSpacing: '1px', wordSpacing: '2px'}}>An email has been sent to you. Please follow the link to reset your password. Thank You.</div>
                                         </div>
                                     
                                         <br/>

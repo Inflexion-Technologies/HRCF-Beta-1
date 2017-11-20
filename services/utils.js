@@ -295,9 +295,11 @@ exports.sendCreditMail = function(email, name, amount, date){
     sendEmail(email, 'Credit', msg);
 }
 
-exports.sendResetMail = function(email, name){
-    const url = '';
-    const msg = forgotEmailTemplate(name, url);
+exports.sendResetMail = function(email, name, uuid){
+    const config = require('../config').config;
+    const baseUrl = config.IP+':'+config.PORT;
+
+    const msg = forgotEmailTemplate(name, baseUrl, uuid);
     sendEmail(email, 'Reset Password', msg);
 }
 
@@ -435,9 +437,9 @@ var getNumber = function(value){
     return value;
 }
 
-var forgotEmailTemplate = function(name, url){
+var forgotEmailTemplate = function(name, url, uuid){
     return `Dear `+name+`, Please click on this link to reset
-     your password. `+url+``;
+     your password. `+url+`/#/reset/`+uuid;
 }
 
 var registeringEmailTemplate = function(name){

@@ -18,6 +18,14 @@ class Withdraw extends EventEmitter{
     setBankName(){}
     setBankId(){}
 
+    isProfileComplete(){
+        if(cookie.load('is_complete') === 'true'){
+            return true;
+        }
+
+        return false;
+    }
+
     reset(){
         this.amount = 0;
         this.pageNumber = 1;

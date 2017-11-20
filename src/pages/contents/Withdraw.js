@@ -4,6 +4,7 @@ import WBanks from './withdraw_components/WBanks'
 import WConfirm from './withdraw_components/WConfirm'
 import WMessage from './withdraw_components/WMessage'
 import WTopUp from './withdraw_components/WTopUp'
+import WCompleteProfile from './withdraw_components/WCompleteProfile'
 
 import * as TransactionAction from '../../actions/TransactionAction'
 
@@ -178,6 +179,111 @@ class Withdraw extends Component {
         )
 
     }else{
+
+    //Tell to Complete Profile
+    if(!WithdrawStore.isProfileComplete()){
+        return (
+            <div>
+            <div className={"row withdraw "+calculator_color_style}>
+
+                <div className="hidden-xs hidden-sm col-md-4 col-lg-4 kill-padding-except-left">
+                    <div className="withdraw-widget">
+                        <div className="amount">{this.balance}
+                             <div className="small">GHS</div>
+                        </div>
+                        <div className={"label "+calculator_color_style}>Available Balance</div>
+                    </div>
+                </div>
+
+                <div className="hidden-xs hidden-sm col-md-1 col-lg-1 kill-padding">
+                    <div className="withdraw-widget" style={{paddingTop : '25px'}}>
+                        <div className={"label operator "+calculator_color_style} style={{fontSize : '34px'}}>-</div>
+                    </div>
+                </div>
+
+                <div className="hidden-xs hidden-sm col-md-3 col-lg-3 kill-padding">
+                    <div className="withdraw-widget">
+                        <div className="amount">{this.withdrawAmount}
+                            <div className="small">GHS</div>
+                        </div>
+                        <div className={"label "+calculator_color_style}>Withdraw Amount</div>
+                    </div>
+                </div>
+
+                <div className="hidden-xs hidden-sm col-md-1 col-lg-1 kill-padding">
+                    <div className="withdraw-widget" style={{paddingTop : '25px'}}>
+                        <div className={"label operator "+calculator_color_style} style={{fontSize : '34px'}}>=</div>
+                    </div>
+                </div>
+
+                <div className="hidden-xs hidden-sm col-md-3 col-lg-3 kill-padding-except-right">
+                    <div className="withdraw-widget">
+                        <div className="amount">{this.newBalance}
+                            <div className="small">GHS</div>
+                        </div>
+                        <div className={"label "+calculator_color_style}>New Available Balance</div>
+                    </div>
+                </div>
+
+
+
+
+                <div className="hidden-md hidden-lg col-sm-5 col-xs-5 kill-padding-except-left">
+                    <div className="withdraw-widget">
+                        <div className="amount">{this.balance}
+                             <div className="small"></div>
+                        </div>
+                        <div className={"label "+calculator_color_style}>Available Balance</div>
+                    </div>
+                </div>
+
+                <div className="hidden-md hidden-lg col-sm-2 col-xs-2 kill-padding">
+                    <div className="withdraw-widget"  style={{paddingTop : '25px'}} >
+                        <div className={"label operator "+calculator_color_style} style={{fontSize : '25px'}} >-</div>
+                    </div>
+                </div>
+
+                <div className="hidden-md hidden-lg col-sm-5 col-xs-5 kill-padding-except-right">
+                    <div className="withdraw-widget">
+                        <div className="amount">{this.withdrawAmount}
+                            <div className="small"></div>
+                        </div>
+                        <div className={"label "+calculator_color_style}>Withdraw Amount</div>
+                    </div>
+                </div>
+
+                <div className="hidden-md hidden-lg col-sm-2 col-xs-2 kill-padding-except-left">
+                    <div className="withdraw-widget"  style={{paddingTop : '25px'}}>
+                        <div className={"label operator "+calculator_color_style}  style={{fontSize : '25px'}} >=</div>
+                    </div>
+                </div>
+
+                <div className="hidden-md hidden-lg col-sm-3 col-xs-10 kill-padding-except-right">
+                    <div className="withdraw-widget">
+                        <div className="amount">{this.newBalance}
+                            <div className="small">GHS</div>
+                        </div>
+                        <div className={"label "+calculator_color_style}>New Available Balance</div>
+                    </div>
+                </div>
+
+            </div>
+            {/* Content */}
+                <div className="row withdraw-wizard">
+                    <WCompleteProfile />
+                </div>
+                <div className="row breaker"></div>
+                <div className="row">
+                
+            </div>
+    </div>
+        );
+    }
+
+
+
+
+
 
     let calculator_color_style = '';
     switch(parseInt(this.pageNumber)){

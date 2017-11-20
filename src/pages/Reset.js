@@ -7,6 +7,9 @@ import Img from 'react-image';
 import icam_icon from '../icons/icam_logo.png';
 import icam_icon2 from '../icons/icam_logo_.png';
 
+import MainStore from '../stores/MainStore';
+import * as MainAction from '../actions/MainAction';
+
 import thumb_icon from '../icons/thumb.svg';
 import {Link} from 'react-router-dom';
 
@@ -20,23 +23,53 @@ class Reset extends Component {
     constructor(){
         super();
         this.passwordErrorText = 'Please Enter Password';
+        this.uuid = '';
 
         this.state = {    
             password : '',
             pError : false,
             signupButtonText : 'Reset',
             isButtonDisabled : false,
-            showPassword : false            
+            showPassword : false,
+            count : 0        
         }
+
+        this.successfulReset = false;
+        this.failedReset = false;
+
+        this.doSuccessfulScreen = this.doSuccessfulScreen.bind(this);
+        this.doFailedScreen = this.doFailedScreen.bind(this);
     }
 
     componentWillMount(){
-  
+        this.uuid = this.props.match.params.key;
+
+        MainStore.on('reset_success', this.doSuccessfulScreen);
+        MainStore.on('reset_failed', this.doFailedScreen);
         //this.clearCookies();
     }
 
     componentWillUnMount(){
-       
+       MainStore.removeListener('reset_success', this.doSuccessfulScreen);
+       MainStore.removeListener('reset_failed', this.doFailedScreen);
+    }
+
+    doSuccessfulScreen(){
+        this.successfulReset = true;
+        this.disableButton(true, 'Reset');        
+        this.refresh();
+    }
+
+    doFailedScreen(){
+        this.failedReset = true;
+        this.disableButton(true, 'Reset');                
+        this.refresh();
+    }
+
+    refresh(){
+        this.setState({
+            count : this.state.count + 1
+        })
     }
 
     redirect(){
@@ -55,10 +88,11 @@ class Reset extends Component {
 
     onResetClicked(){
         if(this.doValidate()){
-            //Set up user
+            //Initiate password reset
             this.disableButton(true, 'Please Wait ...');
-
             this.handleBrowserConfig();
+
+            MainAction.resetPassword(this.uuid, this.state.password);
         }
     }
 
@@ -94,10 +128,99 @@ class Reset extends Component {
             return false;
         }
 
+        this.refresh();
         return true;
     }
 
     render() {
+
+        if(this.successfulReset){
+            return (
+                <div className="signup">
+                <div className="ad col-md-8 hidden-sm hidden-xs">
+                    <div>
+                        <Img src={icam_icon} className="icon" />
+                    </div>
+                    <div className="col-md-12">
+                        <ReactSVG path={thumb_icon} callback={svg => {}} className="thumb"/>
+                    </div>
+                </div>
+
+                <div className="control col-md-4 col-sm-12 col-xs-12 m-style">
+                    <div className="sign-in-wrapper">
+                        <div className="sign-container">
+                            <div className="text-center">
+                                <h2 className="logo">
+                                    <Img src={icam_icon2} className="login-icon" />
+                                </h2>
+                                <br/>
+                                <h4 className="title-typo-style">Successful Reset</h4>
+                            </div>
+
+                            <div className="sign-in-form">
+                               
+                                <div className="form-group">
+                                    <h3></h3>
+                                    <div style={{color: '#fefefe', fontSize: '14px', letterSpacing: '1px', wordSpacing: '2px'}}>You have successfully reset your password. Thank you!.</div>
+                                </div>
+                            
+                                <br/>
+                            
+                                <Link to="/login" className="typo-style"><a className="btn btn-md btn-default btn-block typo-style">Go Back to Login</a></Link>
+                            </div>
+                            <div className="text-center copyright-txt">
+                                <small className="typo-style">IC Asset Managers - Copyright © 2017</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            );
+        }
+
+        if(this.failedReset){
+            return (
+                <div className="signup">
+                <div className="ad col-md-8 hidden-sm hidden-xs">
+                    <div>
+                        <Img src={icam_icon} className="icon" />
+                    </div>
+                    <div className="col-md-12">
+                        <ReactSVG path={thumb_icon} callback={svg => {}} className="thumb"/>
+                    </div>
+                </div>
+
+                <div className="control col-md-4 col-sm-12 col-xs-12 m-style">
+                    <div className="sign-in-wrapper">
+                        <div className="sign-container">
+                            <div className="text-center">
+                                <h2 className="logo">
+                                    <Img src={icam_icon2} className="login-icon" />
+                                </h2>
+                                <br/>
+                                <h4 className="title-typo-style">Failed Password Reset</h4>
+                            </div>
+
+                            <div className="sign-in-form">
+                               
+                                <div className="form-group">
+                                    <div style={{color: '#fefefe', fontSize: '14px', letterSpacing: '1px', wordSpacing: '2px'}}>Ooops! You were unable to reset your password, please contact support or try again later. Thank you for your patience.</div>
+                                </div>
+                            
+                                <br/>
+                            
+                                <Link to="/login" className="typo-style"><a className="btn btn-md btn-default btn-block typo-style">Go Back to Login</a></Link>
+                            </div>
+                            <div className="text-center copyright-txt">
+                                <small className="typo-style">IC Asset Managers - Copyright © 2017</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            );
+        }
+
         return (
             <div className="signup">
                 <div className="ad col-md-8 hidden-sm hidden-xs">

@@ -144,17 +144,20 @@ export default class App {
         const payoutModel = models.payoutRequestModel(dbConfig);
         const navStoreModel = models.navStoreModel(dbConfig);
         const forgotModel = models.forgotModel(dbConfig);
+        const fundAllocationStoreModel = models.fundAllocationStoreModel(dbConfig);
+        const fundAllocationCollectionModel = models.fundAllocationCollectionModel(dbConfig);
 
         //Setting relationships
         forgotModel.belongsTo(usersModel);
         payoutModel.belongsTo(usersModel);
         payoutModel.belongsTo(accountsModel);
-
         imageMapperModel.belongsTo(usersModel);
 
         requestModel.belongsTo(usersModel);
         requestModel.belongsTo(approveModel);
         requestModel.belongsTo(accountsModel);
+
+        fundAllocationCollectionModel.belongsTo(fundAllocationStoreModel);
 
         bankStatementModel.belongsTo(icBankModel);
 
@@ -213,7 +216,7 @@ export default class App {
         const withdrawals = new WithdrawalsRoutes(withdrawalModel, usersModel);
         const banks = new BanksRoutes(bankModel);
         
-        const utils = new UtilsRoutes(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel, requestModel, accountsModel,approveModel, icBankModel, payoutModel, withdrawalModel, transactionModel, forgotModel);
+        const utils = new UtilsRoutes(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel, requestModel, accountsModel,approveModel, icBankModel, payoutModel, withdrawalModel, transactionModel, forgotModel, fundAllocationStoreModel, fundAllocationCollectionModel, navStoreModel);
         const auth = new AuthRoutes(usersModel);
         const bankstatement = new BankStatementRoutes(bankStatementModel, icBankModel, usersModel);
         const misc = new MiscRoutes(usersModel, accountsModel, approveModel, companyModel);
@@ -292,6 +295,30 @@ export default class App {
              gain_loss : payload.gainLoss});
     }
 
+    saveFundAllocationData(data){
+        const dbConfig = d.sequelize;
+        const fundAllocationStoreModel = models.fundAllocationStoreModel(dbConfig);
+        const fundAllocationCollectionModel = models.fundAllocationCollectionModel(dbConfig);
+
+        if(data.length > 0){
+
+            fundAllocationStoreModel.create({status : 'A'})
+            .then((store)=>{
+                if(store){
+                    data.map((d)=>{
+                        fundAllocationCollectionModel.create({
+                            fund_allocation_store_id : store.id,
+                            fund_name : d.fundName,
+                            market_value : d.marketValue,
+                            aum_percent : d.aumPercent,
+                            asset_class : d.assetClass
+                        })
+                    })
+                }
+            })
+        }
+    }
+
     getNAV(){
         var app = this;
         var request = require('request'),
@@ -305,22 +332,51 @@ export default class App {
             method: 'GET',
             json: true,
         }, function(error, res, body){
-            app.creditAllUsers(body.payload.nav);
-            app.saveNAV(body.payload);
+            if(body.payload && body.statusCode === 'successful'){
+                app.creditAllUsers(body.payload.nav);
+                app.saveNAV(body.payload);
+            }
+            
+        });	
+    }
+
+    getFundAllocation(){
+        var app = this;
+        var request = require('request'),
+        dateFormat = require('dateformat'),
+        yesterday = new Date().setDate(new Date().getDate()-1),
+        yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
+        url = d.config.ams_fund_allocation;
+
+        request({
+            uri: url+yesterday_formatted,
+            method: 'GET',
+            json: true,
+        }, function(error, res, body){
+            console.log("Asset Allocation "+JSON.stringify(body.payload));
+            if(body.payload && body.statusCode === 'successful'){
+                app.saveFundAllocationData(body.payload);                
+            }else{
+                console.log('body.payload => '+body.payload);
+            }
         });	
     }
 
     runCron(){
+        //First Init
+        this.getNAV();
+        this.getFundAllocation();
 
         setInterval(()=>{
             var dateFormat = require('dateformat');
             const hour = dateFormat(new Date(), 'H');
 
-            if(parseInt(hour) === 0){
+            if(parseInt(hour) === parseInt(d.config.cron_balance_hour)){
                 this.getNAV();
+                this.getFundAllocation();
             }
             
-        }, 60*60*1000);
+        }, 5*60*1000);
     }
 
 }

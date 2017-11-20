@@ -397,6 +397,43 @@ export function navStoreModel(config){
 	return nav;
 }
 
+export function fundAllocationStoreModel(config){
+	const fund_allocation = config.define('fund_allocation_store', {
+    status: {
+      type: Sequelize.STRING(1),
+      defaultValue : 'A'
+	  }
+	}, {underscored: true});
+
+	return fund_allocation;
+}
+
+export function fundAllocationCollectionModel(config){
+	const fund_allocation_collection = config.define('fund_allocation_collection', {
+    fund_allocation_store_id : {
+      type : Sequelize.INTEGER
+    },
+    fund_name: {
+      type: Sequelize.STRING
+    },
+    market_value: {
+      type: Sequelize.FLOAT
+    },
+    aum_percent: {
+      type: Sequelize.FLOAT
+    },
+    asset_class: {
+      type: Sequelize.STRING
+    },
+    status: {
+      type: Sequelize.STRING(1),
+      defaultValue : 'A'
+	  }
+	}, {underscored: true});
+
+	return fund_allocation_collection;
+}
+
 export function approveModel(config){
 	const approvers = config.define('approver', {
       user_id : {

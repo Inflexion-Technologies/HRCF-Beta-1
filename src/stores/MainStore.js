@@ -11,11 +11,12 @@ class MainStore extends EventEmitter{
         this.actual_balance = 0;
         this.interest = 0;
         this.contribution = 0;
-    }
 
-    initUser (...user){
-        this.user = user;
-        this.emit('main');
+        this.interestCategories = [];
+        this.interestSeries = [];
+
+        this.navCategories = [];
+        this.navSeries = [];
     }
 
     getUser(){
@@ -51,14 +52,76 @@ class MainStore extends EventEmitter{
 
     doForgotRequest(status){
         if(status){
-            this.emit('reset_password_success');
+            this.emit('forgot_request_success');
         }else{
-            this.emit('reset_password_failed');
+            this.emit('forgot_request_failed');
+        }
+    }
+
+    doResetRequest(status){
+        if(status){
+            this.emit('reset_success');
+        }else{
+            this.emit('reset_failed')
+        }
+    }
+
+    doLoadFundAllocationPie(data){
+        if(data){
+            this.pie_data = data;
+            this.emit('fund_allocation_pie_success');
+        }
+    }
+
+    doLoadFundAllocationPieFailed(){
+        this.pie_data = [];
+    }
+
+    doNAVSuccess(data){
+        if(data){
+            let categories = [];
+            let series = [];
+             
+            data.map((d)=>{
+                categories.push(d.date);
+                series.push(d.unit);
+            });
+
+            this.navCategories = categories;
+            this.navSeries = series;
+
+            this.emit('nav_success');
+        }
+    }
+
+    doInterestDataSuccess(data){
+        if(data){
+            //Group data
+            let categories = [];
+            let series = [];
+             
+            data.map((d)=>{
+                categories.push(d.date);
+                series.push(d.amount);
+            });
+
+            this.interestCategories = categories;
+            this.interestSeries = series;
+
+            this.emit('performance_interest_success');
         }
     }
 
     broadcastClick(){
         this.emit('main_click_triggered');
+    }
+
+    getInterestCategory(){
+        return this.interestCategories;
+    }
+
+    getInterestSeries(){
+        return this.interestSeries;
     }
 
     getUserName(){
@@ -93,6 +156,18 @@ class MainStore extends EventEmitter{
         return formatStyle(this.interest) === '' ? '0.00':formatStyle(this.interest);
     }
 
+    getPieData(){
+        return this.pie_data;
+    }
+
+    getNavCategories(){
+        return this.navCategories;
+    }
+
+    getNavSeries(){
+        return this.navSeries;
+    }
+
     handleActions(action){
         switch(action.type){
             case 'DASHBOARD_USER_BALANCE' : {
@@ -113,6 +188,30 @@ class MainStore extends EventEmitter{
             } 
             case 'FORGOT_REQUEST_FAILED' : {
                 this.doForgotRequest(false);
+                break;
+            } 
+            case 'RESET_REQUEST_SUCCESS' : {
+                this.doResetRequest(true);
+                break;
+            } 
+            case 'RESET_REQUEST_FAILED' : {
+                this.doResetRequest(false);
+                break;
+            } 
+            case 'PIE_DATA_SUCCESS' : {
+                this.doLoadFundAllocationPie(action.data);
+                break;
+            } 
+            case 'PIE_DATA_FAILED' : {
+                this.doLoadFundAllocationPieFailed();
+                break;
+            } 
+            case 'NAV_DATA_SUCCESS' : {
+                this.doNAVSuccess(action.data);
+                break;
+            } 
+            case 'INTEREST_DATA_SUCCESS' : {
+                this.doInterestDataSuccess(action.data);
                 break;
             } 
             default:{}

@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.fc690d10.css",
-  "main.css.map": "static/css/main.fc690d10.css.map",
-  "main.js": "static/js/main.ed6884a9.js",
-  "main.js.map": "static/js/main.ed6884a9.js.map",
+  "main.css": "static/css/main.9a1df4ca.css",
+  "main.css.map": "static/css/main.9a1df4ca.css.map",
+  "main.js": "static/js/main.da72d076.js",
+  "main.js.map": "static/js/main.da72d076.js.map",
   "static/media/bank-building-b.svg": "static/media/bank-building-b.8cda48fd.svg",
   "static/media/check-square.svg": "static/media/check-square.7fb9d4fd.svg",
   "static/media/close-envelope.svg": "static/media/close-envelope.85748036.svg",
@@ -20,12 +20,14 @@
   "static/media/icam_logo.png": "static/media/icam_logo.a6e01bea.png",
   "static/media/icam_logo_.png": "static/media/icam_logo_.4a0a4e0d.png",
   "static/media/icon.svg": "static/media/icon.1af40fb8.svg",
+  "static/media/key.svg": "static/media/key.3edc3822.svg",
   "static/media/master_card.png": "static/media/master_card.dd4f7774.png",
   "static/media/mobile_money.png": "static/media/mobile_money.b00c3dd2.png",
   "static/media/sheets.svg": "static/media/sheets.bfcb4733.svg",
   "static/media/ssbb.svg": "static/media/ssbb.8f6860a4.svg",
   "static/media/thumb.svg": "static/media/thumb.cb192409.svg",
   "static/media/tick-box-with-a-check-mark.svg": "static/media/tick-box-with-a-check-mark.aa3c2269.svg",
+  "static/media/users.svg": "static/media/users.940ffa8a.svg",
   "static/media/visa.png": "static/media/visa.8486189a.png",
   "static/media/wallet.svg": "static/media/wallet.889b8a36.svg"
 }

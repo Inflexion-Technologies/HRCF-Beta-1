@@ -14,7 +14,7 @@ import jwt from 'jsonwebtoken';
 
 export default class UtilsRoutes{ 
 
-constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel, RequestModel, AccountModel, ApproveModel, ICBankModel, PayOutModel, WithdrawModel, TransactionModel, ForgotModel){
+constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel, RequestModel, AccountModel, ApproveModel, ICBankModel, PayOutModel, WithdrawModel, TransactionModel, ForgotModel, FundAllocationStoreModel, FundAllocationCollectionModel, NAVStoreModel){
     this.app = this;
     this.UsersModel = UsersModel;
     this.TracksModel = TracksModel;    
@@ -30,6 +30,9 @@ constructor(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDMod
     this.WithdrawModel = WithdrawModel;
     this.TransactionModel = TransactionModel;
     this.ForgotModel = ForgotModel;
+    this.FundAllocationStoreModel = FundAllocationStoreModel;
+    this.FundAllocationCollectionModel = FundAllocationCollectionModel;
+    this.NAVStoreModel = NAVStoreModel;
 }
 
 getGeneratedId(count, type){
@@ -299,9 +302,81 @@ routes(){
             });
         });
 
+    utilsRouter.route('/fund_allocation/pie')
+        .get((req, res)=>{  
+            app.FundAllocationStoreModel.max('id', {where : {status : 'A'}})
+            .then((store)=>{
+                if(store){
+                    app.FundAllocationCollectionModel.findAll({where : {fund_allocation_store_id : store}})
+                    .then((collections)=>{
+
+                        let pie_data = [];
+                        collections.map((collection)=>{
+                            pie_data.push({name: collection.asset_class, y: collection.aum_percent});
+                        });
+
+                        res.status(200).json(pie_data);                        
+                    })
+                }else{
+                    res.status(400).json({success : false});
+                }
+            })
+        });
+
+    utilsRouter.route('/nav_performance')
+        .get((req, res)=>{  
+            app.NAVStoreModel.findAll({where :{status : 'A'}})
+            .then((navs)=>{
+                if(navs){
+                    const dateFormat = require('dateformat');
+                    
+                    let nav_data = [];
+                    
+                    navs.map((nav)=>{
+                        const unit = (nav.nav_per_unit - 1)*100;
+                        const date = dateFormat(new Date(nav.created_at), 'dd mmm');
+
+                        nav_data.push({date, unit});
+                    });
+
+                    res.status(200).json(nav_data);
+                }else{
+                    res.status(400).json({success : false});
+                }
+            })
+    });
+
+    utilsRouter.route('/reset')
+        .get((req, res)=>{ 
+            const password = req.query.password;
+            const uuid = req.query.uuid;
+
+            console.log('PASSWORD => '+password);
+
+            app.ForgotModel.findOne({where : {uuid, status : 'P'}})
+            .then((forgot)=>{
+                if(forgot){
+                    app.UsersModel.findOne({where : {id : forgot.user_id, status : 'A'}})
+                    .then((user)=>{
+                        if(user){
+                            user.update({password})
+                            .then((user)=>{
+                                res.status(200).json({success : true});
+                            })
+                        }else{
+                            res.status(400).json({success : false});
+                        }
+                    });
+                    forgot.update({status : 'D'});
+                }else{
+                    res.status(400).json({success : false});
+                }
+            });
+        });
+
     utilsRouter.route('/forgot/:email')
         .post((req, res)=>{  
-            //////////////////////////////////////////////
+            
             if(utils.isValidEmail(req.params.email)){
                 app.UsersModel.findOne({where : {email : req.params.email,
                                                 status : 'A'}})
@@ -312,7 +387,7 @@ routes(){
                         .then((forgot)=>{
                             if(forgot){
                                 //Push email notification
-                                utils.sendResetMail(user.email, user.firstname);
+                                utils.sendResetMail(user.email, user.firstname, forgot.uuid);
                                 res.status(200).json({success : true});
                             }
                         })

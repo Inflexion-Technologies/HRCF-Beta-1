@@ -74,9 +74,52 @@ module.exports = require("express");
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(__dirname) {
+
+var Sequelize = __webpack_require__(10);
+var path = __webpack_require__(6);
+
+var config = {
+    IP: process.env.SERVER_IP || 'http://104.155.93.65',
+    PORT: process.env.SERVER_PORT || 8001,
+    secret: 'thequickfoxjumpedofthelazydog',
+    uploadlocation: path.resolve(__dirname + '/resources'),
+    ext: 'xlsx',
+    ams: 'http://217.174.240.226:8080/fam-rest/rest/api/eod?fundCode=ICAMGHRCF&valueDate=',
+    ams_fund_allocation: 'http://217.174.240.226:8080/fa-amrest/rest/api/asset-allocations?fundCode=ECGT3SP1&valueDate=',
+    cron_balance_hour: 15,
+    email_host: 'smtp.gmail.com',
+    email_port: '587',
+    email_secure: false,
+    email_username: 'noreply@icassetmanagers.com',
+    email_password: 'dqKZ%388',
+    prepare: false
+};
+
+var sequelize = new Sequelize(process.env.DB_NAME || 'HRCF', process.env.DB_USER || 'hrcf', process.env.DB_PASSWORD || 'pa55w0rd', {
+    host: process.env.DB_HOST || 'localhost',
+    //dialect: 'postgres',
+    dialect: process.env.DB_DIALECT || 'mysql',
+    pool: {
+        max: 1,
+        min: 0,
+        idle: 10000,
+        acquire: 20000,
+        handleDisconnects: true
+    }
+});
+
+module.exports = { config: config, sequelize: sequelize };
+/* WEBPACK VAR INJECTION */}.call(exports, "/"))
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
-var _ = __webpack_require__(4);
+var _ = __webpack_require__(5);
 
 exports.getHash = function (password) {
     var crypto = __webpack_require__(28);
@@ -119,7 +162,7 @@ exports.xlsxToJSON = function (filename) {
 };
 
 exports.sendEmail = function (sender, title, message) {
-    var config = __webpack_require__(2).config;
+    var config = __webpack_require__(1).config;
     var smtpTransport = __webpack_require__(11);
     var nodemailer = __webpack_require__(12);
 
@@ -156,7 +199,7 @@ exports.sendEmail = function (sender, title, message) {
 
 exports.saveID = function (req, res) {
     var models = __webpack_require__(7);
-    var sequelize = __webpack_require__(2).sequelize;
+    var sequelize = __webpack_require__(1).sequelize;
     var usersModel = models.usersModel(sequelize);
     var imageMapModel = models.imageMapModel(sequelize);
 
@@ -165,7 +208,7 @@ exports.saveID = function (req, res) {
     var multer = __webpack_require__(14);
     var storage = multer.diskStorage({
         destination: function destination(req, file, callback) {
-            var path = __webpack_require__(5);
+            var path = __webpack_require__(6);
             var dest = path.resolve('./uploads');
             fs.ensureDirSync(dest);
             callback(null, dest);
@@ -211,7 +254,7 @@ exports.saveID = function (req, res) {
 };
 
 exports.capitalizeWord = function (name) {
-    var _ = __webpack_require__(4);
+    var _ = __webpack_require__(5);
 
     var value = _.capitalize(name);
 
@@ -240,14 +283,14 @@ exports.capitalizeWord = function (name) {
 
 exports.saveFile = function (req, res) {
     var models = __webpack_require__(7);
-    var sequelize = __webpack_require__(2).sequelize;
+    var sequelize = __webpack_require__(1).sequelize;
     var usersModel = models.usersModel(sequelize);
 
     var fs = __webpack_require__(13);
     var multer = __webpack_require__(14);
     var storage = multer.diskStorage({
         destination: function destination(req, file, callback) {
-            var path = __webpack_require__(5);
+            var path = __webpack_require__(6);
             var dest = path.resolve('./uploads');
             fs.ensureDirSync(dest);
             callback(null, dest);
@@ -307,14 +350,14 @@ exports.saveFile = function (req, res) {
 };
 
 exports.sendApprovalEmail = function (name, email, uuid, code) {
-    var config = __webpack_require__(2).config;
+    var config = __webpack_require__(1).config;
 
     var baseUrl = config.IP + ':' + config.PORT;
     sendEmail(email, 'Approve Request', approveEmailTemplate(baseUrl, code, name, uuid));
 };
 
 var sendEmail = function sendEmail(sender, title, message) {
-    var config = __webpack_require__(2).config;
+    var config = __webpack_require__(1).config;
     var smtpTransport = __webpack_require__(11);
     var nodemailer = __webpack_require__(12);
 
@@ -363,8 +406,16 @@ exports.sendCreditMail = function (email, name, amount, date) {
     sendEmail(email, 'Credit', msg);
 };
 
+exports.sendResetMail = function (email, name, uuid) {
+    var config = __webpack_require__(1).config;
+    var baseUrl = config.IP + ':' + config.PORT;
+
+    var msg = forgotEmailTemplate(name, baseUrl, uuid);
+    sendEmail(email, 'Reset Password', msg);
+};
+
 exports.getUniqCollection = function (data, field) {
-    var _ = __webpack_require__(4);
+    var _ = __webpack_require__(5);
 
     var allValues = [];
 
@@ -395,11 +446,11 @@ var sendCreditMail2 = function sendCreditMail2(email, name, amount, date) {
 
 var compute2 = function compute2(req, res, data, ic_bank_id) {
     if (data) {
-        var _ = __webpack_require__(4);
+        var _ = __webpack_require__(5);
 
         //Import Models
         var models = __webpack_require__(7);
-        var sequelize = __webpack_require__(2).sequelize;
+        var sequelize = __webpack_require__(1).sequelize;
 
         var creditModel = models.creditModel(sequelize);
         var transactionModel = models.transactionModel(sequelize);
@@ -494,6 +545,10 @@ var getNumber = function getNumber(value) {
     return value;
 };
 
+var forgotEmailTemplate = function forgotEmailTemplate(name, url, uuid) {
+    return 'Dear ' + name + ', Please click on this link to reset\n     your password. ' + url + '/#/reset/' + uuid;
+};
+
 var registeringEmailTemplate = function registeringEmailTemplate(name) {
 
     return '<html>\n       <head>\n       \n           <meta charset="utf-8" http-equiv="Content-Type" content="text/html" />\n           <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />\n           <meta name="format-detection" content="telephone=no" />\n             <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />\n           <title>HRCF</title>\n           <style type="text/css">\n               \n               /* ==> Importing Fonts <== */\n               @import url(https://fonts.googleapis.com/css?family=Fredoka+One);\n               @import url(https://fonts.googleapis.com/css?family=Quicksand);\n               @import url(https://fonts.googleapis.com/css?family=Open+Sans);\n       \n               /* ==> Global CSS <== */\n               .ReadMsgBody{width:100%;background-color:#ffffff;}\n               .ExternalClass{width:100%;background-color:#ffffff;}\n               .ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{line-height:100%;}\n               html{width: 100%;}\n               body{-webkit-text-size-adjust:none;-ms-text-size-adjust:none;margin:0;padding:0;}\n               table{border-spacing:0;border-collapse:collapse;}\n               table td{border-collapse:collapse;}\n               img{display:block !important;}\n               a{text-decoration:none;color:#e91e63;}\n       \n               /* ==> Responsive CSS For Tablets <== */\n               @media only screen and (max-width:640px) {\n                   body{width:auto !important;}\n                   table[class="tab-1"] {width:450px !important;}\n                   table[class="tab-2"] {width:47% !important;text-align:left !important;}\n                   table[class="tab-3"] {width:100% !important;text-align:center !important;}\n                   img[class="img-1"] {width:100% !important;height:auto !important;}\n               }\n       \n               /* ==> Responsive CSS For Phones <== */\n               @media only screen and (max-width:480px) {\n                   body { width: auto !important; }\n                   table[class="tab-1"] {width:290px !important;}\n                   table[class="tab-2"] {width:100% !important;text-align:left !important;}\n                   table[class="tab-3"] {width:100% !important;text-align:center !important;}\n                   img[class="img-1"] {width:100% !important;}\n               }\n       \n           </style>\n       </head>\n       <body bgcolor="#f6f6f6">\n           <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">\n               <tr >\n                   <td align="center">\n                       <table class="tab-1" align="center" cellspacing="0" cellpadding="0" width="600">\n       \n                           <tr><td height="60"></td></tr>\n                           <!-- Logo -->\n                           <tr>\n                                       <td align="center">\n                                           <img src="img/01-logo.png" alt="Logo" width="87">\n                                       </td>\n       \n                           </tr>\n       \n                           <tr><td height="35"></td></tr>\n       \n                           <tr>\n                               <td>\n       \n                                   <table class="tab-3" width="600" align="left" cellspacing="0" cellpadding="0" bgcolor="#fff" >\n                                       <tr >\n                                           <td align="left" style="font-family: \'open Sans\', sans-serif; font-weight: bold; letter-spacing: 1px; color: #737f8d; font-size: 20px;padding-top: 50px; padding-left: 40px; padding-right: 40px">\n                                               Hey' + name + ',\n                                           </td>\n                                       </tr>\n                                       <tr><td height="10"></td></tr>\n                                       <tr>\n       \n                                           <td align="left" style="color: #737f8d; font-family: \'open sans\',sans-serif; font-weight: normal; font-size: 17px;padding-bottom: 50px; padding-left: 40px; padding-right: 40px">\n                                               Thanks for registering for an account on HRCF! Before we get started, we just need to confirm that this is you. Click below to verify your email address:\n                                           </td>\n                                       </tr>\n                                       <tr>\n                                           <td style="padding-bottom: 50px; padding-left: 40px; padding-right: 40px" >\n                                               <table align="center" bgcolor="#0d47a1" >\n                                                   <tr >\n                                                       <td align="center" style="font-family: \'open sans\', sans-serif; font-weight: bold; letter-spacing: 2px; border: 1px solid #0d47a1; padding: 15px 25px;">\n                                                           <a href="#" style="color: #fff">VERIFY</a>\n                                                       </td>\n                                                   </tr>\n                                               </table>\n                                           </td>\n                                       </tr>\n                                   </table>\n                                   <tr>\n                                           <td style="padding-top: 10px; font-family: \'open sans\', sans-serif; " align="center">\n                                               <p style="color:#737f8d;text-align:\'center\' ">\n                                                   <small >\n                                                       <span >You\'re receiving this email because you signed up for and account on HRCF</span><br />\n                                                       <span >The Victoria, Plot No. 131. North Labone, Accra-Ghana </span><br />\n                                                       <span >P.M.B 104, GP Accra - Ghana</span>\n                                                   </small>\n                                               </p>\n                                           </td>\n                                       </tr>\n       \n                                   \n                                   \n                               </td>\n                           </tr>\n       \n                           <tr><td height="60"></td></tr>\n       \n                       </table>\n                   </td>\n               </tr>\n           </table>\n        </body>\n       </html>';
@@ -518,48 +573,6 @@ var debitEmailTemplate = function debitEmailTemplate(name, amount, date, bank, a
 };
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(__dirname) {
-
-var Sequelize = __webpack_require__(10);
-var path = __webpack_require__(5);
-
-var config = {
-    IP: process.env.SERVER_IP || 'http://104.155.93.65',
-    PORT: process.env.SERVER_PORT || 8001,
-    secret: 'thequickfoxjumpedofthelazydog',
-    uploadlocation: path.resolve(__dirname + '/resources'),
-    ext: 'xlsx',
-    ams: 'http://217.174.240.226:8080/fam-rest/rest/api/eod?fundCode=ICAMGHRCF&valueDate=',
-    cron_balance_time: 0,
-    email_host: 'smtp.gmail.com',
-    email_port: '587',
-    email_secure: false,
-    email_username: 'noreply@icassetmanagers.com',
-    email_password: 'dqKZ%388',
-    prepare: false
-};
-
-var sequelize = new Sequelize(process.env.DB_NAME || 'HRCF', process.env.DB_USER || 'hrcf', process.env.DB_PASSWORD || 'pa55w0rd', {
-    host: process.env.DB_HOST || 'localhost',
-    //dialect: 'postgres',
-    dialect: process.env.DB_DIALECT || 'mysql',
-    pool: {
-        max: 1,
-        min: 0,
-        idle: 10000,
-        acquire: 20000,
-        handleDisconnects: true
-    }
-});
-
-module.exports = { config: config, sequelize: sequelize };
-/* WEBPACK VAR INJECTION */}.call(exports, "/"))
-
-/***/ }),
 /* 3 */
 /***/ (function(module, exports) {
 
@@ -569,19 +582,19 @@ module.exports = require("request");
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = require("lodash");
+module.exports = require("dateformat");
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports) {
 
-module.exports = require("path");
+module.exports = require("lodash");
 
 /***/ }),
 /* 6 */
 /***/ (function(module, exports) {
 
-module.exports = require("dateformat");
+module.exports = require("path");
 
 /***/ }),
 /* 7 */
@@ -605,21 +618,24 @@ exports.ICBankModel = ICBankModel;
 exports.branchModel = branchModel;
 exports.accountModel = accountModel;
 exports.requestModel = requestModel;
+exports.forgotModel = forgotModel;
 exports.payoutRequestModel = payoutRequestModel;
 exports.trackModel = trackModel;
 exports.navStoreModel = navStoreModel;
+exports.fundAllocationStoreModel = fundAllocationStoreModel;
+exports.fundAllocationCollectionModel = fundAllocationCollectionModel;
 exports.approveModel = approveModel;
 exports.usersModel = usersModel;
 
 var _sequelize = __webpack_require__(10);
 
-var _lodash = __webpack_require__(4);
+var _lodash = __webpack_require__(5);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 function companyModel(config) {
   var company = config.define('company', {
@@ -940,6 +956,24 @@ function requestModel(config) {
   return request;
 }
 
+function forgotModel(config) {
+  var forgot = config.define('forgot_password', {
+    uuid: {
+      type: _sequelize.Sequelize.UUID,
+      defaultValue: _sequelize.Sequelize.UUIDV1
+    },
+    user_id: {
+      type: _sequelize.Sequelize.INTEGER
+    },
+    status: {
+      type: _sequelize.Sequelize.STRING(1),
+      defaultValue: 'P'
+    }
+  }, { underscored: true });
+
+  return forgot;
+}
+
 function payoutRequestModel(config) {
   var payout_request = config.define('payout_request', {
     user_id: {
@@ -995,6 +1029,43 @@ function navStoreModel(config) {
   }, { underscored: true });
 
   return nav;
+}
+
+function fundAllocationStoreModel(config) {
+  var fund_allocation = config.define('fund_allocation_store', {
+    status: {
+      type: _sequelize.Sequelize.STRING(1),
+      defaultValue: 'A'
+    }
+  }, { underscored: true });
+
+  return fund_allocation;
+}
+
+function fundAllocationCollectionModel(config) {
+  var fund_allocation_collection = config.define('fund_allocation_collection', {
+    fund_allocation_store_id: {
+      type: _sequelize.Sequelize.INTEGER
+    },
+    fund_name: {
+      type: _sequelize.Sequelize.STRING
+    },
+    market_value: {
+      type: _sequelize.Sequelize.FLOAT
+    },
+    aum_percent: {
+      type: _sequelize.Sequelize.FLOAT
+    },
+    asset_class: {
+      type: _sequelize.Sequelize.STRING
+    },
+    status: {
+      type: _sequelize.Sequelize.STRING(1),
+      defaultValue: 'A'
+    }
+  }, { underscored: true });
+
+  return fund_allocation_collection;
 }
 
 function approveModel(config) {
@@ -1282,7 +1353,7 @@ var _models = __webpack_require__(7);
 
 var models = _interopRequireWildcard(_models);
 
-var _config = __webpack_require__(2);
+var _config = __webpack_require__(1);
 
 var d = _interopRequireWildcard(_config);
 
@@ -1294,7 +1365,7 @@ var _jsonwebtoken = __webpack_require__(8);
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
-var _path = __webpack_require__(5);
+var _path = __webpack_require__(6);
 
 var _path2 = _interopRequireDefault(_path);
 
@@ -1422,17 +1493,21 @@ var App = function () {
             var imageMapperModel = models.imageMapModel(dbConfig);
             var payoutModel = models.payoutRequestModel(dbConfig);
             var navStoreModel = models.navStoreModel(dbConfig);
+            var forgotModel = models.forgotModel(dbConfig);
+            var fundAllocationStoreModel = models.fundAllocationStoreModel(dbConfig);
+            var fundAllocationCollectionModel = models.fundAllocationCollectionModel(dbConfig);
 
             //Setting relationships
-
+            forgotModel.belongsTo(usersModel);
             payoutModel.belongsTo(usersModel);
             payoutModel.belongsTo(accountsModel);
-
             imageMapperModel.belongsTo(usersModel);
 
             requestModel.belongsTo(usersModel);
             requestModel.belongsTo(approveModel);
             requestModel.belongsTo(accountsModel);
+
+            fundAllocationCollectionModel.belongsTo(fundAllocationStoreModel);
 
             bankStatementModel.belongsTo(icBankModel);
 
@@ -1490,7 +1565,7 @@ var App = function () {
             var withdrawals = new _withdrawals_router2.default(withdrawalModel, usersModel);
             var banks = new _banks_router2.default(bankModel);
 
-            var utils = new _utils_router2.default(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel, requestModel, accountsModel, approveModel, icBankModel, payoutModel, withdrawalModel, transactionModel);
+            var utils = new _utils_router2.default(usersModel, trackModel, companyModel, bankModel, branchModel, idTypesModel, requestModel, accountsModel, approveModel, icBankModel, payoutModel, withdrawalModel, transactionModel, forgotModel, fundAllocationStoreModel, fundAllocationCollectionModel, navStoreModel);
             var auth = new _auth_router2.default(usersModel);
             var bankstatement = new _bank_statements_router2.default(bankStatementModel, icBankModel, usersModel);
             var misc = new _misc_router2.default(usersModel, accountsModel, approveModel, companyModel);
@@ -1571,11 +1646,35 @@ var App = function () {
                 gain_loss: payload.gainLoss });
         }
     }, {
+        key: 'saveFundAllocationData',
+        value: function saveFundAllocationData(data) {
+            var dbConfig = d.sequelize;
+            var fundAllocationStoreModel = models.fundAllocationStoreModel(dbConfig);
+            var fundAllocationCollectionModel = models.fundAllocationCollectionModel(dbConfig);
+
+            if (data.length > 0) {
+
+                fundAllocationStoreModel.create({ status: 'A' }).then(function (store) {
+                    if (store) {
+                        data.map(function (d) {
+                            fundAllocationCollectionModel.create({
+                                fund_allocation_store_id: store.id,
+                                fund_name: d.fundName,
+                                market_value: d.marketValue,
+                                aum_percent: d.aumPercent,
+                                asset_class: d.assetClass
+                            });
+                        });
+                    }
+                });
+            }
+        }
+    }, {
         key: 'getNAV',
         value: function getNAV() {
             var app = this;
             var request = __webpack_require__(3),
-                dateFormat = __webpack_require__(6),
+                dateFormat = __webpack_require__(4),
                 yesterday = new Date().setDate(new Date().getDate() - 1),
                 yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
                 url = d.config.ams;
@@ -1585,8 +1684,33 @@ var App = function () {
                 method: 'GET',
                 json: true
             }, function (error, res, body) {
-                app.creditAllUsers(body.payload.nav);
-                app.saveNAV(body.payload);
+                if (body.payload && body.statusCode === 'successful') {
+                    app.creditAllUsers(body.payload.nav);
+                    app.saveNAV(body.payload);
+                }
+            });
+        }
+    }, {
+        key: 'getFundAllocation',
+        value: function getFundAllocation() {
+            var app = this;
+            var request = __webpack_require__(3),
+                dateFormat = __webpack_require__(4),
+                yesterday = new Date().setDate(new Date().getDate() - 1),
+                yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
+                url = d.config.ams_fund_allocation;
+
+            request({
+                uri: url + yesterday_formatted,
+                method: 'GET',
+                json: true
+            }, function (error, res, body) {
+                console.log("Asset Allocation " + JSON.stringify(body.payload));
+                if (body.payload && body.statusCode === 'successful') {
+                    app.saveFundAllocationData(body.payload);
+                } else {
+                    console.log('body.payload => ' + body.payload);
+                }
             });
         }
     }, {
@@ -1594,14 +1718,19 @@ var App = function () {
         value: function runCron() {
             var _this = this;
 
+            //First Init
+            this.getNAV();
+            this.getFundAllocation();
+
             setInterval(function () {
-                var dateFormat = __webpack_require__(6);
+                var dateFormat = __webpack_require__(4);
                 var hour = dateFormat(new Date(), 'H');
 
-                if (parseInt(hour) === 0) {
+                if (parseInt(hour) === parseInt(d.config.cron_balance_hour)) {
                     _this.getNAV();
+                    _this.getFundAllocation();
                 }
-            }, 60 * 60 * 1000);
+            }, 5 * 60 * 1000);
         }
     }]);
 
@@ -1655,7 +1784,7 @@ var _express = __webpack_require__(0);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _dateformat = __webpack_require__(6);
+var _dateformat = __webpack_require__(4);
 
 var _dateformat2 = _interopRequireDefault(_dateformat);
 
@@ -2279,7 +2408,7 @@ var _shortid = __webpack_require__(27);
 
 var _shortid2 = _interopRequireDefault(_shortid);
 
-var _lodash = __webpack_require__(4);
+var _lodash = __webpack_require__(5);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -2369,7 +2498,7 @@ var TransactionsRoutes = function () {
                                 //Prepare a collection and send back
                                 var collection = [];
 
-                                var utils = __webpack_require__(1);
+                                var utils = __webpack_require__(2);
                                 var uniqRequest = utils.getUniqCollection(requests, 'transaction_code');
 
                                 uniqRequest.map(function (request) {
@@ -2408,9 +2537,24 @@ var TransactionsRoutes = function () {
                 }
             });
 
-            transactionsRouter.route('/interest_chart/:user_id').get(function (req, res) {
+            transactionsRouter.route('/interest/performance/:user_id').get(function (req, res) {
                 app.TransactionModel.findAll({ where: { id: req.params.user_id, type: 'I', status: 'A' } }).then(function (interests) {
-                    res.status(200).json(interests);
+                    if (interests) {
+                        var dateFormat = __webpack_require__(4);
+
+                        var interest_data = [];
+
+                        interests.map(function (interest) {
+                            var amount = interest.amount;
+                            var date = dateFormat(new Date(interest.created_at), 'dd mmm');
+
+                            interest_data.push({ date: date, amount: amount });
+                        });
+
+                        res.status(200).json({ interest_data: interest_data });
+                    } else {
+                        res.status(400).json({ success: false });
+                    }
                 });
             });
 
@@ -2421,7 +2565,7 @@ var TransactionsRoutes = function () {
                     var account_id = req.body.detail.account_id;
                     var password = req.body.detail.password;
                     var transaction_code = _shortid2.default.generate();
-                    var utils = __webpack_require__(1);
+                    var utils = __webpack_require__(2);
 
                     console.log('Amount => ' + amount + ', account => ' + account_id);
 
@@ -2465,7 +2609,7 @@ var TransactionsRoutes = function () {
                         account_id: account_id,
                         approver_id: approver_id
                     }).then(function (request) {
-                        var utils = __webpack_require__(1);
+                        var utils = __webpack_require__(2);
                         utils.sendApprovalEmail(approve_name, email, request.uuid, transaction_code);
                         counter = counter + 1;
                         if (counter === approvers.length) {
@@ -2611,7 +2755,7 @@ var _jsonwebtoken = __webpack_require__(8);
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
-var _config = __webpack_require__(2);
+var _config = __webpack_require__(1);
 
 var d = _interopRequireWildcard(_config);
 
@@ -2633,7 +2777,7 @@ var AuthRoutes = function () {
         value: function routes() {
             var app = this;
             var authRouter = _express2.default.Router();
-            var utils = __webpack_require__(1);
+            var utils = __webpack_require__(2);
             var expressApp = (0, _express2.default)();
 
             expressApp.set('token', d.config.secret);
@@ -2750,7 +2894,7 @@ var BankStatementRoutes = function () {
         value: function routes() {
             var app = this;
             var bankStatementRouter = _express2.default.Router();
-            var utils = __webpack_require__(1);
+            var utils = __webpack_require__(2);
 
             //Middleware to check all request comes from an admin
             bankStatementRouter.use('/*', function (req, res, next) {
@@ -3130,15 +3274,15 @@ var _request = __webpack_require__(3);
 
 var _request2 = _interopRequireDefault(_request);
 
-var _dateformat = __webpack_require__(6);
+var _dateformat = __webpack_require__(4);
 
 var _dateformat2 = _interopRequireDefault(_dateformat);
 
-var _config = __webpack_require__(2);
+var _config = __webpack_require__(1);
 
 var d = _interopRequireWildcard(_config);
 
-var _path = __webpack_require__(5);
+var _path = __webpack_require__(6);
 
 var _path2 = _interopRequireDefault(_path);
 
@@ -3164,7 +3308,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 var UtilsRoutes = function () {
-    function UtilsRoutes(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel, RequestModel, AccountModel, ApproveModel, ICBankModel, PayOutModel, WithdrawModel, TransactionModel) {
+    function UtilsRoutes(UsersModel, TracksModel, CompanyModel, BankModel, BranchModel, IDModel, RequestModel, AccountModel, ApproveModel, ICBankModel, PayOutModel, WithdrawModel, TransactionModel, ForgotModel, FundAllocationStoreModel, FundAllocationCollectionModel, NAVStoreModel) {
         _classCallCheck(this, UtilsRoutes);
 
         this.app = this;
@@ -3181,6 +3325,10 @@ var UtilsRoutes = function () {
         this.PayOutModel = PayOutModel;
         this.WithdrawModel = WithdrawModel;
         this.TransactionModel = TransactionModel;
+        this.ForgotModel = ForgotModel;
+        this.FundAllocationStoreModel = FundAllocationStoreModel;
+        this.FundAllocationCollectionModel = FundAllocationCollectionModel;
+        this.NAVStoreModel = NAVStoreModel;
     }
 
     _createClass(UtilsRoutes, [{
@@ -3230,7 +3378,7 @@ var UtilsRoutes = function () {
         value: function updateIndividualPaymentNumber(user, res) {
             var app = this;
             var expressApp = (0, _express2.default)();
-            var utils = __webpack_require__(1);
+            var utils = __webpack_require__(2);
 
             expressApp.set('token', d.config.secret);
 
@@ -3337,7 +3485,7 @@ var UtilsRoutes = function () {
             //utilsRouter.use(express_formidable());
 
 
-            var utils = __webpack_require__(1);
+            var utils = __webpack_require__(2);
             //let upload  = multer({storage: app.storage}).any();
 
             expressApp.set('token', d.config.secret);
@@ -3447,6 +3595,92 @@ var UtilsRoutes = function () {
                         res.status(200).send('No Banks Available');
                     }
                 });
+            });
+
+            utilsRouter.route('/fund_allocation/pie').get(function (req, res) {
+                app.FundAllocationStoreModel.max('id', { where: { status: 'A' } }).then(function (store) {
+                    if (store) {
+                        app.FundAllocationCollectionModel.findAll({ where: { fund_allocation_store_id: store } }).then(function (collections) {
+
+                            var pie_data = [];
+                            collections.map(function (collection) {
+                                pie_data.push({ name: collection.asset_class, y: collection.aum_percent });
+                            });
+
+                            res.status(200).json(pie_data);
+                        });
+                    } else {
+                        res.status(400).json({ success: false });
+                    }
+                });
+            });
+
+            utilsRouter.route('/nav_performance').get(function (req, res) {
+                app.NAVStoreModel.findAll({ where: { status: 'A' } }).then(function (navs) {
+                    if (navs) {
+                        var dateFormat = __webpack_require__(4);
+
+                        var nav_data = [];
+
+                        navs.map(function (nav) {
+                            var unit = (nav.nav_per_unit - 1) * 100;
+                            var date = dateFormat(new Date(nav.created_at), 'dd mmm');
+
+                            nav_data.push({ date: date, unit: unit });
+                        });
+
+                        res.status(200).json(nav_data);
+                    } else {
+                        res.status(400).json({ success: false });
+                    }
+                });
+            });
+
+            utilsRouter.route('/reset').get(function (req, res) {
+                var password = req.query.password;
+                var uuid = req.query.uuid;
+
+                console.log('PASSWORD => ' + password);
+
+                app.ForgotModel.findOne({ where: { uuid: uuid, status: 'P' } }).then(function (forgot) {
+                    if (forgot) {
+                        app.UsersModel.findOne({ where: { id: forgot.user_id, status: 'A' } }).then(function (user) {
+                            if (user) {
+                                user.update({ password: password }).then(function (user) {
+                                    res.status(200).json({ success: true });
+                                });
+                            } else {
+                                res.status(400).json({ success: false });
+                            }
+                        });
+                        forgot.update({ status: 'D' });
+                    } else {
+                        res.status(400).json({ success: false });
+                    }
+                });
+            });
+
+            utilsRouter.route('/forgot/:email').post(function (req, res) {
+
+                if (utils.isValidEmail(req.params.email)) {
+                    app.UsersModel.findOne({ where: { email: req.params.email,
+                            status: 'A' } }).then(function (user) {
+                        if (user) {
+
+                            app.ForgotModel.create({ user_id: user.id }).then(function (forgot) {
+                                if (forgot) {
+                                    //Push email notification
+                                    utils.sendResetMail(user.email, user.firstname, forgot.uuid);
+                                    res.status(200).json({ success: true });
+                                }
+                            });
+                        } else {
+                            res.status(400).json({ success: false });
+                        }
+                    });
+                } else {
+                    res.status(400).json({ success: false });
+                }
             });
 
             utilsRouter.route('/adduser').post(function (req, res) {
@@ -3683,7 +3917,7 @@ var _express = __webpack_require__(0);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _config = __webpack_require__(2);
+var _config = __webpack_require__(1);
 
 var d = _interopRequireWildcard(_config);
 
@@ -3705,7 +3939,7 @@ var SessionRoutes = function () {
         value: function routes() {
             var app = this;
             var sessionsRouter = _express2.default.Router();
-            var utils = __webpack_require__(1);
+            var utils = __webpack_require__(2);
 
             sessionsRouter.route('/register').get(function (req, res) {
                 var username = d.config.sessions_username;
@@ -3784,7 +4018,7 @@ var UploadRoutes = function () {
 
                 console.log('bank_id => ' + req.body.bank_id);
 
-                var utils = __webpack_require__(1);
+                var utils = __webpack_require__(2);
                 utils.saveFile(req, res);
             });
 

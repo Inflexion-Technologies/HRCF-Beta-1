@@ -217,7 +217,7 @@ class Login extends Component {
                             
                                 <button className="btn btn-info btn-block" onClick={this.onLoginClicked.bind(this)} disabled={this.state.isButtonDisabled}>{this.state.loginButtonText}</button>
                                 <div className="text-center help-block">
-                                    <a href="#/"><small className="typo-style">Forgot password?</small></a>
+                                <Link to="/forgot"><small className="typo-style">Forgot password?</small></Link>
                                     <p className="text-muted help-block"><small className="typo-style">Do not have an account?</small></p>
                                 </div>
                                 <Link to="/signup" className="btn btn-md btn-default btn-block typo-style">Create an account</Link>
