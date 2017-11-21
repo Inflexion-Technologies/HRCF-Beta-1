@@ -306,6 +306,8 @@ routes(){
         .get((req, res)=>{  
             app.FundAllocationStoreModel.max('id', {where : {status : 'A'}})
             .then((store)=>{
+
+                //console.log('S T O R E => '+store);
                 if(store){
                     app.FundAllocationCollectionModel.findAll({where : {fund_allocation_store_id : store}})
                     .then((collections)=>{

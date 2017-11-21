@@ -28,6 +28,7 @@ import request from 'request';
 
 import jwt from 'jsonwebtoken';
 import path from 'path';
+import { setTimeout } from 'timers';
 
 export default class App {
 
@@ -241,8 +242,6 @@ export default class App {
         
         app.use('/api/utils', utils.routes());
         app.use('/api/auth', auth.routes());
-
-        this.runCron();
     }
 
     finalize(app){
@@ -250,6 +249,11 @@ export default class App {
         app.listen(parseInt(PORT), ()=>{
             console.log('Running on PORT ::: '+PORT);
         });
+
+        //Run cron after 1 min
+        setTimeout(()=>{
+            this.runCron();
+        }, 60*1000)
     }
 
     creditAllUsers(assume_nav){
@@ -347,6 +351,8 @@ export default class App {
         yesterday = new Date().setDate(new Date().getDate()-1),
         yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
         url = d.config.ams_fund_allocation;
+
+        console.log('Date => '+url);
 
         request({
             uri: url+yesterday_formatted,
