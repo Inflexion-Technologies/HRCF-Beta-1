@@ -9,13 +9,13 @@ const config = {
     ext : 'xlsx',
     ams: 'http://217.174.240.226:8080/fam-rest/rest/api/eod?fundCode=ICAMGHRCF&valueDate=',
     ams_fund_allocation : 'http://217.174.240.226:8080/fa-amrest/rest/api/asset-allocations?fundCode=ECGT3SP1&valueDate=',
-    cron_balance_hour : 15,
+    cron_balance_hour : 0,
     email_host : 'smtp.gmail.com',
     email_port : '587',
     email_secure : false,
     email_username : 'noreply@icassetmanagers.com',
     email_password : 'dqKZ%388',
-    prepare : false
+    prepare : true
 }
 
 const sequelize = new Sequelize(process.env.DB_NAME || 'HRCF', process.env.DB_USER || 'hrcf', process.env.DB_PASSWORD || 'pa55w0rd', {

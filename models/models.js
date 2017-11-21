@@ -511,6 +511,9 @@ export function usersModel(config){
           this.setDataValue('email', (val).trim());
         }
       },
+      company_id :{
+        type : Sequelize.INTEGER
+      },
       msisdn: {
         type: Sequelize.STRING,
         unique : true,
