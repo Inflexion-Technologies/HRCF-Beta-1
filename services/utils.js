@@ -815,10 +815,10 @@ var creditEmailTemplate = function(name, amount, date){
                                 
                                 <div class="editable-text" style="line-height: 170%; text-align: justify; font-size: 18px; ">
                                     <span class="text_container" style="font-size: 13px;letter-spacing: 1px;word-spacing: 2px;">
-                                        You have successfully credited your IC Asset Managers Investment account with <b>`+amount+` GHS</b>.<br />
+                                        You have successfully credited your IC Asset Managers Investment account with <b>GHS `+amount+` </b>.<br />
                                          Details of the transaction are: <br/>
                                         Transaction Date: 	<b>`+date+`</b>	 <br/>
-                                        Transaction Amount: <b>`+amount+` GHS</b><br/>
+                                        Transaction Amount: <b>GHS `+amount+` </b><br/>
                                     </span>
                                 </div>
                             </td>

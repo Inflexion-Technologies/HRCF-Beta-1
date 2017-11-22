@@ -57,7 +57,7 @@ class ConfirmStore extends EventEmitter{
         
         const formatStyle = format({integerSeparator:','});
 
-        return formatStyle(this.amount) === '' ? '0.00':formatStyle(this.amount)+'.00';
+        return formatStyle(this.amount) === '' ? '0.00':formatStyle(this.amount);
     }
 
     getCode(){

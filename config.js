@@ -16,7 +16,7 @@ const config = {
     email_secure : false,
     email_username : 'noreply@icassetmanagers.com',
     email_password : 'dqKZ%388',
-    prepare : true
+    prepare : false
 }
 
 const sequelize = new Sequelize(process.env.DB_NAME || 'HRCF', process.env.DB_USER || 'hrcf', process.env.DB_PASSWORD || 'pa55w0rd', {

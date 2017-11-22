@@ -46,7 +46,7 @@ class MainStore extends EventEmitter{
     }
 
     doDashboardUserInterest(data){
-        this.interest = data.credit;
+        this.interest = data.interest;
         this.emit('dashboard_user_interest');            
     }
 
@@ -174,7 +174,7 @@ class MainStore extends EventEmitter{
                 this.doDashboardUserBalance(action.data);
                 break;
             } 
-            case 'DASHBOARD_USER_BALANCE' : {
+            case 'DASHBOARD_USER_INTEREST' : {
                 this.doDashboardUserInterest(action.data);
                 break;
             } 

@@ -105,7 +105,7 @@ class History extends Component {
                             {d.transaction}
                         </div>
                         <div className="col-md-3 col-lg-3 d-item">
-                            {app.getFormattedNumbers(d.amount)} GHS
+                        GHS {app.getFormattedNumbers(d.amount)}
                         </div>
                         <div className="col-md-3 col-lg-3 d-item">
                             {d.status}
