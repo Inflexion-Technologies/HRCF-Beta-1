@@ -56,12 +56,7 @@ export default class TransactionsRoutes{
                app.TransactionModel.sum('amount', {where :{type : 'C', status : 'A', user_id : req.params.user_id}})
                .then((credit)=>{
                    if(credit){
-                        const total_credits = credit;
-                        app.TransactionModel.sum('amount', {where : {type : 'W', status : 'A', user_id : req.params.user_id}})
-                        .then((withdraw_amount)=>{
-                            const total_contribution = total_credits - withdraw_amount;
-                            res.status(200).json({contribution : total_contribution});
-                        })
+                        res.status(200).json({contribution : credit});
                     }else{
                         res.status(200).json({contribution : 0});
                     }

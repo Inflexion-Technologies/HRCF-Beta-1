@@ -87,8 +87,9 @@ class Withdraw extends Component {
 
                 <div className="hidden-xs hidden-sm col-md-4 col-lg-4 kill-padding-except-left">
                     <div className="withdraw-widget">
-                        <div className="amount">{this.balance}
-                             <div className="small">GHS</div>
+                        <div className="amount">
+                            <div className="small">GHS</div>
+                            {this.balance} 
                         </div>
                         <div className={"label "+calculator_color_style}>Available Balance</div>
                     </div>
@@ -102,8 +103,9 @@ class Withdraw extends Component {
 
                 <div className="hidden-xs hidden-sm col-md-3 col-lg-3 kill-padding">
                     <div className="withdraw-widget">
-                        <div className="amount">{this.withdrawAmount}
+                        <div className="amount">
                             <div className="small">GHS</div>
+                            {this.withdrawAmount}
                         </div>
                         <div className={"label "+calculator_color_style}>Withdraw Amount</div>
                     </div>
@@ -117,8 +119,9 @@ class Withdraw extends Component {
 
                 <div className="hidden-xs hidden-sm col-md-3 col-lg-3 kill-padding-except-right">
                     <div className="withdraw-widget">
-                        <div className="amount">{this.newBalance}
+                        <div className="amount">
                             <div className="small">GHS</div>
+                            {this.newBalance}
                         </div>
                         <div className={"label "+calculator_color_style}>New Available Balance</div>
                     </div>
@@ -129,8 +132,9 @@ class Withdraw extends Component {
 
                 <div className="hidden-md hidden-lg col-sm-5 col-xs-5 kill-padding-except-left">
                     <div className="withdraw-widget">
-                        <div className="amount">{this.balance}
-                             <div className="small"></div>
+                        <div className="amount">
+                            {this.balance}
+                            <div className="small"></div>
                         </div>
                         <div className={"label "+calculator_color_style}>Available Balance</div>
                     </div>
@@ -144,7 +148,8 @@ class Withdraw extends Component {
 
                 <div className="hidden-md hidden-lg col-sm-5 col-xs-5 kill-padding-except-right">
                     <div className="withdraw-widget">
-                        <div className="amount">{this.withdrawAmount}
+                        <div className="amount">
+                            {this.withdrawAmount}
                             <div className="small"></div>
                         </div>
                         <div className={"label "+calculator_color_style}>Withdraw Amount</div>
@@ -159,8 +164,9 @@ class Withdraw extends Component {
 
                 <div className="hidden-md hidden-lg col-sm-3 col-xs-10 kill-padding-except-right">
                     <div className="withdraw-widget">
-                        <div className="amount">{this.newBalance}
+                        <div className="amount">
                             <div className="small">GHS</div>
+                            {this.newBalance}
                         </div>
                         <div className={"label "+calculator_color_style}>New Available Balance</div>
                     </div>
@@ -188,8 +194,9 @@ class Withdraw extends Component {
 
                 <div className="hidden-xs hidden-sm col-md-4 col-lg-4 kill-padding-except-left">
                     <div className="withdraw-widget">
-                        <div className="amount">{this.balance}
-                             <div className="small">GHS</div>
+                        <div className="amount">
+                            <div className="small">GHS</div>
+                            {this.balance}
                         </div>
                         <div className={"label "+calculator_color_style}>Available Balance</div>
                     </div>
@@ -203,8 +210,9 @@ class Withdraw extends Component {
 
                 <div className="hidden-xs hidden-sm col-md-3 col-lg-3 kill-padding">
                     <div className="withdraw-widget">
-                        <div className="amount">{this.withdrawAmount}
+                        <div className="amount">
                             <div className="small">GHS</div>
+                            {this.withdrawAmount}
                         </div>
                         <div className={"label "+calculator_color_style}>Withdraw Amount</div>
                     </div>
@@ -218,8 +226,9 @@ class Withdraw extends Component {
 
                 <div className="hidden-xs hidden-sm col-md-3 col-lg-3 kill-padding-except-right">
                     <div className="withdraw-widget">
-                        <div className="amount">{this.newBalance}
+                        <div className="amount">
                             <div className="small">GHS</div>
+                            {this.newBalance}
                         </div>
                         <div className={"label "+calculator_color_style}>New Available Balance</div>
                     </div>
@@ -227,10 +236,11 @@ class Withdraw extends Component {
 
 
 
-
                 <div className="hidden-md hidden-lg col-sm-5 col-xs-5 kill-padding-except-left">
                     <div className="withdraw-widget">
-                        <div className="amount">{this.balance}
+                        <div className="amount">
+                        
+                            {this.balance}
                              <div className="small"></div>
                         </div>
                         <div className={"label "+calculator_color_style}>Available Balance</div>
@@ -245,7 +255,9 @@ class Withdraw extends Component {
 
                 <div className="hidden-md hidden-lg col-sm-5 col-xs-5 kill-padding-except-right">
                     <div className="withdraw-widget">
-                        <div className="amount">{this.withdrawAmount}
+                        <div className="amount">
+                        
+                            {this.withdrawAmount}
                             <div className="small"></div>
                         </div>
                         <div className={"label "+calculator_color_style}>Withdraw Amount</div>
@@ -260,8 +272,9 @@ class Withdraw extends Component {
 
                 <div className="hidden-md hidden-lg col-sm-3 col-xs-10 kill-padding-except-right">
                     <div className="withdraw-widget">
-                        <div className="amount">{this.newBalance}
+                        <div className="amount">
                             <div className="small">GHS</div>
+                            {this.newBalance}
                         </div>
                         <div className={"label "+calculator_color_style}>New Available Balance</div>
                     </div>
@@ -307,8 +320,9 @@ class Withdraw extends Component {
 
                         <div className="hidden-xs hidden-sm col-md-4 col-lg-4 kill-padding-except-left">
                             <div className="withdraw-widget">
-                                <div className="amount">{this.balance}
+                                <div className="amount">
                                     <div className="small">GHS</div>
+                                    {this.balance}
                                 </div>
                                 <div className={"label "+calculator_color_style}>Available Balance</div>
                             </div>
@@ -322,8 +336,9 @@ class Withdraw extends Component {
 
                         <div className="hidden-xs hidden-sm col-md-3 col-lg-3 kill-padding">
                             <div className="withdraw-widget">
-                                <div className="amount">{this.withdrawAmount}
+                                <div className="amount">
                                     <div className="small">GHS</div>
+                                    {this.withdrawAmount}
                                 </div>
                                 <div className={"label "+calculator_color_style}>Withdraw Amount</div>
                             </div>
@@ -337,8 +352,9 @@ class Withdraw extends Component {
 
                         <div className="hidden-xs hidden-sm col-md-3 col-lg-3 kill-padding-except-right">
                                 <div className="withdraw-widget">
-                                    <div className="amount">{this.newBalance}
+                                    <div className="amount">
                                         <div className="small">GHS</div>
+                                        {this.newBalance}
                                     </div>
                                     <div className={"label "+calculator_color_style}>New Available Balance</div>
                                 </div>
@@ -347,7 +363,8 @@ class Withdraw extends Component {
 
                         <div className="hidden-md hidden-lg col-sm-5 col-xs-5 kill-padding-except-left">
                             <div className="withdraw-widget">
-                                <div className="amount">{this.balance}
+                                <div className="amount">
+                                    {this.balance}
                                     <div className="small"></div>
                                 </div>
                                 <div className={"label "+calculator_color_style}>Available Balance</div>
@@ -362,7 +379,8 @@ class Withdraw extends Component {
 
                         <div className="hidden-md hidden-lg col-sm-5 col-xs-5 kill-padding-except-right">
                             <div className="withdraw-widget">
-                                <div className="amount">{this.withdrawAmount}
+                                <div className="amount">
+                                    {this.withdrawAmount}
                                     <div className="small"></div>
                                 </div>
                                 <div className={"label "+calculator_color_style}>Withdraw Amount</div>
@@ -377,7 +395,8 @@ class Withdraw extends Component {
 
                         <div className="hidden-md hidden-lg col-sm-3 col-xs-10 kill-padding-except-right">
                             <div className="withdraw-widget">
-                                <div className="amount">{this.newBalance}
+                                <div className="amount">
+                                    {this.newBalance}
                                     <div className="small">GHS</div>
                                 </div>
                                 <div className={"label "+calculator_color_style}>New Available Balance</div>

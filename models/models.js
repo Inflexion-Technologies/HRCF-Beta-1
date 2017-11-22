@@ -30,7 +30,7 @@ export function transactionModel(config){
         values : ['W','C','I']
       },
       amount : {
-        type : Sequelize.DOUBLE,
+        type : Sequelize.FLOAT,
         defaultValue : 0
       },
       user_id : {
@@ -51,7 +51,7 @@ export function transactionModel(config){
 export function withdrawalModel(config){
 	const withdrawals = config.define('withdrawal', {
       amount: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.FLOAT
       },
       user_id : {
         type : Sequelize.INTEGER
@@ -71,7 +71,7 @@ export function withdrawalModel(config){
 export function creditModel(config){
 	const credits = config.define('credit', {
       amount: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.FLOAT
       },
       type : {
         type : Sequelize.ENUM,
@@ -177,10 +177,10 @@ export function bankStatementModel(config){
         type : Sequelize.INTEGER
       },
       credit : {
-        type : Sequelize.DOUBLE
+        type : Sequelize.FLOAT
       },
       debit : {
-        type : Sequelize.DOUBLE
+        type : Sequelize.FLOAT
       },
       fund_code : {
         type : Sequelize.STRING
@@ -524,11 +524,11 @@ export function usersModel(config){
         }
       },
       available_balance : {
-        type : Sequelize.DOUBLE,
+        type : Sequelize.FLOAT,
         defaultValue : 0
       },
       actual_balance : {
-        type : Sequelize.DOUBLE,
+        type : Sequelize.FLOAT,
         defaultValue : 0
       },
       type: {
