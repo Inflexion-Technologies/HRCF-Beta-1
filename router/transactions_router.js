@@ -158,7 +158,7 @@ export default class TransactionsRoutes{
             .post((req, res)=>{
                 if(req.body){
                     const user_id = req.params.user_id;
-                    const amount = req.body.detail.amount;
+                    const amount = parseFloat(req.body.detail.amount);
                     const account_id = req.body.detail.account_id;
                     const password = req.body.detail.password;
                     const transaction_code = gen.generate(); 

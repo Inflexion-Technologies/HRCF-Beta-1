@@ -431,7 +431,7 @@ var compute2 = function(req, res, data, ic_bank_id){
 
 
 
-                var config = require('../config');
+                var config = require('../config'),
                 url = config.config.ams_excel;
 
                 request({

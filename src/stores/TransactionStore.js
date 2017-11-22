@@ -6,12 +6,12 @@ class TransactionStore extends EventEmitter{
     constructor(){
         super();
         this.account_id = 0;
-        this.actual_balance = 0;
-        this.available_balance = 0;        
+        this.actual_balance = 0.00;
+        this.available_balance = 0.00;        
         this.accounts = [];
         this.selectData = [];
         this.account_id = 0;
-        this.amount = 0;
+        this.amount = 0.00;
     }
 
     emitFailedLogin(){

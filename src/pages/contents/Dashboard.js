@@ -139,21 +139,21 @@ class Dashboard extends Component {
                     <div className="hidden-xs hidden-sm col-md-4 kill-padding-except-left">
                         <div className="dash-widget-contribution">
                             <div className="label">Total Contribution</div>
-                            <div className="amount">{MainStore.getContribution()} GHS</div>
+                            <div className="amount">GHS {MainStore.getContribution()}</div>
                         </div>
                     </div>
 
                     <div className="hidden-xs hidden-sm col-md-4 kill-padding">
                         <div className="dash-widget-balance">
                             <div className="label">Total Interest</div>
-                            <div className="amount">{MainStore.getInterest()} GHS</div>
+                            <div className="amount">GHS {MainStore.getInterest()}</div>
                         </div>
                     </div>
 
                     <div className="hidden-xs hidden-sm col-md-4 kill-padding-except-right">
                         <div className="dash-widget-available-balance">
                             <div className="label">Available Balance</div>
-                            <div className="amount">{MainStore.getAvailableBalance()} GHS</div>
+                            <div className="amount">GHS {MainStore.getAvailableBalance()}</div>
                         </div>
                     </div>
 
@@ -161,21 +161,21 @@ class Dashboard extends Component {
                     <div className="hidden-md hidden-lg col-xs-12 col-sm-12">
                         <div className="dash-widget-contribution">
                             <div className="label">Total Contribution</div>
-                            <div className="amount">{MainStore.getContribution()} GHS</div>
+                            <div className="amount">GHS {MainStore.getContribution()}</div>
                         </div>
                     </div>
 
                     <div className="hidden-md hidden-lg col-xs-12 col-sm-12">
                         <div className="dash-widget-balance">
                             <div className="label">Total Interest</div>
-                            <div className="amount">{MainStore.getInterest()} GHS</div>
+                            <div className="amount">GHS {MainStore.getInterest()}</div>
                         </div>
                     </div>
 
                     <div className="hidden-md hidden-lg col-xs-12 col-sm-12">
                         <div className="dash-widget-available-balance">
                             <div className="label">Available Balance</div>
-                            <div className="amount">{MainStore.getAvailableBalance()} GHS</div>
+                            <div className="amount">GHS {MainStore.getAvailableBalance()}</div>
                         </div>
                     </div>
 

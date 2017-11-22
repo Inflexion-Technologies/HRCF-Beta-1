@@ -94,6 +94,9 @@ class WConfirm extends Component {
         detail.amount = TransactionStore.getAmount();
         detail.password = this.state.password;
 
+        console.log('W I T H D R A W => '+detail.amount);
+
+
         TransactionAction.placeRequest(detail);
       }else{
         this.refresh();

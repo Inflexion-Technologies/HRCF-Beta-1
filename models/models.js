@@ -305,7 +305,7 @@ export function requestModel(config){
         type: Sequelize.INTEGER
       },
       amount : {
-        type : Sequelize.INTEGER
+        type : Sequelize.FLOAT
       },
       approver_id : {
         type : Sequelize.INTEGER
@@ -346,7 +346,7 @@ export function payoutRequestModel(config){
         type: Sequelize.INTEGER
       },
       amount : {
-        type : Sequelize.INTEGER
+        type : Sequelize.FLOAT
       },
       account_id: {
         type: Sequelize.INTEGER
@@ -380,13 +380,13 @@ export function trackModel(config){
 export function navStoreModel(config){
 	const nav = config.define('nav_store', {
     nav: {
-      type: Sequelize.INTEGER
+      type: Sequelize.FLOAT
     },
     nav_per_unit: {
-      type: Sequelize.INTEGER
+      type: Sequelize.FLOAT
     },
     gain_loss: {
-      type: Sequelize.INTEGER
+      type: Sequelize.FLOAT
     },
     status: {
       type: Sequelize.STRING(1),
