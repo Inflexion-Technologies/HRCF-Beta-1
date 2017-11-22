@@ -8,7 +8,7 @@ const config = {
     uploadlocation : path.resolve(__dirname+'/resources'),
     ext : 'xlsx',
     ams: 'http://217.174.240.226:8080/fam-rest/rest/api/eod?fundCode=ICAMGHRCF&valueDate=',
-    ams_fund_allocation : 'http://217.174.240.226:8080/fa-amrest/rest/api/asset-allocations?fundCode=ECGT3SP1&valueDate=',
+    ams_fund_allocation : 'http://217.174.240.226:8080/fa-amrest/rest/api/asset-allocations?fundCode=ICAMGHRCF&valueDate=',
     ams_excel : 'http://217.174.240.226:28087/fa-amrest',
     cron_balance_hour : 0,
     email_host : 'smtp.gmail.com',

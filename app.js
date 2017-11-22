@@ -355,7 +355,7 @@ export default class App {
         yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
         url = d.config.ams_fund_allocation;
 
-        console.log('Date => '+url);
+        console.log('Date => '+url+yesterday_formatted);
 
         request({
             uri: url+yesterday_formatted,

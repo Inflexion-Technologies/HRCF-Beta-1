@@ -1748,7 +1748,7 @@ var App = function () {
                 yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
                 url = d.config.ams_fund_allocation;
 
-            console.log('Date => ' + url);
+            console.log('Date => ' + url + yesterday_formatted);
 
             request({
                 uri: url + yesterday_formatted,
@@ -3333,6 +3333,18 @@ var PayoutRoutes = function () {
 
             payoutsRouter.route('/').get(function (req, res) {
                 app.Payouts.findAll().then(function (payouts) {
+                    res.status(200).json(payouts);
+                });
+            });
+
+            payoutsRouter.route('/pending').get(function (req, res) {
+                app.Payouts.findAll({ where: { status: 'P' } }).then(function (payouts) {
+                    res.status(200).json(payouts);
+                });
+            });
+
+            payoutsRouter.route('/paid').get(function (req, res) {
+                app.Payouts.findAll({ where: { status: 'A' } }).then(function (payouts) {
                     res.status(200).json(payouts);
                 });
             });
