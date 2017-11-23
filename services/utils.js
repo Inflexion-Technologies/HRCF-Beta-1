@@ -344,6 +344,7 @@ var compute2 = function(req, res, data, ic_bank_id){
         const usersModel = models.usersModel(sequelize);
         const bankStatementModel = models.bankStatementModel(sequelize);
         const icBanksModel = models.ICBankModel(sequelize);
+        const bankStatementLog = models.bankTransactionAMSLog(sequelize);
 
         if(data){
 
@@ -430,7 +431,6 @@ var compute2 = function(req, res, data, ic_bank_id){
                 });
 
 
-
                 var config = require('../config'),
                 url = config.config.ams_excel;
 
@@ -443,6 +443,14 @@ var compute2 = function(req, res, data, ic_bank_id){
                     if(error) {
                         console.log('There was an error');
                         return;
+                    }
+
+                    if(body.statusCode === 'successful'){
+                        console.log('Bank statment pushed successfully');
+                        bankStatementLog.create({status: 'A'});
+                    }else{
+                        console.log('Bank statement pushed unsuccessfully');
+                        bankStatementLog.create({status : 'F'});
                     }
 
                     console.log('Res => '+body);

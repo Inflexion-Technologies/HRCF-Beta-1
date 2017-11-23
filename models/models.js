@@ -480,6 +480,17 @@ export function approveModel(config){
 	return approvers;
 }
 
+export function bankTransactionAMSLog(config){
+	const bt_log = config.define('bank_transaction_ams_log', {
+    status: {
+      type: Sequelize.STRING(1),
+      defaultValue : 'F'
+	  }
+	}, {underscored: true});
+
+	return bt_log;
+}
+
 export function usersModel(config){
 	const users = config.define('user', {
       firstname: {

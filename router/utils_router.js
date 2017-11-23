@@ -330,18 +330,34 @@ routes(){
             app.NAVStoreModel.findAll({where :{status : 'A'}})
             .then((navs)=>{
                 if(navs){
-                    const dateFormat = require('dateformat');
+                    const dateFormat = require('dateformat');   
+                    const _ = require('lodash');
                     
                     let nav_data = [];
+                    let onlyDates = [];
+                    let nav_data_final = [];
+                    
+                    //Group all by date and id
                     
                     navs.map((nav)=>{
                         const unit = (nav.nav_per_unit - 1)*100;
                         const date = dateFormat(new Date(nav.created_at), 'dd mmm');
 
+                        onlyDates.push(date);
                         nav_data.push({date, unit});
                     });
 
-                    res.status(200).json(nav_data);
+
+                    let uniqDates = _.uniq(onlyDates);
+
+                    uniqDates.map((u_date)=>{
+                        const nd = _.find(nav_data, {date : u_date});
+                        nav_data_final.push(nd);
+                    });
+
+                    console.log('N A V    D A T A   = > '+nav_data_final);
+
+                    res.status(200).json(nav_data_final);
                 }else{
                     res.status(400).json({success : false});
                 }

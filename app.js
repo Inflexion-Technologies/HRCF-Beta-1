@@ -196,9 +196,8 @@ export default class App {
         const icBanksData = require('./resources/ic_banks.json');
         const idTypesData = require('./resources/id_types.json');
 
-        // dbConfig.sync().then(()=>{  
         if(d.config.prepare){          
-            dbConfig.sync({force:true}).then(()=>{
+            dbConfig.sync().then(()=>{
                 trackModel.bulkCreate([{count: 1},{count: 1}]);
                 companyModel.bulkCreate([{name : 'Anonymous'}]);
                 bankModel.bulkCreate(banksData);
@@ -226,7 +225,7 @@ export default class App {
         const uploadStatement = new UploadRoutes();
         const payoutRequest = new PayoutRoutes(payoutModel); 
 
-        //Set Middleware to check for sessions
+        //Set Middleware to check for tokens
         app.use('/api/v1/*', this.validate); 
 
         app.use('/api/v1/users', users.routes());

@@ -86,8 +86,8 @@ var config = {
     uploadlocation: path.resolve(__dirname + '/resources'),
     ext: 'xlsx',
     ams: 'http://217.174.240.226:8080/fam-rest/rest/api/eod?fundCode=ICAMGHRCF&valueDate=',
-    ams_fund_allocation: 'http://217.174.240.226:8080/fa-amrest/rest/api/asset-allocations?fundCode=ECGT3SP1&valueDate=',
-    ams_excel: 'http://217.174.240.226:28087/fa-amrest',
+    ams_fund_allocation: 'http://217.174.240.226:8080/fa-amrest/rest/api/asset-allocations?fundCode=ICAMGHRCF&valueDate=',
+    ams_excel: '217.174.240.226:8080/fa-amrest/rest/api/bank-transaction',
     cron_balance_hour: 0,
     email_host: 'smtp.gmail.com',
     email_port: '587',
@@ -458,6 +458,7 @@ var compute2 = function compute2(req, res, data, ic_bank_id) {
         var usersModel = models.usersModel(sequelize);
         var bankStatementModel = models.bankStatementModel(sequelize);
         var icBanksModel = models.ICBankModel(sequelize);
+        var bankStatementLog = models.bankTransactionAMSLog(sequelize);
 
         if (data) {
 
@@ -552,6 +553,14 @@ var compute2 = function compute2(req, res, data, ic_bank_id) {
                 if (error) {
                     console.log('There was an error');
                     return;
+                }
+
+                if (body.statusCode === 'successful') {
+                    console.log('Bank statment pushed successfully');
+                    bankStatementLog.create({ status: 'A' });
+                } else {
+                    console.log('Bank statement pushed unsuccessfully');
+                    bankStatementLog.create({ status: 'F' });
                 }
 
                 console.log('Res => ' + body);
@@ -657,6 +666,7 @@ exports.navStoreModel = navStoreModel;
 exports.fundAllocationStoreModel = fundAllocationStoreModel;
 exports.fundAllocationCollectionModel = fundAllocationCollectionModel;
 exports.approveModel = approveModel;
+exports.bankTransactionAMSLog = bankTransactionAMSLog;
 exports.usersModel = usersModel;
 
 var _sequelize = __webpack_require__(10);
@@ -1146,6 +1156,17 @@ function approveModel(config) {
   return approvers;
 }
 
+function bankTransactionAMSLog(config) {
+  var bt_log = config.define('bank_transaction_ams_log', {
+    status: {
+      type: _sequelize.Sequelize.STRING(1),
+      defaultValue: 'F'
+    }
+  }, { underscored: true });
+
+  return bt_log;
+}
+
 function usersModel(config) {
   var users = config.define('user', {
     firstname: {
@@ -1584,9 +1605,8 @@ var App = function () {
             var icBanksData = __webpack_require__(44);
             var idTypesData = __webpack_require__(45);
 
-            // dbConfig.sync().then(()=>{  
             if (d.config.prepare) {
-                dbConfig.sync({ force: true }).then(function () {
+                dbConfig.sync().then(function () {
                     trackModel.bulkCreate([{ count: 1 }, { count: 1 }]);
                     companyModel.bulkCreate([{ name: 'Anonymous' }]);
                     bankModel.bulkCreate(banksData);
@@ -1614,7 +1634,7 @@ var App = function () {
             var uploadStatement = new _uploads_router2.default();
             var payoutRequest = new _payouts_router2.default(payoutModel);
 
-            //Set Middleware to check for sessions
+            //Set Middleware to check for tokens
             app.use('/api/v1/*', this.validate);
 
             app.use('/api/v1/users', users.routes());
@@ -2584,7 +2604,7 @@ var TransactionsRoutes = function () {
             });
 
             transactionsRouter.route('/interest/performance/:user_id').get(function (req, res) {
-                app.TransactionModel.findAll({ where: { id: req.params.user_id, type: 'I', status: 'A' } }).then(function (interests) {
+                app.TransactionModel.findAll({ where: { user_id: req.params.user_id, type: 'I', status: 'A' } }).then(function (interests) {
                     if (interests) {
                         var dateFormat = __webpack_require__(4);
 
@@ -2597,7 +2617,7 @@ var TransactionsRoutes = function () {
                             interest_data.push({ date: date, amount: amount });
                         });
 
-                        res.status(200).json({ interest_data: interest_data });
+                        res.status(200).json(interest_data);
                     } else {
                         res.status(400).json({ success: false });
                     }
@@ -3735,17 +3755,32 @@ var UtilsRoutes = function () {
                 app.NAVStoreModel.findAll({ where: { status: 'A' } }).then(function (navs) {
                     if (navs) {
                         var dateFormat = __webpack_require__(4);
+                        var _ = __webpack_require__(5);
 
                         var nav_data = [];
+                        var onlyDates = [];
+                        var nav_data_final = [];
+
+                        //Group all by date and id
 
                         navs.map(function (nav) {
                             var unit = (nav.nav_per_unit - 1) * 100;
                             var date = dateFormat(new Date(nav.created_at), 'dd mmm');
 
+                            onlyDates.push(date);
                             nav_data.push({ date: date, unit: unit });
                         });
 
-                        res.status(200).json(nav_data);
+                        var uniqDates = _.uniq(onlyDates);
+
+                        uniqDates.map(function (u_date) {
+                            var nd = _.find(nav_data, { date: u_date });
+                            nav_data_final.push(nd);
+                        });
+
+                        console.log('N A V    D A T A   = > ' + nav_data_final);
+
+                        res.status(200).json(nav_data_final);
                     } else {
                         res.status(400).json({ success: false });
                     }

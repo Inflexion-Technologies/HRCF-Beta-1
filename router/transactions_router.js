@@ -133,7 +133,7 @@ export default class TransactionsRoutes{
 
         transactionsRouter.route('/interest/performance/:user_id')
             .get((req, res)=>{
-                app.TransactionModel.findAll({where : {id : req.params.user_id, type : 'I', status : 'A'}})
+                app.TransactionModel.findAll({where : {user_id : req.params.user_id, type : 'I', status : 'A'}})
                 .then((interests)=>{
                     if(interests){
                         const dateFormat = require('dateformat');
@@ -147,7 +147,7 @@ export default class TransactionsRoutes{
                             interest_data.push({date, amount});
                         })
 
-                        res.status(200).json({interest_data});
+                        res.status(200).json(interest_data);
                     }else{
                         res.status(400).json({success : false});
                     }
