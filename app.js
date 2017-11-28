@@ -29,6 +29,7 @@ import request from 'request';
 
 import jwt from 'jsonwebtoken';
 import path from 'path';
+import json2xls from 'json2xls';
 import { setTimeout } from 'timers';
 
 export default class App {
@@ -44,6 +45,7 @@ export default class App {
         app.use(bodyParser.json({limit: '50mb', parameterLimit: 1000000}));
         app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit: 1000000}));
         app.use(cookieParser());
+        app.use(json2xls.middleware);
         //app.use(expressValidator([]));
         app.use(session({resave:true, saveUninitialized: true, 
                         secret: 'thequickbrownfoxjumpedoverthelazydogs',
@@ -296,6 +298,27 @@ export default class App {
         const dbConfig = d.sequelize;        
         const navStoreModel = models.navStoreModel(dbConfig);
 
+        //Grab previous data
+        navStoreModel.max('id', {where : {status : 'A'}})
+        .then((max_id)=>{
+            if(max_id){
+                navStoreModel.findOne({where : {id : max_id}})
+                .then((lastnav)=>{
+                    if(lastnav){
+                        const chg = parseFloat(payload.navPerUnit) / lastnav.nav_per_unit;
+                        const percent_chg = (chg - 1)*100;
+
+                        navStoreModel.create({nav : payload.nav,
+                            nav_per_unit : payload.navPerUnit, 
+                            gain_loss : payload.gainLoss,
+                            per_change : percent_chg});
+                    }
+                })
+            }else{
+
+            }
+        })
+
         navStoreModel.create({nav : payload.nav,
              nav_per_unit : payload.navPerUnit, 
              gain_loss : payload.gainLoss});
@@ -325,27 +348,6 @@ export default class App {
         }
     }
 
-    getNAV(){
-        var app = this;
-        var request = require('request'),
-        dateFormat = require('dateformat'),
-        yesterday = new Date().setDate(new Date().getDate()-1),
-        yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
-        url = d.config.ams;
-
-        request({
-            uri: url+yesterday_formatted,
-            method: 'GET',
-            json: true,
-        }, function(error, res, body){
-            if(body.payload && body.statusCode === 'successful'){
-                app.creditAllUsers(body.payload.nav);
-                app.saveNAV(body.payload);
-            }
-            
-        });	
-    }
-
     getFundAllocation(){
         var app = this;
         var request = require('request'),
@@ -370,6 +372,83 @@ export default class App {
         });	
     }
 
+    getNAV(){
+        var app = this;
+        var request = require('request'),
+        dateFormat = require('dateformat'),
+        yesterday = new Date().setDate(new Date().getDate()-1),
+        yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
+        url = d.config.ams;
+
+        request({
+            uri: url+yesterday_formatted,
+            method: 'GET',
+            json: true,
+        }, function(error, res, body){
+            if(body.payload && body.statusCode === 'successful'){
+                app.creditAllUsers(body.payload.nav);
+                app.saveNAV(body.payload);
+            }
+            
+        });	
+    }
+
+    // getNAVHistory(){
+        
+    //             const previous_days = 21;
+        
+    //             for(var i = 0; i<previous_days; i++){
+        
+    //                 var app = this;
+    //                 var request = require('request'),
+    //                 dateFormat = require('dateformat'),
+    //                 yesterday = new Date().setDate(new Date().getDate()-i),
+    //                 yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
+    //                 url = d.config.ams;
+        
+    //                 request({
+    //                     uri: url+yesterday_formatted,
+    //                     method: 'GET',
+    //                     json: true,
+    //                 }, function(error, res, body){
+    //                     if(body.payload && body.statusCode === 'successful'){
+    //                         app.creditAllUsers(body.payload.nav);
+    //                         app.saveNAV(body.payload);
+    //                     }
+                        
+    //                 });	
+    //             }
+    // }
+
+    // getFundAllocationHistory(){
+
+    //     const previous_days = 21;
+        
+    //     for(var i = 0; i < previous_days; i++){
+    //         var app = this;
+    //         var request = require('request'),
+    //         dateFormat = require('dateformat'),
+    //         yesterday = new Date().setDate(new Date().getDate()-1),
+    //         yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
+    //         url = d.config.ams_fund_allocation;
+
+    //         console.log('Date => '+url+yesterday_formatted);
+
+    //         request({
+    //             uri: url+yesterday_formatted,
+    //             method: 'GET',
+    //             json: true,
+    //         }, function(error, res, body){
+    //             console.log("Asset Allocation "+JSON.stringify(body.payload));
+    //             if(body.payload && body.statusCode === 'successful'){
+    //                 app.saveFundAllocationData(body.payload);                
+    //             }else{
+    //                 console.log('body.payload => '+body.payload);
+    //             }
+    //         });	
+    //     }
+    // }
+
     runCron(){
         //First Init
         this.getNAV();
@@ -384,7 +463,7 @@ export default class App {
                 this.getFundAllocation();
             }
             
-        }, 5*60*1000);
+        }, 60*60*1000);
     }
 
 }

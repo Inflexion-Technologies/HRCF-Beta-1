@@ -340,7 +340,7 @@ routes(){
                     //Group all by date and id
                     
                     navs.map((nav)=>{
-                        const unit = (nav.nav_per_unit - 1)*100;
+                        const unit = nav.per_change;
                         const date = dateFormat(new Date(nav.created_at), 'dd mmm');
 
                         onlyDates.push(date);

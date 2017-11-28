@@ -17,6 +17,10 @@ export default class TransactionsRoutes{
         const app = this;
         const transactionsRouter = express.Router();
 
+        //const json2xls = require('json2xls');
+
+        //express.use(json2xls.middleware)
+
         transactionsRouter.route('/')
             .get((req, res)=>{  
                 app.TransactionModel.findAll({where: {status:'A'},  include: [{model : app.UserModel, attributes:['firstname', 'lastname', 'payment_number', 'email', 'msisdn']}] }).then(transactions => {
@@ -129,6 +133,36 @@ export default class TransactionsRoutes{
                 }else{
                     res.status(200).send('Data not saved!');
                 }
+            }); 
+
+        transactionsRouter.route('/reports/:id')
+            .get((req, res)=>{
+                
+            }); 
+
+        transactionsRouter.route('/reports/withdrawal/:id')
+            .get((req, res)=>{
+                app.TransactionModel.findAll({where : {type : 'W', status : 'A'}})
+                .then((transactions)=>{
+                    if(transactions){
+                        res.status(200).xls(transactions);
+                    }
+                })
+            }); 
+
+        transactionsRouter.route('/reports/credit/:id')
+            .get((req, res)=>{
+                app.TransactionModel.findAll({where : {type : 'C', status : 'A'}})
+                .then((transactions)=>{
+                    if(transactions){
+                        res.status(200).xls(transactions);                        
+                    }
+                })
+            }); 
+
+        transactionsRouter.route('/reports/interest/:id')
+            .get((req, res)=>{
+                res.status(200).xls(transactions);                
             }); 
 
         transactionsRouter.route('/interest/performance/:user_id')

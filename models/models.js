@@ -388,6 +388,9 @@ export function navStoreModel(config){
     gain_loss: {
       type: Sequelize.FLOAT
     },
+    per_change : {
+      type : Sequelize.FLOAT(11)
+    },
     status: {
       type: Sequelize.STRING(1),
       defaultValue : 'A'

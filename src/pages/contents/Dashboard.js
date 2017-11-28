@@ -43,49 +43,67 @@ class Dashboard extends Component {
         title: {
             text: 'Total Interest Performance'
         },
+        subtitle: {
+            text: 'Interest Earned Daily'
+        },
+        yAxis: {
+            title: {
+                text: 'Amount (GHS)'
+            }
+        },
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                }
+            }
+        },
         xAxis: {
             categories: categories
-          },
-          series: [{
+        },
+        series: [{
+            name : 'Interest',
             data: series
-          }]
+        }]
     }
 
     return <ReactHighcharts config={line_config}></ReactHighcharts>    
   }
 
   renderBar(series, categories){
-    const bar_config={
+    const line_config={
         chart: {
-            type: 'bar'
+            type: 'line'
         },
         title: {
             text: 'Net Asset Value Performance'
+        },
+        subtitle: {
+            text: '2017 Performance'
         },
         xAxis: {
             categories: categories
         },
         yAxis: {
-            min: 0,
             title: {
-                text: 'Performance'
+                text: 'Percent'
             }
         },
-        legend: {
-            reversed: true
-        },
         plotOptions: {
-            series: {
-                stacking: 'normal'
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
             }
         },
         series: [{
-            name: 'Unit',
+            name: '2017',
             data: series
         }]
     }
 
-    return <ReactHighcharts config={bar_config}></ReactHighcharts>    
+    return <ReactHighcharts config={line_config}></ReactHighcharts>    
   }
 
   renderPie(data){
@@ -116,7 +134,7 @@ class Dashboard extends Component {
             }
         },
         series: [{
-            name: 'Instruments',
+            name: ' ',
             colorByPoint: true,
             data: data
         }]
