@@ -64,6 +64,7 @@ class Main extends Component {
   }
 
   onLogout(){
+      MainStore.clearCookies();
       this.props.history.push('/login');
       this.clearDrawer();
   }

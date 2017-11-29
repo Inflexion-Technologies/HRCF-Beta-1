@@ -370,6 +370,8 @@ var compute2 = function(req, res, data, ic_bank_id){
                         .then((user)=>{
                             if(user){
                                 const credit = data.credit.trim();
+
+                                console.log('C R E D I T = = = '+credit);
                                 return user.increment({'actual_balance' : parseFloat(credit)})
                                 .then((user)=>{
                                     user.increment({'available_balance' : parseFloat(credit)});
@@ -432,6 +434,7 @@ var compute2 = function(req, res, data, ic_bank_id){
 
 
                 var config = require('../config'),
+                request = require('request'),                
                 url = config.config.ams_excel;
 
                 request({
@@ -469,6 +472,8 @@ var getNumber = function(value){
         valueTokens.map((token)=>{
             newValue = newValue + token;
         })
+
+        console.log('N E W   V A L U E  = = =  '+newValue);
 
         return newValue;
     }

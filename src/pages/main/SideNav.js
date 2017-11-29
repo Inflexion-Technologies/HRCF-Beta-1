@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import cookie from 'react-cookies';
+import MainStore from '../../stores/MainStore'
 
 import '../../bower_components/bootstrap/dist/css/bootstrap.css';
 import '../../styles/custom.css';
@@ -25,6 +26,7 @@ class SideNav extends Component {
   }
 
   returnToLogin(){
+    MainStore.clearCookies();
     this.props.history.push('/login');
   }
   

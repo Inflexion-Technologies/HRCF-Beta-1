@@ -423,6 +423,8 @@ routes(){
         
           if(Object.keys(req.body) != 0){
                 req.body.is_admin = 'N';
+                req.body.actual_balance = 0.00;
+                req.body.available_balance = 0.00;
 
                 app.UsersModel.create(req.body).then((user)=>{
                     if(user && req.body.type === 'C'){
@@ -436,6 +438,9 @@ routes(){
                 });
           }else if(Object.keys(req.query) != 0){
                 req.query.is_admin = 'N';    
+                req.query.actual_balance = 0.00;
+                req.query.available_balance = 0.00;
+
                 app.UsersModel.create(req.query).then((user)=>{
                     if(user && req.query.type === 'C'){
                         user.lname = req.query.lname;

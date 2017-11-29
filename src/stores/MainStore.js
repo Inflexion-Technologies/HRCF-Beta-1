@@ -116,6 +116,22 @@ class MainStore extends EventEmitter{
         this.emit('main_click_triggered');
     }
 
+    clearCookies(){
+        cookie.remove('firstname');
+        cookie.remove('lastname');
+        cookie.remove('is_admin');
+        cookie.remove('payment_number');
+        cookie.remove('token');
+        cookie.remove('msisdn');
+        cookie.remove('email');
+        cookie.remove('id');
+        cookie.remove('is_complete');   
+        cookie.remove('type');
+        //cookie.remove('');
+        //cookie.remove('');
+        
+    }
+
     getInterestCategory(){
         return this.interestCategories;
     }

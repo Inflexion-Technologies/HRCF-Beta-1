@@ -593,12 +593,10 @@ export function usersModel(config){
         }
       },
       available_balance : {
-        type : Sequelize.FLOAT,
-        defaultValue : 0
+        type : Sequelize.DOUBLE
       },
       actual_balance : {
-        type : Sequelize.FLOAT,
-        defaultValue : 0
+        type : Sequelize.DOUBLE
       },
       type: {
         type: Sequelize.ENUM,
