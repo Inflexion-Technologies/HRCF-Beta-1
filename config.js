@@ -10,7 +10,7 @@ const config = {
     ams: 'http://217.174.240.226:8080/fam-rest/rest/api/eod?fundCode=ICAMGHRCF&valueDate=',
     ams_fund_allocation : 'http://217.174.240.226:8080/fa-amrest/rest/api/asset-allocations?fundCode=ICAMGHRCF&valueDate=',
     ams_excel : '217.174.240.226:8080/fa-amrest/rest/api/bank-transaction',
-    cron_balance_hour : 0,
+    cron_balance_hour : 22,
     email_host : 'smtp.gmail.com',
     email_port : '587',
     email_secure : false,

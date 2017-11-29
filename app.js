@@ -31,6 +31,7 @@ import jwt from 'jsonwebtoken';
 import path from 'path';
 import json2xls from 'json2xls';
 import { setTimeout } from 'timers';
+import { port } from '_debugger';
 
 export default class App {
 
@@ -150,8 +151,10 @@ export default class App {
         const forgotModel = models.forgotModel(dbConfig);
         const fundAllocationStoreModel = models.fundAllocationStoreModel(dbConfig);
         const fundAllocationCollectionModel = models.fundAllocationCollectionModel(dbConfig);
+        const portfolioModel = models.portfolioModel(dbConfig);
 
         //Setting relationships
+        portfolioModel.belongsTo(usersModel);
         forgotModel.belongsTo(usersModel);
         payoutModel.belongsTo(usersModel);
         payoutModel.belongsTo(accountsModel);
@@ -191,6 +194,8 @@ export default class App {
         usersModel.belongsToMany(accountsModel, {through: 'user_accounts'});        
         accountsModel.belongsToMany(usersModel, {through: 'user_accounts'});
 
+        usersModel.belongsToMany(portfolioModel, {through: 'user_portfolios'});
+        portfolioModel.belongsToMany(usersModel, {through: 'user_portfolios'});
 
         //Loading Banks and Branches and IC Banks
         const banksData = require('./resources/banks.json');
@@ -305,7 +310,7 @@ export default class App {
                 navStoreModel.findOne({where : {id : max_id}})
                 .then((lastnav)=>{
                     if(lastnav){
-                        const chg = parseFloat(payload.navPerUnit) / lastnav.nav_per_unit;
+                        const chg = parseFloat(payload.nav) / lastnav.nav;
                         const percent_chg = (chg - 1)*100;
 
                         navStoreModel.create({nav : payload.nav,
@@ -314,14 +319,12 @@ export default class App {
                             per_change : percent_chg});
                     }
                 })
-            }else{
-
             }
         })
 
-        navStoreModel.create({nav : payload.nav,
-             nav_per_unit : payload.navPerUnit, 
-             gain_loss : payload.gainLoss});
+        // navStoreModel.create({nav : payload.nav,
+        //      nav_per_unit : payload.navPerUnit, 
+        //      gain_loss : payload.gainLoss});
     }
 
     saveFundAllocationData(data){
@@ -352,14 +355,14 @@ export default class App {
         var app = this;
         var request = require('request'),
         dateFormat = require('dateformat'),
-        yesterday = new Date().setDate(new Date().getDate()-1),
-        yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
+        //yesterday = new Date().setDate(new Date().getDate()-1),
+        today_formatted = dateFormat(new Date(), 'dd-mm-yyyy'),
         url = d.config.ams_fund_allocation;
 
-        console.log('Date => '+url+yesterday_formatted);
+        console.log('Date => '+url+today_formatted);
 
         request({
-            uri: url+yesterday_formatted,
+            uri: url+today_formatted,
             method: 'GET',
             json: true,
         }, function(error, res, body){
@@ -376,12 +379,12 @@ export default class App {
         var app = this;
         var request = require('request'),
         dateFormat = require('dateformat'),
-        yesterday = new Date().setDate(new Date().getDate()-1),
-        yesterday_formatted = dateFormat(new Date(yesterday), 'dd-mm-yyyy'),
+        //yesterday = new Date().setDate(new Date().getDate()-1),
+        today_formatted = dateFormat(new Date(), 'dd-mm-yyyy'),
         url = d.config.ams;
 
         request({
-            uri: url+yesterday_formatted,
+            uri: url+today_formatted,
             method: 'GET',
             json: true,
         }, function(error, res, body){

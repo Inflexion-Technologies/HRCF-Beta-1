@@ -483,6 +483,61 @@ export function approveModel(config){
 	return approvers;
 }
 
+export function portfolioModel(config){
+	const portfolio = config.define('portfolio', {
+    name: {
+      type: Sequelize.STRING
+	  },
+    user_id: {
+      type: Sequelize.INTEGER
+    },
+    payment_number: {
+      type: Sequelize.STRING
+    },
+    risk_factor: {
+      type: Sequelize.INTEGER
+	  },
+    status: {
+      type: Sequelize.STRING(1),
+      defaultValue : 'A'
+	  }
+	}, {underscored: true});
+
+	return portfolio;
+}
+
+export function riskModel(config){
+	const risk = config.define('risk', {
+    risk: {
+      type: Sequelize.INTEGER,
+      unique : true
+	  },
+    distribution: {
+      type: Sequelize.STRING
+	  },
+    status: {
+      type: Sequelize.STRING(1),
+      defaultValue : 'A'
+	  }
+	}, {underscored: true});
+
+	return risk;
+}
+
+export function fundModel(config){
+	const fund = config.define('fund', {
+    name: {
+      type: Sequelize.STRING
+	  },
+    status: {
+      type: Sequelize.STRING(1),
+      defaultValue : 'A'
+	  }
+	}, {underscored: true});
+
+	return fund;
+}
+
 export function bankTransactionAMSLog(config){
 	const bt_log = config.define('bank_transaction_ams_log', {
     status: {
