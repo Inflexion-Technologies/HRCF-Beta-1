@@ -32,6 +32,7 @@ import path from 'path';
 import json2xls from 'json2xls';
 import { setTimeout } from 'timers';
 import { port } from '_debugger';
+import { approveModel } from './models/models';
 
 export default class App {
 
@@ -270,6 +271,7 @@ export default class App {
         const usersModel = models.usersModel(dbConfig);
         const creditModel = models.creditModel(dbConfig);
         const transaction = models.transactionModel(dbConfig);
+        const dateFormat = require('dateformat')
 
         usersModel.sum('actual_balance', {where :{status : 'A'}}).then((totalActualBalance)=>{
             if(parseFloat(totalActualBalance) > 0){
@@ -290,7 +292,8 @@ export default class App {
                                 transaction.create({type : 'I', 
                                     amount : interest, 
                                     user_id : user.id, 
-                                    narration : 'Interest'});
+                                    narration : 'Interest',
+                                    date :  dateFormat(new Date(), 'yyyy-mm-dd')});
                             }
                         })
                     })
@@ -394,6 +397,57 @@ export default class App {
             }
             
         });	
+    }
+
+    cancelLateRequest(){
+        const dbConfig = d.sequelize;
+        const requestModel = models.requestModel(dbConfig);
+        const userModel = models.usersModel(dbConfig);
+        const threshold_days = d.config.cancel_request_threshold;
+
+        requestModel.findAll({where : {status : 'P'}})
+        .then((requests)=>{
+            if(requests){
+                const dateFormat = require('dateformat');
+                const threshold_date_formatted = dateFormat(new Date().setDate(new Date().getDate()-threshold_days), 'dd-mm-yyyy');
+
+                let past_request = [];
+                requests.map((request)=>{
+                    const request_date = dateFormat(new Date(request.created_at), 'dd-mm-yyyy');
+                    if(request_date === threshold_date_formatted){
+                        //Add request id to bucket
+                        past_request.push(request);
+                    }
+                })
+
+                //Cancel all past unresponded resquest
+                past_request.map((req)=>{
+                    requestModel.findAll({where : {user_id : req.user_id,
+                                                 transaction_code : req.transaction_code,
+                                                 status : 'P'}})
+                    .then((requests)=>{
+                        if(requests){
+
+                            //Reject all requests
+                            requests.update({status : 'R'})
+                            .then((success)=>{
+                                if(success){
+
+                                    //credit user
+                                    userModel.findOne({where :{id : req.user_id, status : 'A'}})
+                                    .then((user)=>{
+                                        if(user){
+                                            user.increment('available_balance', parseFloat(req.amount));
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    })
+                })
+
+            }
+        })
     }
 
     // getNAVHistory(){

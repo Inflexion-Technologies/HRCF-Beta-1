@@ -87,8 +87,9 @@ var config = {
     ext: 'xlsx',
     ams: 'http://217.174.240.226:8080/fam-rest/rest/api/eod?fundCode=ICAMGHRCF&valueDate=',
     ams_fund_allocation: 'http://217.174.240.226:8080/fa-amrest/rest/api/asset-allocations?fundCode=ICAMGHRCF&valueDate=',
-    ams_excel: '217.174.240.226:8080/fa-amrest/rest/api/bank-transaction',
+    ams_excel: 'http://217.174.240.226:8080/fa-amrest/rest/api/bank-transaction',
     cron_balance_hour: 22,
+    cancel_request_threshold: 3,
     email_host: 'smtp.gmail.com',
     email_port: '587',
     email_secure: false,
@@ -723,6 +724,9 @@ function transactionModel(config) {
     narration: {
       type: _sequelize.Sequelize.STRING
     },
+    date: {
+      type: _sequelize.Sequelize.DATE
+    },
     status: {
       type: _sequelize.Sequelize.STRING(1),
       defaultValue: 'A'
@@ -769,6 +773,9 @@ function creditModel(config) {
     },
     narration: {
       type: _sequelize.Sequelize.STRING
+    },
+    date: {
+      type: _sequelize.Sequelize.DATE
     },
     status: {
       type: _sequelize.Sequelize.STRING(1),
@@ -1075,6 +1082,9 @@ function navStoreModel(config) {
     per_change: {
       type: _sequelize.Sequelize.FLOAT(11)
     },
+    date: {
+      type: _sequelize.Sequelize.DATE
+    },
     status: {
       type: _sequelize.Sequelize.STRING(1),
       defaultValue: 'A'
@@ -1086,6 +1096,9 @@ function navStoreModel(config) {
 
 function fundAllocationStoreModel(config) {
   var fund_allocation = config.define('fund_allocation_store', {
+    date: {
+      type: _sequelize.Sequelize.DATE
+    },
     status: {
       type: _sequelize.Sequelize.STRING(1),
       defaultValue: 'A'
@@ -1111,6 +1124,9 @@ function fundAllocationCollectionModel(config) {
     },
     asset_class: {
       type: _sequelize.Sequelize.STRING
+    },
+    date: {
+      type: _sequelize.Sequelize.DATE
     },
     status: {
       type: _sequelize.Sequelize.STRING(1),
@@ -1875,6 +1891,53 @@ var App = function () {
                 if (body.payload && body.statusCode === 'successful') {
                     app.creditAllUsers(body.payload.nav);
                     app.saveNAV(body.payload);
+                }
+            });
+        }
+    }, {
+        key: 'cancelLateRequest',
+        value: function cancelLateRequest() {
+            var dbConfig = d.sequelize;
+            var requestModel = models.requestModel(dbConfig);
+            var userModel = models.usersModel(dbConfig);
+            var threshold_days = d.config.cancel_request_threshold;
+
+            requestModel.findAll({ where: { status: 'P' } }).then(function (requests) {
+                if (requests) {
+                    var dateFormat = __webpack_require__(4);
+                    var threshold_date_formatted = dateFormat(new Date().setDate(new Date().getDate() - threshold_days), 'dd-mm-yyyy');
+
+                    var past_request = [];
+                    requests.map(function (request) {
+                        var request_date = dateFormat(new Date(request.created_at), 'dd-mm-yyyy');
+                        if (request_date === threshold_date_formatted) {
+                            //Add request id to bucket
+                            past_request.push(request);
+                        }
+                    });
+
+                    //Cancel all past unresponded resquest
+                    past_request.map(function (req) {
+                        requestModel.findAll({ where: { user_id: req.user_id,
+                                transaction_code: req.transaction_code,
+                                status: 'P' } }).then(function (requests) {
+                            if (requests) {
+
+                                //Reject all requests
+                                requests.update({ status: 'R' }).then(function (success) {
+                                    if (success) {
+
+                                        //credit user
+                                        userModel.findOne({ where: { id: req.user_id, status: 'A' } }).then(function (user) {
+                                            if (user) {
+                                                user.increment('available_balance', parseFloat(req.amount));
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    });
                 }
             });
         }
@@ -3967,7 +4030,7 @@ var UtilsRoutes = function () {
 
                         navs.map(function (nav) {
                             var unit = nav.per_change;
-                            var date = dateFormat(new Date(nav.created_at), 'dd mmm');
+                            var date = dateFormat(new Date(nav.date), 'dd mmm');
 
                             onlyDates.push(date);
                             nav_data.push({ date: date, unit: unit });

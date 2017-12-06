@@ -1,9 +1,9 @@
-import {Sequelize} from 'sequelize';
-import _ from 'lodash';
+var Sequelize = require('sequelize');
+var _ = require('lodash');
 
 var utils = require('../services/utils');
 
-export function companyModel(config){
+exports.companyModel = function(config){
 	const company = config.define('company', {
       name: {
         type: Sequelize.STRING
@@ -23,7 +23,7 @@ export function companyModel(config){
 	  return company;
 }
 
-export function transactionModel(config){
+exports.transactionModel = function(config){
 	const transactions = config.define('transaction', {
       type: {
         type: Sequelize.ENUM,
@@ -51,7 +51,7 @@ export function transactionModel(config){
 	  return transactions;
 }
 
-export function withdrawalModel(config){
+exports.withdrawalModel = function(config){
 	const withdrawals = config.define('withdrawal', {
       amount: {
         type: Sequelize.FLOAT
@@ -71,7 +71,7 @@ export function withdrawalModel(config){
 	  return withdrawals;
 }
 
-export function creditModel(config){
+exports.creditModel = function(config){
 	const credits = config.define('credit', {
       amount: {
         type: Sequelize.FLOAT
@@ -101,7 +101,7 @@ export function creditModel(config){
 	  return credits;
 }
 
-export function bankModel(config){
+exports.bankModel = function(config){
 	const banks = config.define('bank', {
 	    name: {
         type: Sequelize.STRING,
@@ -137,7 +137,7 @@ export function bankModel(config){
 	return banks;
 }
 
-export function idModel(config){
+exports.idModel = function(config){
 	const ids = config.define('id_type', {
 	    name: {
         type: Sequelize.STRING,
@@ -154,7 +154,7 @@ export function idModel(config){
 	return ids;
 }
 
-export function imageMapModel(config){
+exports.imageMapModel = function(config){
 	const mapper = config.define('id_map', {
 	    user_id: {
         type: Sequelize.INTEGER,
@@ -171,7 +171,7 @@ export function imageMapModel(config){
 	return mapper;
 }
 
-export function bankStatementModel(config){
+exports.bankStatementModel = function(config){
   const bankStatements = config.define('bank_statement', {
       ledger_account : {
         type : Sequelize.STRING
@@ -221,7 +221,7 @@ export function bankStatementModel(config){
 	return bankStatements;
 }
 
-export function ICBankModel(config){
+exports.ICBankModel = function(config){
 	const icbanks = config.define('ic_bank', {
 	    name: {
         type: Sequelize.STRING,
@@ -242,7 +242,7 @@ export function ICBankModel(config){
 	return icbanks;
 }
 
-export function branchModel(config){
+exports.branchModel = function(config){
 	const bankBranch = config.define('bank_branch', {
 	    name: {
         type: Sequelize.STRING,
@@ -275,7 +275,7 @@ export function branchModel(config){
 	return bankBranch;
 }
 
-export function accountModel(config){
+exports.accountModel = function(config){
 	const account = config.define('account', {
       name : {
         type : Sequelize.STRING
@@ -298,7 +298,7 @@ export function accountModel(config){
 	return account;
 }
 
-export function requestModel(config){
+exports.requestModel = function(config){
 	const request = config.define('approve_request', {
       uuid : {
         type : Sequelize.UUID,
@@ -328,7 +328,7 @@ export function requestModel(config){
 	return request;
 }
 
-export function forgotModel(config){
+exports.forgotModel = function(config){
 	const forgot = config.define('forgot_password', {
       uuid : {
         type : Sequelize.UUID,
@@ -346,7 +346,7 @@ export function forgotModel(config){
 	return forgot;
 }
 
-export function payoutRequestModel(config){
+exports.payoutRequestModel = function(config){
 	const payout_request = config.define('payout_request', {
 	    user_id: {
         type: Sequelize.INTEGER
@@ -369,7 +369,7 @@ export function payoutRequestModel(config){
 	return payout_request;
 }
 
-export function trackModel(config){
+exports.trackModel = function(config){
 	const track = config.define('tracker', {
     count: {
       type: Sequelize.INTEGER
@@ -383,7 +383,7 @@ export function trackModel(config){
 	return track;
 }
 
-export function navStoreModel(config){
+exports.navStoreModel = function(config){
 	const nav = config.define('nav_store', {
     nav: {
       type: Sequelize.FLOAT
@@ -409,7 +409,7 @@ export function navStoreModel(config){
 	return nav;
 }
 
-export function fundAllocationStoreModel(config){
+exports.fundAllocationStoreModel = function(config){
 	const fund_allocation = config.define('fund_allocation_store', {
     date : {
       type : Sequelize.DATE
@@ -423,7 +423,7 @@ export function fundAllocationStoreModel(config){
 	return fund_allocation;
 }
 
-export function fundAllocationCollectionModel(config){
+exports.fundAllocationCollectionModel = function(config){
 	const fund_allocation_collection = config.define('fund_allocation_collection', {
     fund_allocation_store_id : {
       type : Sequelize.INTEGER
@@ -452,7 +452,7 @@ export function fundAllocationCollectionModel(config){
 	return fund_allocation_collection;
 }
 
-export function approveModel(config){
+exports.approveModel = function(config){
 	const approvers = config.define('approver', {
       user_id : {
         type : Sequelize.INTEGER
@@ -498,7 +498,7 @@ export function approveModel(config){
 	return approvers;
 }
 
-export function portfolioModel(config){
+exports.portfolioModel = function(config){
 	const portfolio = config.define('portfolio', {
     name: {
       type: Sequelize.STRING
@@ -521,7 +521,7 @@ export function portfolioModel(config){
 	return portfolio;
 }
 
-export function riskModel(config){
+exports.riskModel = function(config){
 	const risk = config.define('risk', {
     risk: {
       type: Sequelize.INTEGER,
@@ -539,7 +539,7 @@ export function riskModel(config){
 	return risk;
 }
 
-export function fundModel(config){
+exports.fundModel = function(config){
 	const fund = config.define('fund', {
     name: {
       type: Sequelize.STRING
@@ -553,7 +553,7 @@ export function fundModel(config){
 	return fund;
 }
 
-export function bankTransactionAMSLog(config){
+exports.bankTransactionAMSLog = function(config){
 	const bt_log = config.define('bank_transaction_ams_log', {
     status: {
       type: Sequelize.STRING(1),
@@ -564,7 +564,7 @@ export function bankTransactionAMSLog(config){
 	return bt_log;
 }
 
-export function usersModel(config){
+exports.usersModel = function(config){
 	const users = config.define('user', {
       firstname: {
         type: Sequelize.STRING,

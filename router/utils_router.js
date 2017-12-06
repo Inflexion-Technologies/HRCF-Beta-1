@@ -341,7 +341,7 @@ routes(){
                     
                     navs.map((nav)=>{
                         const unit = nav.per_change;
-                        const date = dateFormat(new Date(nav.created_at), 'dd mmm');
+                        const date = dateFormat(new Date(nav.date), 'dd mmm');
 
                         onlyDates.push(date);
                         nav_data.push({date, unit});
