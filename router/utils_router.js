@@ -304,12 +304,13 @@ routes(){
 
     utilsRouter.route('/fund_allocation/pie')
         .get((req, res)=>{  
-            app.FundAllocationStoreModel.max('id', {where : {status : 'A'}})
-            .then((store)=>{
+            app.FundAllocationStoreModel.findAll({where : {status : 'A'}, limit : 1, order : [['date', 'DESC']]})
+            .then((stores)=>{
 
                 //console.log('S T O R E => '+store);
-                if(store){
-                    app.FundAllocationCollectionModel.findAll({where : {fund_allocation_store_id : store}})
+                if(stores){
+                    const id = stores[0].id;
+                    app.FundAllocationCollectionModel.findAll({where : {fund_allocation_store_id : id}})
                     .then((collections)=>{
 
                         let pie_data = [];
@@ -327,7 +328,7 @@ routes(){
 
     utilsRouter.route('/nav_performance')
         .get((req, res)=>{  
-            app.NAVStoreModel.findAll({where :{status : 'A'}})
+            app.NAVStoreModel.findAll({where :{status : 'A'}, order:[['date', 'DESC']], limit : 7})
             .then((navs)=>{
                 if(navs){
                     const dateFormat = require('dateformat');   
@@ -348,7 +349,7 @@ routes(){
                     });
 
 
-                    let uniqDates = _.uniq(onlyDates);
+                    let uniqDates = _.reverse(_.uniq(onlyDates));
 
                     uniqDates.map((u_date)=>{
                         const nd = _.find(nav_data, {date : u_date});

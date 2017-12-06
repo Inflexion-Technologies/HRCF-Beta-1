@@ -11,12 +11,28 @@ if(process.argv !== undefined && process.argv.length === 3){
             let dates = getWholeMonth();
             getNAV(dates);
             getFundAllocation(dates);
+            
+            setTimeout(function(){
+                updatePriceChange();                
+            }, 20*1000)
 
             break;
         }
 
         case 'last-week' : {
             let dates = getLastWeek();
+
+            getNAV(dates);
+            getFundAllocation(dates);
+
+            setTimeout(function(){
+                updatePriceChange();                
+            }, 20*1000)
+            break;
+        }
+
+        case 'last-year' : {
+            let dates = getAYearAgo();
 
             getNAV(dates);
             getFundAllocation(dates);
@@ -68,7 +84,21 @@ function getWholeMonth(){
 function getLastWeek(){   
     var calendar = [];
 
-    for(var i=0; i<=7; i++){
+    for(var i=1; i<=8; i++){
+        let date = new Date().setDate(new Date().getDate()-i);
+        let formatted_date = dateFormat(date, 'yyyy-mm-dd');
+
+        calendar.push(formatted_date);
+    }
+
+    console.log('Last Week Calendar => '+calendar);    
+    return calendar;
+}
+
+function getAYearAgo(){
+    var calendar = [];
+
+    for(var i=1; i<=365; i++){
         let date = new Date().setDate(new Date().getDate()-i);
         let formatted_date = dateFormat(date, 'yyyy-mm-dd');
 
@@ -142,29 +172,46 @@ function updatePriceChange(){
         .then(function(navs){
             const len = navs.length;
             var chgList = [];
-            for(var i=0; i<=len; i++){
+            for(var i=1; i<len; i++){
 
                 var iDay = dateFormat(new Date().setDate(new Date().getDate() - i), 'dd-mm-yyyy');
-                var current_nav = navs.find(function(nav){
+                var current_nav = {};
+
+                navs.map(function(nav){
+                    
                     let tmpDate = dateFormat(new Date(nav.date), 'dd-mm-yyyy');
-                    return iDay === tmpDate;
+                    
+                    if(iDay === tmpDate){
+                        current_nav = nav;
+                    }
                 });
 
                 console.log('Current Nav '+JSON.stringify(current_nav))
 
 
                 var i2Day = dateFormat(new Date().setDate(new Date().getDate() - (i+1)), 'dd-mm-yyyy');
-                var last_nav = navs.find(function(nav){
+                var last_nav = {};
+
+                navs.find(function(nav){
+                    
                     let tmpDate = dateFormat(new Date(nav.date), 'dd-mm-yyyy');
-                    return i2Day === tmpDate;
+                    if(i2Day === tmpDate){
+                        last_nav = nav;
+                    }
                 });
+
+                console.log('Last Nav '+JSON.stringify(last_nav))
+                
 
                 if(current_nav === undefined || last_nav === undefined){
                     continue;
                 }
 
-                console.log('Last Nav '+JSON.stringify(last_nav))
-                var chg = ((current_nav.nav/last_nav.nav) - 1)*100;    
+                var chg = ((current_nav.nav/last_nav.nav) - 1)*100;   
+                
+                if(isNaN(chg) || chg === NaN || chg === null){
+                    continue;
+                }
                 
                 chgList.push({id: current_nav.id, change : chg});
                 console.log('Change '+chg);

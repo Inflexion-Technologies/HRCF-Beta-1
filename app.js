@@ -307,10 +307,11 @@ export default class App {
         const navStoreModel = models.navStoreModel(dbConfig);
 
         //Grab previous data
-        navStoreModel.max('id', {where : {status : 'A'}})
-        .then((max_id)=>{
-            if(max_id){
-                navStoreModel.findOne({where : {id : max_id}})
+        navStoreModel.findAll({where : {status : 'A'}, limit : 1, order : [['date', 'DESC']]})
+        .then((navs)=>{
+            if(navs){
+                const id = navs[0].id;
+                navStoreModel.findOne({where : {id : id}})
                 .then((lastnav)=>{
                     if(lastnav){
                         const chg = parseFloat(payload.nav) / lastnav.nav;

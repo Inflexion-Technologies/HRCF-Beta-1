@@ -12,7 +12,6 @@ import '../../styles/custom.css';
 class Dashboard extends Component {
 
     constructor(){
-
         super();
         this.state = {
             count : 0
@@ -37,11 +36,11 @@ class Dashboard extends Component {
      MainStore.on('fund_allocation_pie_success', this.refresh);
   }
 
-  renderLine(series, categories){
+  renderInterest(series, categories){
     const line_config={
         
         title: {
-            text: 'Total Interest Performance'
+            text: 'Total Earnings Performance'
         },
         subtitle: {
             text: 'Interest Earned Daily'
@@ -70,35 +69,45 @@ class Dashboard extends Component {
     return <ReactHighcharts config={line_config}></ReactHighcharts>    
   }
 
-  renderBar(series, categories){
+  renderNAV(series, categories){
     const line_config={
-        chart: {
-            type: 'line'
-        },
+        // chart: {
+        //     type: 'line'
+        // },
         title: {
             text: 'Net Asset Value Performance'
         },
         subtitle: {
-            text: '2017 Performance'
+            text: 'Past 7 days Performance'
         },
         xAxis: {
             categories: categories
         },
         yAxis: {
             title: {
-                text: 'Percent'
+                text: 'Percent Change'
             }
         },
+        legend : {
+            layout : 'vertical',
+            align : 'right',
+            verticalAlign : 'middle'
+        },
         plotOptions: {
-            line: {
-                dataLabels: {
-                    enabled: true
-                },
-                enableMouseTracking: false
+            // line: {
+            //     dataLabels: {
+            //         enabled: true
+            //     },
+            //     enableMouseTracking: false
+            // },
+            series : {
+                label : {
+                    connectorAllowed : false
+                }
             }
         },
         series: [{
-            name: '2017',
+            name: 'NAV Performance',
             data: series
         }]
     }
@@ -106,7 +115,7 @@ class Dashboard extends Component {
     return <ReactHighcharts config={line_config}></ReactHighcharts>    
   }
 
-  renderPie(data){
+  renderFundsAllocation(data){
     const pie_config={
         chart: {
             plotBackgroundColor: null,
@@ -163,7 +172,7 @@ class Dashboard extends Component {
 
                     <div className="hidden-xs hidden-sm col-md-4 kill-padding">
                         <div className="dash-widget-balance">
-                            <div className="label">Total Interest</div>
+                            <div className="label">Total Earnings</div>
                             <div className="amount">GHS {MainStore.getInterest()}</div>
                         </div>
                     </div>
@@ -202,24 +211,24 @@ class Dashboard extends Component {
                 {/* Content */}
                 <div className="row">
                     <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-                        {this.renderLine(MainStore.getInterestSeries(), MainStore.getInterestCategory())}
+                        {this.renderInterest(MainStore.getInterestSeries(), MainStore.getInterestCategory())}
                     </div>
                 </div>
                 <div className="row breaker"></div>
                 <div className="row">
                     <div className="hidden-xs hidden-sm col-lg-6 col-md-6 kill-padding-except-left">
-                        {this.renderBar(MainStore.getNavSeries(), MainStore.getNavCategories())}
+                        {this.renderNAV(MainStore.getNavSeries(), MainStore.getNavCategories())}
                     </div>
                     <div className="hidden-xs hidden-sm col-lg-6 col-md-6 kill-padding-except-right">
-                        {this.renderPie(MainStore.getPieData())}
+                        {this.renderFundsAllocation(MainStore.getPieData())}
                     </div>
 
 
                     <div className="hidden-lg hidden-md col-xs-12 col-sm-12">
-                        {this.renderBar(MainStore.getNavSeries(), MainStore.getNavCategories())}
+                        {this.renderNAV(MainStore.getNavSeries(), MainStore.getNavCategories())}
                     </div>
                     <div className="hidden-lg hidden-md col-xs-12 col-sm-12">
-                        {this.renderPie(MainStore.getPieData())}
+                        {this.renderFundsAllocation(MainStore.getPieData())}
                     </div>
                 </div>
         </div>

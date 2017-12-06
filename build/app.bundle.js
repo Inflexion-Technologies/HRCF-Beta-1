@@ -95,7 +95,7 @@ var config = {
     email_secure: false,
     email_username: 'noreply@icassetmanagers.com',
     email_password: 'dqKZ%388',
-    prepare: true
+    prepare: false
 };
 
 var sequelize = new Sequelize(process.env.DB_NAME || 'HRCF', process.env.DB_USER || 'hrcf', process.env.DB_PASSWORD || 'pa55w0rd', {
@@ -1768,6 +1768,7 @@ var App = function () {
             var usersModel = models.usersModel(dbConfig);
             var creditModel = models.creditModel(dbConfig);
             var transaction = models.transactionModel(dbConfig);
+            var dateFormat = __webpack_require__(4);
 
             usersModel.sum('actual_balance', { where: { status: 'A' } }).then(function (totalActualBalance) {
                 if (parseFloat(totalActualBalance) > 0) {
@@ -1787,7 +1788,8 @@ var App = function () {
                                     transaction.create({ type: 'I',
                                         amount: interest,
                                         user_id: user.id,
-                                        narration: 'Interest' });
+                                        narration: 'Interest',
+                                        date: dateFormat(new Date(), 'yyyy-mm-dd') });
                                 }
                             });
                         });
@@ -3997,11 +3999,12 @@ var UtilsRoutes = function () {
             });
 
             utilsRouter.route('/fund_allocation/pie').get(function (req, res) {
-                app.FundAllocationStoreModel.max('id', { where: { status: 'A' } }).then(function (store) {
+                app.FundAllocationStoreModel.findAll({ where: { status: 'A' }, limit: 1, order: [['date', 'DESC']] }).then(function (stores) {
 
                     //console.log('S T O R E => '+store);
-                    if (store) {
-                        app.FundAllocationCollectionModel.findAll({ where: { fund_allocation_store_id: store } }).then(function (collections) {
+                    if (stores) {
+                        var id = stores[0].id;
+                        app.FundAllocationCollectionModel.findAll({ where: { fund_allocation_store_id: id } }).then(function (collections) {
 
                             var pie_data = [];
                             collections.map(function (collection) {
@@ -4017,7 +4020,7 @@ var UtilsRoutes = function () {
             });
 
             utilsRouter.route('/nav_performance').get(function (req, res) {
-                app.NAVStoreModel.findAll({ where: { status: 'A' } }).then(function (navs) {
+                app.NAVStoreModel.findAll({ where: { status: 'A' }, order: [['date', 'DESC']], limit: 7 }).then(function (navs) {
                     if (navs) {
                         var dateFormat = __webpack_require__(4);
                         var _ = __webpack_require__(5);
@@ -4036,7 +4039,7 @@ var UtilsRoutes = function () {
                             nav_data.push({ date: date, unit: unit });
                         });
 
-                        var uniqDates = _.uniq(onlyDates);
+                        var uniqDates = _.reverse(_.uniq(onlyDates));
 
                         uniqDates.map(function (u_date) {
                             var nd = _.find(nav_data, { date: u_date });
