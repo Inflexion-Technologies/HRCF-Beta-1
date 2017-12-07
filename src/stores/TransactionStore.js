@@ -69,8 +69,12 @@ class TransactionStore extends EventEmitter{
         if(data.success){
             this.emit('transaction_user_confirm_request');            
         }else{
-            this.emit('transaction_user_failed_request');
+            this.emit('transaction_user_failed_request');            
         }
+    }
+
+    doTransactionUserRequestInsufficientFunds(){
+        this.emit('transaction_user_not_enough_funds');        
     }
 
     setAccount(id){
@@ -166,7 +170,10 @@ class TransactionStore extends EventEmitter{
                 this.doTransactionUserRequest(action.data);
                 break;
             }
-            
+            case 'TRANSACTION_USER_REQUEST_INSUFFIENCIENT_FUNDS' : {
+                this.doTransactionUserRequestInsufficientFunds();
+                break;
+            }
            
             
             default:{}

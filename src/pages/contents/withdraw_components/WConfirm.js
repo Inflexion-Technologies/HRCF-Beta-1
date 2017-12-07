@@ -27,19 +27,25 @@ class WConfirm extends Component {
 
     // this.userConfirmed = this.userConfirmed.bind(this);
     this.proceed = this.proceed.bind(this);
-    
+    this.notEnoughFunds = this.notEnoughFunds.bind(this);
     this.rejectTransaction = this.rejectTransaction.bind(this);
 
     this.isAllValid = true;
     this.pswdCorrect = false;
+    this.isFundsBalanced = true;
   }
 
   componentWillMount(){
+    this.pswdCorrect = false;
+    this.isFundsBalanced = true;
+
     WithdrawStore.setAmount('0.00');
+    
     // TransactionStore.on('transaction_user_confirm_valid', this.userConfirmed);
     TransactionStore.on('transaction_user_confirm_invalid', this.rejectTransaction);
     TransactionStore.on('transaction_user_confirm_request', this.proceed);    
     TransactionStore.on('transaction_user_failed_request', this.rejectTransaction);    
+    TransactionStore.on('transaction_user_not_enough_funds', this.notEnoughFunds);
     
 }
 
@@ -47,7 +53,8 @@ class WConfirm extends Component {
     // TransactionStore.removeListener('transaction_user_confirm_valid', this.userConfirmed);
     TransactionStore.removeListener('transaction_user_confirm_invalid', this.rejectTransaction);
     TransactionStore.removeListener('transaction_user_confirm_request', this.proceed);        
-    TransactionStore.removeListener('transaction_user_failed_request', this.rejectTransaction);    
+    TransactionStore.removeListener('transaction_user_failed_request', this.rejectTransaction);   
+    TransactionStore.on('transaction_user_not_enough_funds', this.notEnoughFunds);    
 }
 
   onPasswordChanged(e){
@@ -64,8 +71,16 @@ class WConfirm extends Component {
   rejectTransaction(){
       this.pError = true;
       this.passwordError = 'Wrong Password';
+      this.isFundsBalanced = true;
 
       this.refresh();
+  }
+
+  notEnoughFunds(){
+    this.isFundsBalanced = false;
+    this.pError = false;
+
+    this.refresh();
   }
 
   validate(){
@@ -126,6 +141,11 @@ class WConfirm extends Component {
 
                 <div className="col-md-6 wpanel">
                     <div className="content-height">
+
+                        <div className={this.isFundsBalanced ? 'hide' : 'form-group'}>
+                            <div className="confirm-label" style={{fontSize: '15px', padding: '5px', letterSpacing: '2px', background: '#000000', textAlign: 'center'}}>Insufficient Funds</div>
+                        </div>
+
                         <div className="form-group">
                             <div className="input-style">Account Name</div>
                             <div className="confirm-label">{TransactionStore.getAccountName()}</div>
@@ -143,7 +163,7 @@ class WConfirm extends Component {
 
                         <div className="form-group">
                             <div className="input-style">Amount</div>
-                            <div className="confirm-label">{TransactionStore.getAmount()}.00</div>
+                            <div className="confirm-label">{TransactionStore.getAmount()}</div>
                         </div>
 
                         <div className="form-group">

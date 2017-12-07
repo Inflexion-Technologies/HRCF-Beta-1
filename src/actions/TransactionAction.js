@@ -59,6 +59,11 @@ export function placeRequest(detail){
                 data: res.data
             });
         }
+    }).catch(()=>{
+        dispatcher.dispatch({
+            type : "TRANSACTION_USER_REQUEST_INSUFFIENCIENT_FUNDS",
+            data: null
+        });
     });
 }
 

@@ -1804,9 +1804,10 @@ var App = function () {
             var navStoreModel = models.navStoreModel(dbConfig);
 
             //Grab previous data
-            navStoreModel.max('id', { where: { status: 'A' } }).then(function (max_id) {
-                if (max_id) {
-                    navStoreModel.findOne({ where: { id: max_id } }).then(function (lastnav) {
+            navStoreModel.findAll({ where: { status: 'A' }, limit: 1, order: [['date', 'DESC']] }).then(function (navs) {
+                if (navs) {
+                    var id = navs[0].id;
+                    navStoreModel.findOne({ where: { id: id } }).then(function (lastnav) {
                         if (lastnav) {
                             var chg = parseFloat(payload.nav) / lastnav.nav;
                             var percent_chg = (chg - 1) * 100;
@@ -1814,7 +1815,8 @@ var App = function () {
                             navStoreModel.create({ nav: payload.nav,
                                 nav_per_unit: payload.navPerUnit,
                                 gain_loss: payload.gainLoss,
-                                per_change: percent_chg });
+                                per_change: percent_chg,
+                                date: new Date() });
                         }
                     });
                 }
@@ -2004,10 +2006,6 @@ var App = function () {
         key: 'runCron',
         value: function runCron() {
             var _this2 = this;
-
-            //First Init
-            this.getNAV();
-            this.getFundAllocation();
 
             setInterval(function () {
                 var dateFormat = __webpack_require__(4);
@@ -2883,10 +2881,14 @@ var TransactionsRoutes = function () {
                     //Verify User
                     app.UserModel.findOne({ where: { id: user_id, password: utils.getHash(password) } }).then(function (user) {
                         if (user) {
-                            user.decrement({ 'available_balance': amount }).then(function (user) {
-                                console.log('Available balance Debited!');
-                                app.placeRequest(res, user_id, amount, account_id, transaction_code);
-                            });
+                            if (user.available_balance > amount) {
+                                user.decrement({ 'available_balance': amount }).then(function (user) {
+                                    console.log('Available balance Debited!');
+                                    app.placeRequest(res, user_id, amount, account_id, transaction_code);
+                                });
+                            } else {
+                                res.status(400).json({ success: false, code: 0 });
+                            }
                         } else {
                             res.status(400).json({ success: false });
                         }
