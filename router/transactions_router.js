@@ -206,10 +206,14 @@ export default class TransactionsRoutes{
                     //Verify User
                     app.UserModel.findOne({where : {id : user_id, password : utils.getHash(password)}}).then(user => {
                         if(user){
-                            user.decrement({'available_balance' : amount}).then((user)=>{
-                                console.log('Available balance Debited!');
-                                app.placeRequest(res, user_id, amount, account_id, transaction_code);
-                            }); 
+                            if(amount > user.available_balance){
+                                user.decrement({'available_balance' : amount}).then((user)=>{
+                                    console.log('Available balance Debited!');
+                                    app.placeRequest(res, user_id, amount, account_id, transaction_code);
+                                }); 
+                            }else{
+                                res.status(400).json({success : false});
+                            }
                         }else{
                             res.status(400).json({success : false});
                         }

@@ -320,7 +320,8 @@ export default class App {
                         navStoreModel.create({nav : payload.nav,
                             nav_per_unit : payload.navPerUnit, 
                             gain_loss : payload.gainLoss,
-                            per_change : percent_chg});
+                            per_change : percent_chg,
+                            date : new Date()});
                     }
                 })
             }
@@ -508,10 +509,6 @@ export default class App {
     // }
 
     runCron(){
-        //First Init
-        this.getNAV();
-        this.getFundAllocation();
-
         setInterval(()=>{
             var dateFormat = require('dateformat');
             const hour = dateFormat(new Date(), 'H');
