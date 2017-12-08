@@ -2890,7 +2890,7 @@ var TransactionsRoutes = function () {
                                 res.status(400).json({ success: false, code: 0 });
                             }
                         } else {
-                            res.status(400).json({ success: false });
+                            res.status(200).json({ success: false });
                         }
                     });
                 } else {

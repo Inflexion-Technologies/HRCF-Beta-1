@@ -480,6 +480,7 @@
     float: right;
     font-size: 14px;
     padding: 10px;
+    cursor: pointer;
 }
 
 .sidebar{

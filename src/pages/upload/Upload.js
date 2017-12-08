@@ -29,12 +29,23 @@ class Upload extends Component {
             bank : 0,
             uploadFile : 'Browse Files',
             desc : '',
-            count : 0
+            count : 0,
+            uploadMsg : '',
+            showSuccess : false,
+            showLoading : false,
+            showError : false,
+            showFailed : false,
+            showUpload : false
         }
 
         this.refresh = this.refresh.bind(this);
         this.onDescriptionChange = this.onDescriptionChange.bind(this);
         this.onBankChanged= this.onBankChanged.bind(this);
+
+        this.loadingSuccessMsg = this.loadingSuccessMsg.bind(this);
+        this.loadingLoadingMsg = this.loadingLoadingMsg.bind(this);
+        this.loadingErrorMsg = this.loadingErrorMsg.bind(this);
+        this.loadingFailedMsg = this.loadingFailedMsg.bind(this);
     }
 
     componentWillMount(){
@@ -51,6 +62,18 @@ class Upload extends Component {
         this.setState({
             bank : evt.target.value
         })
+
+        if(evt.target.value > 0){
+            this.setState({
+                uploadMsg : '',
+                showUpload : true
+            })
+        }else{
+            this.setState({
+                uploadMsg : '',
+                showUpload : false
+            })
+        }
     }
 
     refresh(){
@@ -77,7 +100,48 @@ class Upload extends Component {
         }
     }
 
+    loadingSuccessMsg(){
+        this.setState({
+            uploadMsg : 'Upload Complete',
+            showSuccess : true,
+            showLoading : false,
+            showError : false,
+            showFailed : false
+        })
+    }
+
+    loadingLoadingMsg(progress){
+        this.setState({
+            uploadMsg : 'Uploading ... '+(progress.loaded/progress.total)+'%',
+            showSuccess : false,
+            showLoading : true,
+            showError : false,
+            showFailed : false
+        })
+    }
+
+    loadingErrorMsg(){
+        this.setState({
+            uploadMsg : 'Upload Error',
+            showSuccess : false,
+            showLoading : false,
+            showError : true,
+            showFailed : false
+        })
+    }
+
+    loadingFailedMsg(){
+        this.setState({
+            uploadMsg : 'Upload Failed',
+            showSuccess : false,
+            showLoading : false,
+            showError : false,
+            showFailed : true
+        })
+    }
+
     render() {
+        const app = this;
         const options={
             //baseUrl:'/api/v1/uploads',
             baseUrl:'/api/utils/statement/upload',            
@@ -91,6 +155,24 @@ class Upload extends Component {
             fileFieldName : 'file',
             chooseFile : (files)=>{
                 this.setState({uploadFile : files[0].name});
+            },
+            uploading : (progress)=>{
+                console.log('loading...',progress.loaded/progress.total+'%')
+
+                app.loadingLoadingMsg(progress);
+            },
+            uploadSuccess : (resp)=>{
+                console.log('upload success..!')
+
+                app.loadingSuccessMsg();
+            },
+            uploadError : (err)=>{
+                 
+                app.loadingErrorMsg();       
+            },
+            uploadFail : (resp)=>{
+                
+                app.loadingFailedMsg();
             }
         }
         return (
@@ -115,6 +197,22 @@ class Upload extends Component {
 
                             <div className="sign-in-form">
 
+                                <div className={this.state.showSuccess ? 'form-group' : 'hide'}>
+                                    <div style={{textTransform: 'uppercase', fontSize: '12px', letterSpacing: '2px', fontWeight: '600', color: '#2e7d32'}}>{this.state.uploadMsg}</div>                      
+                                </div>
+
+                                <div className={this.state.showLoading ? 'form-group' : 'hide'}>
+                                    <div style={{textTransform: 'uppercase', fontSize: '12px', letterSpacing: '2px', fontWeight: '600', color: '#ff8f00'}}>{this.state.uploadMsg}</div>                      
+                                </div>
+
+                                <div className={this.state.showError ? 'form-group' : 'hide'}>
+                                    <div style={{textTransform: 'uppercase', fontSize: '12px', letterSpacing: '2px', fontWeight: '600', color: '#c62828'}}>{this.state.uploadMsg}</div>                      
+                                </div>
+
+                                <div className={this.state.showFailed ? 'form-group' : 'hide'}>
+                                    <div style={{textTransform: 'uppercase', fontSize: '12px', letterSpacing: '2px', fontWeight: '600', color: '#c62828'}}>{this.state.uploadMsg}</div>                      
+                                </div>
+
                                 <div className="form-group">
                                     <select className="form-control" value={this.state.bank} onChange={this.onBankChanged}>
                                         {this.getSelectOptions(UploadStore.getBanks())}
@@ -126,7 +224,7 @@ class Upload extends Component {
                                     <span className={this.state.uError ? 'error' : 'vamus'}>{this.descriptionErrorMessage}</span>
                                 </div> */}
 
-                                <FileUpload className="show" options={options}>
+                                <FileUpload className={this.state.showUpload ? 'show' : 'hide'} options={options}>
                                     <div ref="chooseBtn" className="form-group show">
                                         <button className="btn btn-info btn-block" >{this.state.uploadFile}</button>
                                     </div>
