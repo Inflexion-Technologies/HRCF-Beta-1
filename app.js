@@ -32,7 +32,7 @@ import path from 'path';
 import json2xls from 'json2xls';
 import { setTimeout } from 'timers';
 import { port } from '_debugger';
-import { approveModel } from './models/models';
+import { approveModel, bankTransactionAMSLog } from './models/models';
 
 export default class App {
 
@@ -153,8 +153,10 @@ export default class App {
         const fundAllocationStoreModel = models.fundAllocationStoreModel(dbConfig);
         const fundAllocationCollectionModel = models.fundAllocationCollectionModel(dbConfig);
         const portfolioModel = models.portfolioModel(dbConfig);
+        const bankTransactionLog = models.bankTransactionAMSLog(dbConfig);
 
         //Setting relationships
+        bankTransactionLog.belongsTo(icBankModel);
         portfolioModel.belongsTo(usersModel);
         forgotModel.belongsTo(usersModel);
         payoutModel.belongsTo(usersModel);

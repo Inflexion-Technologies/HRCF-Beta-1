@@ -169,7 +169,7 @@ class WConfirm extends Component {
                         <div className="form-group">
                             <div className="confirm-label petit-margin"> </div>
                             <input type="password" className="form-control password-style" placeholder="Enter Password To Confirm" value={this.state.password} onChange={this.onPasswordChanged.bind(this)} />
-                            <span className={this.pError ? 'error' : 'vamus'}>{this.passwordError}</span>
+                            <span className={this.pError ? 'error' : 'vamus'} style={{color:'#555555'}}>{this.passwordError}</span>
                         </div>
                     </div>
                    

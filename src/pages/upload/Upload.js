@@ -112,7 +112,7 @@ class Upload extends Component {
 
     loadingLoadingMsg(progress){
         this.setState({
-            uploadMsg : 'Uploading ... '+(progress.loaded/progress.total)+'%',
+            uploadMsg : 'Uploading ... '+((progress.loaded/progress.total)*100)+'%',
             showSuccess : false,
             showLoading : true,
             showError : false,

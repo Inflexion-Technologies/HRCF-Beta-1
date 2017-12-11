@@ -71,9 +71,9 @@ class Dashboard extends Component {
 
   renderNAV(series, categories){
     const line_config={
-        // chart: {
-        //     type: 'line'
-        // },
+        chart: {
+            zoomType: 'x'
+        },
         title: {
             text: 'Net Asset Value Performance'
         },
@@ -94,19 +94,33 @@ class Dashboard extends Component {
             verticalAlign : 'middle'
         },
         plotOptions: {
-            // line: {
-            //     dataLabels: {
-            //         enabled: true
-            //     },
-            //     enableMouseTracking: false
-            // },
-            series : {
-                label : {
-                    connectorAllowed : false
-                }
+            area: {
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        // [0, ReactHighcharts.getOptions().colors[0]],
+                        // [1, ReactHighcharts.Color(ReactHighcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
+                marker: {
+                    radius: 2
+                },
+                lineWidth: 1,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                },
+                threshold: null
             }
         },
         series: [{
+            type: 'area',
             name: 'NAV Performance',
             data: series
         }]

@@ -281,7 +281,11 @@ var sendEmail = function(sender, title, message){
 }
 
 exports.sendDebitMail = function(email, name, amount, date, bank, account_name, account_number){
-    const msg = debitEmailTemplate(name, amount, date, bank, account_name, account_number);
+
+    var format = require('format-number');
+    var formatStyle = format({integerSeparator:',', round : 2});
+
+    const msg = debitEmailTemplate(name, formatStyle(amount), date, bank, account_name, account_number);
     sendEmail(email, 'Debit', msg);
 }
 
@@ -327,7 +331,11 @@ exports.getUniqCollection = function(data, field){
 }
 
 var sendCreditMail2 = function(email, name, amount, date){
-    const msg = creditEmailTemplate(name, amount, date);
+    var format = require('format-number');
+    var formatStyle = format({integerSeparator:',', round : 2});
+
+
+    const msg = creditEmailTemplate(name, formatStyle(amount), date);
     sendEmail(email, 'Credit', msg);
 }
 
@@ -429,7 +437,8 @@ var compute2 = function(req, res, data, ic_bank_id){
                                     sponsorCode : transact.sponsor_code,
                                     counterpartyCode : transact.counter_party_code,
                                     bankAccountNo : transact.account_number,
-                                    description : transact.description});
+                                    description : transact.description,
+                                    date : transact.date});
                 });
 
 
@@ -440,8 +449,10 @@ var compute2 = function(req, res, data, ic_bank_id){
                 request({
                     uri: url,
                     method: 'POST',
-                    json: true,
-                    body : ams_data,
+                    headers : {
+                        'Content-Type' : 'application/json'
+                    },
+                    body : JSON.stringify(ams_data),
                 }, function(error, res, body){
                     if(error) {
                         console.log('There was an error');
@@ -450,12 +461,13 @@ var compute2 = function(req, res, data, ic_bank_id){
 
                     if(body.statusCode === 'successful'){
                         console.log('Bank statment pushed successfully');
-                        bankStatementLog.create({status: 'A'});
+                        bankStatementLog.create({ic_bank_id : ic_bank_id, status : 'A'});
                     }else{
                         console.log('Bank statement pushed unsuccessfully');
-                        bankStatementLog.create({status : 'F'});
+                        bankStatementLog.create({ic_bank_id : ic_bank_id, status : 'F'});
                     }
 
+                    console.log('Res => '+JSON.stringify(ams_data));                    
                     console.log('Res => '+body);
                 });	
         }else{
@@ -1516,7 +1528,7 @@ var creditEmailTemplate = function(name, amount, date){
                              
                              <div class="editable-text" style="line-height: 170%; text-align: justify; font-size: 18px; ">
                                  <span class="text_container" style="font-size: 13px;letter-spacing: 1px;word-spacing: 2px;">
-                                     You have successfully withdrawn <b>`+amount+` GHS</b> from your IC Asset Managers Investment account.<br />
+                                     You have successfully withdrawn <b>GHS `+amount+` </b> from your IC Asset Managers Investment account.<br />
                                       Details of the transaction are: <br/>
                                      Transaction Date: 	<b>`+date+`</b>	 <br/>
                                      Transaction Amount: <b>`+amount+` GHS</b><br/>
