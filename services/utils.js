@@ -203,7 +203,7 @@ exports.saveFile = function(req, res){
                 console.log(req.file);
                 console.log(req.body);
 
-                const ic_bank_id = req.body.bank_id;
+                //const ic_bank_id = req.body.bank_id;
 
                 usersModel.findOne({where : {id : req.body.user_id, is_admin : 'Y', status : 'A'}})
                 .then(function(user){
@@ -394,8 +394,8 @@ var compute2 = function(req, res, data, ic_bank_id){
                             if(user){
                                 icBanksModel.findOne({where : {account_number : data.account_number, status : 'A'}}).then((icBank)=>{
                                     if(icBank){
-                                        creditModel.create({amount : data.credit,type : 'C',narration : data.description,user_id : user.id,bank_id:icBank.id});
-                                        transactionModel.create({amount : data.credit,type : 'C',narration : data.description,user_id : user.id});
+                                        creditModel.create({amount : data.credit,type : 'C',narration : data.description,user_id : user.id,bank_id:icBank.id, date : new Date()});
+                                        transactionModel.create({amount : data.credit,type : 'C',narration : data.description,user_id : user.id, date : new Date()});
                                     }
                                 });
                             }

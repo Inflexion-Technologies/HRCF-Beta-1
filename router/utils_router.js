@@ -584,7 +584,7 @@ routes(){
                         user.decrement({'actual_balance' : request.amount})
                         .then((user)=>{
                             app.WithdrawModel.create({amount : request.amount, user_id : user.id, account_id: request.account_id});
-                            app.TransactionModel.create({type : 'W', amount: request.amount, user_id:user.id,narration: 'Withdraw'});
+                            app.TransactionModel.create({type : 'W', amount: request.amount, user_id:user.id,narration: 'Withdraw', date : new Date()});
                         })                       
                     });
 
