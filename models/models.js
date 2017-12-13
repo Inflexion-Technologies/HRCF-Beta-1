@@ -179,9 +179,9 @@ export function bankStatementModel(config){
       date : {
         type : Sequelize.DATE
       },
-      ic_bank_id : {
-        type : Sequelize.INTEGER
-      },
+      // ic_bank_id : {
+      //   type : Sequelize.INTEGER
+      // },
       credit : {
         type : Sequelize.FLOAT
       },
@@ -555,9 +555,7 @@ export function fundModel(config){
 
 export function bankTransactionAMSLog(config){
 	const bt_log = config.define('bank_transaction_ams_log', {
-    ic_bank_id: {
-      type: Sequelize.INTEGER
-	  },
+   
     status: {
       type: Sequelize.STRING(1),
       defaultValue : 'F'

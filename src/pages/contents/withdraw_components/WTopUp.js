@@ -181,6 +181,10 @@ class WTopUp extends Component {
 
                       {/* <div className="banks">Ecobank</div> */}
                       <div className="banks">Guaranty Trust Bank (GTB)</div>
+                      <div className="clearfix"></div>
+                      <span className="bank-details-style"> Head Office,</span>
+                      <div className="clearfix"></div>
+                      <span className="bank-details-style"> 2011114750110</span>
                       {/* <div className="banks">Stanbic Bank</div>
                       <div className="banks">Cal Bank</div>
                       <div className="banks">Standard Chartered Bank</div>

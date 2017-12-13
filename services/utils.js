@@ -223,7 +223,7 @@ exports.saveFile = function(req, res){
 
                         console.log('sheet => '+JSON.stringify(data));
 
-                        compute2(req, res, data, ic_bank_id);
+                        compute2(req, res, data, 0);
 
                     }else{
                         res.status(400).json({success: false});
@@ -420,7 +420,7 @@ var compute2 = function(req, res, data, ic_bank_id){
                         security_issuer_code : data.security_issuer_code,
                         currency : data.currency,                        
                         account_number : data.account_number,
-                        ic_bank_id : ic_bank_id,
+                        // ic_bank_id : ic_bank_id,
                         counter_party_code : data.counter_party_code,
                         sponsor_code : data.sponsor_code
                     })
@@ -459,16 +459,19 @@ var compute2 = function(req, res, data, ic_bank_id){
                         return;
                     }
 
-                    if(body.statusCode === 'successful'){
+                    var bodyJSON = JSON.parse(body);
+
+                    
+                    if(bodyJSON.statusCode === 'successful'){
                         console.log('Bank statment pushed successfully');
-                        bankStatementLog.create({ic_bank_id : ic_bank_id, status : 'A'});
+                        bankStatementLog.create({status : 'A'});
                     }else{
                         console.log('Bank statement pushed unsuccessfully');
-                        bankStatementLog.create({ic_bank_id : ic_bank_id, status : 'F'});
+                        bankStatementLog.create({status : 'F'});
                     }
 
                     console.log('Res => '+JSON.stringify(ams_data));                    
-                    console.log('Res => '+body);
+                    console.log('Res => '+JSON.stringify(bodyJSON));
                 });	
         }else{
             console.log('Wrong fields ...');
@@ -484,8 +487,6 @@ var getNumber = function(value){
         valueTokens.map((token)=>{
             newValue = newValue + token;
         })
-
-        console.log('N E W   V A L U E  = = =  '+newValue);
 
         return newValue;
     }

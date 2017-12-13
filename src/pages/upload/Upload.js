@@ -214,9 +214,10 @@ class Upload extends Component {
                                 </div>
 
                                 <div className="form-group">
-                                    <select className="form-control" value={this.state.bank} onChange={this.onBankChanged}>
+                                    {/* <select className="form-control" value={this.state.bank} onChange={this.onBankChanged}>
                                         {this.getSelectOptions(UploadStore.getBanks())}
-                                    </select>                        
+                                    </select> */}
+                                    <div style={{fontSize: '11px', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: '600'}}>Select An Excel Bank Statememt to Upload</div>                       
                                 </div>
 
                                 {/* <div className="form-group">
@@ -224,7 +225,7 @@ class Upload extends Component {
                                     <span className={this.state.uError ? 'error' : 'vamus'}>{this.descriptionErrorMessage}</span>
                                 </div> */}
 
-                                <FileUpload className={this.state.showUpload ? 'show' : 'hide'} options={options}>
+                                <FileUpload options={options}>
                                     <div ref="chooseBtn" className="form-group show">
                                         <button className="btn btn-info btn-block" >{this.state.uploadFile}</button>
                                     </div>

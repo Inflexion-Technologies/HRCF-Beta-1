@@ -308,7 +308,7 @@ routes(){
             .then((stores)=>{
 
                 //console.log('S T O R E => '+store);
-                if(stores){
+                if(stores && stores.length > 0){
                     const id = stores[0].id;
                     app.FundAllocationCollectionModel.findAll({where : {fund_allocation_store_id : id}})
                     .then((collections)=>{

@@ -156,7 +156,8 @@ export default class App {
         const bankTransactionLog = models.bankTransactionAMSLog(dbConfig);
 
         //Setting relationships
-        bankTransactionLog.belongsTo(icBankModel);
+        
+        //bankTransactionLog.belongsTo(icBankModel);
         portfolioModel.belongsTo(usersModel);
         forgotModel.belongsTo(usersModel);
         payoutModel.belongsTo(usersModel);
@@ -169,7 +170,7 @@ export default class App {
 
         fundAllocationCollectionModel.belongsTo(fundAllocationStoreModel);
 
-        bankStatementModel.belongsTo(icBankModel);
+        //bankStatementModel.belongsTo(icBankModel);
 
         approveModel.belongsTo(companyModel);
 

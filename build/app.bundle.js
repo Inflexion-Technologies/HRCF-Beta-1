@@ -345,7 +345,7 @@ exports.saveFile = function (req, res) {
 
                         console.log('sheet => ' + JSON.stringify(data));
 
-                        compute2(req, res, data, ic_bank_id);
+                        compute2(req, res, data, 0);
                     } else {
                         res.status(400).json({ success: false });
                     }
@@ -537,7 +537,7 @@ var compute2 = function compute2(req, res, data, ic_bank_id) {
                     security_issuer_code: data.security_issuer_code,
                     currency: data.currency,
                     account_number: data.account_number,
-                    ic_bank_id: ic_bank_id,
+                    // ic_bank_id : ic_bank_id,
                     counter_party_code: data.counter_party_code,
                     sponsor_code: data.sponsor_code
                 });
@@ -575,16 +575,18 @@ var compute2 = function compute2(req, res, data, ic_bank_id) {
                     return;
                 }
 
-                if (body.statusCode === 'successful') {
+                var bodyJSON = JSON.parse(body);
+
+                if (bodyJSON.statusCode === 'successful') {
                     console.log('Bank statment pushed successfully');
-                    bankStatementLog.create({ ic_bank_id: ic_bank_id, status: 'A' });
+                    bankStatementLog.create({ status: 'A' });
                 } else {
                     console.log('Bank statement pushed unsuccessfully');
-                    bankStatementLog.create({ ic_bank_id: ic_bank_id, status: 'F' });
+                    bankStatementLog.create({ status: 'F' });
                 }
 
                 console.log('Res => ' + JSON.stringify(ams_data));
-                console.log('Res => ' + body);
+                console.log('Res => ' + JSON.stringify(bodyJSON));
             });
         } else {
             console.log('Wrong fields ...');
@@ -600,8 +602,6 @@ var getNumber = function getNumber(value) {
         valueTokens.map(function (token) {
             newValue = newValue + token;
         });
-
-        console.log('N E W   V A L U E  = = =  ' + newValue);
 
         return newValue;
     }
@@ -875,9 +875,9 @@ function bankStatementModel(config) {
     date: {
       type: _sequelize.Sequelize.DATE
     },
-    ic_bank_id: {
-      type: _sequelize.Sequelize.INTEGER
-    },
+    // ic_bank_id : {
+    //   type : Sequelize.INTEGER
+    // },
     credit: {
       type: _sequelize.Sequelize.FLOAT
     },
@@ -1251,9 +1251,7 @@ function fundModel(config) {
 
 function bankTransactionAMSLog(config) {
   var bt_log = config.define('bank_transaction_ams_log', {
-    ic_bank_id: {
-      type: _sequelize.Sequelize.INTEGER
-    },
+
     status: {
       type: _sequelize.Sequelize.STRING(1),
       defaultValue: 'F'
@@ -1669,7 +1667,8 @@ var App = function () {
             var bankTransactionLog = models.bankTransactionAMSLog(dbConfig);
 
             //Setting relationships
-            bankTransactionLog.belongsTo(icBankModel);
+
+            //bankTransactionLog.belongsTo(icBankModel);
             portfolioModel.belongsTo(usersModel);
             forgotModel.belongsTo(usersModel);
             payoutModel.belongsTo(usersModel);
@@ -1682,7 +1681,7 @@ var App = function () {
 
             fundAllocationCollectionModel.belongsTo(fundAllocationStoreModel);
 
-            bankStatementModel.belongsTo(icBankModel);
+            //bankStatementModel.belongsTo(icBankModel);
 
             approveModel.belongsTo(companyModel);
 
@@ -4026,7 +4025,7 @@ var UtilsRoutes = function () {
                 app.FundAllocationStoreModel.findAll({ where: { status: 'A' }, limit: 1, order: [['date', 'DESC']] }).then(function (stores) {
 
                     //console.log('S T O R E => '+store);
-                    if (stores) {
+                    if (stores && stores.length > 0) {
                         var id = stores[0].id;
                         app.FundAllocationCollectionModel.findAll({ where: { fund_allocation_store_id: id } }).then(function (collections) {
 
